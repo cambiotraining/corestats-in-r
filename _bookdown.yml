@@ -1,0 +1,17 @@
+book_filename: "Core statistics in R"
+new_session: true
+delete_merged_file: true
+
+rmd_files: [
+  "index.Rmd",
+
+  "cs1-intro.Rmd",
+  "cs1-background.Rmd",
+  "cs1-practical-introduction.Rmd",
+  "cs1-practical-one_sample.Rmd",
+  "cs1-practical-two_sample.Rmd",
+]
+
+language:
+  ui:
+    chapter_name: "Chapter "
