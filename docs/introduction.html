@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Overview | Core Statistics in R</title>
+<title>Chapter 2 Introduction | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Overview | Core Statistics in R">
+<meta property="og:title" content="Chapter 2 Introduction | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta property="og:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Overview | Core Statistics in R">
-<meta name="twitter:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="twitter:title" content="Chapter 2 Introduction | Core Statistics in R">
+<meta name="twitter:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,10 +45,10 @@
       <div class="menu-items" width="100%">
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1</li>
 <li class="book-part">Simple hypothesis testing</li>
-<li><a class="" href="introduction.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="active" href="introduction.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li><a class="" href="background-concepts.html"><span class="header-section-number">3</span> Background concepts</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction-1.html"><span class="header-section-number">4</span> Introduction</a></li>
@@ -63,67 +63,61 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1" number="1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction" class="section level1" number="2">
 <h1>
-<span class="header-section-number">1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h1>
-<p>These sessions are intended to enable you to perform core data analysis techniques appropriately and confidently using R.</p>
+<div id="objectives" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Aim: To carry out basic one and two sample statistical tests.</strong></p>
+<p>By the end of this section and practical participants should be able to achieve the following for each of the listed tests:</p>
+<ol style="list-style-type: decimal">
+<li>Understand what the purpose of each test is</li>
+<li>Perform the test in R</li>
+<li>Interpret the test output</li>
+<li>Understand under what assumptions/conditions each test is appropriate</li>
+<li>Check for those assumptions</li>
+</ol>
+</div>
+<p>The tests covered in this practical are:</p>
 <ul>
-<li><p>6 lecture-practicals</p></li>
-<li><p>Ongoing formative assessment exercises</p></li>
-<li><p>No formal assessment</p></li>
-<li><p>No mathematical derivations</p></li>
-<li><p>No pen and paper calculations</p></li>
+<li>One-sample tests</li>
+<li>One sample t-test</li>
+<li>Wilcoxon one-sample signed-rank</li>
+<li>Two-sample tests</li>
+<li>Student’s t-test</li>
+<li>Mann-Whitney U test</li>
+<li>Paired t-test</li>
+<li>Wilcoxon signed-rank test</li>
 </ul>
-<p>They are <strong>not</strong> a “how to mindlessly use a stats program” course!</p>
-<div id="core-aims" class="section level2" number="1.1">
+</div>
+<div id="background" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">1.1</span> Core aims<a class="anchor" aria-label="anchor" href="#core-aims"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
 </h2>
-<div class="highlight">
-<p>To know what to do when presented with an arbitrary dataset e.g.</p>
-<ol style="list-style-type: decimal">
-<li>Know what data analysis techniques are available</li>
-<li>Know which ones are allowable</li>
-<li>Be able to carry these out and understand the results</li>
-</ol>
+<p>This practical does not focus on the underlying mathematical theory of the tests although the demonstrators will be happy to answer any questions.
+For each test there will be a section explaining its purpose, a section explaining how to perform the test in R, a section explaining the results that have been output to the screen, and a section covering the assumptions required to perform the test.</p>
+
 </div>
 </div>
-<div id="core-topics" class="section level2" number="1.2">
-<h2>
-<span class="header-section-number">1.2</span> Core topics<a class="anchor" aria-label="anchor" href="#core-topics"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li><a href="#cs1">Simple Hypothesis Testing</a></li>
-<li>Categorical Predictor Variables</li>
-<li>Continuous Predictors</li>
-<li>Multiple Predictor Variables</li>
-<li>Linear Models</li>
-<li>Errors, Power and Multiple Comparisons</li>
-</ol>
-</div>
-</div>
-
-
-
-
-
-
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="introduction.html"><span class="header-section-number">2</span> Introduction</a></div>
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Overview</a></div>
+<div class="next"><a href="background-concepts.html"><span class="header-section-number">3</span> Background concepts</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#overview"><span class="header-section-number">1</span> Overview</a></li>
-<li><a class="nav-link" href="#core-aims"><span class="header-section-number">1.1</span> Core aims</a></li>
-<li><a class="nav-link" href="#core-topics"><span class="header-section-number">1.2</span> Core topics</a></li>
+<li><a class="nav-link" href="#introduction"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="nav-link" href="#objectives"><span class="header-section-number">2.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#background"><span class="header-section-number">2.2</span> Background</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -135,7 +129,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-14.</p>
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
