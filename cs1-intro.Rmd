@@ -1,5 +1,4 @@
-# (PART) CoreStats 1 {.unnumbered}
-# (PART) Simple hypothesis testing {.unnumbered}
+# (PART) CoreStats 1: Simple hypothesis testing {.unnumbered}
 
 # Introduction
 
