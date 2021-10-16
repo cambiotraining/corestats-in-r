@@ -17,14 +17,14 @@ By the end of this section and practical participants should be able to achieve 
 
 The tests covered in this practical are:
 
--	One-sample tests
--	One sample t-test
--	Wilcoxon one-sample signed-rank
--	Two-sample tests
--	Student’s t-test
--	Mann-Whitney U test 
--	Paired t-test
--	Wilcoxon signed-rank test
+1. [One-sample tests](#cs1-one-sample-tests)
+    -	[One sample t-test](#cs1-onesample-t-test)
+    -	[One-sample Wilcoxon signed-rank test](#cs1-onesample-wilcoxon-signed-rank)
+2. [Two-sample tests](#cs1-two-sample)
+    -	[Student’s t-test](#cs1-students-t-test)
+    -	[Mann-Whitney U test](#cs1-mannwhitney-u-test) 
+    -	[Paired two-sample t-test](#cs1-paired-two-sample-t-test)
+    -	[Wilcoxon signed-rank test](#cs1-twosample-wilcoxon-signed-rank)
 
 ## Background
 

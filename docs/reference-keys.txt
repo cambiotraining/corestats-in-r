@@ -25,11 +25,11 @@ assumptions
 key-statistical-concepts
 introduction-1
 cs1-datasets
-one-sample-tests
+cs1-one-sample-tests
 objectives-1
 purpose-and-aim
 choosing-a-test-1
-one-sample-t-test
+cs1-onesample-t-test
 section-commands
 data-and-hypotheses
 summarise-and-visualise
@@ -41,7 +41,7 @@ q-q-plot-of-the-data
 shapiro-wilk-test
 assumptions-overview
 exercise
-wilcoxon-signed-rank
+cs1-onesample-wilcoxon-signed-rank
 section-commands-1
 summarise-and-visualise-1
 implement-the-test-1
@@ -49,12 +49,12 @@ interpreting-the-output-and-report-results-1
 assumptions-2
 exercise-1
 key-points
-two-sample-tests
+cs1-two-sample
 objectives-2
 purpose-and-aim-1
 two-sample-choosing-a-test
 data-format
-students-t-test
+cs1-students-t-test
 section-commands-2
 data-and-hypotheses-1
 cs1-students-sumvisual
@@ -63,7 +63,7 @@ interpret-output-and-report-results
 assumptions-3
 exercise-2
 exercise-3
-mann-whitney-u-test
+cs1-mannwhitney-u-test
 section-commands-3
 data-and-hypotheses-2
 summarise-and-visualise-2
@@ -71,7 +71,7 @@ implement-test-1
 interpret-output-and-report-results-1
 assumptions-4
 exercise-4
-paired-two-sample-t-test
+cs1-paired-two-sample-t-test
 section-commands-4
 data-and-hypotheses-3
 summarise-and-visualise-3
@@ -79,7 +79,7 @@ implement-test-2
 interpret-output-and-report-results-2
 assumptions-5
 exercise-5
-wilcoxon-signed-rank-test
+cs1-twosample-wilcoxon-signed-rank
 section-commands-5
 data-and-hypotheses-4
 summarise-and-visualise-4

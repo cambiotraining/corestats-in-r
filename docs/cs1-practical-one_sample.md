@@ -1,4 +1,4 @@
-# One-sample tests
+# One-sample tests {#cs1-one-sample-tests}
 
 ## Objectives
 :::objectives
@@ -30,7 +30,7 @@ There are two tests that we are going to look at in this situation; the one-samp
 If your data is normally distributed, then a one-sample t-test is appropriate. If your data aren’t normally distributed, but their distribution is symmetric, and the sample size is small then a one-sample Wilcoxon signed rank test is more appropriate.
 
 
-## One-sample t-test
+## One-sample t-test {#cs1-onesample-t-test}
 For each statistical test we consider there will be five tasks. These will come back again and again, so pay extra close attention.
 
 :::highlight
@@ -282,7 +282,7 @@ In terms of assessing the assumptions of a test it is always worth considering s
 
 In the `fishlength` example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be...
 
-In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the [one-sample Wilcoxon signed rank test](#wilcoxon-signed-rank).
+In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the [one-sample Wilcoxon signed rank test](#cs1-onesample-wilcoxon-signed-rank).
 
 ### Exercise
 :::exercise
@@ -392,7 +392,7 @@ In reality, if I found myself in this situation I would also try doing a non-par
 </details>
 :::
 
-## One-sample Wilcoxon signed-rank test {#wilcoxon-signed-rank}
+## One-sample Wilcoxon signed-rank test {#cs1-onesample-wilcoxon-signed-rank}
 This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still need the parent distribution (and consequently the sample) to be symmetric though. In this test we look to see if the _median_ of the parent distributions differs significantly from a given hypothesised value (in contrast with the t-test that looks at the _mean_).
 
 ### Section commands

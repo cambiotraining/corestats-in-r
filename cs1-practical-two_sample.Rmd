@@ -1,7 +1,7 @@
 ```{r setup, include=FALSE}
 source(file = "setup.R")
 ```
-# Two-sample tests
+# Two-sample tests {#cs1-two-sample}
 
 ## Objectives
 :::objectives
@@ -81,7 +81,7 @@ graph TD
 knitr::include_graphics("img/cs1-diagram-which-test.svg")
 ```
 
-1.	Testing whether a sample comes from a normal distribution was covered in [One-sample tests](#one-sample-tests). You need to visualise your data and/or use the Shapiro-Wilk test.
+1.	Testing whether a sample comes from a normal distribution was covered in [One-sample tests](#cs1-one-sample-tests). You need to visualise your data and/or use the Shapiro-Wilk test.
 2.	The size of the sample makes things easier. Because of maths (specifically due to something called the central limit theorem which I am not even going to attempt to touch upon here) if you have large samples then you can use the tests that assume normality of the parent population (Student’s t-test, Welch’s t-test and the paired t-test) even if your parent populations are certainly not normal. If you really want to understand exactly why this works, then you will have to do some more rigorous mathematics. So, for the moment I’m going to say that it’s OK to take these facts on faith and just trust me on this.
 3.	Paired samples mean that for every data point in one sample there is a matching data point in the other sample that is linked to it in some inextricable way. A typical example would involve a group of 20 test subjects being measured before and after some experiment. Providing that the experiment didn’t do anything fatal to the test subjects then the data would consist of two samples; 20 pre-experiment measurements and 20 post-experiment measurements. However, because the same test subjects were used then each pre-experiment data point can be matched exactly to one of the post-experiment data points. In this sense the two samples are said to be “paired”.
 4.	There are a couple of tests (Bartlett’s test and Levene’s test) that can be used to see if two samples come from distributions with the same variance. These will be covered in a later section.
@@ -127,11 +127,11 @@ read_csv("data/examples/cs1-meerkats.csv") %>%
 
 Having tidy data is the easiest way of doing analyses in R and I would strongly encourage you all to start adopting this format as standard for data collection and processing.
 
-## Student's t-test
+## Student's t-test {#cs1-students-t-test}
 For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. 
 
 :::note
-The language used in this section is slightly different to that used in section \@ref(one-sample-tests). Although the language used in section \@ref(one-sample-tests) was technically more correct, the sentences are somewhat more onerous to read. Here I’ve opted for an easier reading style at the expense of technical accuracy. Please feel free to re-write this section (at your own leisure).
+The language used in this section is slightly different to that used in section \@ref(cs1-one-sample-tests). Although the language used in section \@ref(cs1-one-sample-tests) was technically more correct, the sentences are somewhat more onerous to read. Here I’ve opted for an easier reading style at the expense of technical accuracy. Please feel free to re-write this section (at your own leisure).
 :::
 
 ### Section commands
@@ -474,7 +474,7 @@ In reality, because of the ambiguous normality assumption assessment, for this d
 </details>
 :::
 
-## Mann-Whitney U test
+## Mann-Whitney U test {#cs1-mannwhitney-u-test}
 This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the medians of the two groups we do still need the parent distributions (and consequently the samples) to both have the same shape and variance. In this test we look to see if the medians of the two parent distributions differ significantly from each other.
 
 ### Section commands
@@ -561,7 +561,7 @@ A Mann-Whitney test indicated that there wasn't a significant difference in the 
 </details>
 :::
 
-## Paired two-sample t-test
+## Paired two-sample t-test {#cs1-paired-two-sample-t-test}
 A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is applicable if the number of paired points within the samples is large (>30) or, if the number of points is small, then this test also works when the parent distributions are normally distributed.
 
 ### Section commands
@@ -657,7 +657,7 @@ So, yep, a paired t-test is appropriate for this dataset.
 </details>
 :::
 
-## Wilcoxon signed-rank test
+## Wilcoxon signed-rank test {#cs1-twosample-wilcoxon-signed-rank}
 A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the differences is symmetric. We’re effectively testing to see if the median of the differences between the two samples differs significantly from zero.
 
 ### Section commands
