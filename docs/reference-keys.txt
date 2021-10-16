@@ -7,6 +7,8 @@ exr:unlabeled-div-4
 tab:cs1-twosample-turtle-data
 exr:unlabeled-div-5
 exr:unlabeled-div-6
+exr:unlabeled-div-7
+tab:cs1-pairedwilcoxon-example
 overview
 core-aims
 core-topics
@@ -50,7 +52,7 @@ key-points
 two-sample-tests
 objectives-2
 purpose-and-aim-1
-choosing-a-test-2
+two-sample-choosing-a-test
 data-format
 students-t-test
 section-commands-2
@@ -78,4 +80,11 @@ interpret-output-and-report-results-2
 assumptions-5
 exercise-5
 wilcoxon-signed-rank-test
+section-commands-5
+data-and-hypotheses-4
+summarise-and-visualise-4
+implement-test-3
+interpret-output-and-report-results-3
+assumptions-6
+exercise-6
 key-points-1
