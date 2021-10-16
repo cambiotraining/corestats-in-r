@@ -9,6 +9,7 @@ exr:unlabeled-div-5
 exr:unlabeled-div-6
 exr:unlabeled-div-7
 tab:cs1-pairedwilcoxon-example
+exr:unlabeled-div-8
 overview
 core-aims
 core-topics
@@ -86,3 +87,14 @@ objectives-3
 background-1
 introduction-1
 cs2-datasets
+cs2-anova
+objectives-4
+purpose-and-aim-2
+section-commands-6
+data-and-hypotheses-5
+summarise-and-visualise-5
+implement-test-4
+interpret-output-and-report-results-4
+assumptions-6
+exercise-7
+key-points-2

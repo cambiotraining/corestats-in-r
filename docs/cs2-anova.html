@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 ANOVA | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="8.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   8.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 ANOVA | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="8.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   8.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="8.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   8.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="uni-title"> <img src="img/main-logo-homepage.svg" alt="Biostatistics Initiative" style="padding: 10px" width="250" height="53">
+</div>
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="active" href="cs2-anova.html"><span class="header-section-number">8</span> ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-anova" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
+</h1>
+<div id="objectives-4" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-4"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Questions</strong></p>
+<ul>
+<li>How do I…</li>
+<li>What do I…</li>
+</ul>
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Be able to…</li>
+<li>Use…</li>
+</ul>
+</div>
+</div>
+<div id="purpose-and-aim-2" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.</p>
+<div id="section-commands-6" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>New commands used in this section.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></td>
+<td align="left">Fits a linear model</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code></td>
+<td align="left">Carries out an ANOVA on a linear model</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="data-and-hypotheses-5" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called <code>exposed</code> (E), <code>partially sheltered</code> (P) and <code>sheltered</code> (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The mean feeding rates at all three sites is the same <span class="math inline">\(\mu E = \mu P = \mu S\)</span>
+</li>
+<li>
+<span class="math inline">\(H_1\)</span>: The mean feeding rates are not all equal.</li>
+</ul>
+<p>We will use a one-way ANOVA test to check this.</p>
+<ul>
+<li>We use a <strong>one-way</strong> ANOVA test because we only have one predictor variable (the categorical variable location).</li>
+<li>We’re using <strong>ANOVA</strong> because we have more than two groups and we don’t know any better yet with respect to the exact assumptions.</li>
+</ul>
+<p>The data are stored in the file <code>CS2-oystercatcher.csv</code>.</p>
+</div>
+<div id="summarise-and-visualise-5" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>First we read in the data.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-oystercatcher.csv"</span><span class="op">)</span></code></pre></div>
+<p>Next we summarise the data and visualise them. We have a quick peek at the first few rows of our data with <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> so we can see how the data are organised.</p>
+<p>The data are in stacked format. The first column contains information on feeding rates and is called <code>feeding.</code> The second column has categorical data on the type of site and is called <code>site</code>.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<pre><code>##   feeding    site
+## 1    14.2 Exposed
+## 2    16.5 Exposed
+## 3     9.3 Exposed
+## 4    15.1 Exposed
+## 5    13.4 Exposed
+## 6    18.4 Partial</code></pre>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##        site feeding.Min. feeding.1st Qu. feeding.Median feeding.Mean
+## 1   Exposed         9.30           13.40          14.20        13.70
+## 2   Partial        13.00           16.50          17.40        17.14
+## 3 Sheltered        21.50           22.20          24.10        23.64
+##   feeding.3rd Qu. feeding.Max.
+## 1           15.10        16.50
+## 2           18.40        20.40
+## 3           25.10        25.30</code></pre>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
+</div>
+<div id="implement-test-4" class="section level3" number="8.2.4">
+<h3>
+<span class="header-section-number">8.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>Perform an ANOVA test on the data:</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<p>The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
+<ul>
+<li>The first argument must be in the formula format: <code>response ~ predictor</code>
+</li>
+<li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
+<li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
+</ul>
+</div>
+<div id="interpret-output-and-report-results-4" class="section level3" number="8.2.5">
+<h3>
+<span class="header-section-number">8.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: feeding
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## site       2 254.812 127.406  21.508 0.0001077 ***
+## Residuals 12  71.084   5.924                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<ul>
+<li>The 1st line just tells you the that this is an ANOVA test</li>
+<li>The 2nd line tells you what the response variable is (in this case feeding)</li>
+<li>The 3rd, 4th and 5th lines are an ANOVA table which contain some useful values:
+<ul>
+<li>The <code>Df</code> column contains the degrees of freedom values on each row, 2 and 12 (which we’ll need for the reporting)</li>
+<li>The <code>F</code> value column contains the F statistic, 21.508 (which again we’ll need for reporting).</li>
+<li>The p-value is 0.0001077 and is the number directly under the <code>Pr(&gt;F)</code> on the 4th line.</li>
+<li>The other values in the table (in the <code>Sum Sq</code> and <code>Mean Sq</code>) columns are used to calculate the F statistic itself and we don’t need to know these.</li>
+</ul>
+</li>
+<li>The 6th line has some symbolic codes to represent how big (small) the p-value is; so, a p-value smaller than 0.001 would have a *** symbol next to it (which ours does). Whereas if the p-value was between 0.01 and 0.05 then there would simply be a * character next to it, etc. Thankfully we can all cope with actual numbers and don’t need a short-hand code to determine the reporting of our experiments (please tell me that’s true…!)</li>
+</ul>
+<p>Again, the p-value is what we’re most interested in here and shows us the probability of getting samples such as ours if the null hypothesis were actually true.</p>
+<p>Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say “that it is very unlikely that these three samples came from the same parent distribution” and as such we can reject our null hypothesis and state that:</p>
+<blockquote>
+<p>A one-way ANOVA showed that the mean feeding rate of oystercatchers differed significantly between locations (F = 21.51, df = 2, 12, p = 0.00011).</p>
+</blockquote>
+<p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
+</div>
+<div id="assumptions-6" class="section level3" number="8.2.6">
+<h3>
+<span class="header-section-number">8.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>To use an ANOVA test, we have to make three assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distributions from which the samples are taken are normally distributed</li>
+<li>Each data point in the samples is independent of the others</li>
+<li>The parent distributions should have the same variance</li>
+</ol>
+<p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
+<p><strong>1. Normality</strong></p>
+<p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Partial</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Sheltered</span><span class="op">)</span></code></pre></div>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Exposed
+## W = 0.9151, p-value = 0.4988</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Partial
+## W = 0.96913, p-value = 0.8697</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Sheltered
+## W = 0.88532, p-value = 0.3341</code></pre>
+<p>We can see that all three groups appear to be normally distributed which is good.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
+<p>Extract the residuals from the data and check their normality:</p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid_oyster
+## W = 0.93592, p-value = 0.3338</code></pre>
+<p>Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)</p>
+<p><strong>2. Equality of Variance</strong></p>
+<p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
+<p>Perform Bartlett’s test on the data:</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  feeding by site
+## Bartlett's K-squared = 0.90632, df = 2, p-value = 0.6356</code></pre>
+<p>Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.</p>
+<p><strong>3. Graphical Interpretation and Diagnostic Plots</strong></p>
+<p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
+<p>Create the standard set diagnostic plots:</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># create the diagnostic plots</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># and return the window back to normal</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## hat values (leverages) are all = 0.2
+##  and there are no factor predictors; no plot no. 5</code></pre>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672"></div>
+<p>The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).</p>
+<ul>
+<li>In this example, two of the plots (top-left and bottom-left) show effectively the same thing: what the distribution of data between each group look like. These allow an informal check on the equality of variance assumption.
+<ul>
+<li>For the top-left graph we want all data to be symmetric about the 0 horizontal line and for the spread to be the same (please ignore the red line; it is an unhelpful addition to these graphs).</li>
+<li>For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.</li>
+</ul>
+</li>
+<li>The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).</li>
+</ul>
+<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is allright.</p>
+<div class="note">
+<p>At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.</p>
+<p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
+</div>
+</div>
+<div id="exercise-7" class="section level3" number="8.2.7">
+<h3>
+<span class="header-section-number">8.2.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+</h3>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 8.1  </strong></span>Exercise title</p>
+<p>Exercise description</p>
+<details><summary>
+Answer
+</summary><p>An elaborate answer</p>
+</details>
+</div>
+</div>
+</div>
+<div id="key-points-2" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">8</span> ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-4"><span class="header-section-number">8.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">8.2</span> Purpose and aim</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">8.2.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">8.2.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">8.2.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">8.2.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">8.2.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">8.2.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">8.2.7</span> Exercise</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">8.3</span> Key points</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs2-practical-anova.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs2-practical-anova.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-16.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
