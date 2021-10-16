@@ -323,7 +323,7 @@ Uganda
 </ul>
 <p>The data are stored in stacked format in the file <code>data/raw/CS1-twosample.csv</code>.</p>
 <p>Read this into R:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="cs1-students-sumvisual" class="section level3" number="5.4.3">
@@ -331,7 +331,7 @@ Uganda
 <span class="header-section-number">5.4.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#cs1-students-sumvisual"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s summarise the data…</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##     river length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
 ## 1   Aripo    17.50000       19.10000      20.10000    20.33077       21.30000
@@ -340,7 +340,7 @@ Uganda
 ## 1    26.40000
 ## 2    23.30000</code></pre>
 <p>and visualise it:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
         main <span class="op">=</span> <span class="st">"Male guppies"</span>,
         ylab <span class="op">=</span> <span class="st">"Length (mm)"</span><span class="op">)</span></code></pre></div>
@@ -352,7 +352,7 @@ Uganda
 <span class="header-section-number">5.4.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a two-sample, two-tailed, t-test:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
        alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
        var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -367,13 +367,13 @@ Uganda
 </ul>
 <p>This next section shows you that we can perform exactly the same test with the data in a different (unstacked) format. This is potentially somewhat redundant (or thorough depending on your point of view). Probably best just to do it anyway just in case you gain extra insight through repetition (it works for rowers…)</p>
 <p>Convert the data to unstacked format and repeat the t test:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a new object that contains the unstacked data</span>
 <span class="va">uns_rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">rivers</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
 <span class="va">uns_rivers</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the t-test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span>, <span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>,
        alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
@@ -429,14 +429,14 @@ Uganda
 <p>The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
 This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.</p>
 <p>So we perform a <a href="cs1-one-sample-tests.html#shapiro-wilk-test">Shapiro-Wilk test</a> on both samples separately:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  uns_rivers$Aripo
 ## W = 0.93596, p-value = 0.02802</code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -455,7 +455,7 @@ The Shapiro-Wilk test is quite sensitive to sample size. This means that if you 
 <p>Create the Q-Q plots for the two samples and discuss with your neighbour what you see in light of the results from the above Shapiro-Wilk test.</p>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>, main <span class="op">=</span> <span class="st">"Aripo"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
@@ -473,11 +473,11 @@ Answer
 <p>Nevertheless, the Shapiro-Wilk test has shown that the data are not normal <em>enough</em> and so in order to test for equality of variance we will use Levene’s test.
 Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
 <p>To install the <code>car</code> package, run the following command in your console:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
 <p>We can now perform Levene’s test:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
 <pre><code>## Levene's Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
@@ -488,7 +488,7 @@ Levene’s test is not included in the default R packages and may require the in
 <div class="note">
 <p><strong>For information only:</strong></p>
 <p>If we had wanted to carry out Bartlett’s test (i.e. if the data had been sufficiently normally distributed) then the command would have been:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
@@ -708,12 +708,12 @@ Female
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-turtle.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s summarise the data…</p>
 <pre class="{rcs1-twosample-turtle-summary}"><code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate(serum ~ sex , data = turtle, summary)</a></code></pre>
 <p>and visualise the data:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , data <span class="op">=</span> <span class="va">turtle</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/cs1-twosample-turtle-boxplot-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
@@ -738,7 +738,7 @@ Female
 <p><strong>5. Check Assumptions</strong></p>
 <p><strong>Normality</strong></p>
 <p>Let’s look at the normality of each of the groups separately. There are several ways of getting at the <code>serum</code> values for Males and Females separately. We’ll use the unstacking method, then use Shapiro-Wilk followed by qqplots.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uns_turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">turtle</span>, <span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -746,7 +746,7 @@ Female
 ## 
 ## data:  uns_turtle$Male
 ## W = 0.94392, p-value = 0.6743</code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -758,7 +758,7 @@ Female
 <li>The p-value for the Female group is smaller than for the Male group (suggesting that the Female group is closer to being non-normal than the Male group) which makes sense.</li>
 <li>The Shapiro-Wilk test is generally quite relaxed about normality for small sample sizes (and notoriously strict for very large sample sizes). For a group with only 6 data points in it, the data would actually have to have a really, really skewed distribution. Given that the Female group only has 6 data points in it, it’s not too surprising that the Shapiro-Wilk test came back saying everything is OK.</li>
 </ol>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, main <span class="op">=</span> <span class="st">"Male"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
@@ -770,7 +770,7 @@ Female
 <p><strong>Homogeneity of Variance</strong></p>
 <p>It’s not clear whether the data are normal or not, so it isn’t clear which test to use here. The sensible approach is to do both and hope that they agree (fingers crossed!)</p>
 <p>Bartlett’s test gives us:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, <span class="va">turtle</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
@@ -778,7 +778,7 @@ Female
 ## data:  serum by sex
 ## Bartlett's K-squared = 0.045377, df = 1, p-value = 0.8313</code></pre>
 <p>and Levene’s test gives us:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load if needed</span>
 <span class="co"># library(car)</span>
 
@@ -791,7 +791,7 @@ Female
 <p>Overall, what this means is that we’re not too sure about normality, but that homogeneity of variance is pretty good.</p>
 <p><strong>6. Carry out a two-sample t-test</strong></p>
 <p>Because of the result of the Bartlett test I know that I can carry out a two-sample Student’s t-test (as opposed to a two-sample Welch’s t-test, if you’re confused, see Figure <a href="cs1-two-sample.html#fig:fig-cs1-diagram-which-test">5.2</a>)</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , <span class="va">turtle</span>,
        alternative<span class="op">=</span><span class="st">"two.sided"</span>,
        var.equal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -850,7 +850,7 @@ Female
 <span class="header-section-number">5.5.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a two-tailed, Mann-Whitney U test:</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
             alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -914,7 +914,7 @@ Answer
 <p><strong>Assumptions</strong></p>
 <p>We’ve already checked that the variances of the two groups are similar, so we’re OK there. Whilst the Mann-Whitney test doesn’t require normality or symmetry of distributions it does require that the distributions have the same shape. In this example, with just a handful of data points in each group, it’s quite hard to make this call one way or another. My advice in this case would be say that unless it’s obvious that the distributions are very different we can just allow this assumption to pass, and you’re only going see obvious differences in distribution shape when you have considerably more data points than we have here.</p>
 <p><strong>Carry out a Mann-Whitney test</strong></p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">turtle</span>,
             alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -960,14 +960,14 @@ Answer
 </ul>
 <p>The data are stored in unstacked format in the file “CS1-twopaired.csv.”
 Read this into R:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-twopaired.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="summarise-and-visualise-3" class="section level3" number="5.6.3">
 <h3>
 <span class="header-section-number">5.6.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">)</span></code></pre></div>
 <pre><code>##     morning         evening     
 ##  Min.   :146.1   Min.   : 60.1  
@@ -976,11 +976,11 @@ Read this into R:</p>
 ##  Mean   :313.5   Mean   :197.4  
 ##  3rd Qu.:359.7   3rd Qu.:260.8  
 ##  Max.   :432.5   Max.   :379.3</code></pre>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cortisol</span>, ylab <span class="op">=</span> <span class="st">"Level (nmol/l)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/cs1-pairedt-sumvisual-1.png" width="672"></div>
 <p>The box plot does not capture how the cortisol level of each individual subject has changed though. We can explore the individual changes between morning and evening by creating a boxplot of the <em>differences</em> between the two times of measurement.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># calculate the difference between evening and morning values</span>
 <span class="va">changeCor</span> <span class="op">&lt;-</span> <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span> <span class="op">-</span> <span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>
 
@@ -993,7 +993,7 @@ Read this into R:</p>
 <span class="header-section-number">5.6.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a two-sample, two-tailed, paired t-test:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>,
        alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -1041,14 +1041,14 @@ Was a paired t-test an appropriate test?</p>
 Answer
 </summary><p>A paired test is really just a one-sample test in disguise. We actually don’t care too much about the distributions of the individual groups. Instead we care about the properties of the <strong>differences</strong>. So for a paired t-test to be valid for this dataset, we need the differences between the morning and evening values to be normally distributed.</p>
 <p>Let’s check this with Shapiro-Wilk and Q-Q plots using the <code>changeCor</code> variable we created earlier.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">changeCor</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  changeCor
 ## W = 0.92362, p-value = 0.1164</code></pre>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">changeCor</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">changeCor</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
@@ -1093,7 +1093,7 @@ Answer
 <span class="header-section-number">5.7.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a two-tailed, Wilcoxon signed-rank test:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>,
             alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -1244,7 +1244,7 @@ Answer
 <p><span class="math inline">\(H_1\)</span> : foreleg average <span class="math inline">\(\neq\)</span> hindleg average</p>
 <p><strong>2-4. Import Data, Summarise and visualise</strong></p>
 <p>I always recommend storing data in stacked format even in this example, even though in this case it might seem easier to store your data in unstacked format (this is pretty much the only time where this is even a sensible option). So for this example I manually input the data into excel in the following layout:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-deer.csv"</span><span class="op">)</span></code></pre></div>
 <table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -1483,7 +1483,7 @@ foreleg
 </table>
 <p>The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an <code>id</code> column, where each observation has a unique ID.</p>
 <p>Let’s look at the data and see what we can see.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##       leg length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
 ## 1 foreleg      136.00         138.25        142.00      141.40         144.50
@@ -1491,22 +1491,22 @@ foreleg
 ##   length.Max.
 ## 1      147.00
 ## 2      150.00</code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <p>It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have <em>paired</em> data. What we really need to look at is the difference in leg length for each deer:</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uns_deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">deer</span>, <span class="va">length</span> <span class="op">~</span> <span class="va">leg</span><span class="op">)</span>
 <span class="va">deerDiff</span> <span class="op">&lt;-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">hindleg</span> <span class="op">-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">foreleg</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    -3.0     2.5     4.5     3.3     5.0     6.0</code></pre>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
 <p>This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).</p>
 <p><strong>5. Perform a two-sample t-test</strong></p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -1521,7 +1521,7 @@ foreleg
 ##                    -3.3</code></pre>
 <p>The paired t-test here assumes that the data is stored exactly as we have entered it (i.e. that the first hindleg row matches the first foreleg row). Here we apparently see a significant difference.</p>
 <p><strong>6. Perform a paired Wilcoxon test</strong></p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in wilcox.test.default(x = c(138L, 136L, 147L, 139L, 143L, 141L, :
 ## cannot compute exact p-value with ties</code></pre>
@@ -1534,14 +1534,14 @@ foreleg
 <p>The paired Wilcoxon test makes the same assumptions about the order of the data as the paired t-test. Here again we have a significant difference.</p>
 <p><strong>7. Check assumptions</strong></p>
 <p>We need to consider the distribution of the <em>difference</em> in leg lengths rather than the individual distributions.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  deerDiff
 ## W = 0.81366, p-value = 0.02123</code></pre>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">deerDiff</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>

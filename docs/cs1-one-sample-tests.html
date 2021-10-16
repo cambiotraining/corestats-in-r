@@ -175,7 +175,7 @@ So, in the figure below, we could use these tests to see what the probability is
 </ul>
 <p>Make sure you have downloaded the data (see: <a href="introduction.html#cs1-datasets">Datasets</a>) and placed it in the <code>data/raw</code> folder within your working directory.</p>
 <p>We then read in the data and create a vector containing the data.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import the data</span>
 <span class="va">fishlengthDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-onesample.csv"</span><span class="op">)</span>
 
@@ -188,11 +188,11 @@ So, in the figure below, we could use these tests to see what the probability is
 <span class="header-section-number">4.4.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
 </h3>
 <p>Summarise the data and visualise it:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    11.2    17.5    18.8    18.3    19.7    23.3</code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span>, main <span class="op">=</span> <span class="st">"Male guppies"</span>, ylab <span class="op">=</span> <span class="st">"Length (mm)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-summary-1.png" width="672"></div>
 <p>The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be “statistically significant,” although we may anticipate such a result.</p>
@@ -202,7 +202,7 @@ So, in the figure below, we could use these tests to see what the probability is
 <span class="header-section-number">4.4.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a one-sample, two-tailed t-test:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">fishlength</span>, mu <span class="op">=</span> <span class="fl">20</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -293,7 +293,7 @@ There are three ways of checking for normality:</p>
 <span class="header-section-number">4.4.7</span> Histogram of the data<a class="anchor" aria-label="anchor" href="#histogram-of-the-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plot a histogram of the data, which gives:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-t-test-histogram-1.png" width="672"></div>
 <p>The distribution appears to be uni-modal and symmetric, and so it isn’t obviously non-normal. However, there are a lot of distributions that have these simple properties but which aren’t normal, so this isn’t exactly rigorous. Thankfully there are other, more rigorous tests.</p>
@@ -305,7 +305,7 @@ There are three ways of checking for normality:</p>
 </h3>
 <p>Q-Q plot is the short for quantile-quantile plot. This <strong>diagnostic</strong> plot (as it is sometimes called) is a way of comparing two distributions. How Q-Q plots work won’t be explained here but ask a demonstrator if you really want to know what is going on.</p>
 <p>Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the Q-Q plot</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span>
 
@@ -333,7 +333,7 @@ There are three ways of checking for normality:</p>
 </h3>
 <p>This is one of a number of formal statistical test that assess whether a given sample of numbers come from a normal distribution. It calculates the probability of getting the sample data if the underlying distribution is in fact normal. It is very easy to carry out in R.</p>
 <p>Perform a Shapiro-Wilk test on the data:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -389,15 +389,15 @@ Answer
 <span class="math inline">\(H_0\)</span> : mean = 45s</p>
 <p><span class="math inline">\(H_1\)</span> : mean <span class="math inline">\(\neq\)</span> 45s</p>
 <p><strong>Create data, summarise and visualise</strong></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dissolving</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42.7</span> , <span class="fl">43.4</span> , <span class="fl">44.6</span> , <span class="fl">45.1</span> , <span class="fl">45.6</span> , <span class="fl">45.9</span> , <span class="fl">46.8</span> , <span class="fl">47.6</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   42.70   44.30   45.35   45.21   46.12   47.60</code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
 <p>There are only 8 data points, so the default histogram looks a bit rubbish / uninformative. Thankfully the box-plot is a bit more useful here. We can see:</p>
@@ -407,7 +407,7 @@ Answer
 <li>The data appear to be symmetric, and so whilst we can’t tell if they’re normal they’re a least not massively skewed.</li>
 </ol>
 <p><strong>Carry out t-test</strong></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu<span class="op">=</span><span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -423,14 +423,14 @@ Answer
 <p>A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),</p>
 <p><strong>Explore Assumptions</strong>
 Normality:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  dissolving
 ## W = 0.98023, p-value = 0.9641</code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
@@ -488,7 +488,7 @@ Normality:</p>
 <span class="header-section-number">4.5.3</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">fishlength</span>, mu <span class="op">=</span> <span class="fl">20</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <p>The syntax is identical to the one-sample t-test we carried out earlier.</p>
 <ul>
@@ -540,7 +540,7 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 </ol>
 <p>Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.</p>
 <p>Plot a histogram and a boxplot of the data:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
@@ -565,7 +565,7 @@ Answer
 <span class="math inline">\(H_0\)</span> : median = 45s</p>
 <p><span class="math inline">\(H_1\)</span> : median <span class="math inline">\(\neq\)</span> 45s</p>
 <p><strong>Wilcoxon signed-rank test</strong></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu<span class="op">=</span><span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test

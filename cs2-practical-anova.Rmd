@@ -1,3 +1,8 @@
+
+```{r, setup}
+source(file = "setup.R")
+```
+
 # ANOVA {#cs2-anova}
 
 ## Objectives
@@ -191,15 +196,223 @@ At this stage, I should point out that I nearly always stick with the graphical 
 Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.
 :::
 
+### Post-hoc testing
+One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.
+
+```{r cs2-tukey-example, echo=FALSE}
+tukey <- read.csv("data/raw/CS2-tukey.csv")
+boxplot(response ~ group, data = tukey)
+```
+
+Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.
+
+**1. Read in the data and plot**
+
+```{r cs2-tukey-test, fig.show='hide'}
+tukey <- read.csv("data/raw/CS2-tukey.csv")
+boxplot(response ~ group, data = tukey)
+```
+
+**2. Test for a significant difference in group means**
+
+```{r}
+lm_tukey <- lm(response ~ group, data = tukey)
+
+anova(lm_tukey)
+```
+Here we have a p-value of 2.39x10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.
+
+However, this was not due to all of the sample means being different, but rather just because one of the groups is very different from the others. In order to drill down and investigate this further we use a new test called **Tukey’s range test** (or **Tukey’s honest significant difference test** – this always makes me think of some terrible cowboy/western dialogue). This will compare all of the groups in a pairwise fashion and reports on whether a significant difference exists.
+
+**3. Performing Tukey’s test on these data**
+
+```{r}
+aov_tukey <- aov(response ~ group, data = tukey)
+
+TukeyHSD(aov_tukey)
+```
+
+The first argument repeats our ANOVA using a different function 'aov()'. We store the output of this function in an R object called `aov_tukey`.
+Note that the `TukeyHSD()` function takes the output of the `aov()` function as its argument and not the raw data.
+
+The bottom three lines contain the information that we want. The final column of each (entitled `p adj`) is the p-value that we’re looking for. The null hypothesis in each case is that there is no difference in the mean between the two groups. As we can see the first line shows that there isn’t a significant difference between `sample1` and `sample2` but the 2nd and 3rd lines show that there is a significant difference between `sample1` and `sample3`, as well as `sample2` and `sample3`. This matches with what we expected based on the boxplot.
+
+**4. Assumptions**
+
+When to use Tukey’s range test is a matter of debate (strangely enough a lot of statistical analysis techniques are currently matters of opinion rather than mathematical fact – it does explain a little why this whole field appears so bloody confusing!)
+
+-	Some people claim that we should only perform Tukey’s range test (or any other post-hoc tests) if the preceding ANOVA test showed that there was a significant difference between the groups and that if the ANOVA test had not shown any significant differences between groups then we would have to stop there.
+-	Other people say that this is rubbish and we can do what the hell we like, when we like as long as we tell people what we did.
+
+The background to this is rather involved but one of the reasons for this debate is to prevent so-called **data-dredging** or **p-hacking**. This is where scientists/analysts are so fixated on getting a "significant" result that they perform a huge variety of statistical techniques until they find one that shows that their data is significant (this was a particular problem in psychological studies for while – not to point fingers though, they are working hard to sort their stuff out. Kudos!).
+
+Whether you should use post-hoc testing or not will depend on your experimental design and the questions that you’re attempting to answer.
+
+Tukey’s range test, when we decide to use it, requires the same three assumptions as an ANOVA test:
+
+1.	Normality of distributions
+2.	Equality of variance between groups
+3.	Independence of observations
+
+
 ### Exercise
 :::exercise
-Exercise title
+Juvenile lobster weight
 
-Exercise description
+Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+read_csv("data/examples/cs2-messy_lobsters.csv") %>%
+  pivot_wider(names_from = diet, values_from = weight) %>% 
+  select(-group) %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE) %>% 
+  row_spec(0, background = "white") %>% 
+  column_spec(c(1,2,3), background = "white")
+```
+
+Is there any evidence that diet affects the growth rate of lobsters?
+
+1.	Write down the null and alternative hypotheses
+2.	Import the data into R
+    - The data are stored in the file `data/raw/CS2-lobsters.csv`
+3. Summarise and visualise the data
+4. Check the assumptions using appropriate tests and graphical analyses
+5. Perform an ANOVA test
+6. Write down a sentence that summarise the results that you have found
+7. Perform a post-hoc test and report the findings
 
 <details><summary>Answer</summary>
 
-An elaborate answer
+**1. Hypotheses**
+
+$H_0$ : all means are equal
+
+$H_1$ : not all means are equal
+
+**2-3. Import Data, summarise and visualise**
+
+The data are stored in a `.csv` file in stacked format with columns called `weight` and `diet`.
+
+```{r}
+lobsters <- read.csv("data/raw/CS2-lobsters.csv")
+```
+
+Let's look at the data and see what we can see.
+
+```{r, echo=FALSE}
+lobsters
+```
+
+```{r}
+aggregate(weight ~ diet, data = lobsters, summary)
+
+boxplot(weight ~ diet, data = lobsters)
+```
+
+As always we use the plot and summary to assess three things:
+
+1. Did we load the data in properly?
+  * We see three groups with reasonable values. There aren't any data points that are obviously wrong (negative, zero or massively big) and we have the right number of groups. So it looks as if we didn't do anything obviously wrong.
+2. What do we expect as a result of a statistical test?
+  * Whilst the `Mussels` group does look higher than the other two groups, `Pellets` and `Flakes` appear almost identical in terms of average values, and there's quite a bit of overlap with the `Mussels` group. A non-significant result is the most likely answer, and I would be surprised to see a significant p-value - especially given the small sample size that we have here.
+3. What do we think about assumptions?
+  * The groups appear mainly symmetric (although `Pellets` is a bit weird) and so we're not immediately massively worried about lack of normality. Again, `Flakes` and `Mussels` appear to have very similar variances but it's a bit hard to decide what's going on with `Pellets.` It's hard to say what's going on with the assumptions and so I'll wait and see what the other tests say.
+
+**4. Explore Assumptions**
+
+**Normality**
+
+We'll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we'll only use the Q-Q plot.
+
+We'll need to unstack the data to use the Shapiro-Wilk test on the individual groups:
+
+```{r}
+lobst_uns <- unstack(lobsters, weight ~ diet)
+shapiro.test(lobst_uns$Flakes)
+shapiro.test(lobst_uns$Mussels)
+shapiro.test(lobst_uns$Pellets)
+```
+
+`Flakes` and `Mussels` are fine, but, as we suspected from earlier, `Pellets` appears to have a marginally significant Normality test result.
+
+Let's look at the Shapiro-Wilk test for all of the data together:
+
+```{r}
+resid_lobst <- residuals(lm(weight ~ diet, data = lobsters))
+shapiro.test(resid_lobst)
+```
+
+This on the other hand says that everything is fine. Let's look at the Q-Q-plot:
+
+```{r}
+plot(lm(weight ~ diet , data = lobsters),
+     which = 2)
+```
+
+Here, I've used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots, but you can tell R to only plot a specific one. (If you want to  know more about this have a look at the `plot.lm` help documentation using `?plot.lm`). I've asked R to only plot the Q-Q plot with the `which = 2` argument.
+
+The Q-Q plot looks OK, not perfect, but more than good enough for us to have confidence in the normality of the data.
+
+Overall, I'd be happy that the assumption of normality has been adequately well met here. The suggested lack of normality in the `Pellets` was only just significant and we have to take into account that there are only 5 data points in that group. If there had been a lot more points in that group, or if the Q-Q plot was considerably worse then I wouldn't be confident.
+
+**Equality of Variance**
+
+We'll consider the Bartlett test and we'll look at some diagnostic plots too.
+
+```{r}
+bartlett.test(weight ~ diet, data = lobsters)
+
+plot(lm(weight ~ diet, data = lobsters),
+     which = c(1,3))
+```
+
+In the above code, I've used the same trick as before with the `which` argument to only plot the two diagnostic plots that relate to equality of variance (residuals vs fitted and scale-location).
+
+Here all three methods agree that there isn't any issues with equality of variance:
+
+* the Bartlett test p-value is large and non-significant
+* the spread of points in all three groups in the residuals vs fitted graph are roughly the same
+* the red line in the scale-location graph is pretty horizontal
+
+Overall, this assumption is pretty well met.
+
+**5. Carry out one-way ANOVA**
+
+With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.
+
+```{r}
+anova(lm(weight ~ diet, data = lobsters))
+```
+
+
+**6. Result**
+
+> A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).
+
+**7. Post-hoc testing with Tukey**
+
+```{r}
+TukeyHSD(aov(weight ~ diet, data = lobsters))
+```
+
+Here we can see that actually, there is no significant difference between any of the pairs of groups in this dataset.
+
+:::note
+I want to reiterate that carrying out the post-hoc test after getting a non-significant result with ANOVA is something that you have to think very carefully about and it all depends on what your research question it.
+
+If your research question was:
+
+_Does diet affect lobster weight?_ or _Is there any effect of diet on lobster weight?_ 
+
+Then when we got the non-significant result from the ANOVA test we should have just stopped there as we have our answer. Going digging for "significant" results by running more tests is a main factor that contributes towards lack of reproducibility in research.
+
+If on the other hand your research question was:
+
+_Are any specific diets better or worse for lobster weight than others?_
+
+Then we should probably have just skipped the one-way ANOVA test entirely and just jumped straight in with the Tukey's range test, but the important point here is that the result of the one-way ANOVA test doesn't preclude carrying out the Tukey test.
+:::
 
 </details>
 :::

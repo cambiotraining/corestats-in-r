@@ -10,6 +10,11 @@ bibliography: [book.bib, packages.bib]
 description: "These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University." 
 ---
 
+
+```r
+source(file = "setup.R")
+```
+
 # Overview
 
 These sessions are intended to enable you to perform core data analysis techniques appropriately and confidently using R.

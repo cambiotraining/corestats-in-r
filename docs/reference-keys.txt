@@ -96,5 +96,6 @@ summarise-and-visualise-5
 implement-test-4
 interpret-output-and-report-results-4
 assumptions-6
+post-hoc-testing
 exercise-7
 key-points-2
