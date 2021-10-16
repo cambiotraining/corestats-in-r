@@ -6,6 +6,7 @@ exr:unlabeled-div-3
 exr:unlabeled-div-4
 tab:cs1-twosample-turtle-data
 exr:unlabeled-div-5
+exr:unlabeled-div-6
 overview
 core-aims
 core-topics
@@ -69,5 +70,12 @@ interpret-output-and-report-results-1
 assumptions-4
 exercise-4
 paired-two-sample-t-test
+section-commands-4
+data-and-hypotheses-3
+summarise-and-visualise-3
+implement-test-2
+interpret-output-and-report-results-2
+assumptions-5
+exercise-5
 wilcoxon-signed-rank-test
 key-points-1

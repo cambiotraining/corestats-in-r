@@ -1,3 +1,5 @@
+bookdown::render_book(output_dir = "docs", "index.Rmd", "bookdown::bs4_book")
+
 par(mfrow=c(1,2))
 
 # Section link
