@@ -1,6 +1,6 @@
 # (PART) CoreStats 2: Single categorical predictors {.unnumbered}
 
-# Introduction
+# Introduction {#cs2-intro}
 
 ## Objectives
 :::objectives

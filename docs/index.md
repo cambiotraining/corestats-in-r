@@ -34,9 +34,13 @@ To know what to do when presented with an arbitrary dataset e.g.
 
 ## Core topics
 
-1. [Simple Hypothesis Testing](#cs1)
-2. Categorical Predictor Variables
+1. [Simple Hypothesis Testing](#cs1-intro)
+2. [Categorical Predictor Variables](#cs2-intro)
 3. Continuous Predictors 
 4. Multiple Predictor Variables
 5. Linear Models 
 6. Errors, Power and Multiple Comparisons
+
+## Datasets {#index-datasets}
+
+This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/raw`.

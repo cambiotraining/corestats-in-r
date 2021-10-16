@@ -25,3 +25,4 @@ To combine conditions, use the following _logical operators_:
 :::
 
 ## Datasets {#cs1-datasets}
+This section uses various data set. They are all located in the `data/raw/` folder in your working directory. Please see [Datasets](#index-datasets) for more information.

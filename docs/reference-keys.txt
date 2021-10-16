@@ -12,10 +12,11 @@ tab:cs1-pairedwilcoxon-example
 overview
 core-aims
 core-topics
-introduction
+index-datasets
+cs1-intro
 objectives
 background
-introduction-1
+introduction
 cs1-datasets
 cs1-one-sample-tests
 objectives-1
@@ -80,6 +81,8 @@ interpret-output-and-report-results-3
 assumptions-5
 exercise-6
 key-points-1
-introduction-2
+cs2-intro
 objectives-3
 background-1
+introduction-1
+cs2-datasets

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Introduction | Core Statistics in R</title>
+<title>Chapter 6 Introduction | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to...">
+<meta name="description" content="6.1 Objectives  Aim: To introduce R commands for analysing single categorical predictors. By the end of this practical participants should be able to perform the following statistical analyses:...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Introduction | Core Statistics in R">
+<meta property="og:title" content="Chapter 6 Introduction | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to...">
+<meta property="og:description" content="6.1 Objectives  Aim: To introduce R commands for analysing single categorical predictors. By the end of this practical participants should be able to perform the following statistical analyses:...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Introduction | Core Statistics in R">
-<meta name="twitter:description" content="Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to...">
+<meta name="twitter:title" content="Chapter 6 Introduction | Core Statistics in R">
+<meta name="twitter:description" content="6.1 Objectives  Aim: To introduce R commands for analysing single categorical predictors. By the end of this practical participants should be able to perform the following statistical analyses:...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,11 +49,11 @@
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
-<li><a class="active" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
 <li><a class="" href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
+<li><a class="active" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
 <li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
 </ul>
@@ -65,61 +65,69 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-intro" class="section level1" number="6">
 <h1>
-<span class="header-section-number">3</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Introduction<a class="anchor" aria-label="anchor" href="#cs2-intro"><i class="fas fa-link"></i></a>
 </h1>
-<p>Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to achieve.
-There may be a list of commands relevant to that section which will be displayed in boxes like this:</p>
-<div class="note">
-<p><strong>Conditional operators</strong></p>
-<p>To set filtering conditions, use the following <em>relational operators</em>:</p>
-<ul>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code> is greater than</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">&gt;=</a></code> is greater than or equal to</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">&lt;</a></code> is less than</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">&lt;=</a></code> is less than or equal to</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code> is equal to</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> is different from</li>
-<li>
-<code><a href="https://rdrr.io/r/base/match.html">%in%</a></code> is contained in</li>
-</ul>
-<p>To combine conditions, use the following <em>logical operators</em>:</p>
-<ul>
-<li>
-<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code> AND</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> OR</li>
-</ul>
-</div>
-<div id="cs1-datasets" class="section level2" number="3.1">
+<div id="objectives-3" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">3.1</span> Datasets<a class="anchor" aria-label="anchor" href="#cs1-datasets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>This section uses various data set. They are all located in the <code>data/raw/</code> folder in your working directory. Please see <a href="index.html#index-datasets">Datasets</a> for more information.</p>
+<div class="objectives">
+<p><strong>Aim: To introduce R commands for analysing single categorical predictors.</strong></p>
+<p>By the end of this practical participants should be able to perform the following statistical analyses:</p>
+<ol style="list-style-type: decimal">
+<li>One-way Analysis of Variance (ANOVA)</li>
+<li>Kruskal-Wallis test</li>
+</ol>
+<p>For each of these, participants should be able to:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Perform the test in R</li>
+<li>Interpret the output</li>
+<li>Check the assumptions of the test</li>
+<li>Carry out a post-hoc test if appropriate</li>
+</ol>
+</div>
+<p>The tests covered in this practical are:</p>
+<ul>
+<li>One-way ANOVA</li>
+<li>Kruskall-Wallis test</li>
+</ul>
+</div>
+<div id="background-1" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Background<a class="anchor" aria-label="anchor" href="#background-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>This practical focuses on the implementation of various statistical tests relating to categorical predictors. These boil down to ANOVA and Kruskal-Wallis (which is a non-parametric alternative).
+Again, it does not focus on the underlying theory of the tests (although the demonstrators will be happy to answer any questions that you may have).</p>
+<p>For each test there will be a section that:</p>
+<ul>
+<li>explains the purpose of the test,</li>
+<li>explains how to visualise the data,</li>
+<li>explains how to perform the test in R,</li>
+<li>explains how to interpret the output and report the results, and</li>
+<li>explains how to assess the assumptions required to perform the test.</li>
+</ul>
+</div>
+</div>
 
-</div>
-</div>
+
+
   <div class="chapter-nav">
-<div class="prev"><a href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></div>
-<div class="next"><a href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></div>
+<div class="prev"><a href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></div>
+<div class="next"><a href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#introduction"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="nav-link" href="#cs1-datasets"><span class="header-section-number">3.1</span> Datasets</a></li>
+<li><a class="nav-link" href="#cs2-intro"><span class="header-section-number">6</span> Introduction</a></li>
+<li><a class="nav-link" href="#objectives-3"><span class="header-section-number">6.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#background-1"><span class="header-section-number">6.2</span> Background</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-practical-introduction.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-practical-introduction.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs2-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs2-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

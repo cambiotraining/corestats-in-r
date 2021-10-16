@@ -1,6 +1,6 @@
 # (PART) CoreStats 1: Simple hypothesis testing {.unnumbered}
 
-# Introduction
+# Introduction {#cs1-intro}
 
 ## Objectives
 :::objectives
