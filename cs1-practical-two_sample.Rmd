@@ -365,22 +365,15 @@ $H_1$ : male mean $\neq$ female mean
 
 I'd always recommend storing data in tidy, stacked format (in fact I can't think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-read_csv("data/examples/cs1-turtle.csv") %>% 
-  kbl() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE) %>% 
-  row_spec(0, background = "white") %>% 
-  column_spec(c(1,2), background = "white")
-```
-
-
 ```{r cs1-twosample-read-turtle-data}
 turtle <- read.csv("data/examples/cs1-turtle.csv")
+
+turtle
 ```
 
 Let's summarise the data...
 
-```{rcs1-twosample-turtle-summary}
+```{r cs1-twosample-turtle-summary}
 aggregate(serum ~ sex , data = turtle, summary)
 ```
 

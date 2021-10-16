@@ -470,79 +470,44 @@ $H_1$ : male mean $\neq$ female mean
 
 I'd always recommend storing data in tidy, stacked format (in fact I can't think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;background-color: white !important;"> serum </th>
-   <th style="text-align:left;background-color: white !important;"> sex </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 220.1 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 218.6 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 229.6 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 228.8 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 222.0 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 224.1 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 226.5 </td>
-   <td style="text-align:left;background-color: white !important;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 223.4 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 221.5 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 230.2 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 224.3 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 223.8 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 230.8 </td>
-   <td style="text-align:left;background-color: white !important;"> Female </td>
-  </tr>
-</tbody>
-</table>
-
-
 
 ```r
 turtle <- read.csv("data/examples/cs1-turtle.csv")
+
+turtle
+```
+
+```
+##    serum    sex
+## 1  220.1   Male
+## 2  218.6   Male
+## 3  229.6   Male
+## 4  228.8   Male
+## 5  222.0   Male
+## 6  224.1   Male
+## 7  226.5   Male
+## 8  223.4 Female
+## 9  221.5 Female
+## 10 230.2 Female
+## 11 224.3 Female
+## 12 223.8 Female
+## 13 230.8 Female
 ```
 
 Let's summarise the data...
 
-```{rcs1-twosample-turtle-summary}
+
+```r
 aggregate(serum ~ sex , data = turtle, summary)
+```
+
+```
+##      sex serum.Min. serum.1st Qu. serum.Median serum.Mean serum.3rd Qu.
+## 1 Female   221.5000      223.5000     224.0500   225.6667      228.7250
+## 2   Male   218.6000      221.0500     224.1000   224.2429      227.6500
+##   serum.Max.
+## 1   230.8000
+## 2   229.6000
 ```
 
 and visualise the data:
@@ -931,7 +896,7 @@ qqnorm(changeCor)
 qqline(changeCor, col = "red")
 ```
 
-<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 The Shapiro-Wilk test says that the data are normal enough and whilst the Q-Q plot is mostly fine, there is some suggestion of snaking at the bottom left. I'm actually OK with this because the suggestion of snaking is actually only due to a single point (the last point on the left). If you cover that point up with your thumb (or finger of your choice) then the remaining points in the Q-Q plot look pretty damn good, and so the suggestion of snaking is actually driven by only a single point (which can happen by chance). As such I'm actually happy that the assumption of normality is well met in this case. This **single point** check is a useful thing to remember when assessing diagnostic plots.
 
@@ -1207,7 +1172,7 @@ aggregate(length ~ leg, data = deer, summary)
 boxplot(length ~ leg, data = deer)
 ```
 
-<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have _paired_ data. What we really need to look at is the difference in leg length for each deer:
 
@@ -1227,7 +1192,7 @@ summary(deerDiff)
 boxplot(deerDiff)
 ```
 
-<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).
 
@@ -1299,7 +1264,7 @@ qqnorm(deerDiff)
 qqline(deerDiff, col = "red")
 ```
 
-<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="cs1-practical-two_sample_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 Both our Shapiro-Wilk test and our Q-Q plot suggest that the difference data aren't normally distributed, which rules out a paired t-test. We should therefore consider a paired Wilcoxon test next. Remember that this test requires that the distribution of differences be symmetric, whereas our box-plot from before suggested that the data were very much skewed.
 
