@@ -10,6 +10,7 @@ exr:unlabeled-div-6
 exr:unlabeled-div-7
 tab:cs1-pairedwilcoxon-example
 exr:unlabeled-div-8
+exr:unlabeled-div-9
 overview
 core-aims
 core-topics
@@ -99,3 +100,15 @@ assumptions-6
 post-hoc-testing
 exercise-7
 key-points-2
+kruskal-wallis-test
+objectives-5
+purpose-and-aim-3
+section-commands-7
+data-and-hypotheses-6
+summarise-and-visualise-6
+implement-test-5
+interpret-output-and-report-results-5
+assumptions-7
+post-hoc-testing-1
+exercise-8
+key-points-3

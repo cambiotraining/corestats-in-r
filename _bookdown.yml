@@ -13,6 +13,7 @@ rmd_files: [
   "cs2-intro.Rmd",
   "cs2-practical-introduction.Rmd",
   "cs2-practical-anova.Rmd",
+  "cs2-practical-kruskal.Rmd",
 ]
 
 language:
