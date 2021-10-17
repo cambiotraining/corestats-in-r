@@ -58,6 +58,11 @@
 <li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
 <li><a class="active" href="cs2-anova.html"><span class="header-section-number">8</span> ANOVA</a></li>
 <li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">9</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
 </ul>
 
         <div class="book-extra">
@@ -253,7 +258,7 @@
 ## data:  uns_oyster$Sheltered
 ## W = 0.88532, p-value = 0.3341</code></pre>
 <p>We can see that all three groups appear to be normally distributed which is good.</p>
-<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
 <p>Extract the residuals from the data and check their normality:</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>

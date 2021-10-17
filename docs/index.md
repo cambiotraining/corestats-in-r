@@ -41,7 +41,7 @@ To know what to do when presented with an arbitrary dataset e.g.
 
 1. [Simple Hypothesis Testing](#cs1-intro)
 2. [Categorical Predictor Variables](#cs2-intro)
-3. Continuous Predictors 
+3. [Continuous Predictors](#cs3-intro) 
 4. Multiple Predictor Variables
 5. Linear Models 
 6. Errors, Power and Multiple Comparisons

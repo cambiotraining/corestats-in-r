@@ -1,0 +1,104 @@
+
+
+```r
+source(file = "setup.R")
+```
+
+# Correlation coefficients
+
+## Objectives
+:::objectives
+**Questions**
+
+- How do I...
+- What do I...
+
+**Objectives**
+
+- Be able to...
+- Use...
+:::
+
+## Purpose and aim
+Correlation refers to the relationship of two variables (or datasets) to one another. Two datasets are said to be correlated if they are not independent from one another. Correlations can be useful because they can indicate if a predictive relationship may exist. However just because two datasets are correlated does not mean that they are causally related.
+
+### Section commands
+New commands used in this section:
+
+| Function| Description|
+|:- |:- |
+|`cor()`| Calculates a correlation matrix |
+|`pairs()`| Plots a matrix of scatter plots |
+
+### Data and hypotheses
+We will use the `USArrests` dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. `USArrests` is an unstacked data frame with 50 observations of four variables: `Murder`, `Assault`, `UrbanPop` and `Robbery`.
+
+The data are stored in the file `data/raw/CS3-usarrests.csv`.
+
+First we read in the data:
+
+
+```r
+USArrests <- read.csv("data/raw/CS3-usarrests.csv", row.names = 1)
+
+# have a look at the data
+head(USArrests)
+```
+
+```
+##            Murder Assault UrbanPop Robbery
+## Alabama      13.2     236       58    21.2
+## Alaska       10.0     263       48    44.5
+## Arizona       8.1     294       80    31.0
+## Arkansas      8.8     190       50    19.5
+## California    9.0     276       91    40.6
+## Colorado      7.9     204       78    38.7
+```
+
+The syntax for reading in this data frame is a little different. Here we want to use the first column of the `.csv` file to specify the names of the rows of the dataset rather than to include the information inside the dataset itself. We do this by using the `row.names = 1` argument which tells R to use the 1st column of the file for the row names. We need to do this because some of the functions will be using require a _matrix_ as input (basically a data frame containing only numbers).
+
+## Pearson’s product moment correlation coefficient
+Pearson's r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.
+
+### Summarise and visualise
+### Assumptions
+### Implement test
+### Interpret output and report results
+### Exercise
+:::exercise
+Exercise title
+
+Exercise description
+
+<details><summary>Answer</summary>
+
+An elaborate answer
+
+</details>
+:::
+
+## Spearman's rank correlation coefficient
+### Summarise and visualise
+### Assumptions
+### Implement test
+### Interpret output and report results
+### Exercise
+:::exercise
+Exercise title
+
+Exercise description
+
+<details><summary>Answer</summary>
+
+An elaborate answer
+
+</details>
+:::
+
+## Key points
+
+:::keypoints
+- Point 1
+- Point 2
+- Point 3
+:::

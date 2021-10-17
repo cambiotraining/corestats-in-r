@@ -14,6 +14,9 @@ rmd_files: [
   "cs2-practical-introduction.Rmd",
   "cs2-practical-anova.Rmd",
   "cs2-practical-kruskal.Rmd",
+  "cs3-intro.Rmd",
+  "cs3-practical-introduction.Rmd",
+  "cs3-practical-correlation_coefficients.Rmd",
 ]
 
 language:

@@ -31,9 +31,9 @@ Again, it does not focus on the underlying theory of the tests (although the dem
 
 For each test there will be a section that:
 
-- explains the purpose of the test,
-- explains how to visualise the data,
-- explains how to perform the test in R,
-- explains how to interpret the output and report the results, and 
-- explains how to assess the assumptions required to perform the test.
+* explains the purpose of the test,
+* explains how to visualise the data,
+* explains how to perform the test in R,
+* explains how to interpret the output and report the results, and 
+* explains how to assess the assumptions required to perform the test.
 
