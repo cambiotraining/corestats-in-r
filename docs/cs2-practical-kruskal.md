@@ -28,13 +28,13 @@ New commands used in this section:
 | Function| Description|
 |:- |:- |
 |`kruskal.test()`| Performs the Kruskal-Wallis test |
-|`dunn()`| Performs Dunn's test |
+|`dunn.test()`| Performs Dunn's test |
 
 ### Data and hypotheses
 For example, suppose a behavioural ecologist records the rate at which [spider monkeys](https://en.wikipedia.org/wiki/Spider_monkey) behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as `high`, `low` or `none.` We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:
 
--	$H_0$: The median aggression rates for all types of familiarity are the same.
--	$H_1$: The median aggression rates are not all equal.
+-	$H_0$: The median aggression rates for all types of familiarity are the same
+-	$H_1$: The median aggression rates are not all equal
 
 We will use a Kruskal-Wallis test to check this.
 
@@ -166,7 +166,7 @@ leveneTest(aggression ~ familiarity, data = spidermonkey)
 
 The relevant p-value is given on the 3rd line (`Pr(>F) = 0.893`). As it is quite large we see that each group do appear to have the same variance.
 
-There is also a warning about `group coerced to factor`. There is no need to worry about this - Levene's test needs to compare different groups and because the `aggression` is encoded as a numeric value, it converts it to a categorical one before running the test.
+There is also a warning about `group coerced to factor`. There is no need to worry about this - Levene's test needs to compare different groups and because `aggression` is encoded as a numeric value, it converts it to a categorical one before running the test.
 
 ### Post-hoc testing
 The equivalent of Tukey’s range test for non-normal data is **Dunn’s test**.
@@ -225,13 +225,14 @@ The comparison between the pairs of groups is reported in the table at the botto
 :::exercise
 Kruskal-Wallis and Dunn's test on lobster data
 
+Perform a Kruskal-Wallis test and do a post-hoc test on the `lobster` data set.
+
 <details><summary>Answer</summary>
 
 **1. Hypotheses**
 
-$H_0$ : all medians are equal
-
-$H_1$ : not all medians are equal
+- $H_0$ : all medians are equal
+- $H_1$ : not all medians are equal
 
 **2. Import data, summarise and visualise**
 
@@ -245,11 +246,6 @@ From before, since the data are normal enough they are definitely similar enough
 
 ```r
 leveneTest(weight ~ diet, data = lobsters)
-```
-
-```
-## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-## factor.
 ```
 
 ```
