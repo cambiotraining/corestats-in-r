@@ -130,8 +130,6 @@ implement-test-6
 interpret-output-and-report-results-6
 exercise-9
 spearmans-rank-correlation-coefficient
-summarise-and-visualise-8
-assumptions-8
 implement-test-7
 interpret-output-and-report-results-7
 exercise-10

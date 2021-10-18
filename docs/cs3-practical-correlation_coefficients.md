@@ -10,13 +10,14 @@ source(file = "setup.R")
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- What are correlation coefficients?
+- What kind of correlation coefficients are there and when do I use them?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to calculate correlation coefficients in R
+- Use visual tools to explore correlations between variables
+- Know the limitations of correlation coefficients
 :::
 
 ## Purpose and aim
@@ -183,21 +184,117 @@ cor(USAstate, method = "pearson")
 </details>
 :::
 
-
 ## Spearman's rank correlation coefficient
-### Summarise and visualise
-### Assumptions
+This test first calculates the rank of the numerical data (i.e. their position from smallest (or most negative) to the largest (or most positive)) in the two variables and then calculates Pearson’s product moment correlation coefficient using the ranks. As a consequence, this test is less sensitive to outliers in the distribution.
+
 ### Implement test
+We are using the same `USArrests` data set as before, so run this command:
+
+
+```r
+cor(USArrests, method = "spearman")
+```
+
+*	The first argument is a matrix or a data frame
+*	The argument `method` tells R which correlation coefficient to use 
+
 ### Interpret output and report results
+This gives the following output:
+
+
+```
+##             Murder   Assault  UrbanPop   Robbery
+## Murder   1.0000000 0.8172735 0.1067163 0.6794265
+## Assault  0.8172735 1.0000000 0.2752133 0.7143681
+## UrbanPop 0.1067163 0.2752133 1.0000000 0.4381068
+## Robbery  0.6794265 0.7143681 0.4381068 1.0000000
+```
+
+The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.
+
 ### Exercise
 :::exercise
-Exercise title
+Spearman's correlation for USA state data
 
-Exercise description
+Calculate Spearman’s correlation coefficient for the `data/raw/CS3-statedata.csv` dataset.
+
+Which variable’s correlations are affected most by the use of the Spearman’s rank compared with Pearson’s r?
+
+With reference to the scatter plot produced earlier, can you explain why this might this be?
+
+*	Remember to use the `row.names = 1` argument to load the data as a matrix
+
+<details><summary>Hint</summary>
+1. Instead of eye-balling differences, think about how you can determine the difference between the two correlation matrices
+2. The `heatmap()` function can be very useful to visualise matrices
+</details>
 
 <details><summary>Answer</summary>
 
-An elaborate answer
+
+```r
+cor(USAstate, method = "spearman")
+```
+
+```
+##            Population      Income Illiteracy    LifeExp     Murder     HSGrad
+## Population  1.0000000  0.12460984  0.3130496 -0.1040171  0.3457401 -0.3833649
+## Income      0.1246098  1.00000000 -0.3145948  0.3241050 -0.2174623  0.5104809
+## Illiteracy  0.3130496 -0.31459482  1.0000000 -0.5553735  0.6723592 -0.6545396
+## LifeExp    -0.1040171  0.32410498 -0.5553735  1.0000000 -0.7802406  0.5239410
+## Murder      0.3457401 -0.21746230  0.6723592 -0.7802406  1.0000000 -0.4367330
+## HSGrad     -0.3833649  0.51048095 -0.6545396  0.5239410 -0.4367330  1.0000000
+## Frost      -0.4588526  0.19686382 -0.6831936  0.2983910 -0.5438432  0.3985351
+## Area       -0.1206723  0.05709484 -0.2503721  0.1275002  0.1064259  0.4389752
+##                 Frost        Area
+## Population -0.4588526 -0.12067227
+## Income      0.1968638  0.05709484
+## Illiteracy -0.6831936 -0.25037208
+## LifeExp     0.2983910  0.12750018
+## Murder     -0.5438432  0.10642590
+## HSGrad      0.3985351  0.43897520
+## Frost       1.0000000  0.11228778
+## Area        0.1122878  1.00000000
+```
+
+In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we're using R is that we can be a bit more **programmatic** about these things.
+
+Let's calculate the difference between the two correlation matrices:
+
+
+```r
+corPear <- cor(USAstate, method = "pearson")
+corSpea <- cor(USAstate, method = "spearman")
+corDiff <- corPear - corSpea
+```
+
+Again, we could now just look at a grid of 64 numbers and see if we can spot the biggest differences, but our eyes aren't that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data. We can do that using some R plotting functions, `heatmap()` to be exact. The `heatmap()` function has a lot of features that we don't need and so I'm not going to go into it in detail here. The main reason I'm using it is that it displays matrices the right way round (other plotting functions display matrices rotated by 90 degrees) and automatically labels the rows and columns.
+
+
+```r
+heatmap(abs(corDiff), symm = TRUE, Rowv = NA)
+```
+
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+The `abs()` function calculates the absolute value (i.e. just the magnitude) of the matrix values. This is just because I only care about situations where the two correlation coefficients are different from each other but I don't care which is the larger. The `symm` argument tells the function that we have a symmetric matrix and in conjunction with the `Rowv = NA` argument stops the plot from reordering the rows and columns. The `Rowv = NA` argument also stops the function from adding dendrograms to the margins of the plot.
+
+The plot itself is coloured from yellow, indicating the smallest values (which in this case correspond to no difference in correlation coefficients), through orange to dark red, indicating the biggest values (which in this case correspond to the variables with the biggest difference in correlation coefficients).
+
+The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light yellow in colour, which means that there isn't much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the `Area` row/column suggesting that there's a big difference in the correlation coefficients there.
+
+We can now revisit the pairwise scatter plot from before to see if this makes sense:
+
+
+```r
+pairs(USAstate)
+```
+
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the `Area` vs `Income` graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.
+
+Well done, [Mr. Spearman](https://en.wikipedia.org/wiki/Charles_Spearman).
 
 </details>
 :::
@@ -205,7 +302,9 @@ An elaborate answer
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- Correlation is the degree to which two variables are linearly related
+- Correlation does not imply causation
+- We can visualise correlations using the `pairs()` function
+- Using the `cor()` function we can calculate correlation matrices
+- Two main correlation coefficients are Pearson's r and Spearman's rank, with Spearman's rank being less sensitive to outliers
 :::

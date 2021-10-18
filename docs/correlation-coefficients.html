@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 12 Correlation coefficients | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="12.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   12.2 Purpose and aim Correlation refers to the relationship of two variables (or datasets) to one another. Two...">
+<meta name="description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Correlation coefficients | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="12.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   12.2 Purpose and aim Correlation refers to the relationship of two variables (or datasets) to one another. Two...">
+<meta property="og:description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 12 Correlation coefficients | Core Statistics in R">
-<meta name="twitter:description" content="12.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   12.2 Purpose and aim Correlation refers to the relationship of two variables (or datasets) to one another. Two...">
+<meta name="twitter:description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -83,13 +83,14 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>What are correlation coefficients?</li>
+<li>What kind of correlation coefficients are there and when do I use them?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to calculate correlation coefficients in R</li>
+<li>Use visual tools to explore correlations between variables</li>
+<li>Know the limitations of correlation coefficients</li>
 </ul>
 </div>
 </div>
@@ -252,36 +253,89 @@ Answer
 <h2>
 <span class="header-section-number">12.4</span> Spearman’s rank correlation coefficient<a class="anchor" aria-label="anchor" href="#spearmans-rank-correlation-coefficient"><i class="fas fa-link"></i></a>
 </h2>
-<div id="summarise-and-visualise-8" class="section level3" number="12.4.1">
+<p>This test first calculates the rank of the numerical data (i.e. their position from smallest (or most negative) to the largest (or most positive)) in the two variables and then calculates Pearson’s product moment correlation coefficient using the ranks. As a consequence, this test is less sensitive to outliers in the distribution.</p>
+<div id="implement-test-7" class="section level3" number="12.4.1">
 <h3>
-<span class="header-section-number">12.4.1</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.1</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
 </h3>
+<p>We are using the same <code>USArrests</code> data set as before, so run this command:</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USArrests</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first argument is a matrix or a data frame</li>
+<li>The argument <code>method</code> tells R which correlation coefficient to use</li>
+</ul>
 </div>
-<div id="assumptions-8" class="section level3" number="12.4.2">
+<div id="interpret-output-and-report-results-7" class="section level3" number="12.4.2">
 <h3>
-<span class="header-section-number">12.4.2</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.2</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-7"><i class="fas fa-link"></i></a>
 </h3>
+<p>This gives the following output:</p>
+<pre><code>##             Murder   Assault  UrbanPop   Robbery
+## Murder   1.0000000 0.8172735 0.1067163 0.6794265
+## Assault  0.8172735 1.0000000 0.2752133 0.7143681
+## UrbanPop 0.1067163 0.2752133 1.0000000 0.4381068
+## Robbery  0.6794265 0.7143681 0.4381068 1.0000000</code></pre>
+<p>The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.</p>
 </div>
-<div id="implement-test-7" class="section level3" number="12.4.3">
+<div id="exercise-10" class="section level3" number="12.4.3">
 <h3>
-<span class="header-section-number">12.4.3</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="interpret-output-and-report-results-7" class="section level3" number="12.4.4">
-<h3>
-<span class="header-section-number">12.4.4</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-7"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="exercise-10" class="section level3" number="12.4.5">
-<h3>
-<span class="header-section-number">12.4.5</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.3</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-10"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 12.2  </strong></span>Exercise title</p>
-<p>Exercise description</p>
+<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 12.2  </strong></span>Spearman’s correlation for USA state data</p>
+<p>Calculate Spearman’s correlation coefficient for the <code>data/raw/CS3-statedata.csv</code> dataset.</p>
+<p>Which variable’s correlations are affected most by the use of the Spearman’s rank compared with Pearson’s r?</p>
+<p>With reference to the scatter plot produced earlier, can you explain why this might this be?</p>
+<ul>
+<li>Remember to use the <code>row.names = 1</code> argument to load the data as a matrix</li>
+</ul>
 <details><summary>
+Hint
+</summary><ol style="list-style-type: decimal">
+<li>Instead of eye-balling differences, think about how you can determine the difference between the two correlation matrices</li>
+<li>The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function can be very useful to visualise matrices</li>
+</ol></details><details><summary>
 Answer
-</summary><p>An elaborate answer</p>
+</summary><div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+<pre><code>##            Population      Income Illiteracy    LifeExp     Murder     HSGrad
+## Population  1.0000000  0.12460984  0.3130496 -0.1040171  0.3457401 -0.3833649
+## Income      0.1246098  1.00000000 -0.3145948  0.3241050 -0.2174623  0.5104809
+## Illiteracy  0.3130496 -0.31459482  1.0000000 -0.5553735  0.6723592 -0.6545396
+## LifeExp    -0.1040171  0.32410498 -0.5553735  1.0000000 -0.7802406  0.5239410
+## Murder      0.3457401 -0.21746230  0.6723592 -0.7802406  1.0000000 -0.4367330
+## HSGrad     -0.3833649  0.51048095 -0.6545396  0.5239410 -0.4367330  1.0000000
+## Frost      -0.4588526  0.19686382 -0.6831936  0.2983910 -0.5438432  0.3985351
+## Area       -0.1206723  0.05709484 -0.2503721  0.1275002  0.1064259  0.4389752
+##                 Frost        Area
+## Population -0.4588526 -0.12067227
+## Income      0.1968638  0.05709484
+## Illiteracy -0.6831936 -0.25037208
+## LifeExp     0.2983910  0.12750018
+## Murder     -0.5438432  0.10642590
+## HSGrad      0.3985351  0.43897520
+## Frost       1.0000000  0.11228778
+## Area        0.1122878  1.00000000</code></pre>
+<p>In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we’re using R is that we can be a bit more <strong>programmatic</strong> about these things.</p>
+<p>Let’s calculate the difference between the two correlation matrices:</p>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
+<span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span>
+<span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span></code></pre></div>
+<p>Again, we could now just look at a grid of 64 numbers and see if we can spot the biggest differences, but our eyes aren’t that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data. We can do that using some R plotting functions, <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> to be exact. The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function has a lot of features that we don’t need and so I’m not going to go into it in detail here. The main reason I’m using it is that it displays matrices the right way round (other plotting functions display matrices rotated by 90 degrees) and automatically labels the rows and columns.</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html">heatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">corDiff</span><span class="op">)</span>, symm <span class="op">=</span> <span class="cn">TRUE</span>, Rowv <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<p>The <code><a href="https://rdrr.io/r/base/MathFun.html">abs()</a></code> function calculates the absolute value (i.e. just the magnitude) of the matrix values. This is just because I only care about situations where the two correlation coefficients are different from each other but I don’t care which is the larger. The <code>symm</code> argument tells the function that we have a symmetric matrix and in conjunction with the <code>Rowv = NA</code> argument stops the plot from reordering the rows and columns. The <code>Rowv = NA</code> argument also stops the function from adding dendrograms to the margins of the plot.</p>
+<p>The plot itself is coloured from yellow, indicating the smallest values (which in this case correspond to no difference in correlation coefficients), through orange to dark red, indicating the biggest values (which in this case correspond to the variables with the biggest difference in correlation coefficients).</p>
+<p>The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light yellow in colour, which means that there isn’t much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the <code>Area</code> row/column suggesting that there’s a big difference in the correlation coefficients there.</p>
+<p>We can now revisit the pairwise scatter plot from before to see if this makes sense:</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USAstate</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<p>What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the <code>Area</code> vs <code>Income</code> graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.</p>
+<p>Well done, <a href="https://en.wikipedia.org/wiki/Charles_Spearman">Mr. Spearman</a>.</p>
 </details>
 </div>
 </div>
@@ -292,9 +346,11 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>Correlation is the degree to which two variables are linearly related</li>
+<li>Correlation does not imply causation</li>
+<li>We can visualise correlations using the <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> function</li>
+<li>Using the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function we can calculate correlation matrices</li>
+<li>Two main correlation coefficients are Pearson’s r and Spearman’s rank, with Spearman’s rank being less sensitive to outliers</li>
 </ul>
 </div>
 
@@ -324,11 +380,9 @@ Answer
 </li>
 <li>
 <a class="nav-link" href="#spearmans-rank-correlation-coefficient"><span class="header-section-number">12.4</span> Spearman’s rank correlation coefficient</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">12.4.1</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">12.4.2</span> Assumptions</a></li>
-<li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">12.4.3</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-7"><span class="header-section-number">12.4.4</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-10"><span class="header-section-number">12.4.5</span> Exercise</a></li>
+<li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">12.4.1</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-7"><span class="header-section-number">12.4.2</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-10"><span class="header-section-number">12.4.3</span> Exercise</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#key-points-4"><span class="header-section-number">12.5</span> Key points</a></li>
