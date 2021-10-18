@@ -126,13 +126,12 @@ section-commands-8
 data-and-hypotheses-7
 pearsons-product-moment-correlation-coefficient
 summarise-and-visualise-7
-assumptions-8
 implement-test-6
 interpret-output-and-report-results-6
 exercise-9
 spearmans-rank-correlation-coefficient
 summarise-and-visualise-8
-assumptions-9
+assumptions-8
 implement-test-7
 interpret-output-and-report-results-7
 exercise-10

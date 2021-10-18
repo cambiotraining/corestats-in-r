@@ -61,21 +61,128 @@ The syntax for reading in this data frame is a little different. Here we want to
 Pearson's r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.
 
 ### Summarise and visualise
-### Assumptions
+Run this command:
+
+
+```r
+pairs(USArrests, lower.panel = NULL)
+```
+
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+*	The first argument is a matrix or a data frame
+*	The argument `lower.panel` tells R not to add the redundant reflected lower set of plots, below the diagonal 
+
+From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some case (`Murder` and `UrbanPop` for example).
+
 ### Implement test
+Let's test if there are any possible correlations between the variables:
+
+
+```r
+cor(USArrests, method = "pearson")
+```
+
+*	The first argument is a matrix or a data frame
+*	The argument `method` tells R which correlation coefficient to use (`pearson` (default), `kendall`, or `spearman`)
+
 ### Interpret output and report results
+This should give the following output:
+
+
+```
+##              Murder   Assault   UrbanPop   Robbery
+## Murder   1.00000000 0.8018733 0.06957262 0.5635788
+## Assault  0.80187331 1.0000000 0.25887170 0.6652412
+## UrbanPop 0.06957262 0.2588717 1.00000000 0.4113412
+## Robbery  0.56357883 0.6652412 0.41134124 1.0000000
+```
+
+The matrix gives the correlation coefficient between each pair of variables in the data frame. The matrix is symmetric (_why?_) and the diagonal values are all 1 (_why?_). The most correlated variables are `Murder` and `Assault` with an `r` value of 0.801. This appears to agree well with the set of scatter plots that we produced earlier.
+
 ### Exercise
 :::exercise
-Exercise title
+State data correlation
 
-Exercise description
+We will use the data from the file `data/raw/CS3-statedata.csv` dataset for this exercise. This rather more benign dataset contains information on more general properties of each US state, such as population (1975), per capita income (1974), illiteracy proportion (1970), life expectancy (1969), murder rate per 100,000 people (there's no getting away from it), percentage of the population who are high-school graduates, average number of days where the minimum temperature is below freezing between 1931 and 1960, and the state area in square miles. The dataset contains 50 rows and 8 columns, with column names: `Population`, `Income`, `Illiteracy`, `Life.Exp`, `Murder`, `HS.Grad`, `Frost` and `Area`.
+
+Load in the data (remembering to tell R that the first column of the CSV file should be used to specify the row names of the dataset) and use the pairs command to visually identify 3 different pairs of variables that appear to be
+
+1.	the most positively correlated
+2.	the most negatively correlated
+3.	not correlated at all
+
+Calculate Pearson’s r for all variable pairs and see how well you were able to identify correlation visually.
 
 <details><summary>Answer</summary>
 
-An elaborate answer
+**1. Read in the data**
+
+
+```r
+USAstate <- read.csv("data/raw/CS3-statedata.csv",
+                     row.names = 1)
+
+# have a look at the data
+head(USAstate)
+```
+
+```
+##            Population Income Illiteracy LifeExp Murder HSGrad Frost   Area
+## Alabama          3615   3624        2.1   69.05   15.1   41.3    20  50708
+## Alaska            365   6315        1.5   69.31   11.3   66.7   152 566432
+## Arizona          2212   4530        1.8   70.55    7.8   58.1    15 113417
+## Arkansas         2110   3378        1.9   70.66   10.1   39.9    65  51945
+## California      21198   5114        1.1   71.71   10.3   62.6    20 156361
+## Colorado         2541   4884        0.7   72.06    6.8   63.9   166 103766
+```
+
+**2. Look at the pair-wise comparisons**
+
+
+```r
+pairs(USAstate, lower.panel = NULL)
+```
+
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+**3. Create a correlation matrix**
+
+
+```r
+cor(USAstate, method = "pearson")
+```
+
+```
+##             Population     Income  Illiteracy     LifeExp     Murder
+## Population  1.00000000  0.2082276  0.10762237 -0.06805195  0.3436428
+## Income      0.20822756  1.0000000 -0.43707519  0.34025534 -0.2300776
+## Illiteracy  0.10762237 -0.4370752  1.00000000 -0.58847793  0.7029752
+## LifeExp    -0.06805195  0.3402553 -0.58847793  1.00000000 -0.7808458
+## Murder      0.34364275 -0.2300776  0.70297520 -0.78084575  1.0000000
+## HSGrad     -0.09848975  0.6199323 -0.65718861  0.58221620 -0.4879710
+## Frost      -0.33215245  0.2262822 -0.67194697  0.26206801 -0.5388834
+## Area        0.02254384  0.3633154  0.07726113 -0.10733194  0.2283902
+##                 HSGrad      Frost        Area
+## Population -0.09848975 -0.3321525  0.02254384
+## Income      0.61993232  0.2262822  0.36331544
+## Illiteracy -0.65718861 -0.6719470  0.07726113
+## LifeExp     0.58221620  0.2620680 -0.10733194
+## Murder     -0.48797102 -0.5388834  0.22839021
+## HSGrad      1.00000000  0.3667797  0.33354187
+## Frost       0.36677970  1.0000000  0.05922910
+## Area        0.33354187  0.0592291  1.00000000
+```
+
+
+
+1. The most **positively** correlated variables are  Murder and Illiteracy
+2. The most **negatively** correlated variables are Murder and LifeExp
+3. The most **uncorrelated** variables are Area and Population
 
 </details>
 :::
+
 
 ## Spearman's rank correlation coefficient
 ### Summarise and visualise
