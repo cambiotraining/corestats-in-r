@@ -17,6 +17,7 @@ rmd_files: [
   "cs3-intro.Rmd",
   "cs3-practical-introduction.Rmd",
   "cs3-practical-correlation_coefficients.Rmd",
+  "cs3-practical-linear_regression.Rmd",
 ]
 
 language:

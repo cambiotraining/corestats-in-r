@@ -13,6 +13,7 @@ exr:unlabeled-div-8
 exr:unlabeled-div-9
 exr:unlabeled-div-10
 exr:unlabeled-div-11
+exr:unlabeled-div-12
 overview
 core-aims
 core-topics
@@ -134,3 +135,14 @@ implement-test-7
 interpret-output-and-report-results-7
 exercise-10
 key-points-4
+linear-regression
+objectives-8
+purpose-and-aim-5
+section-commands-9
+data-and-hypotheses-8
+summarise-and-visualise-8
+implement-test-8
+interpret-output-and-report-results-8
+assumptions-8
+exercise-11
+key-points-5
