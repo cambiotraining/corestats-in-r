@@ -1,7 +1,7 @@
 --- 
 title: "Core Statistics in R"
 author: "Matt Castle and Martin van Rongen"
-date: "2021-10-18"
+date: "2021-10-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -42,7 +42,7 @@ To know what to do when presented with an arbitrary dataset e.g.
 1. [Simple Hypothesis Testing](#cs1-intro)
 2. [Categorical Predictor Variables](#cs2-intro)
 3. [Continuous Predictors](#cs3-intro) 
-4. Multiple Predictor Variables
+4. [Multiple Predictor Variables](#cs4-intro)
 5. Linear Models 
 6. Errors, Power and Multiple Comparisons
 

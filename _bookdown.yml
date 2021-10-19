@@ -18,6 +18,9 @@ rmd_files: [
   "cs3-practical-introduction.Rmd",
   "cs3-practical-correlation_coefficients.Rmd",
   "cs3-practical-linear_regression.Rmd",
+  "cs4-intro.Rmd",
+  "cs4-practical-introduction.Rmd",
+  "cs4-practical-two_way_anova.Rmd",
 ]
 
 language:

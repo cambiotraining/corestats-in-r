@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 13 Linear regression | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="13.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   13.2 Purpose and aim Regression analysis not only tests for an association between two or more variables, but also...">
+<meta name="description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 13 Linear regression | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="13.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   13.2 Purpose and aim Regression analysis not only tests for an association between two or more variables, but also...">
+<meta property="og:description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 13 Linear regression | Core Statistics in R">
-<meta name="twitter:description" content="13.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   13.2 Purpose and aim Regression analysis not only tests for an association between two or more variables, but also...">
+<meta name="twitter:description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -64,6 +64,11 @@
 <li><a class="" href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></li>
 <li><a class="" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
 <li><a class="active" href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -84,13 +89,15 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>When should I use a linear regression?</li>
+<li>How do I interpret the results?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform a linear regression in R</li>
+<li>Use ANOVA to check if the slope of the regression differs from zero</li>
+<li>Understand the underlying assumptions for linear regression analysis</li>
+<li>Use diagnostic plots to check these assumptions</li>
 </ul>
 </div>
 </div>
@@ -352,17 +359,30 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>Linear regression tests if a linear relationship exists between two or more variables</li>
+<li>If so, we can use one variable to predict another</li>
+<li>A linear model has an intercept and slope and we test if the slope differs from zero</li>
+<li>We create linear models in R with the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function and use <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> to assess the slope coefficient</li>
+<li>We can only use a linear regression if these four assumptions are met:
+<ol style="list-style-type: decimal">
+<li>The data are linear</li>
+<li>Residuals are normally distributed</li>
+<li>Residuals are not correlated with their fitted values</li>
+<li>No single point should have a large influence on the linear model</li>
+</ol>
+</li>
+<li>We use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot(model_name)</a></code> to get four diagnostic plots in R, that help evaluate these assumptions</li>
 </ul>
 </div>
 
 </div>
 </div>
+
+
+
   <div class="chapter-nav">
 <div class="prev"><a href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></div>
-<div class="empty"></div>
+<div class="next"><a href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -397,7 +417,7 @@ Answer
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-18.</p>
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

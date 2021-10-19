@@ -9,13 +9,15 @@ source(file = "setup.R")
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- When should I use a linear regression?
+- How do I interpret the results?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform a linear regression in R
+- Use ANOVA to check if the slope of the regression differs from zero
+- Understand the underlying assumptions for linear regression analysis
+- Use diagnostic plots to check these assumptions
 :::
 
 ## Purpose and aim
@@ -266,7 +268,14 @@ Neither of these solutions can be tackled with the knowledge that we have so far
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- Linear regression tests if a linear relationship exists between two or more variables 
+- If so, we can use one variable to predict another
+- A linear model has an intercept and slope and we test if the slope differs from zero
+- We create linear models in R with the `lm()` function and use `anova()` to assess the slope coefficient
+- We can only use a linear regression if these four assumptions are met:
+    1. The data are linear
+    2. Residuals are normally distributed
+    3. Residuals are not correlated with their fitted values
+    4. No single point should have a large influence on the linear model
+- We use `plot(model_name)` to get four diagnostic plots in R, that help evaluate these assumptions
 :::

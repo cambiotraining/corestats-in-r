@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Introduction | Core Statistics in R</title>
+<title>Chapter 14 Introduction | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta name="description" content="14.1 Objectives  Aim: To introduce R commands for carrying out two-way ANOVA and linear regression with grouped data/ANCOVA By the end of this practical participants should be able to achieve the...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Introduction | Core Statistics in R">
+<meta property="og:title" content="Chapter 14 Introduction | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta property="og:description" content="14.1 Objectives  Aim: To introduce R commands for carrying out two-way ANOVA and linear regression with grouped data/ANCOVA By the end of this practical participants should be able to achieve the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Introduction | Core Statistics in R">
-<meta name="twitter:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta name="twitter:title" content="Chapter 14 Introduction | Core Statistics in R">
+<meta name="twitter:description" content="14.1 Objectives  Aim: To introduce R commands for carrying out two-way ANOVA and linear regression with grouped data/ANCOVA By the end of this practical participants should be able to achieve the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -47,7 +47,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
-<li><a class="active" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
@@ -65,7 +65,7 @@
 <li><a class="" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
+<li><a class="active" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
 <li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
 <li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
@@ -78,51 +78,29 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-intro" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs4-intro" class="section level1" number="14">
 <h1>
-<span class="header-section-number">2</span> Introduction<a class="anchor" aria-label="anchor" href="#cs1-intro"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> Introduction<a class="anchor" aria-label="anchor" href="#cs4-intro"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives" class="section level2" number="2.1">
+<div id="objectives-9" class="section level2" number="14.1">
 <h2>
-<span class="header-section-number">2.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-9"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
-<p><strong>Aim: To carry out basic one and two sample statistical tests.</strong></p>
-<p>By the end of this section and practical participants should be able to achieve the following for each of the listed tests:</p>
+<p><strong>Aim: To introduce R commands for carrying out two-way ANOVA and linear regression with grouped data/ANCOVA</strong></p>
+<p>By the end of this practical participants should be able to achieve the following:</p>
 <ol style="list-style-type: decimal">
-<li>Understand what the purpose of each test is</li>
-<li>Perform the test in R</li>
-<li>Interpret the test output</li>
-<li>Understand under what assumptions/conditions each test is appropriate</li>
-<li>Check for those assumptions</li>
+<li>Carry out a two-way ANOVA using R and interpret the output</li>
+<li>Analyse linear regression with grouped data (ANCOVA)</li>
 </ol>
 </div>
-<p>The tests covered in this practical are:</p>
-<ol style="list-style-type: decimal">
-<li>
-<a href="cs1-one-sample-tests.html#cs1-one-sample-tests">One-sample tests</a>
-<ul>
-<li><a href="cs1-one-sample-tests.html#cs1-onesample-t-test">One sample t-test</a></li>
-<li><a href="cs1-one-sample-tests.html#cs1-onesample-wilcoxon-signed-rank">One-sample Wilcoxon signed-rank test</a></li>
-</ul>
-</li>
-<li>
-<a href="cs1-two-sample.html#cs1-two-sample">Two-sample tests</a>
-<ul>
-<li><a href="cs1-two-sample.html#cs1-students-t-test">Student’s t-test</a></li>
-<li><a href="cs1-two-sample.html#cs1-mannwhitney-u-test">Mann-Whitney U test</a></li>
-<li><a href="cs1-two-sample.html#cs1-paired-two-sample-t-test">Paired two-sample t-test</a></li>
-<li><a href="cs1-two-sample.html#cs1-twosample-wilcoxon-signed-rank">Wilcoxon signed-rank test</a></li>
-</ul>
-</li>
-</ol>
 </div>
-<div id="background" class="section level2" number="2.2">
+<div id="background-3" class="section level2" number="14.2">
 <h2>
-<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>This practical does not focus on the underlying mathematical theory of the tests although the demonstrators will be happy to answer any questions.
-For each test there will be a section explaining its purpose, a section explaining how to perform the test in R, a section explaining the results that have been output to the screen, and a section covering the assumptions required to perform the test.</p>
+<p>This practical focuses on the implementation of various statistical tests relating to multiple predictor variables in R. It does not focus on the underlying theory of the tests (although the demonstrators will be happy to answer any questions that you may have).</p>
+<p>For each test there will be a section explaining how to perform the test, a section explaining the results that have been output to the screen, and an exercise for you to complete relating to the test itself.</p>
 
 </div>
 </div>
@@ -130,20 +108,20 @@ For each test there will be a section explaining its purpose, a section explaini
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Overview</a></div>
-<div class="next"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
+<div class="prev"><a href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></div>
+<div class="next"><a href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-intro"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="nav-link" href="#objectives"><span class="header-section-number">2.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#background"><span class="header-section-number">2.2</span> Background</a></li>
+<li><a class="nav-link" href="#cs4-intro"><span class="header-section-number">14</span> Introduction</a></li>
+<li><a class="nav-link" href="#objectives-9"><span class="header-section-number">14.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#background-3"><span class="header-section-number">14.2</span> Background</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs4-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs4-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

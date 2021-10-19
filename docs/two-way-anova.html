@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Introduction | Core Statistics in R</title>
+<title>Chapter 16 Two-way ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta name="description" content="16.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   16.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Introduction | Core Statistics in R">
+<meta property="og:title" content="Chapter 16 Two-way ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta property="og:description" content="16.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   16.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Introduction | Core Statistics in R">
-<meta name="twitter:description" content="2.1 Objectives  Aim: To carry out basic one and two sample statistical tests. By the end of this section and practical participants should be able to achieve the following for each of the listed...">
+<meta name="twitter:title" content="Chapter 16 Two-way ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="16.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   16.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -47,7 +47,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
-<li><a class="active" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
@@ -68,7 +68,7 @@
 <li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
 <li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
+<li><a class="active" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,72 +78,133 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-intro" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="two-way-anova" class="section level1" number="16">
 <h1>
-<span class="header-section-number">2</span> Introduction<a class="anchor" aria-label="anchor" href="#cs1-intro"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> Two-way ANOVA<a class="anchor" aria-label="anchor" href="#two-way-anova"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives" class="section level2" number="2.1">
+<div id="objectives-10" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">2.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-10"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
-<p><strong>Aim: To carry out basic one and two sample statistical tests.</strong></p>
-<p>By the end of this section and practical participants should be able to achieve the following for each of the listed tests:</p>
-<ol style="list-style-type: decimal">
-<li>Understand what the purpose of each test is</li>
-<li>Perform the test in R</li>
-<li>Interpret the test output</li>
-<li>Understand under what assumptions/conditions each test is appropriate</li>
-<li>Check for those assumptions</li>
-</ol>
-</div>
-<p>The tests covered in this practical are:</p>
-<ol style="list-style-type: decimal">
-<li>
-<a href="cs1-one-sample-tests.html#cs1-one-sample-tests">One-sample tests</a>
+<p><strong>Questions</strong></p>
 <ul>
-<li><a href="cs1-one-sample-tests.html#cs1-onesample-t-test">One sample t-test</a></li>
-<li><a href="cs1-one-sample-tests.html#cs1-onesample-wilcoxon-signed-rank">One-sample Wilcoxon signed-rank test</a></li>
+<li>How do I…</li>
+<li>What do I…</li>
 </ul>
-</li>
-<li>
-<a href="cs1-two-sample.html#cs1-two-sample">Two-sample tests</a>
+<p><strong>Objectives</strong></p>
 <ul>
-<li><a href="cs1-two-sample.html#cs1-students-t-test">Student’s t-test</a></li>
-<li><a href="cs1-two-sample.html#cs1-mannwhitney-u-test">Mann-Whitney U test</a></li>
-<li><a href="cs1-two-sample.html#cs1-paired-two-sample-t-test">Paired two-sample t-test</a></li>
-<li><a href="cs1-two-sample.html#cs1-twosample-wilcoxon-signed-rank">Wilcoxon signed-rank test</a></li>
+<li>Be able to…</li>
+<li>Use…</li>
 </ul>
-</li>
-</ol>
 </div>
-<div id="background" class="section level2" number="2.2">
+</div>
+<div id="purpose-and-aim-6" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-6"><i class="fas fa-link"></i></a>
 </h2>
-<p>This practical does not focus on the underlying mathematical theory of the tests although the demonstrators will be happy to answer any questions.
-For each test there will be a section explaining its purpose, a section explaining how to perform the test in R, a section explaining the results that have been output to the screen, and a section covering the assumptions required to perform the test.</p>
+<p>A two-way analysis of variance is used when we have two categorical predictor variables (or factors) and a single continuous response variable. For example, when we are looking at how body weight (continuous response variable in kilograms) is affected by gender (categorical variable, Male or Female) and exercise type (categorical variable, Control or Runner).</p>
+<div id="section-commands-10" class="section level3" number="16.2.1">
+<h3>
+<span class="header-section-number">16.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-10"><i class="fas fa-link"></i></a>
+</h3>
+<p>New commands used in this section:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>function_name()</code></td>
+<td align="left">Description</td>
+</tr>
+<tr class="even">
+<td align="left"><code>function_name()</code></td>
+<td align="left">Description</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="data-and-hypotheses-9" class="section level3" number="16.2.2">
+<h3>
+<span class="header-section-number">16.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-9"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="summarise-and-visualise-9" class="section level3" number="16.2.3">
+<h3>
+<span class="header-section-number">16.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="assumptions-9" class="section level3" number="16.2.4">
+<h3>
+<span class="header-section-number">16.2.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-9"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="implement-test-9" class="section level3" number="16.2.5">
+<h3>
+<span class="header-section-number">16.2.5</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-9"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="interpret-output-and-report-results-9" class="section level3" number="16.2.6">
+<h3>
+<span class="header-section-number">16.2.6</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-9"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="exercise-12" class="section level3" number="16.2.7">
+<h3>
+<span class="header-section-number">16.2.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-12"><i class="fas fa-link"></i></a>
+</h3>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-13" class="exercise"><strong>Exercise 16.1  </strong></span>Exercise title</p>
+<p>Exercise description</p>
+<details><summary>
+Answer
+</summary><p>An elaborate answer</p>
+</details>
+</div>
+</div>
+</div>
+<div id="key-points-6" class="section level2" number="16.3">
+<h2>
+<span class="header-section-number">16.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
 
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
-<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Overview</a></div>
-<div class="next"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
+<div class="prev"><a href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-intro"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="nav-link" href="#objectives"><span class="header-section-number">2.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#background"><span class="header-section-number">2.2</span> Background</a></li>
+<li><a class="nav-link" href="#two-way-anova"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-10"><span class="header-section-number">16.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#purpose-and-aim-6"><span class="header-section-number">16.2</span> Purpose and aim</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-10"><span class="header-section-number">16.2.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-9"><span class="header-section-number">16.2.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-9"><span class="header-section-number">16.2.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-9"><span class="header-section-number">16.2.4</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-test-9"><span class="header-section-number">16.2.5</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-9"><span class="header-section-number">16.2.6</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-12"><span class="header-section-number">16.2.7</span> Exercise</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#key-points-6"><span class="header-section-number">16.3</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-intro.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-intro.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs4-practical-two_way_anova.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs4-practical-two_way_anova.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
