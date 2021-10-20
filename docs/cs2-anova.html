@@ -122,10 +122,11 @@
 <span class="header-section-number">14.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.</p>
-<div id="section-commands-6" class="section level3" number="14.2.1">
-<h3>
-<span class="header-section-number">14.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
-</h3>
+</div>
+<div id="section-commands-6" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
+</h2>
 <p>New commands used in this section.</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
@@ -144,10 +145,10 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-5" class="section level3" number="14.2.2">
-<h3>
-<span class="header-section-number">14.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
-</h3>
+<div id="data-and-hypotheses-5" class="section level2" number="14.4">
+<h2>
+<span class="header-section-number">14.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+</h2>
 <p>For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called <code>exposed</code> (E), <code>partially sheltered</code> (P) and <code>sheltered</code> (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:</p>
 <ul>
 <li>
@@ -163,10 +164,10 @@
 </ul>
 <p>The data are stored in the file <code>CS2-oystercatcher.csv</code>.</p>
 </div>
-<div id="summarise-and-visualise-5" class="section level3" number="14.2.3">
-<h3>
-<span class="header-section-number">14.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
-</h3>
+<div id="summarise-and-visualise-5" class="section level2" number="14.5">
+<h2>
+<span class="header-section-number">14.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
+</h2>
 <p>First we read in the data.</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-oystercatcher.csv"</span><span class="op">)</span></code></pre></div>
@@ -196,10 +197,10 @@
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
 </div>
-<div id="implement-test-4" class="section level3" number="14.2.4">
-<h3>
-<span class="header-section-number">14.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
-</h3>
+<div id="implement-test-4" class="section level2" number="14.6">
+<h2>
+<span class="header-section-number">14.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+</h2>
 <p>Perform an ANOVA test on the data:</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
@@ -213,10 +214,10 @@
 <li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-4" class="section level3" number="14.2.5">
-<h3>
-<span class="header-section-number">14.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
-</h3>
+<div id="interpret-output-and-report-results-4" class="section level2" number="14.7">
+<h2>
+<span class="header-section-number">14.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+</h2>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -246,10 +247,10 @@
 </blockquote>
 <p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
 </div>
-<div id="assumptions-6" class="section level3" number="14.2.6">
-<h3>
-<span class="header-section-number">14.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
-</h3>
+<div id="assumptions-6" class="section level2" number="14.8">
+<h2>
+<span class="header-section-number">14.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+</h2>
 <p>To use an ANOVA test, we have to make three assumptions:</p>
 <ol style="list-style-type: decimal">
 <li>The parent distributions from which the samples are taken are normally distributed</li>
@@ -335,10 +336,10 @@
 <p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
 </div>
 </div>
-<div id="post-hoc-testing" class="section level3" number="14.2.7">
-<h3>
-<span class="header-section-number">14.2.7</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
-</h3>
+<div id="post-hoc-testing" class="section level2" number="14.9">
+<h2>
+<span class="header-section-number">14.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
+</h2>
 <p>One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.</p>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
 <p>Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.</p>
@@ -394,10 +395,10 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 <li>Independence of observations</li>
 </ol>
 </div>
-<div id="exercise-7" class="section level3" number="14.2.8">
-<h3>
-<span class="header-section-number">14.2.8</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
-</h3>
+<div id="exercise-7" class="section level2" number="14.10">
+<h2>
+<span class="header-section-number">14.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+</h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 14.1  </strong></span>Juvenile lobster weight</p>
 <p>Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:</p>
@@ -674,10 +675,9 @@ Answer
 </details>
 </div>
 </div>
-</div>
-<div id="key-points-2" class="section level2" number="14.3">
+<div id="key-points-2" class="section level2" number="14.11">
 <h2>
-<span class="header-section-number">14.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -697,19 +697,16 @@ Answer
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">14</span> ANOVA</a></li>
 <li><a class="nav-link" href="#objectives-4"><span class="header-section-number">14.1</span> Objectives</a></li>
-<li>
-<a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">14.2</span> Purpose and aim</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">14.2.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">14.2.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">14.2.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">14.2.4</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.2.5</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.2.6</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.2.7</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.2.8</span> Exercise</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.3</span> Key points</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">14.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">14.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">14.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">14.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">14.6</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.7</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.9</span> Post-hoc testing</a></li>
+<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.11</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

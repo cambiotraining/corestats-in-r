@@ -18,7 +18,7 @@
 ## Purpose and aim
 The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used when the assumption of normality cannot be met. In this way it is an extension of the Mann-Whitney test for two groups.
 
-### Section commands
+## Section commands
 New commands used in this section:
 
 | Function| Description|
@@ -26,7 +26,7 @@ New commands used in this section:
 |`kruskal.test()`| Performs the Kruskal-Wallis test |
 |`dunn.test()`| Performs Dunn's test |
 
-### Data and hypotheses
+## Data and hypotheses
 For example, suppose a behavioural ecologist records the rate at which [spider monkeys](https://en.wikipedia.org/wiki/Spider_monkey) behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as `high`, `low` or `none.` We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:
 
 -	$H_0$: The median aggression rates for all types of familiarity are the same
@@ -43,7 +43,7 @@ First we read the data in:
 spidermonkey <- read.csv("data/raw/CS2-spidermonkey.csv")
 ```
 
-### Summarise and visualise
+## Summarise and visualise
 
 
 ```r
@@ -86,7 +86,7 @@ boxplot(aggression ~ familiarity, data = spidermonkey)
 
 The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.
 
-### Implement test
+## Implement test
 Perform a Kruskal-Wallis test on the data:
 
 
@@ -97,7 +97,7 @@ kruskal.test(aggression ~ familiarity, data = spidermonkey)
 -	The first argument must be in the formula format: `variable ~ category`
 -	If the data are stored in stacked format, then the second argument must be the name of the data frame
 
-### Interpret output and report results
+## Interpret output and report results
 This is the output that you should now see in the console window:
 
 
@@ -115,7 +115,7 @@ Since the p-value is very small (much smaller than the standard significance lev
 
 > A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).
 
-### Assumptions
+## Assumptions
 To use the Kruskal-Wallis test we have to make three assumptions:
 
 1.	The parent distributions from which the samples are drawn have the same shape (if they’re normal then we should use a one-way ANOVA)
@@ -164,7 +164,7 @@ The relevant p-value is given on the 3rd line (`Pr(>F) = 0.893`). As it is quite
 
 There is also a warning about `group coerced to factor`. There is no need to worry about this - Levene's test needs to compare different groups and because `aggression` is encoded as a numeric value, it converts it to a categorical one before running the test.
 
-### Post-hoc testing
+## Post-hoc testing
 The equivalent of Tukey’s range test for non-normal data is **Dunn’s test**.
 Dunn’s test is also not included in the default R packages and may require the installation of an additional package called `dunn.test`.
 
@@ -217,7 +217,7 @@ You can see that the `dunn.test()` function also performs a Kruskal-Wallis test 
 
 The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity an no familiarity groups and between the low and no groups are significant though.
 
-### Exercise
+## Exercise
 :::exercise
 Kruskal-Wallis and Dunn's test on lobster data
 

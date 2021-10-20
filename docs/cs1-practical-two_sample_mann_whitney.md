@@ -11,7 +11,7 @@ No new commands used in this section.
 Again, we use the `rivers` dataset. We want to test whether the median body length of male guppies differs between samples. We form the following null and alternative hypotheses:
 
 -	$H_0$: The difference in median body length between the two groups is 0 ($\mu A - \mu G = 0$)
--	H1: The difference in median body length between the two groups is not 0 ($\mu A - \mu G \neq 0$)
+-	$H_1$: The difference in median body length between the two groups is not 0 ($\mu A - \mu G \neq 0$)
 
 We use a two-tailed Mann-Whitney U test to see if we can reject the null hypothesis.
 

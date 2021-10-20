@@ -19,7 +19,7 @@
 ## Purpose and aim
 Correlation refers to the relationship of two variables (or datasets) to one another. Two datasets are said to be correlated if they are not independent from one another. Correlations can be useful because they can indicate if a predictive relationship may exist. However just because two datasets are correlated does not mean that they are causally related.
 
-### Section commands
+## Section commands
 New commands used in this section:
 
 | Function| Description|
@@ -27,7 +27,7 @@ New commands used in this section:
 |`cor()`| Calculates a correlation matrix |
 |`pairs()`| Plots a matrix of scatter plots |
 
-### Data and hypotheses
+## Data and hypotheses
 We will use the `USArrests` dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. `USArrests` is an unstacked data frame with 50 observations of four variables: `Murder`, `Assault`, `UrbanPop` and `Robbery`.
 
 The data are stored in the file `data/raw/CS3-usarrests.csv`.
@@ -57,7 +57,7 @@ The syntax for reading in this data frame is a little different. Here we want to
 ## Pearson’s product moment correlation coefficient
 Pearson's r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.
 
-### Summarise and visualise
+## Summarise and visualise
 Run this command:
 
 
@@ -72,7 +72,7 @@ pairs(USArrests, lower.panel = NULL)
 
 From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some case (`Murder` and `UrbanPop` for example).
 
-### Implement test
+## Implement test
 Let's test if there are any possible correlations between the variables:
 
 
@@ -83,7 +83,7 @@ cor(USArrests, method = "pearson")
 *	The first argument is a matrix or a data frame
 *	The argument `method` tells R which correlation coefficient to use (`pearson` (default), `kendall`, or `spearman`)
 
-### Interpret output and report results
+## Interpret output and report results
 This should give the following output:
 
 
@@ -97,7 +97,7 @@ This should give the following output:
 
 The matrix gives the correlation coefficient between each pair of variables in the data frame. The matrix is symmetric (_why?_) and the diagonal values are all 1 (_why?_). The most correlated variables are `Murder` and `Assault` with an `r` value of 0.801. This appears to agree well with the set of scatter plots that we produced earlier.
 
-### Exercise
+## Exercise
 :::exercise
 State data correlation
 
@@ -183,7 +183,7 @@ cor(USAstate, method = "pearson")
 ## Spearman's rank correlation coefficient
 This test first calculates the rank of the numerical data (i.e. their position from smallest (or most negative) to the largest (or most positive)) in the two variables and then calculates Pearson’s product moment correlation coefficient using the ranks. As a consequence, this test is less sensitive to outliers in the distribution.
 
-### Implement test
+## Implement test
 We are using the same `USArrests` data set as before, so run this command:
 
 
@@ -194,7 +194,7 @@ cor(USArrests, method = "spearman")
 *	The first argument is a matrix or a data frame
 *	The argument `method` tells R which correlation coefficient to use 
 
-### Interpret output and report results
+## Interpret output and report results
 This gives the following output:
 
 
@@ -208,7 +208,7 @@ This gives the following output:
 
 The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.
 
-### Exercise
+## Exercise
 :::exercise
 Spearman's correlation for USA state data
 

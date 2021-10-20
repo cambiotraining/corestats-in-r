@@ -27,10 +27,10 @@ y = \beta_0 + \beta_1 x
 
 where $\beta_0$ is the value of the intercept and $\beta_1$ is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, $\beta_1$, is actually different from zero. If it is different from zero then we can say that $x$has a significant effect on $y$ (since changing $x$ leads to a predicted change in $y$), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of $\beta_0$ and $\beta_1$.
 
-### Section commands
+## Section commands
 No new commands used in this section.
 
-### Data and hypotheses
+## Data and hypotheses
 We will perform a simple linear regression analysis on the two variables `Murder` and `Assault` from the `USArrests` dataset. We wish to determine whether the `Assault` variable is a significant predictor of the `Murder` variable. This means that we will need to find the coefficients $\beta_0$ and $\beta_1$ that best fit the following macabre equation:
 
 \begin{equation*}
@@ -42,7 +42,7 @@ And then will be testing the following null and alternative hypotheses:
 - $H_0$: `Assault` is not a significant predictor of `Murder`, $\beta_1 = 0$
 -	$H_1$: `Assault` is a significant predictor of `Murder`, $\beta_1 \neq 0$
 
-### Summarise and visualise
+## Summarise and visualise
 You can visualise the data with:
 
 
@@ -54,7 +54,7 @@ plot(Murder ~ Assault, data = USArrests)
 
 There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.
 
-### Implement test
+## Implement test
 Fit a straight line to the data:
 
 
@@ -95,7 +95,7 @@ anova(lm_1)
 
 Here, we again use the `anova()` command to assess significance. This shouldn’t be too surprising at this stage if the introductory lectures made any sense. From a mathematical perspective, one-way ANOVA and simple linear regression are exactly the same as each other and it makes sense that we should use the same command to analyse them in R.
 
-### Interpret output and report results
+## Interpret output and report results
 
 ```
 ## Analysis of Variance Table
@@ -141,7 +141,7 @@ abline(lm_1, col = "red")
 *	The first command creates a scatter plot of the data
 *	The second command uses the results of the linear model fitting (the object `lm_1`) to add the line of best fit to the plot (and colour it red).
 
-### Assumptions
+## Assumptions
 In order for a linear regression analysis to be valid 4 key assumptions need to be met:
 
 :::highlight
@@ -175,7 +175,7 @@ Formally, if there is any concern after looking at the diagnostic plots, then a 
 Let's change this through leading by example!
 :::
 
-### Exercise
+## Exercise
 :::exercise
 Linear regression
 

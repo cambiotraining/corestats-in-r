@@ -18,7 +18,7 @@
 ## Purpose and aim
 Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.
 
-### Section commands
+## Section commands
 New commands used in this section.
 
 | Function| Description|
@@ -26,7 +26,7 @@ New commands used in this section.
 |`lm()`| Fits a linear model |
 |`anova()`| Carries out an ANOVA on a linear model |
 
-### Data and hypotheses
+## Data and hypotheses
 For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called `exposed` (E), `partially sheltered` (P) and `sheltered` (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:
 
 -	$H_0$: The mean feeding rates at all three sites is the same $\mu E = \mu P = \mu S$
@@ -39,7 +39,7 @@ We will use a one-way ANOVA test to check this.
 
 The data are stored in the file `CS2-oystercatcher.csv`.
 
-### Summarise and visualise
+## Summarise and visualise
 First we read in the data.
 
 
@@ -89,7 +89,7 @@ boxplot(feeding ~ site, data = oystercatcher)
 
 Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.
 
-### Implement test
+## Implement test
 Perform an ANOVA test on the data:
 
 
@@ -105,7 +105,7 @@ The first line fits a linear model to the data (i.e. finds the means of the thre
 -	If the data are stored in stacked format, then the second argument must be the name of the data frame
 -	The `anova()` command takes a linear model object as its main argument
 
-### Interpret output and report results
+## Interpret output and report results
 This is the output that you should now see in the console window:
 
 
@@ -137,7 +137,7 @@ Since the p-value is very small (much smaller than the standard significance lev
 
 Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).
 
-### Assumptions
+## Assumptions
 To use an ANOVA test, we have to make three assumptions:
 
 1.	The parent distributions from which the samples are taken are normally distributed
@@ -272,7 +272,7 @@ At this stage, I should point out that I nearly always stick with the graphical 
 Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.
 :::
 
-### Post-hoc testing
+## Post-hoc testing
 One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.
 
 <img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672" />
@@ -355,7 +355,7 @@ Tukey’s range test, when we decide to use it, requires the same three assumpti
 3.	Independence of observations
 
 
-### Exercise
+## Exercise
 :::exercise
 Juvenile lobster weight
 

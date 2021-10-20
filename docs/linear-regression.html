@@ -129,16 +129,17 @@ Simple linear regression essentially models the dependence of a scalar dependent
 y = \beta_0 + \beta_1 x
 \end{equation*}\]</span></p>
 <p>where <span class="math inline">\(\beta_0\)</span> is the value of the intercept and <span class="math inline">\(\beta_1\)</span> is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, <span class="math inline">\(\beta_1\)</span>, is actually different from zero. If it is different from zero then we can say that <span class="math inline">\(x\)</span>has a significant effect on <span class="math inline">\(y\)</span> (since changing <span class="math inline">\(x\)</span> leads to a predicted change in <span class="math inline">\(y\)</span>), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
-<div id="section-commands-9" class="section level3" number="19.2.1">
-<h3>
-<span class="header-section-number">19.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-9"><i class="fas fa-link"></i></a>
-</h3>
+</div>
+<div id="section-commands-9" class="section level2" number="19.3">
+<h2>
+<span class="header-section-number">19.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-9"><i class="fas fa-link"></i></a>
+</h2>
 <p>No new commands used in this section.</p>
 </div>
-<div id="data-and-hypotheses-8" class="section level3" number="19.2.2">
-<h3>
-<span class="header-section-number">19.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
-</h3>
+<div id="data-and-hypotheses-8" class="section level2" number="19.4">
+<h2>
+<span class="header-section-number">19.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will perform a simple linear regression analysis on the two variables <code>Murder</code> and <code>Assault</code> from the <code>USArrests</code> dataset. We wish to determine whether the <code>Assault</code> variable is a significant predictor of the <code>Murder</code> variable. This means that we will need to find the coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that best fit the following macabre equation:</p>
 <p><span class="math display">\[\begin{equation*}
 Murder  = \beta_0 + \beta_1 Assault
@@ -153,20 +154,20 @@ Murder  = \beta_0 + \beta_1 Assault
 </li>
 </ul>
 </div>
-<div id="summarise-and-visualise-8" class="section level3" number="19.2.3">
-<h3>
-<span class="header-section-number">19.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
-</h3>
+<div id="summarise-and-visualise-8" class="section level2" number="19.5">
+<h2>
+<span class="header-section-number">19.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
+</h2>
 <p>You can visualise the data with:</p>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Murder</span> <span class="op">~</span> <span class="va">Assault</span>, data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p>There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.</p>
 </div>
-<div id="implement-test-8" class="section level3" number="19.2.4">
-<h3>
-<span class="header-section-number">19.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-8"><i class="fas fa-link"></i></a>
-</h3>
+<div id="implement-test-8" class="section level2" number="19.6">
+<h2>
+<span class="header-section-number">19.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-8"><i class="fas fa-link"></i></a>
+</h2>
 <p>Fit a straight line to the data:</p>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Murder</span> <span class="op">~</span> <span class="va">Assault</span>, data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span>
@@ -194,10 +195,10 @@ Murder = 0.63 + 0.042 Assault
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_1</span><span class="op">)</span></code></pre></div>
 <p>Here, we again use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command to assess significance. This shouldn’t be too surprising at this stage if the introductory lectures made any sense. From a mathematical perspective, one-way ANOVA and simple linear regression are exactly the same as each other and it makes sense that we should use the same command to analyse them in R.</p>
 </div>
-<div id="interpret-output-and-report-results-8" class="section level3" number="19.2.5">
-<h3>
-<span class="header-section-number">19.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-8"><i class="fas fa-link"></i></a>
-</h3>
+<div id="interpret-output-and-report-results-8" class="section level2" number="19.7">
+<h2>
+<span class="header-section-number">19.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-8"><i class="fas fa-link"></i></a>
+</h2>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Murder
@@ -238,10 +239,10 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <li>The second command uses the results of the linear model fitting (the object <code>lm_1</code>) to add the line of best fit to the plot (and colour it red).</li>
 </ul>
 </div>
-<div id="assumptions-8" class="section level3" number="19.2.6">
-<h3>
-<span class="header-section-number">19.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
-</h3>
+<div id="assumptions-8" class="section level2" number="19.8">
+<h2>
+<span class="header-section-number">19.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
+</h2>
 <p>In order for a linear regression analysis to be valid 4 key assumptions need to be met:</p>
 <div class="highlight">
 <ol style="list-style-type: decimal">
@@ -270,10 +271,10 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <p>Let’s change this through leading by example!</p>
 </div>
 </div>
-<div id="exercise-11" class="section level3" number="19.2.7">
-<h3>
-<span class="header-section-number">19.2.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-11"><i class="fas fa-link"></i></a>
-</h3>
+<div id="exercise-11" class="section level2" number="19.9">
+<h2>
+<span class="header-section-number">19.9</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-11"><i class="fas fa-link"></i></a>
+</h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-12" class="exercise"><strong>Exercise 19.1  </strong></span>Linear regression</p>
 <p>Calculate two simple linear regressions using the <code>data/raw/CS3-statedata.csv</code> dataset, first for the variable <code>LifeExp</code> on the variable <code>Murder</code> and then for the variable <code>HSGrad</code> on <code>Frost</code>.</p>
@@ -370,10 +371,9 @@ Answer
 </details>
 </div>
 </div>
-</div>
-<div id="key-points-5" class="section level2" number="19.3">
+<div id="key-points-5" class="section level2" number="19.10">
 <h2>
-<span class="header-section-number">19.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.10</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-5"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -406,18 +406,15 @@ Answer
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#linear-regression"><span class="header-section-number">19</span> Linear regression</a></li>
 <li><a class="nav-link" href="#objectives-8"><span class="header-section-number">19.1</span> Objectives</a></li>
-<li>
-<a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">19.2</span> Purpose and aim</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">19.2.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">19.2.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">19.2.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-8"><span class="header-section-number">19.2.4</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">19.2.5</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">19.2.6</span> Assumptions</a></li>
-<li><a class="nav-link" href="#exercise-11"><span class="header-section-number">19.2.7</span> Exercise</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#key-points-5"><span class="header-section-number">19.3</span> Key points</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">19.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">19.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">19.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">19.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-8"><span class="header-section-number">19.6</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">19.7</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">19.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-11"><span class="header-section-number">19.9</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-5"><span class="header-section-number">19.10</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
