@@ -1,25 +1,19 @@
-/* Theme 1 - blue
- 	#002e55 dark highlight
-	#003e74 page header colours/global footer
-	#004e8f carousel btn hover
-	#004e8f main local nav bar
-	#005dab	lighter highlight
-	#0072cf selected state/carousel text bg
-	#68ace5 pale tone - lightest highlight/footer headings
-	#d2e4f3 pale table bg
-
-	Using Uni core palette colours:
-	https://www.cam.ac.uk/brand-resources/guidelines/typography-and-colour/colour-palette
-
-	highlight: #e87722 (Pantone 158c)
-	objectives: #d2e4f3
-	keypoints: #d2e4f3
-*/
-
 /* header with university logo */
-div.uni-title {
-  background-color: #000000;
-}
+div.header {background-color: #000000;width: 100%;border: collapse;float:left;}
+
+table.top-menu {border-collapse: collapse;font-family:"myriad-pro-n6", "myriad-pro", myriad, verdana, arial, sans-serif;font-weight:600;font-style:normal;font-size: smaller;list-style-type: none;margin: 0;padding: 0;overflow: hidden;}
+
+table.top-menu td{padding:10px;border-right:1px solid #2e2e2e;}
+
+table.top-menu td:hover {background-color: #2e2e2e;}
+
+table.top-menu td a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
+
+table.top-menu td a:hover {color: #7a7a7a;background-color: #2e2e2e;}
+
+td.top-menu-right{width:100%}
+
+div.logo{padding:5px 50px 5px 170px;display:block;float:left;}
 
 /* background image for menu */
 div.collapse-lg {
