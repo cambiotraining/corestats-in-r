@@ -5,11 +5,11 @@ table.top-menu {border-collapse: collapse;font-family:"myriad-pro-n6", "myriad-p
 
 table.top-menu td{padding:10px;border-right:1px solid #2e2e2e;}
 
-table.top-menu td:hover {background-color: #2e2e2e;}
+td.top-menu:hover {background-color: #2e2e2e;}
 
-table.top-menu td a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
+td.top-menu a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
 
-table.top-menu td a:hover {color: #7a7a7a;background-color: #2e2e2e;}
+td.top-menu a:hover {color: #7a7a7a;background-color: #2e2e2e;}
 
 td.top-menu-right{width:100%}
 

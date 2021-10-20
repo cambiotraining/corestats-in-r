@@ -1,3 +1,5 @@
+2021-10-20 (MvR): Annoyingly, the sidebar on the right displays up the h3 header level by default with the latest `bslib` package. I've not found a suitable long-term solution, but for now downgrading to bslib 0.2.4 seems to work. For more information see: [this issue](https://issueexplorer.com/issue/rstudio/bookdown/1269). 
+
 This is an adapted version of the bookdown minimal template.
 
 It renders the website using the bs4 bootstrap style.

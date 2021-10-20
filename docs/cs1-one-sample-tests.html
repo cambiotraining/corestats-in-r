@@ -4,19 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 One-sample tests | Core Statistics in R</title>
+<title>Chapter 4 One-sample tests | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="5.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 5 One-sample tests | Core Statistics in R">
+<meta property="og:title" content="Chapter 4 One-sample tests | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="5.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta property="og:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 One-sample tests | Core Statistics in R">
-<meta name="twitter:description" content="5.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="twitter:title" content="Chapter 4 One-sample tests | Core Statistics in R">
+<meta name="twitter:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +28,12 @@
             <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
 </div>
         </td>
-        <td><a href="#index.html">Course home page</a></td>
-        <td><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
-        <td class="top-menu-right">
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
           <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
         </td>
+        <td class="top-menu-right"> </td>
       </tr></table></div>
 </div>
 
@@ -59,28 +60,27 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="" href="background-concepts.html"><span class="header-section-number">3</span> Background concepts</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
-<li><a class="" href="introduction.html"><span class="header-section-number">4</span> Introduction</a></li>
-<li><a class="active" href="cs1-one-sample-tests.html"><span class="header-section-number">5</span> One-sample tests</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">6</span> Two-sample tests</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="active" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">8</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">9</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">10</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">8</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">9</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">12</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">13</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">14</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">16</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">17</span> Two-way ANOVA</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -90,13 +90,13 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-one-sample-tests" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-one-sample-tests" class="section level1" number="4">
 <h1>
-<span class="header-section-number">5</span> One-sample tests<a class="anchor" aria-label="anchor" href="#cs1-one-sample-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> One-sample tests<a class="anchor" aria-label="anchor" href="#cs1-one-sample-tests"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-1" class="section level2" number="5.1">
+<div id="objectives-1" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">5.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -116,24 +116,24 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim" class="section level2" number="5.2">
+<div id="purpose-and-aim" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">5.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
 </h2>
 <p>These tests are used when we have a single sample of continuous data. It is used to find out if the sample came from a parent distribution with a given mean (or median). This essentially boils down to finding out if the sample mean (or median) is “close enough” to our hypothesised parent population mean (or median).
 So, in the figure below, we could use these tests to see what the probability is that the sample of ten points comes from the distribution plotted above it i.e. a population with a mean of 20 mm.</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-intro-1.png" width="672"></div>
 </div>
-<div id="choosing-a-test-1" class="section level2" number="5.3">
+<div id="choosing-a-test" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">5.3</span> Choosing a test<a class="anchor" aria-label="anchor" href="#choosing-a-test-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Choosing a test<a class="anchor" aria-label="anchor" href="#choosing-a-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are two tests that we are going to look at in this situation; the one-sample t-test, and the one-sample Wilcoxon signed rank test. Both tests work on the sort of data that we’re considering here, but they both have different assumptions.</p>
 <p>If your data is normally distributed, then a one-sample t-test is appropriate. If your data aren’t normally distributed, but their distribution is symmetric, and the sample size is small then a one-sample Wilcoxon signed rank test is more appropriate.</p>
 </div>
-<div id="cs1-onesample-t-test" class="section level2" number="5.4">
+<div id="cs1-onesample-t-test" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">5.4</span> One-sample t-test<a class="anchor" aria-label="anchor" href="#cs1-onesample-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> One-sample t-test<a class="anchor" aria-label="anchor" href="#cs1-onesample-t-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>For each statistical test we consider there will be five tasks. These will come back again and again, so pay extra close attention.</p>
 <div class="highlight">
@@ -146,9 +146,9 @@ So, in the figure below, we could use these tests to see what the probability is
 </ol>
 </div>
 <p>We won’t always carry these out in exactly the same order, but we will always consider each of the five tasks for every test.</p>
-<div id="section-commands" class="section level3" number="5.4.1">
+<div id="section-commands" class="section level3" number="4.4.1">
 <h3>
-<span class="header-section-number">5.4.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
 </h3>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -180,9 +180,9 @@ So, in the figure below, we could use these tests to see what the probability is
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses" class="section level3" number="5.4.2">
+<div id="data-and-hypotheses" class="section level3" number="4.4.2">
 <h3>
-<span class="header-section-number">5.4.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses"><i class="fas fa-link"></i></a>
 </h3>
 <p>For example, suppose we measure the body lengths of male guppies (in mm) collected from the Guanapo River in Trinidad. We want to test whether the data support the hypothesis that the mean body is actually 20 mm. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -207,9 +207,9 @@ So, in the figure below, we could use these tests to see what the probability is
 <span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="va">fishlengthDF</span><span class="op">$</span><span class="va">Guanapo</span></code></pre></div>
 <p>The first line reads the data into R and creates an object called a <strong>data frame</strong>. This data frame only contains a single column of numbers called “Guanapo” (the name of the river). In most situations, and for most statistical analyses, having our data stored in a data frame is exactly what we’d want. However, for one sample tests we actually need our data to be stored as a vector. So, the second line extracts the values that are in the Guanapo column of our <code>fishlengthDF</code> data frame and creates a simple vector of numbers that we have called <code>fishlength</code>. This step is only necessary for one-sample tests and when we look at more complex datasets, we won’t need to do this second step at all.</p>
 </div>
-<div id="summarise-and-visualise" class="section level3" number="5.4.3">
+<div id="summarise-and-visualise" class="section level3" number="4.4.3">
 <h3>
-<span class="header-section-number">5.4.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
 </h3>
 <p>Summarise the data and visualise it:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -221,9 +221,9 @@ So, in the figure below, we could use these tests to see what the probability is
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-summary-1.png" width="672"></div>
 <p>The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be “statistically significant,” although we may anticipate such a result.</p>
 </div>
-<div id="implement-the-test" class="section level3" number="5.4.4">
+<div id="implement-the-test" class="section level3" number="4.4.4">
 <h3>
-<span class="header-section-number">5.4.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a one-sample, two-tailed t-test:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -246,9 +246,9 @@ So, in the figure below, we could use these tests to see what the probability is
 </li>
 </ul>
 </div>
-<div id="interpreting-the-output-and-report-results" class="section level3" number="5.4.5">
+<div id="interpreting-the-output-and-report-results" class="section level3" number="4.4.5">
 <h3>
-<span class="header-section-number">5.4.5</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.5</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results"><i class="fas fa-link"></i></a>
 </h3>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## 
@@ -289,9 +289,9 @@ So, in the figure below, we could use these tests to see what the probability is
 <p>The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the actual mean value of our group(<span class="math inline">\(\mu\)</span> = 18.29mm), the test statistic (t = -3.55), the degrees of freedom (df = 28), and the p-value (p = 0.0014). In some journals you are only required to report whether the p-value is less than the critical value (e.g. p &lt; 0.05) but I would always recommend reporting the actual p-value obtained.</p>
 <p>Please feel free to ask a demonstrator if any aspect of this section is unclear as this does form the core of classical hypothesis testing and the logic here applies to all of the rest of the tests.</p>
 </div>
-<div id="assumptions-1" class="section level3" number="5.4.6">
+<div id="assumptions" class="section level3" number="4.4.6">
 <h3>
-<span class="header-section-number">5.4.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order to use a t-test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -312,9 +312,9 @@ There are three ways of checking for normality:</p>
 <li>Shapiro-Wilk test</li>
 </ol>
 </div>
-<div id="histogram-of-the-data" class="section level3" number="5.4.7">
+<div id="histogram-of-the-data" class="section level3" number="4.4.7">
 <h3>
-<span class="header-section-number">5.4.7</span> Histogram of the data<a class="anchor" aria-label="anchor" href="#histogram-of-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.7</span> Histogram of the data<a class="anchor" aria-label="anchor" href="#histogram-of-the-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plot a histogram of the data, which gives:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -323,9 +323,9 @@ There are three ways of checking for normality:</p>
 <p>The distribution appears to be uni-modal and symmetric, and so it isn’t obviously non-normal. However, there are a lot of distributions that have these simple properties but which aren’t normal, so this isn’t exactly rigorous. Thankfully there are other, more rigorous tests.</p>
 <p>NB. By even looking at this distribution to assess the assumption of normality we are already going far beyond what anyone else ever does. Nevertheless, we will continue.</p>
 </div>
-<div id="q-q-plot-of-the-data" class="section level3" number="5.4.8">
+<div id="q-q-plot-of-the-data" class="section level3" number="4.4.8">
 <h3>
-<span class="header-section-number">5.4.8</span> Q-Q plot of the data<a class="anchor" aria-label="anchor" href="#q-q-plot-of-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.8</span> Q-Q plot of the data<a class="anchor" aria-label="anchor" href="#q-q-plot-of-the-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Q-Q plot is the short for quantile-quantile plot. This <strong>diagnostic</strong> plot (as it is sometimes called) is a way of comparing two distributions. How Q-Q plots work won’t be explained here but ask a demonstrator if you really want to know what is going on.</p>
 <p>Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:</p>
@@ -351,9 +351,9 @@ There are three ways of checking for normality:</p>
 <p>These two graphs relate to 200 data points that have been drawn from an exponential distribution. Exponential distributions are not symmetric and are very skewed compared with normal distributions. The significant right-skew in this distribution is reflected in the QQ plot again having points that curve away above the diagonal line at both ends (a left-skew would have the points being below the line at both ends).</p>
 <p>In all four cases it is worth noting that the deviations are only at the ends of the plot.</p>
 </div>
-<div id="shapiro-wilk-test" class="section level3" number="5.4.9">
+<div id="shapiro-wilk-test" class="section level3" number="4.4.9">
 <h3>
-<span class="header-section-number">5.4.9</span> Shapiro-Wilk test<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.9</span> Shapiro-Wilk test<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>This is one of a number of formal statistical test that assess whether a given sample of numbers come from a normal distribution. It calculates the probability of getting the sample data if the underlying distribution is in fact normal. It is very easy to carry out in R.</p>
 <p>Perform a Shapiro-Wilk test on the data:</p>
@@ -376,9 +376,9 @@ There are three ways of checking for normality:</p>
 <p>As the p-value is bigger than 0.05 (say) then we can say that there is insufficient evidence to reject the null hypothesis that the sample came from a normal distribution.</p>
 <p>It is important to recognise that the Shapiro-Wilk test is not without limitations. It is rather sensitive to the sample size being considered. In general, for small sample sizes, the test is very relaxed about normality (and nearly all datasets are considered normal), whereas for large sample sizes the test can be overly strict, and it can fail to recognise datasets that are very nearly normal indeed.</p>
 </div>
-<div id="assumptions-overview" class="section level3" number="5.4.10">
+<div id="assumptions-overview" class="section level3" number="4.4.10">
 <h3>
-<span class="header-section-number">5.4.10</span> Assumptions overview<a class="anchor" aria-label="anchor" href="#assumptions-overview"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.10</span> Assumptions overview<a class="anchor" aria-label="anchor" href="#assumptions-overview"><i class="fas fa-link"></i></a>
 </h3>
 <div class="highlight">
 <p>In terms of assessing the assumptions of a test it is always worth considering several methods, both graphical and analytic, and not just relying on a single method.</p>
@@ -386,12 +386,12 @@ There are three ways of checking for normality:</p>
 <p>In the <code>fishlength</code> example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be…</p>
 <p>In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the <a href="cs1-one-sample-tests.html#cs1-onesample-wilcoxon-signed-rank">one-sample Wilcoxon signed rank test</a>.</p>
 </div>
-<div id="exercise" class="section level3" number="5.4.11">
+<div id="exercise" class="section level3" number="4.4.11">
 <h3>
-<span class="header-section-number">5.4.11</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.11</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 5.1  </strong></span>The following data are the dissolving times (in seconds) of a drug in agitated gastric juice:</p>
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 4.1  </strong></span>The following data are the dissolving times (in seconds) of a drug in agitated gastric juice:</p>
 <p><code>42.7, 43.4, 44.6, 45.1, 45.6, 45.9, 46.8, 47.6</code></p>
 <p>Do these results provide any evidence to suggest that dissolving time for this drug is different from 45 seconds?</p>
 <ol style="list-style-type: decimal">
@@ -468,14 +468,14 @@ Normality:</p>
 </div>
 </div>
 </div>
-<div id="cs1-onesample-wilcoxon-signed-rank" class="section level2" number="5.5">
+<div id="cs1-onesample-wilcoxon-signed-rank" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">5.5</span> One-sample Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-onesample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> One-sample Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-onesample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
 </h2>
 <p>This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still need the parent distribution (and consequently the sample) to be symmetric though. In this test we look to see if the <em>median</em> of the parent distributions differs significantly from a given hypothesised value (in contrast with the t-test that looks at the <em>mean</em>).</p>
-<div id="section-commands-1" class="section level3" number="5.5.1">
+<div id="section-commands-1" class="section level3" number="4.5.1">
 <h3>
-<span class="header-section-number">5.5.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -501,15 +501,15 @@ Normality:</p>
 </ul>
 <p>We will use a one-sample, two-tailed Wilcoxon signed-rank test to see if we should reject the null hypothesis or not.</p>
 </div>
-<div id="summarise-and-visualise-1" class="section level3" number="5.5.2">
+<div id="summarise-and-visualise-1" class="section level3" number="4.5.2">
 <h3>
-<span class="header-section-number">5.5.2</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.2</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We did this before in the previous section, nothing really should have changed between now and then (if it has then you’re not off to a good start on this practical!)</p>
 </div>
-<div id="implement-the-test-1" class="section level3" number="5.5.3">
+<div id="implement-the-test-1" class="section level3" number="4.5.3">
 <h3>
-<span class="header-section-number">5.5.3</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.3</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -522,9 +522,9 @@ Normality:</p>
 </li>
 </ul>
 </div>
-<div id="interpreting-the-output-and-report-results-1" class="section level3" number="5.5.4">
+<div id="interpreting-the-output-and-report-results-1" class="section level3" number="4.5.4">
 <h3>
-<span class="header-section-number">5.5.4</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.4</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>This is the output that you should now see in the console window</p>
 <pre><code>## Warning in wilcox.test.default(fishlength, mu = 20, alternative = "two.sided"):
@@ -553,9 +553,9 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 </blockquote>
 <p>The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the median value of the group (<span class="math inline">\(\mu\)</span> = 18.8 mm), the test statistic (V = 67.5), the number of observations (n = 29), and the p-value (p = 0.0012).</p>
 </div>
-<div id="assumptions-2" class="section level3" number="5.5.5">
+<div id="assumptions-1" class="section level3" number="4.5.5">
 <h3>
-<span class="header-section-number">5.5.5</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.5</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -572,12 +572,12 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 <div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
 <p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
 </div>
-<div id="exercise-1" class="section level3" number="5.5.6">
+<div id="exercise-1" class="section level3" number="4.5.6">
 <h3>
-<span class="header-section-number">5.5.6</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.6</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 5.2  </strong></span>Performing a Wilcoxon signed-rank test:</p>
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 4.2  </strong></span>Performing a Wilcoxon signed-rank test:</p>
 <ol style="list-style-type: decimal">
 <li>Analyse the drug dataset from before using a one-sample Wilcoxon signed-rank test</li>
 <li>Discuss with a (virtual) neighbour which of the two tests you feel is best suited to the data.</li>
@@ -610,9 +610,9 @@ In terms of choosing between the two test we can see that both meet their respec
 </div>
 </div>
 </div>
-<div id="key-points" class="section level2" number="5.6">
+<div id="key-points" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">5.6</span> Key points<a class="anchor" aria-label="anchor" href="#key-points"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Key points<a class="anchor" aria-label="anchor" href="#key-points"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -630,41 +630,41 @@ In terms of choosing between the two test we can see that both meet their respec
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction.html"><span class="header-section-number">4</span> Introduction</a></div>
-<div class="next"><a href="cs1-two-sample.html"><span class="header-section-number">6</span> Two-sample tests</a></div>
+<div class="prev"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
+<div class="next"><a href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-one-sample-tests"><span class="header-section-number">5</span> One-sample tests</a></li>
-<li><a class="nav-link" href="#objectives-1"><span class="header-section-number">5.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">5.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#choosing-a-test-1"><span class="header-section-number">5.3</span> Choosing a test</a></li>
+<li><a class="nav-link" href="#cs1-one-sample-tests"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="nav-link" href="#objectives-1"><span class="header-section-number">4.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">4.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#choosing-a-test"><span class="header-section-number">4.3</span> Choosing a test</a></li>
 <li>
-<a class="nav-link" href="#cs1-onesample-t-test"><span class="header-section-number">5.4</span> One-sample t-test</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands"><span class="header-section-number">5.4.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses"><span class="header-section-number">5.4.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise"><span class="header-section-number">5.4.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-the-test"><span class="header-section-number">5.4.4</span> Implement the test</a></li>
-<li><a class="nav-link" href="#interpreting-the-output-and-report-results"><span class="header-section-number">5.4.5</span> Interpreting the output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">5.4.6</span> Assumptions</a></li>
-<li><a class="nav-link" href="#histogram-of-the-data"><span class="header-section-number">5.4.7</span> Histogram of the data</a></li>
-<li><a class="nav-link" href="#q-q-plot-of-the-data"><span class="header-section-number">5.4.8</span> Q-Q plot of the data</a></li>
-<li><a class="nav-link" href="#shapiro-wilk-test"><span class="header-section-number">5.4.9</span> Shapiro-Wilk test</a></li>
-<li><a class="nav-link" href="#assumptions-overview"><span class="header-section-number">5.4.10</span> Assumptions overview</a></li>
-<li><a class="nav-link" href="#exercise"><span class="header-section-number">5.4.11</span> Exercise</a></li>
+<a class="nav-link" href="#cs1-onesample-t-test"><span class="header-section-number">4.4</span> One-sample t-test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands"><span class="header-section-number">4.4.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses"><span class="header-section-number">4.4.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise"><span class="header-section-number">4.4.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-the-test"><span class="header-section-number">4.4.4</span> Implement the test</a></li>
+<li><a class="nav-link" href="#interpreting-the-output-and-report-results"><span class="header-section-number">4.4.5</span> Interpreting the output and report results</a></li>
+<li><a class="nav-link" href="#assumptions"><span class="header-section-number">4.4.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#histogram-of-the-data"><span class="header-section-number">4.4.7</span> Histogram of the data</a></li>
+<li><a class="nav-link" href="#q-q-plot-of-the-data"><span class="header-section-number">4.4.8</span> Q-Q plot of the data</a></li>
+<li><a class="nav-link" href="#shapiro-wilk-test"><span class="header-section-number">4.4.9</span> Shapiro-Wilk test</a></li>
+<li><a class="nav-link" href="#assumptions-overview"><span class="header-section-number">4.4.10</span> Assumptions overview</a></li>
+<li><a class="nav-link" href="#exercise"><span class="header-section-number">4.4.11</span> Exercise</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">5.5</span> One-sample Wilcoxon signed-rank test</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-1"><span class="header-section-number">5.5.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-1"><span class="header-section-number">5.5.2</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">5.5.3</span> Implement the test</a></li>
-<li><a class="nav-link" href="#interpreting-the-output-and-report-results-1"><span class="header-section-number">5.5.4</span> Interpreting the output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-2"><span class="header-section-number">5.5.5</span> Assumptions</a></li>
-<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">5.5.6</span> Exercise</a></li>
+<a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">4.5</span> One-sample Wilcoxon signed-rank test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-1"><span class="header-section-number">4.5.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-1"><span class="header-section-number">4.5.2</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">4.5.3</span> Implement the test</a></li>
+<li><a class="nav-link" href="#interpreting-the-output-and-report-results-1"><span class="header-section-number">4.5.4</span> Interpreting the output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">4.5.5</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">4.5.6</span> Exercise</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points"><span class="header-section-number">5.6</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points"><span class="header-section-number">4.6</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

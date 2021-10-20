@@ -4,19 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 13 Correlation coefficients | Core Statistics in R</title>
+<title>Chapter 12 Correlation coefficients | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="13.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta name="description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 13 Correlation coefficients | Core Statistics in R">
+<meta property="og:title" content="Chapter 12 Correlation coefficients | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="13.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta property="og:description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 13 Correlation coefficients | Core Statistics in R">
-<meta name="twitter:description" content="13.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta name="twitter:title" content="Chapter 12 Correlation coefficients | Core Statistics in R">
+<meta name="twitter:description" content="12.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +28,12 @@
             <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
 </div>
         </td>
-        <td><a href="#index.html">Course home page</a></td>
-        <td><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
-        <td class="top-menu-right">
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
           <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
         </td>
+        <td class="top-menu-right"> </td>
       </tr></table></div>
 </div>
 
@@ -59,28 +60,27 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="" href="background-concepts.html"><span class="header-section-number">3</span> Background concepts</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
-<li><a class="" href="introduction.html"><span class="header-section-number">4</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">5</span> One-sample tests</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">6</span> Two-sample tests</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">8</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">9</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">10</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">8</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">9</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">12</span> Introduction</a></li>
-<li><a class="active" href="correlation-coefficients.html"><span class="header-section-number">13</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">14</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="active" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">16</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">17</span> Two-way ANOVA</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -90,13 +90,13 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="correlation-coefficients" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="correlation-coefficients" class="section level1" number="12">
 <h1>
-<span class="header-section-number">13</span> Correlation coefficients<a class="anchor" aria-label="anchor" href="#correlation-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Correlation coefficients<a class="anchor" aria-label="anchor" href="#correlation-coefficients"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-7" class="section level2" number="13.1">
+<div id="objectives-7" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">13.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-7"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -112,14 +112,14 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-4" class="section level2" number="13.2">
+<div id="purpose-and-aim-4" class="section level2" number="12.2">
 <h2>
-<span class="header-section-number">13.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Correlation refers to the relationship of two variables (or datasets) to one another. Two datasets are said to be correlated if they are not independent from one another. Correlations can be useful because they can indicate if a predictive relationship may exist. However just because two datasets are correlated does not mean that they are causally related.</p>
-<div id="section-commands-8" class="section level3" number="13.2.1">
+<div id="section-commands-8" class="section level3" number="12.2.1">
 <h3>
-<span class="header-section-number">13.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -139,9 +139,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-7" class="section level3" number="13.2.2">
+<div id="data-and-hypotheses-7" class="section level3" number="12.2.2">
 <h3>
-<span class="header-section-number">13.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>We will use the <code>USArrests</code> dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. <code>USArrests</code> is an unstacked data frame with 50 observations of four variables: <code>Murder</code>, <code>Assault</code>, <code>UrbanPop</code> and <code>Robbery</code>.</p>
 <p>The data are stored in the file <code>data/raw/CS3-usarrests.csv</code>.</p>
@@ -161,14 +161,14 @@
 <p>The syntax for reading in this data frame is a little different. Here we want to use the first column of the <code>.csv</code> file to specify the names of the rows of the dataset rather than to include the information inside the dataset itself. We do this by using the <code>row.names = 1</code> argument which tells R to use the 1st column of the file for the row names. We need to do this because some of the functions will be using require a <em>matrix</em> as input (basically a data frame containing only numbers).</p>
 </div>
 </div>
-<div id="pearsons-product-moment-correlation-coefficient" class="section level2" number="13.3">
+<div id="pearsons-product-moment-correlation-coefficient" class="section level2" number="12.3">
 <h2>
-<span class="header-section-number">13.3</span> Pearson’s product moment correlation coefficient<a class="anchor" aria-label="anchor" href="#pearsons-product-moment-correlation-coefficient"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Pearson’s product moment correlation coefficient<a class="anchor" aria-label="anchor" href="#pearsons-product-moment-correlation-coefficient"><i class="fas fa-link"></i></a>
 </h2>
 <p>Pearson’s r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.</p>
-<div id="summarise-and-visualise-7" class="section level3" number="13.3.1">
+<div id="summarise-and-visualise-7" class="section level3" number="12.3.1">
 <h3>
-<span class="header-section-number">13.3.1</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.1</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>Run this command:</p>
 <div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
@@ -180,9 +180,9 @@
 </ul>
 <p>From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some case (<code>Murder</code> and <code>UrbanPop</code> for example).</p>
 </div>
-<div id="implement-test-6" class="section level3" number="13.3.2">
+<div id="implement-test-6" class="section level3" number="12.3.2">
 <h3>
-<span class="header-section-number">13.3.2</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.2</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s test if there are any possible correlations between the variables:</p>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
@@ -192,9 +192,9 @@
 <li>The argument <code>method</code> tells R which correlation coefficient to use (<code>pearson</code> (default), <code>kendall</code>, or <code>spearman</code>)</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-6" class="section level3" number="13.3.3">
+<div id="interpret-output-and-report-results-6" class="section level3" number="12.3.3">
 <h3>
-<span class="header-section-number">13.3.3</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.3</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>This should give the following output:</p>
 <pre><code>##              Murder   Assault   UrbanPop   Robbery
@@ -204,12 +204,12 @@
 ## Robbery  0.56357883 0.6652412 0.41134124 1.0000000</code></pre>
 <p>The matrix gives the correlation coefficient between each pair of variables in the data frame. The matrix is symmetric (<em>why?</em>) and the diagonal values are all 1 (<em>why?</em>). The most correlated variables are <code>Murder</code> and <code>Assault</code> with an <code>r</code> value of 0.801. This appears to agree well with the set of scatter plots that we produced earlier.</p>
 </div>
-<div id="exercise-9" class="section level3" number="13.3.4">
+<div id="exercise-9" class="section level3" number="12.3.4">
 <h3>
-<span class="header-section-number">13.3.4</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.4</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-9"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-10" class="exercise"><strong>Exercise 13.1  </strong></span>State data correlation</p>
+<p><span id="exr:unlabeled-div-10" class="exercise"><strong>Exercise 12.1  </strong></span>State data correlation</p>
 <p>We will use the data from the file <code>data/raw/CS3-statedata.csv</code> dataset for this exercise. This rather more benign dataset contains information on more general properties of each US state, such as population (1975), per capita income (1974), illiteracy proportion (1970), life expectancy (1969), murder rate per 100,000 people (there’s no getting away from it), percentage of the population who are high-school graduates, average number of days where the minimum temperature is below freezing between 1931 and 1960, and the state area in square miles. The dataset contains 50 rows and 8 columns, with column names: <code>Population</code>, <code>Income</code>, <code>Illiteracy</code>, <code>Life.Exp</code>, <code>Murder</code>, <code>HS.Grad</code>, <code>Frost</code> and <code>Area</code>.</p>
 <p>Load in the data (remembering to tell R that the first column of the CSV file should be used to specify the row names of the dataset) and use the pairs command to visually identify 3 different pairs of variables that appear to be</p>
 <ol style="list-style-type: decimal">
@@ -267,14 +267,14 @@ Answer
 </div>
 </div>
 </div>
-<div id="spearmans-rank-correlation-coefficient" class="section level2" number="13.4">
+<div id="spearmans-rank-correlation-coefficient" class="section level2" number="12.4">
 <h2>
-<span class="header-section-number">13.4</span> Spearman’s rank correlation coefficient<a class="anchor" aria-label="anchor" href="#spearmans-rank-correlation-coefficient"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4</span> Spearman’s rank correlation coefficient<a class="anchor" aria-label="anchor" href="#spearmans-rank-correlation-coefficient"><i class="fas fa-link"></i></a>
 </h2>
 <p>This test first calculates the rank of the numerical data (i.e. their position from smallest (or most negative) to the largest (or most positive)) in the two variables and then calculates Pearson’s product moment correlation coefficient using the ranks. As a consequence, this test is less sensitive to outliers in the distribution.</p>
-<div id="implement-test-7" class="section level3" number="13.4.1">
+<div id="implement-test-7" class="section level3" number="12.4.1">
 <h3>
-<span class="header-section-number">13.4.1</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.1</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>We are using the same <code>USArrests</code> data set as before, so run this command:</p>
 <div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
@@ -284,9 +284,9 @@ Answer
 <li>The argument <code>method</code> tells R which correlation coefficient to use</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-7" class="section level3" number="13.4.2">
+<div id="interpret-output-and-report-results-7" class="section level3" number="12.4.2">
 <h3>
-<span class="header-section-number">13.4.2</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.2</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>This gives the following output:</p>
 <pre><code>##             Murder   Assault  UrbanPop   Robbery
@@ -296,12 +296,12 @@ Answer
 ## Robbery  0.6794265 0.7143681 0.4381068 1.0000000</code></pre>
 <p>The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.</p>
 </div>
-<div id="exercise-10" class="section level3" number="13.4.3">
+<div id="exercise-10" class="section level3" number="12.4.3">
 <h3>
-<span class="header-section-number">13.4.3</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.3</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-10"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 13.2  </strong></span>Spearman’s correlation for USA state data</p>
+<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 12.2  </strong></span>Spearman’s correlation for USA state data</p>
 <p>Calculate Spearman’s correlation coefficient for the <code>data/raw/CS3-statedata.csv</code> dataset.</p>
 <p>Which variable’s correlations are affected most by the use of the Spearman’s rank compared with Pearson’s r?</p>
 <p>With reference to the scatter plot produced earlier, can you explain why this might this be?</p>
@@ -358,9 +358,9 @@ Answer
 </div>
 </div>
 </div>
-<div id="key-points-4" class="section level2" number="13.5">
+<div id="key-points-4" class="section level2" number="12.5">
 <h2>
-<span class="header-section-number">13.5</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.5</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-4"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -377,35 +377,35 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction-2.html"><span class="header-section-number">12</span> Introduction</a></div>
-<div class="next"><a href="linear-regression.html"><span class="header-section-number">14</span> Linear regression</a></div>
+<div class="prev"><a href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></div>
+<div class="next"><a href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#correlation-coefficients"><span class="header-section-number">13</span> Correlation coefficients</a></li>
-<li><a class="nav-link" href="#objectives-7"><span class="header-section-number">13.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#correlation-coefficients"><span class="header-section-number">12</span> Correlation coefficients</a></li>
+<li><a class="nav-link" href="#objectives-7"><span class="header-section-number">12.1</span> Objectives</a></li>
 <li>
-<a class="nav-link" href="#purpose-and-aim-4"><span class="header-section-number">13.2</span> Purpose and aim</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-8"><span class="header-section-number">13.2.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">13.2.2</span> Data and hypotheses</a></li>
+<a class="nav-link" href="#purpose-and-aim-4"><span class="header-section-number">12.2</span> Purpose and aim</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-8"><span class="header-section-number">12.2.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">12.2.2</span> Data and hypotheses</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#pearsons-product-moment-correlation-coefficient"><span class="header-section-number">13.3</span> Pearson’s product moment correlation coefficient</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">13.3.1</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-6"><span class="header-section-number">13.3.2</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-6"><span class="header-section-number">13.3.3</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-9"><span class="header-section-number">13.3.4</span> Exercise</a></li>
+<a class="nav-link" href="#pearsons-product-moment-correlation-coefficient"><span class="header-section-number">12.3</span> Pearson’s product moment correlation coefficient</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">12.3.1</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-6"><span class="header-section-number">12.3.2</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-6"><span class="header-section-number">12.3.3</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-9"><span class="header-section-number">12.3.4</span> Exercise</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#spearmans-rank-correlation-coefficient"><span class="header-section-number">13.4</span> Spearman’s rank correlation coefficient</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">13.4.1</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-7"><span class="header-section-number">13.4.2</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-10"><span class="header-section-number">13.4.3</span> Exercise</a></li>
+<a class="nav-link" href="#spearmans-rank-correlation-coefficient"><span class="header-section-number">12.4</span> Spearman’s rank correlation coefficient</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">12.4.1</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-7"><span class="header-section-number">12.4.2</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-10"><span class="header-section-number">12.4.3</span> Exercise</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points-4"><span class="header-section-number">13.5</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points-4"><span class="header-section-number">12.5</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
