@@ -28,7 +28,7 @@ cs1-one-sample-tests
 objectives-1
 purpose-and-aim
 choosing-a-test
-cs1-onesample-t-test
+cs1-one-sample-t-test
 section-commands
 data-and-hypotheses
 summarise-and-visualise

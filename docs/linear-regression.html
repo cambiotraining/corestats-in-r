@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 13 Linear regression | Core Statistics in R</title>
+<title>Chapter 15 Linear regression | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
+<meta name="description" content="15.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 13 Linear regression | Core Statistics in R">
+<meta property="og:title" content="Chapter 15 Linear regression | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
+<meta property="og:description" content="15.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 13 Linear regression | Core Statistics in R">
-<meta name="twitter:description" content="13.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
+<meta name="twitter:title" content="Chapter 15 Linear regression | Core Statistics in R">
+<meta name="twitter:description" content="15.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -63,24 +63,26 @@
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">5</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> One-sample Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">6</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">8</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">7</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">8</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">9</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">9</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">10</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">11</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">11</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></li>
-<li><a class="active" href="linear-regression.html"><span class="header-section-number">13</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">14</span> Correlation coefficients</a></li>
+<li><a class="active" href="linear-regression.html"><span class="header-section-number">15</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">15</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">16</span> Two-way ANOVA</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">18</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -90,13 +92,13 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-regression" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-regression" class="section level1" number="15">
 <h1>
-<span class="header-section-number">13</span> Linear regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> Linear regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-8" class="section level2" number="13.1">
+<div id="objectives-8" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">13.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-8"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -113,9 +115,9 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-5" class="section level2" number="13.2">
+<div id="purpose-and-aim-5" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">13.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Regression analysis not only tests for an association between two or more variables, but also allows one to investigate quantitatively the nature of any relationship which is present, and thus determine whether one variable may be used to predict values of another.
 Simple linear regression essentially models the dependence of a scalar dependent variable (y) on an independent (or explanatory) variable (x) according to the relationship:</p>
@@ -123,15 +125,15 @@ Simple linear regression essentially models the dependence of a scalar dependent
 y = \beta_0 + \beta_1 x
 \end{equation*}\]</span></p>
 <p>where <span class="math inline">\(\beta_0\)</span> is the value of the intercept and <span class="math inline">\(\beta_1\)</span> is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, <span class="math inline">\(\beta_1\)</span>, is actually different from zero. If it is different from zero then we can say that <span class="math inline">\(x\)</span>has a significant effect on <span class="math inline">\(y\)</span> (since changing <span class="math inline">\(x\)</span> leads to a predicted change in <span class="math inline">\(y\)</span>), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
-<div id="section-commands-9" class="section level3" number="13.2.1">
+<div id="section-commands-9" class="section level3" number="15.2.1">
 <h3>
-<span class="header-section-number">13.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-9"><i class="fas fa-link"></i></a>
 </h3>
 <p>No new commands used in this section.</p>
 </div>
-<div id="data-and-hypotheses-8" class="section level3" number="13.2.2">
+<div id="data-and-hypotheses-8" class="section level3" number="15.2.2">
 <h3>
-<span class="header-section-number">13.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>We will perform a simple linear regression analysis on the two variables <code>Murder</code> and <code>Assault</code> from the <code>USArrests</code> dataset. We wish to determine whether the <code>Assault</code> variable is a significant predictor of the <code>Murder</code> variable. This means that we will need to find the coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that best fit the following macabre equation:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -147,22 +149,22 @@ Murder  = \beta_0 + \beta_1 Assault
 </li>
 </ul>
 </div>
-<div id="summarise-and-visualise-8" class="section level3" number="13.2.3">
+<div id="summarise-and-visualise-8" class="section level3" number="15.2.3">
 <h3>
-<span class="header-section-number">13.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can visualise the data with:</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Murder</span> <span class="op">~</span> <span class="va">Assault</span>, data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p>There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.</p>
 </div>
-<div id="implement-test-8" class="section level3" number="13.2.4">
+<div id="implement-test-8" class="section level3" number="15.2.4">
 <h3>
-<span class="header-section-number">13.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>Fit a straight line to the data:</p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Murder</span> <span class="op">~</span> <span class="va">Assault</span>, data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span>
 
 <span class="co"># show the linear model</span>
@@ -184,13 +186,13 @@ Murder  = \beta_0 + \beta_1 Assault
 Murder = 0.63 + 0.042 Assault
 \end{equation*}\]</span></p>
 <p>Assess whether the slope is significantly different from zero:</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_1</span><span class="op">)</span></code></pre></div>
 <p>Here, we again use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command to assess significance. This shouldn’t be too surprising at this stage if the introductory lectures made any sense. From a mathematical perspective, one-way ANOVA and simple linear regression are exactly the same as each other and it makes sense that we should use the same command to analyse them in R.</p>
 </div>
-<div id="interpret-output-and-report-results-8" class="section level3" number="13.2.5">
+<div id="interpret-output-and-report-results-8" class="section level3" number="15.2.5">
 <h3>
-<span class="header-section-number">13.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-8"><i class="fas fa-link"></i></a>
 </h3>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -220,7 +222,7 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 </blockquote>
 <p><strong>Plotting the regression line</strong></p>
 <p>It can be very helpful to plot the regression line with the original data to see how far the data are from the predicted linear values. We can do this with:</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Murder</span> <span class="op">~</span> <span class="va">Assault</span>, data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span>
 
@@ -232,9 +234,9 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <li>The second command uses the results of the linear model fitting (the object <code>lm_1</code>) to add the line of best fit to the plot (and colour it red).</li>
 </ul>
 </div>
-<div id="assumptions-8" class="section level3" number="13.2.6">
+<div id="assumptions-8" class="section level3" number="15.2.6">
 <h3>
-<span class="header-section-number">13.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order for a linear regression analysis to be valid 4 key assumptions need to be met:</p>
 <div class="highlight">
@@ -246,7 +248,7 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 </ol>
 </div>
 <p>Whether these assumptions are met can easily be checked visually by producing four key diagnostic plots.</p>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a 2 x 2 output window</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
@@ -264,12 +266,12 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <p>Let’s change this through leading by example!</p>
 </div>
 </div>
-<div id="exercise-11" class="section level3" number="13.2.7">
+<div id="exercise-11" class="section level3" number="15.2.7">
 <h3>
-<span class="header-section-number">13.2.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-11"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-11"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-12" class="exercise"><strong>Exercise 13.1  </strong></span>Linear regression</p>
+<p><span id="exr:unlabeled-div-12" class="exercise"><strong>Exercise 15.1  </strong></span>Linear regression</p>
 <p>Calculate two simple linear regressions using the <code>data/raw/CS3-statedata.csv</code> dataset, first for the variable <code>LifeExp</code> on the variable <code>Murder</code> and then for the variable <code>HSGrad</code> on <code>Frost</code>.</p>
 <p>Do the following in both cases:</p>
 <ol style="list-style-type: decimal">
@@ -282,7 +284,7 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 Answer
 </summary><p><strong>Murder and Life Expectancy</strong></p>
 <p>Let’s see if the <code>Murder</code> variable can be used to predict the <code>Life.Exp</code> variable. Let’s plot it first of all.</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">LifeExp</span> <span class="op">~</span> <span class="va">Murder</span>, data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
 
@@ -291,7 +293,7 @@ Answer
 
 <span class="co"># and add a regression line</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lm1</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p>Here, we’ve fit the linear model (second line) at the same time as plotting the raw data (first line) just so we can add in the line of best fit (third line). We visualise for the same reasons:</p>
 <ol style="list-style-type: decimal">
 <li>We check that the data aren’t obviously wrong. Here we have sensible values for life expectancy (nothing massively large or small), and plausible values for murder rates (not that I’m that <em>au fait</em> with US murder rates in 1976 but small positive numbers seem plausible).</li>
@@ -299,10 +301,10 @@ Answer
 <li>We check the assumptions (only roughly though as we’ll be doing this properly in a minute). Nothing immediately gives me cause for concern; the data appear linear, the spread of the data around the line appears homogeneous and symmetrical. No outliers either.</li>
 </ol>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <p>The residuals vs fitted plot appears symmetric enough (similar distribution of points above and below the horizontal grey dotted line) for me to happy with linearity. Similarly the red line in the scale-location plot looks horizontal enough for me to be happy with homogeneity of variance. There aren’t any influential points in the residuals vs leverage. The only plot that does give me a bit of concern is the Normal Q-Q graph. Here we see clear evidence of snaking, although the degree of snaking isn’t actually that bad. This just means that we can be pretty certain that the distribution of residuals isn’t normal, but also that it isn’t <em>very</em> non-normal. What do we do in this situation? Well, there are three possible options:</p>
 <ol style="list-style-type: decimal">
 <li>Appeal to the <strong>Central Limit Theorem</strong>. This states that if we have a large enough sample size we don’t have to worry about whether the distribution of the residuals are normally distributed. <strong>Large enough</strong> is a bit of a moving target here and to be honest it depends on how non-normal the underlying data are. If the data are only a little bit non-normal then we can get away with using a smaller sample than if the data are massively skewed (for example). This is not an exact science, but anything over 30 data points is considered a lot for mild to moderate non-normality (as we have in this case). If the data were very skewed then we would be looking for more data points (50-100). So, for this example we can legitimately just carry on with our analysis without worrying.</li>
@@ -311,7 +313,7 @@ Answer
 </ol>
 <p>So in this case, because we have a large enough sample size and our deviation from normality isn’t too bad, we can just crack on with the standard analysis.</p>
 <p>So, let’s actually do the analysis:</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -324,7 +326,7 @@ Answer
 <p>And after all of that we find that the Murder rate is a statistically significant predictor of life expectancy in US states. Woohoo!</p>
 <p><strong>High School Graduation and Frosty Days</strong></p>
 <p>Now let’s investigate the relationship between the proportion of High School Graduates a state has (<code>HSGrad</code>) and the mean number of days below freezing (<code>Frost</code>) within each state.</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">HSGrad</span> <span class="op">~</span> <span class="va">Frost</span>, data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
 
@@ -333,7 +335,7 @@ Answer
 
 <span class="co"># and add a regression line</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lm2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>Once again, we look at the data.</p>
 <ol style="list-style-type: decimal">
 <li>There doesn’t appear to be any ridiculous errors with the data; High School graduation proportions are in the 0-100% range and the mean number of sub-zero days for each state are between 0 and 365, so these numbers are plausible.</li>
@@ -342,10 +344,10 @@ Answer
 </ol>
 <p>Let’s check these out properly</p>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm2</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
 <p>We can see that what we suspected from before is backed up by the residual vs fitted graph. The data aren’t linear and there appears to be some sort of odd down-up pattern here. Given the lack of linearity it just isn’t worth worrying about the other plots because our model is <strong>misspecified</strong>: a straight line just doesn’t represent our data at all.</p>
 <p>Just for reference, and as practice for looking at diagnostic plots, if we ignore the lack of linearity then we can say that</p>
 <ul>
@@ -365,9 +367,9 @@ Answer
 </div>
 </div>
 </div>
-<div id="key-points-5" class="section level2" number="13.3">
+<div id="key-points-5" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">13.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-5"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -393,25 +395,25 @@ Answer
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="correlation-coefficients.html"><span class="header-section-number">12</span> Correlation coefficients</a></div>
-<div class="next"><a href="cs4-intro.html"><span class="header-section-number">14</span> Introduction</a></div>
+<div class="prev"><a href="correlation-coefficients.html"><span class="header-section-number">14</span> Correlation coefficients</a></div>
+<div class="next"><a href="cs4-intro.html"><span class="header-section-number">16</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#linear-regression"><span class="header-section-number">13</span> Linear regression</a></li>
-<li><a class="nav-link" href="#objectives-8"><span class="header-section-number">13.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#linear-regression"><span class="header-section-number">15</span> Linear regression</a></li>
+<li><a class="nav-link" href="#objectives-8"><span class="header-section-number">15.1</span> Objectives</a></li>
 <li>
-<a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">13.2</span> Purpose and aim</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">13.2.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">13.2.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">13.2.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-8"><span class="header-section-number">13.2.4</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">13.2.5</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">13.2.6</span> Assumptions</a></li>
-<li><a class="nav-link" href="#exercise-11"><span class="header-section-number">13.2.7</span> Exercise</a></li>
+<a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">15.2</span> Purpose and aim</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">15.2.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">15.2.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">15.2.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-8"><span class="header-section-number">15.2.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">15.2.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">15.2.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-11"><span class="header-section-number">15.2.7</span> Exercise</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points-5"><span class="header-section-number">13.3</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points-5"><span class="header-section-number">15.3</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

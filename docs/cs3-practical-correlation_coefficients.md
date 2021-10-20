@@ -1,9 +1,5 @@
 
 
-```r
-source(file = "setup.R")
-```
-
 # Correlation coefficients
 
 ## Objectives
@@ -69,7 +65,7 @@ Run this command:
 pairs(USArrests, lower.panel = NULL)
 ```
 
-<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 *	The first argument is a matrix or a data frame
 *	The argument `lower.panel` tells R not to add the redundant reflected lower set of plots, below the diagonal 
@@ -145,7 +141,7 @@ head(USAstate)
 pairs(USAstate, lower.panel = NULL)
 ```
 
-<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 **3. Create a correlation matrix**
 
@@ -275,7 +271,7 @@ Again, we could now just look at a grid of 64 numbers and see if we can spot the
 heatmap(abs(corDiff), symm = TRUE, Rowv = NA)
 ```
 
-<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 The `abs()` function calculates the absolute value (i.e. just the magnitude) of the matrix values. This is just because I only care about situations where the two correlation coefficients are different from each other but I don't care which is the larger. The `symm` argument tells the function that we have a symmetric matrix and in conjunction with the `Rowv = NA` argument stops the plot from reordering the rows and columns. The `Rowv = NA` argument also stops the function from adding dendrograms to the margins of the plot.
 
@@ -290,7 +286,7 @@ We can now revisit the pairwise scatter plot from before to see if this makes se
 pairs(USAstate)
 ```
 
-<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the `Area` vs `Income` graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.
 

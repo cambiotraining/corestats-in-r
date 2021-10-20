@@ -1,9 +1,5 @@
 
 
-```r
-source(file = "setup.R")
-```
-
 # ANOVA {#cs2-anova}
 
 ## Objectives
@@ -89,7 +85,7 @@ aggregate(feeding ~ site, data = oystercatcher, summary)
 boxplot(feeding ~ site, data = oystercatcher)
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.
 
@@ -485,7 +481,7 @@ aggregate(weight ~ diet, data = lobsters, summary)
 boxplot(weight ~ diet, data = lobsters)
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 As always we use the plot and summary to assess three things:
 
@@ -568,7 +564,7 @@ plot(lm(weight ~ diet , data = lobsters),
      which = 2)
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 Here, I've used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots, but you can tell R to only plot a specific one. (If you want to  know more about this have a look at the `plot.lm` help documentation using `?plot.lm`). I've asked R to only plot the Q-Q plot with the `which = 2` argument.
 
@@ -598,7 +594,7 @@ plot(lm(weight ~ diet, data = lobsters),
      which = c(1,3))
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-2.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672" /><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-2.png" width="672" />
 
 In the above code, I've used the same trick as before with the `which` argument to only plot the two diagnostic plots that relate to equality of variance (residuals vs fitted and scale-location).
 

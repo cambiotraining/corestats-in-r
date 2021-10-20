@@ -1,5 +1,4 @@
-
-```{r, setup}
+```{r, echo=FALSE}
 source(file = "setup.R")
 ```
 

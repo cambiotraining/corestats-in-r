@@ -15,11 +15,7 @@
 
 ## Purpose and aim
 
-## Choosing a test
-
-## ... (test)
-
-### Section commands
+## Section commands
 New commands used in this section:
 
 | Function| Description|
@@ -27,12 +23,13 @@ New commands used in this section:
 |`function_name()`| Description |
 |`function_name()`| Description |
 
-### Data and hypotheses
-### Summarise and visualise
-### Assumptions
-### Implement test
-### Interpret output and report results
-### Exercise
+## Data and hypotheses
+## Summarise and visualise
+## Assumptions
+## Implemention
+## Interpret output and present results
+
+## Exercise
 :::exercise
 Exercise title
 

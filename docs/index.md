@@ -11,9 +11,6 @@ description: "These are the supporting materials for the Core Statistics modules
 ---
 
 
-```r
-source(file = "setup.R")
-```
 
 # Overview
 

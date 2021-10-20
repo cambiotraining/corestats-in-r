@@ -1,9 +1,5 @@
 
 
-```r
-source(file = "setup.R")
-```
-
 # Two-way ANOVA
 
 ## Objectives

@@ -1,6 +1,7 @@
-```{r setup, include=FALSE}
+```{r, echo=FALSE}
 source(file = "setup.R")
 ```
+
 # Two-sample tests {#cs1-two-sample}
 
 ## Objectives

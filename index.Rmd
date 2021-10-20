@@ -10,7 +10,7 @@ bibliography: [book.bib, packages.bib]
 description: "These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University." 
 ---
 
-```{r, setup}
+```{r, setup, echo=FALSE}
 source(file = "setup.R")
 ```
 

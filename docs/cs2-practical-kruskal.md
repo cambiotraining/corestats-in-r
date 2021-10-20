@@ -1,9 +1,5 @@
 
 
-```r
-source(file = "setup.R")
-```
-
 # Kruskal-Wallis test
 
 ## Objectives

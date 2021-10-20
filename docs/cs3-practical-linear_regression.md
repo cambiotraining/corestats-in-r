@@ -1,9 +1,5 @@
 
 
-```r
-source(file = "setup.R")
-```
-
 # Linear regression
 
 ## Objectives
@@ -54,7 +50,7 @@ You can visualise the data with:
 plot(Murder ~ Assault, data = USArrests)
 ```
 
-<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.
 
@@ -213,7 +209,7 @@ lm1 <- lm(LifeExp ~ Murder, data = USAstate)
 abline(lm1, col = "red")
 ```
 
-<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 Here, we've fit the linear model (second line) at the same time as plotting the raw data (first line) just so we can add in the line of best fit (third line). We visualise for the same reasons:
 
@@ -229,7 +225,7 @@ par(mfrow = c(2,2))
 plot(lm1)
 ```
 
-<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 The residuals vs fitted plot appears symmetric enough (similar distribution of points above and below the horizontal grey dotted line) for me to happy with linearity. Similarly the red line in the scale-location plot looks horizontal enough for me to be happy with homogeneity of variance. There aren't any influential points in the residuals vs leverage. The only plot that does give me a bit of concern is the Normal Q-Q graph. Here we see clear evidence of snaking, although the degree of snaking isn't actually that bad. This just means that we can be pretty certain that the distribution of residuals isn't normal, but also that it isn't _very_ non-normal. What do we do in this situation? Well, there are three possible options:
 
@@ -275,7 +271,7 @@ lm2<-lm(HSGrad ~ Frost, data=USAstate)
 abline(lm2, col = "red")
 ```
 
-<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 Once again, we look at the data.
 
@@ -293,7 +289,7 @@ par(mfrow = c(2,2))
 plot(lm2)
 ```
 
-<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 We can see that what we suspected from before is backed up by the residual vs fitted graph. The data aren't linear and there appears to be some sort of odd down-up pattern here. Given the lack of linearity it just isn't worth worrying about the other plots because our model is **misspecified**: a straight line just doesn't represent our data at all.
 
