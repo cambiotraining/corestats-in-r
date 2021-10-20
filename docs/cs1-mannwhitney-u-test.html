@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Mann-Whitney U test | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Mann-Whitney U test | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Mann-Whitney U test | Core Statistics in R">
+<meta name="twitter:description" content="This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+  <div class="header">
+    <div class="inline-table"><table class="top-menu"><tr>
+<td>
+          <div class="logo">
+            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+</div>
+        </td>
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="top-menu-right"> </td>
+      </tr></table></div>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="active" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-mannwhitney-u-test" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Mann-Whitney U test<a class="anchor" aria-label="anchor" href="#cs1-mannwhitney-u-test"><i class="fas fa-link"></i></a>
+</h1>
+<p>This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the medians of the two groups we do still need the parent distributions (and consequently the samples) to both have the same shape and variance. In this test we look to see if the medians of the two parent distributions differ significantly from each other.</p>
+<div id="section-commands-3" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>No new commands used in this section.</p>
+</div>
+<div id="data-and-hypotheses-2" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Again, we use the <code>rivers</code> dataset. We want to test whether the median body length of male guppies differs between samples. We form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The difference in median body length between the two groups is 0 (<span class="math inline">\(\mu A - \mu G = 0\)</span>)</li>
+<li>H1: The difference in median body length between the two groups is not 0 (<span class="math inline">\(\mu A - \mu G \neq 0\)</span>)</li>
+</ul>
+<p>We use a two-tailed Mann-Whitney U test to see if we can reject the null hypothesis.</p>
+</div>
+<div id="summarise-and-visualise-2" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>We did this in the <a href="cs1-students-t-test.html#cs1-students-sumvisual">previous section</a>.</p>
+</div>
+<div id="implement-test-1" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform a two-tailed, Mann-Whitney U test:</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
+            alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  length by river
+## W = 841, p-value = 0.0006464
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>In this case, with the data in a tidy format:</p>
+<ul>
+<li>The first argument must be in the formula format: <code>variable ~ category</code>
+</li>
+<li>The second argument must be the name of the data frame</li>
+<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
+</li>
+</ul>
+</div>
+<div id="interpret-output-and-report-results-1" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>You may get a warning message in the console stating <code>cannot compute exact p-value with ties</code>. This just means that some of the data points have exactly the same value which affects the internal mathematics slightly. However, given that the p-value is so very small, this is not something that we need to worry about.</p>
+<p>After the warning message:</p>
+<ul>
+<li>The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called, and what variables were used</li>
+<li>The 3rd line contains the two key outputs from the test:
+<ul>
+<li>The calculated W-value is 841 (we’ll use this in reporting)</li>
+<li>The p-value is 0.0006464.</li>
+</ul>
+</li>
+<li>The 4th line simply states the alternative hypothesis in terms of the difference between the two sample medians in that if there were a difference then one distribution would be shifted relative to the other.</li>
+</ul>
+<p>Given that the p-value is less than 0.05 we can reject the null hypothesis at this confidence level.
+Again, the p-value on the 3rd line is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say “that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis.”</p>
+<p>To put it more completely, we can state that:</p>
+<blockquote>
+<p>A Mann-Whitney test indicated that the median body length of male guppies in the Guanapo river (18.8 mm) differs significantly from the median body length of male guppies in the Aripo river (20.1 mm) (W = 841, p = 0.0006).</p>
+</blockquote>
+</div>
+<div id="assumptions-3" class="section level2" number="9.6">
+<h2>
+<span class="header-section-number">9.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have checked these previously.</p>
+</div>
+<div id="exercise-4" class="section level2" number="9.7">
+<h2>
+<span class="header-section-number">9.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 9.1  </strong></span>Analyse the turtle dataset from before using a Mann Whitney test.</p>
+<p>We follow the same process as with Student’s t-test.</p>
+<details><summary>
+Answer
+</summary><p><strong>Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : male median <span class="math inline">\(=\)</span> female median</p>
+<p><span class="math inline">\(H_1\)</span> : male median <span class="math inline">\(\neq\)</span> female median</p>
+<p><strong>Summarise and visualise</strong></p>
+<p>This is the same as before.</p>
+<p><strong>Assumptions</strong></p>
+<p>We’ve already checked that the variances of the two groups are similar, so we’re OK there. Whilst the Mann-Whitney test doesn’t require normality or symmetry of distributions it does require that the distributions have the same shape. In this example, with just a handful of data points in each group, it’s quite hard to make this call one way or another. My advice in this case would be say that unless it’s obvious that the distributions are very different we can just allow this assumption to pass, and you’re only going see obvious differences in distribution shape when you have considerably more data points than we have here.</p>
+<p><strong>Carry out a Mann-Whitney test</strong></p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">turtle</span>,
+            alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  serum by sex
+## W = 26, p-value = 0.5338
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>This gives us exactly the same conclusion that we got from the two-sample t-test <em>i.e</em>. that there isn’t any significant difference between the two groups.</p>
+<p>A Mann-Whitney test indicated that there wasn’t a significant difference in the median Serum Cholesterol levels between male and female turtles (W = 26, p = 0.534)</p>
+</details>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></div>
+<div class="next"><a href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs1-mannwhitney-u-test"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="nav-link" href="#section-commands-3"><span class="header-section-number">9.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-2"><span class="header-section-number">9.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-2"><span class="header-section-number">9.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-1"><span class="header-section-number">9.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-1"><span class="header-section-number">9.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-3"><span class="header-section-number">9.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-4"><span class="header-section-number">9.7</span> Exercise</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-practical-two_sample_mann_whitney.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-practical-two_sample_mann_whitney.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

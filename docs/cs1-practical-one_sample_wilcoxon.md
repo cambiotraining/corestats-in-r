@@ -1,7 +1,7 @@
 
 
 
-# One-sample Wilcoxon signed-rank test {#cs1-onesample-wilcoxon-signed-rank}
+# Wilcoxon signed-rank test {#cs1-onesample-wilcoxon-signed-rank}
 This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still need the parent distribution (and consequently the sample) to be symmetric though. In this test we look to see if the _median_ of the parent distributions differs significantly from a given hypothesised value (in contrast with the t-test that looks at the _mean_).
 
 ## Section commands

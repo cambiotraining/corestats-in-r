@@ -52,7 +52,7 @@ cs1-two-sample
 objectives-2
 purpose-and-aim-1
 two-sample-choosing-a-test
-data-format
+tidy-data
 cs1-students-t-test
 section-commands-2
 data-and-hypotheses-1

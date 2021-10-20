@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Wilcoxon signed-rank test | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Wilcoxon signed-rank test | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Wilcoxon signed-rank test | Core Statistics in R">
+<meta name="twitter:description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+  <div class="header">
+    <div class="inline-table"><table class="top-menu"><tr>
+<td>
+          <div class="logo">
+            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+</div>
+        </td>
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="top-menu-right"> </td>
+      </tr></table></div>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="active" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-twosample-wilcoxon-signed-rank" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-twosample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
+</h1>
+<p>A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the differences is symmetric. We’re effectively testing to see if the median of the differences between the two samples differs significantly from zero.</p>
+<div id="section-commands-5" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are no new commands in this section.</p>
+</div>
+<div id="data-and-hypotheses-4" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Using the <code>cortisol</code> dataset from before we form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The median of the difference in cortisol levels between the two groups is 0 (<span class="math inline">\(\mu M = \mu E\)</span>)</li>
+<li>
+<span class="math inline">\(H_1\)</span>: The median of the difference in cortisol levels between the two groups is not 0 (<span class="math inline">\(\mu M \neq \mu E\)</span>)</li>
+</ul>
+<p>We use a two-tailed Wilcoxon signed-rank test to see if we can reject the null hypothesis.</p>
+</div>
+<div id="summarise-and-visualise-4" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Already implemented previously.</p>
+</div>
+<div id="implement-test-3" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform a two-tailed, Wilcoxon signed-rank test:</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>,
+            alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first two arguments must be the two samples in numerical vector format</li>
+<li>The second argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
+</li>
+<li>The third argument indicates that the test is paired</li>
+</ul>
+</div>
+<div id="interpret-output-and-report-results-3" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-3"><i class="fas fa-link"></i></a>
+</h2>
+<pre><code>## 
+##  Wilcoxon signed rank exact test
+## 
+## data:  cortisol$morning and cortisol$evening
+## V = 197, p-value = 0.0001678
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>The p value is given on the 3rd line (p-value = 0.0001678). Given that this is less than 0.05 we can still reject the null hypothesis.</p>
+<blockquote>
+<p>A two-tailed, Wilcoxon signed-rank test indicated that the median cortisol level in adult females differed significantly between the morning (320.5 nmol/l) and the evening (188.9 nmol/l) (V = 197, p = 0.00017).</p>
+</blockquote>
+</div>
+<div id="assumptions-5" class="section level2" number="11.6">
+<h2>
+<span class="header-section-number">11.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>These have been checked previously.</p>
+</div>
+<div id="exercise-6" class="section level2" number="11.7">
+<h2>
+<span class="header-section-number">11.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 11.1  </strong></span>Deer legs</p>
+<p>Using the following data, test the null hypothesis that the fore and hind legs of deer are the same length.</p>
+<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:cs1-pairedwilcoxon-example">Table 11.1: </span>Deer leg length (cm)
+</caption>
+<thead><tr>
+<th style="text-align:right;background-color: white !important;">
+hindleg
+</th>
+<th style="text-align:right;background-color: white !important;">
+foreleg
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+<td style="text-align:right;background-color: white !important;">
+138
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+140
+</td>
+<td style="text-align:right;background-color: white !important;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+144
+</td>
+<td style="text-align:right;background-color: white !important;">
+147
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+144
+</td>
+<td style="text-align:right;background-color: white !important;">
+139
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+<td style="text-align:right;background-color: white !important;">
+143
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+146
+</td>
+<td style="text-align:right;background-color: white !important;">
+141
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+149
+</td>
+<td style="text-align:right;background-color: white !important;">
+143
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+150
+</td>
+<td style="text-align:right;background-color: white !important;">
+145
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+<td style="text-align:right;background-color: white !important;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+148
+</td>
+<td style="text-align:right;background-color: white !important;">
+146
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?</p>
+<ol style="list-style-type: decimal">
+<li>Write down the null and alternative hypotheses</li>
+<li>Choose a representation for the data (stacked or unstacked) and create a csv file</li>
+<li>Import the data into R</li>
+<li>Summarise and visualise the data</li>
+<li>Perform a two-sample paired t-test</li>
+<li>Perform a Wilcoxon signed-rank test</li>
+<li>Now check your assumptions (normality and variance) using appropriate tests</li>
+<li>Discuss with your (virtual) neighbour which test is most appropriate?</li>
+<li>Write down a sentence that summarise the results that you have found</li>
+</ol>
+<details><summary>
+Answer
+</summary><p><strong>1. Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : foreleg average (mean or median) <span class="math inline">\(=\)</span> hindleg average (mean or median)</p>
+<p><span class="math inline">\(H_1\)</span> : foreleg average <span class="math inline">\(\neq\)</span> hindleg average</p>
+<p><strong>2-4. Import Data, Summarise and visualise</strong></p>
+<p>I always recommend storing data in stacked format even in this example, even though in this case it might seem easier to store your data in unstacked format (this is pretty much the only time where this is even a sensible option). So for this example I manually input the data into excel in the following layout:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-deer.csv"</span><span class="op">)</span></code></pre></div>
+<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;background-color: white !important;">
+id
+</th>
+<th style="text-align:left;background-color: white !important;">
+leg
+</th>
+<th style="text-align:right;background-color: white !important;">
+length
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+1
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+2
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+140
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+3
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+144
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+4
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+144
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+5
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+6
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+146
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+7
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+149
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+8
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+9
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+142
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+10
+</td>
+<td style="text-align:left;background-color: white !important;">
+hindleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+148
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+1
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+138
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+2
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+3
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+147
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+4
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+139
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+5
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+143
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+6
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+141
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+7
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+143
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+8
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+145
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+9
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+10
+</td>
+<td style="text-align:left;background-color: white !important;">
+foreleg
+</td>
+<td style="text-align:right;background-color: white !important;">
+146
+</td>
+</tr>
+</tbody>
+</table>
+<p>The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an <code>id</code> column, where each observation has a unique ID.</p>
+<p>Let’s look at the data and see what we can see.</p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##       leg length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
+## 1 foreleg      136.00         138.25        142.00      141.40         144.50
+## 2 hindleg      140.00         142.00        144.00      144.70         147.50
+##   length.Max.
+## 1      147.00
+## 2      150.00</code></pre>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<p>It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have <em>paired</em> data. What we really need to look at is the difference in leg length for each deer:</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">uns_deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">deer</span>, <span class="va">length</span> <span class="op">~</span> <span class="va">leg</span><span class="op">)</span>
+<span class="va">deerDiff</span> <span class="op">&lt;-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">hindleg</span> <span class="op">-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">foreleg</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    -3.0     2.5     4.5     3.3     5.0     6.0</code></pre>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<p>This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).</p>
+<p><strong>5. Perform a two-sample t-test</strong></p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  length by leg
+## t = -3.4138, df = 9, p-value = 0.007703
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.486752 -1.113248
+## sample estimates:
+## mean of the differences 
+##                    -3.3</code></pre>
+<p>The paired t-test here assumes that the data is stored exactly as we have entered it (i.e. that the first hindleg row matches the first foreleg row). Here we apparently see a significant difference.</p>
+<p><strong>6. Perform a paired Wilcoxon test</strong></p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(x = c(138L, 136L, 147L, 139L, 143L, 141L, :
+## cannot compute exact p-value with ties</code></pre>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  length by leg
+## V = 4, p-value = 0.01859
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>The paired Wilcoxon test makes the same assumptions about the order of the data as the paired t-test. Here again we have a significant difference.</p>
+<p><strong>7. Check assumptions</strong></p>
+<p>We need to consider the distribution of the <em>difference</em> in leg lengths rather than the individual distributions.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  deerDiff
+## W = 0.81366, p-value = 0.02123</code></pre>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">deerDiff</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<p>Both our Shapiro-Wilk test and our Q-Q plot suggest that the difference data aren’t normally distributed, which rules out a paired t-test. We should therefore consider a paired Wilcoxon test next. Remember that this test requires that the distribution of differences be symmetric, whereas our box-plot from before suggested that the data were very much skewed.</p>
+<p><strong>8. Conclusions</strong></p>
+<p>So, frustratingly, neither of our tests are appropriate for this dataset. The differences in fore- and hind leg lengths are neither normal enough for a paired t-test nor are they symmetric enough for a Wilcoxon test and we don’t have enough data to just use the t-test (we’d need more than 30 points or so). So what do we do in this situation? Well the answer is that there aren’t actually any traditional statistical tests that are valid for this dataset as it stands!</p>
+<p>There are two options available to someone:</p>
+<ol style="list-style-type: decimal">
+<li>try transforming the raw data (take logs, square root, reciprocals) and hope that one of them leads to a modified dataset that satisfies the assumptions of one of the tests we’ve covered, or</li>
+<li>use a permutation test approach (which would work but is beyond the scope of this course).</li>
+</ol>
+<p>The reason I included this example in the first practical is purely to illustrate how a very simple dataset with an apparently clear message (leg lengths differ within deer) can be intractable. You don’t need to have very complex datasets before you go beyond the capabilities of classical statistics.</p>
+</details>
+</div>
+<p>As Jeremy Clarkson <a href="https://www.quotes.net/mquote/941330">would put it</a>:</p>
+<blockquote>
+<p>And on that bombshell, it’s time to end. Goodnight!</p>
+</blockquote>
+</div>
+<div id="key-points-1" class="section level2" number="11.8">
+<h2>
+<span class="header-section-number">11.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>We use two-sample tests to see if two samples of continuous data come from the same parent distribution</li>
+<li>This essentially boils down to testing if the mean or median differs between the two samples</li>
+<li>There are 5 key two-sample tests: Student’s t-test, Welch’s t-test, Mann-Whitney U test, paired t-test and Wilcoxon signed-rank test</li>
+<li>Which one you use depends on normality of the distribution, sample size, paired or unpaired data and variance of the samples</li>
+<li>Parametric tests are used if the data are normally distributed or the sample size is large</li>
+<li>Non-parametric tests are used if the data are not normally distributed <em>and</em> the sample size is small</li>
+<li>Equality of variance then determines which test is appropriate</li>
+<li>You <a href="cs1-two-sample.html#two-sample-choosing-a-test">can ask yourself</a> 3 questions to determine the test:
+<ol style="list-style-type: decimal">
+<li>is my data paired?</li>
+<li>do I need a parametric or non-parametric test</li>
+<li>can I assume equality of variance?</li>
+</ol>
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></div>
+<div class="next"><a href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs1-twosample-wilcoxon-signed-rank"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li><a class="nav-link" href="#section-commands-5"><span class="header-section-number">11.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-4"><span class="header-section-number">11.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-4"><span class="header-section-number">11.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-3"><span class="header-section-number">11.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-3"><span class="header-section-number">11.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-5"><span class="header-section-number">11.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-6"><span class="header-section-number">11.7</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-1"><span class="header-section-number">11.8</span> Key points</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-practical-two_sample_wilcoxon.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-practical-two_sample_wilcoxon.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

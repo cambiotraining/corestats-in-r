@@ -1,4 +1,4 @@
-# One-sample t-test {#cs1-one-sample-t-test}
+# 1-sample t-test {#cs1-one-sample-t-test}
 
 ## Section commands
 New commands used in this section:

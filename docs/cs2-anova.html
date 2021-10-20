@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 10 ANOVA | Core Statistics in R</title>
+<title>Chapter 14 ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="10.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   10.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 10 ANOVA | Core Statistics in R">
+<meta property="og:title" content="Chapter 14 ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="10.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   10.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta property="og:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 10 ANOVA | Core Statistics in R">
-<meta name="twitter:description" content="10.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   10.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="twitter:title" content="Chapter 14 ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -63,26 +63,30 @@
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> One-sample Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
 <li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">8</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">9</span> Introduction</a></li>
-<li><a class="active" href="cs2-anova.html"><span class="header-section-number">10</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">11</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="active" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">14</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">15</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">18</span> Two-way ANOVA</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -92,13 +96,13 @@
 </div>
       
     </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-anova" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-anova" class="section level1" number="14">
 <h1>
-<span class="header-section-number">10</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-4" class="section level2" number="10.1">
+<div id="objectives-4" class="section level2" number="14.1">
 <h2>
-<span class="header-section-number">10.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-4"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -113,14 +117,14 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-2" class="section level2" number="10.2">
+<div id="purpose-and-aim-2" class="section level2" number="14.2">
 <h2>
-<span class="header-section-number">10.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.</p>
-<div id="section-commands-6" class="section level3" number="10.2.1">
+<div id="section-commands-6" class="section level3" number="14.2.1">
 <h3>
-<span class="header-section-number">10.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>New commands used in this section.</p>
 <div class="inline-table"><table class="table table-sm">
@@ -140,9 +144,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-5" class="section level3" number="10.2.2">
+<div id="data-and-hypotheses-5" class="section level3" number="14.2.2">
 <h3>
-<span class="header-section-number">10.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called <code>exposed</code> (E), <code>partially sheltered</code> (P) and <code>sheltered</code> (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -159,9 +163,9 @@
 </ul>
 <p>The data are stored in the file <code>CS2-oystercatcher.csv</code>.</p>
 </div>
-<div id="summarise-and-visualise-5" class="section level3" number="10.2.3">
+<div id="summarise-and-visualise-5" class="section level3" number="14.2.3">
 <h3>
-<span class="header-section-number">10.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we read in the data.</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
@@ -192,9 +196,9 @@
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
 </div>
-<div id="implement-test-4" class="section level3" number="10.2.4">
+<div id="implement-test-4" class="section level3" number="14.2.4">
 <h3>
-<span class="header-section-number">10.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform an ANOVA test on the data:</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
@@ -209,9 +213,9 @@
 <li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-4" class="section level3" number="10.2.5">
+<div id="interpret-output-and-report-results-4" class="section level3" number="14.2.5">
 <h3>
-<span class="header-section-number">10.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## Analysis of Variance Table
@@ -242,9 +246,9 @@
 </blockquote>
 <p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
 </div>
-<div id="assumptions-6" class="section level3" number="10.2.6">
+<div id="assumptions-6" class="section level3" number="14.2.6">
 <h3>
-<span class="header-section-number">10.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>To use an ANOVA test, we have to make three assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -331,9 +335,9 @@
 <p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
 </div>
 </div>
-<div id="post-hoc-testing" class="section level3" number="10.2.7">
+<div id="post-hoc-testing" class="section level3" number="14.2.7">
 <h3>
-<span class="header-section-number">10.2.7</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.7</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
 </h3>
 <p>One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.</p>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
@@ -390,12 +394,12 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 <li>Independence of observations</li>
 </ol>
 </div>
-<div id="exercise-7" class="section level3" number="10.2.8">
+<div id="exercise-7" class="section level3" number="14.2.8">
 <h3>
-<span class="header-section-number">10.2.8</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.8</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 10.1  </strong></span>Juvenile lobster weight</p>
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 14.1  </strong></span>Juvenile lobster weight</p>
 <p>Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:</p>
 <div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -671,9 +675,9 @@ Answer
 </div>
 </div>
 </div>
-<div id="key-points-2" class="section level2" number="10.3">
+<div id="key-points-2" class="section level2" number="14.3">
 <h2>
-<span class="header-section-number">10.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -686,26 +690,26 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction-1.html"><span class="header-section-number">9</span> Introduction</a></div>
-<div class="next"><a href="kruskal-wallis-test.html"><span class="header-section-number">11</span> Kruskal-Wallis test</a></div>
+<div class="prev"><a href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></div>
+<div class="next"><a href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">10</span> ANOVA</a></li>
-<li><a class="nav-link" href="#objectives-4"><span class="header-section-number">10.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-4"><span class="header-section-number">14.1</span> Objectives</a></li>
 <li>
-<a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">10.2</span> Purpose and aim</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">10.2.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">10.2.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">10.2.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">10.2.4</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">10.2.5</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">10.2.6</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">10.2.7</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">10.2.8</span> Exercise</a></li>
+<a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">14.2</span> Purpose and aim</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">14.2.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">14.2.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">14.2.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">14.2.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.2.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.2.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.2.7</span> Post-hoc testing</a></li>
+<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.2.8</span> Exercise</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">10.3</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.3</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

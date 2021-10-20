@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 One-sample Wilcoxon signed-rank test | Core Statistics in R</title>
+<title>Chapter 6 Wilcoxon signed-rank test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 6 One-sample Wilcoxon signed-rank test | Core Statistics in R">
+<meta property="og:title" content="Chapter 6 Wilcoxon signed-rank test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 One-sample Wilcoxon signed-rank test | Core Statistics in R">
+<meta name="twitter:title" content="Chapter 6 Wilcoxon signed-rank test | Core Statistics in R">
 <meta name="twitter:description" content="This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
@@ -63,26 +63,30 @@
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="active" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> One-sample Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="active" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
 <li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">8</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">9</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">10</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">11</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">14</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">15</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">18</span> Two-way ANOVA</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -94,7 +98,7 @@
     </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-onesample-wilcoxon-signed-rank" class="section level1" number="6">
 <h1>
-<span class="header-section-number">6</span> One-sample Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-onesample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-onesample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
 </h1>
 <p>This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still need the parent distribution (and consequently the sample) to be symmetric though. In this test we look to see if the <em>median</em> of the parent distributions differs significantly from a given hypothesised value (in contrast with the t-test that looks at the <em>mean</em>).</p>
 <div id="section-commands-1" class="section level2" number="6.1">
@@ -253,12 +257,12 @@ In terms of choosing between the two test we can see that both meet their respec
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></div>
+<div class="prev"><a href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></div>
 <div class="next"><a href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">6</span> One-sample Wilcoxon signed-rank test</a></li>
+<li><a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
 <li><a class="nav-link" href="#section-commands-1"><span class="header-section-number">6.1</span> Section commands</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-1"><span class="header-section-number">6.2</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">6.3</span> Implement the test</a></li>
