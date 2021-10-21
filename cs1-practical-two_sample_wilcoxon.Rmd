@@ -160,12 +160,12 @@ There are two options available to someone:
 
 The reason I included this example in the first practical is purely to illustrate how a very simple dataset with an apparently clear message (leg lengths differ within deer) can be intractable. You don't need to have very complex datasets before you go beyond the capabilities of classical statistics.
 
-</details>
-:::
-
 As Jeremy Clarkson [would put it](https://www.quotes.net/mquote/941330):
 
 > And on that bombshell, it's time to end. Goodnight!
+
+</details>
+:::
 
 ## Key points
 
