@@ -27,7 +27,7 @@ Simple linear regression essentially models the dependence of a scalar dependent
 y = \beta_0 + \beta_1 x
 \end{equation*} 
 
-where $\beta_0$ is the value of the intercept and $\beta_1$ is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, $\beta_1$, is actually different from zero. If it is different from zero then we can say that $x$has a significant effect on $y$ (since changing $x$ leads to a predicted change in $y$), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of $\beta_0$ and $\beta_1$.
+where $\beta_0$ is the value of the intercept and $\beta_1$ is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, $\beta_1$, is actually different from zero. If it is different from zero then we can say that $x$ has a significant effect on $y$ (since changing $x$ leads to a predicted change in $y$), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of $\beta_0$ and $\beta_1$.
 
 ## Section commands
 No new commands used in this section.

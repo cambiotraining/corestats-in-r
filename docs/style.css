@@ -1,11 +1,28 @@
+
+/* Background colour for body*/
+div.body-bg{background-color:#002e55; position: absolute; z-index: -1; height: 500px; width:100%;}
+
+/* adjustments for the main container (dynamic content with menu's and chapter etc) */
+.container-fluid{border: thin solid #d4d4d4; background-color: white; margin-top: 75px; padding: 0;}
+
+.container-menu{background-color: #004e8f; outline: 1px solid #004e8f; font-family:"myriad-pro-n6", "myriad-pro", myriad, verdana, arial, sans-serif;font-weight:400;font-style:normal;font-size: small;list-style-type: none;}
+
+.container-menu a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
+
+table.container-menu td{padding:10px;}
+
+td.container-menu:hover {background-color: #002e55;}
+
+td.container-menu-right{width: 100%;}
+
 /*---- Main menu ---- */
 
-li.book-part{background-color:#f3f3f3;margin-top: 1.5rem;margin-bottom: 0.5rem;font-weight:600;}
+li.book-part{background-color:#f7f8fa;margin-top: 1.5rem;margin-bottom: 0.5rem;font-weight:600;}
 
 /*---- Header ---- */
 
 /* header with university logo */
-div.header {background-color: #000000;width: 100%;border: collapse;float:left;}
+div.header {background-color: #000000; width: 100%; border: collapse; float: left;}
 
 table.top-menu {border-collapse: collapse;font-family:"myriad-pro-n6", "myriad-pro", myriad, verdana, arial, sans-serif;font-weight:600;font-style:normal;font-size: small;list-style-type: none;margin: 0;padding: 0;overflow: hidden;}
 
@@ -22,13 +39,8 @@ td.top-menu-right{width:100%}
 div.logo{padding:5px 50px 5px 170px;display:block;float:left;}
 
 /* background image for menu */
-div.collapse-lg {
-  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYV2NkQAM3X/34ry7GwYgsDBLDEMCmCCQGV4jLJJhGsEJCikBqGIlRBFY4nDwDAHbOT3++G7jxAAAAAElFTkSuQmCC);
-  min-height:95%;
-  border: solid;
-  border-color: #d4d4d4;
-  border-width: thin;
-}
+div.collapse-lg {background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYV2NkQAM3X/34ry7GwYgsDBLDEMCmCCQGV4jLJJhGsEJCikBqGIlRBFY4nDwDAHbOT3++G7jxAAAAAElFTkSuQmCC);
+  min-height:75%; border: thin solid #d4d4d4;}
 
 div.searchbar {
   padding: 10px;
