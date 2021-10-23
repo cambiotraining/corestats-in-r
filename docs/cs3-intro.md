@@ -16,6 +16,7 @@ For each of these, participants should be able to:
 a.	Perform the test in R
 b.	Interpret the output
 c.	Check the assumptions of the test
+:::
 
 ## Background
 

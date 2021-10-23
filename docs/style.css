@@ -3,13 +3,16 @@
 div.body-bg{background-color:#002e55; position: absolute; z-index: -1; height: 500px; width:100%;}
 
 /* adjustments for the main container (dynamic content with menu's and chapter etc) */
-.container-fluid{border: thin solid #d4d4d4; background-color: white; margin-top: 75px; padding: 0;}
+.container-fluid{background-color: white; margin-top: 100px; padding: 0;}
 
+div.sidebar{margin-top:1px;background-color: #f7f8fa; border: 1px solid #d4d4d4;}
+
+/* extra menu at the top of the container */
 .container-menu{background-color: #004e8f; outline: 1px solid #004e8f; font-family:"myriad-pro-n6", "myriad-pro", myriad, verdana, arial, sans-serif;font-weight:400;font-style:normal;font-size: small;list-style-type: none;}
 
 .container-menu a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
 
-table.container-menu td{padding:10px;}
+td.container-menu {padding:10px;}
 
 td.container-menu:hover {background-color: #002e55;}
 
@@ -28,7 +31,7 @@ table.top-menu {border-collapse: collapse;font-family:"myriad-pro-n6", "myriad-p
 
 table.top-menu td{padding:10px;border-right:1px solid #2e2e2e;}
 
-td.top-menu:hover {background-color: #2e2e2e;}
+td.top-menu:hover {color: #7a7a7a;background-color: #2e2e2e;}
 
 td.top-menu a {display:block;white-space:nowrap;padding: 0;color:white;text-decoration:none;}
 
