@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 14 ANOVA | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 14 ANOVA | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 14 ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+  <div class="header">
+    <div class="inline-table"><table class="top-menu"><tr>
+<td>
+          <div class="logo">
+            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+</div>
+        </td>
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="top-menu-right"> </td>
+      </tr></table></div>
+</div>
+<div class="body-bg"></div> <!-- .body-bg -->
+
+<div class="container-fluid">
+  <!-- Menu above dynamic content -->
+  <div class="container-menu">
+  <div class="inline-table"><table class="container-menu"><tr>
+<td class="container-menu"><a href="index.html" title="">Core Statistics in R</a></td>
+        <td class="container-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="container-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="container-menu-right"> </td>
+      </tr></table></div>
+</div>
+
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="active" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-anova" class="section level1" number="14">
+<h1>
+<span class="header-section-number">14</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
+</h1>
+<div id="objectives-4" class="section level2" number="14.1">
+<h2>
+<span class="header-section-number">14.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-4"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Questions</strong></p>
+<ul>
+<li>How do I…</li>
+<li>What do I…</li>
+</ul>
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Be able to…</li>
+<li>Use…</li>
+</ul>
+</div>
+</div>
+<div id="purpose-and-aim-2" class="section level2" number="14.2">
+<h2>
+<span class="header-section-number">14.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.</p>
+</div>
+<div id="section-commands-6" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>New commands used in this section.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></td>
+<td align="left">Fits a linear model</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code></td>
+<td align="left">Carries out an ANOVA on a linear model</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="data-and-hypotheses-5" class="section level2" number="14.4">
+<h2>
+<span class="header-section-number">14.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called <code>exposed</code> (E), <code>partially sheltered</code> (P) and <code>sheltered</code> (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The mean feeding rates at all three sites is the same <span class="math inline">\(\mu E = \mu P = \mu S\)</span>
+</li>
+<li>
+<span class="math inline">\(H_1\)</span>: The mean feeding rates are not all equal.</li>
+</ul>
+<p>We will use a one-way ANOVA test to check this.</p>
+<ul>
+<li>We use a <strong>one-way</strong> ANOVA test because we only have one predictor variable (the categorical variable location).</li>
+<li>We’re using <strong>ANOVA</strong> because we have more than two groups and we don’t know any better yet with respect to the exact assumptions.</li>
+</ul>
+<p>The data are stored in the file <code>CS2-oystercatcher.csv</code>.</p>
+</div>
+<div id="summarise-and-visualise-5" class="section level2" number="14.5">
+<h2>
+<span class="header-section-number">14.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>First we read in the data.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-oystercatcher.csv"</span><span class="op">)</span></code></pre></div>
+<p>Next we summarise the data and visualise them. We have a quick peek at the first few rows of our data with <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> so we can see how the data are organised.</p>
+<p>The data are in stacked format. The first column contains information on feeding rates and is called <code>feeding.</code> The second column has categorical data on the type of site and is called <code>site</code>.</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<pre><code>##   feeding    site
+## 1    14.2 Exposed
+## 2    16.5 Exposed
+## 3     9.3 Exposed
+## 4    15.1 Exposed
+## 5    13.4 Exposed
+## 6    18.4 Partial</code></pre>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##        site feeding.Min. feeding.1st Qu. feeding.Median feeding.Mean
+## 1   Exposed         9.30           13.40          14.20        13.70
+## 2   Partial        13.00           16.50          17.40        17.14
+## 3 Sheltered        21.50           22.20          24.10        23.64
+##   feeding.3rd Qu. feeding.Max.
+## 1           15.10        16.50
+## 2           18.40        20.40
+## 3           25.10        25.30</code></pre>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
+</div>
+<div id="implement-test-4" class="section level2" number="14.6">
+<h2>
+<span class="header-section-number">14.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform an ANOVA test on the data:</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<p>The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
+<ul>
+<li>The first argument must be in the formula format: <code>response ~ predictor</code>
+</li>
+<li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
+<li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
+</ul>
+</div>
+<div id="interpret-output-and-report-results-4" class="section level2" number="14.7">
+<h2>
+<span class="header-section-number">14.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: feeding
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## site       2 254.812 127.406  21.508 0.0001077 ***
+## Residuals 12  71.084   5.924                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<ul>
+<li>The 1st line just tells you the that this is an ANOVA test</li>
+<li>The 2nd line tells you what the response variable is (in this case feeding)</li>
+<li>The 3rd, 4th and 5th lines are an ANOVA table which contain some useful values:
+<ul>
+<li>The <code>Df</code> column contains the degrees of freedom values on each row, 2 and 12 (which we’ll need for the reporting)</li>
+<li>The <code>F</code> value column contains the F statistic, 21.508 (which again we’ll need for reporting).</li>
+<li>The p-value is 0.0001077 and is the number directly under the <code>Pr(&gt;F)</code> on the 4th line.</li>
+<li>The other values in the table (in the <code>Sum Sq</code> and <code>Mean Sq</code>) columns are used to calculate the F statistic itself and we don’t need to know these.</li>
+</ul>
+</li>
+<li>The 6th line has some symbolic codes to represent how big (small) the p-value is; so, a p-value smaller than 0.001 would have a *** symbol next to it (which ours does). Whereas if the p-value was between 0.01 and 0.05 then there would simply be a * character next to it, etc. Thankfully we can all cope with actual numbers and don’t need a short-hand code to determine the reporting of our experiments (please tell me that’s true…!)</li>
+</ul>
+<p>Again, the p-value is what we’re most interested in here and shows us the probability of getting samples such as ours if the null hypothesis were actually true.</p>
+<p>Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say “that it is very unlikely that these three samples came from the same parent distribution” and as such we can reject our null hypothesis and state that:</p>
+<blockquote>
+<p>A one-way ANOVA showed that the mean feeding rate of oystercatchers differed significantly between locations (F = 21.51, df = 2, 12, p = 0.00011).</p>
+</blockquote>
+<p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
+</div>
+<div id="assumptions-6" class="section level2" number="14.8">
+<h2>
+<span class="header-section-number">14.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>To use an ANOVA test, we have to make three assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distributions from which the samples are taken are normally distributed</li>
+<li>Each data point in the samples is independent of the others</li>
+<li>The parent distributions should have the same variance</li>
+</ol>
+<p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
+<p><strong>1. Normality</strong></p>
+<p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Partial</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Sheltered</span><span class="op">)</span></code></pre></div>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Exposed
+## W = 0.9151, p-value = 0.4988</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Partial
+## W = 0.96913, p-value = 0.8697</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Sheltered
+## W = 0.88532, p-value = 0.3341</code></pre>
+<p>We can see that all three groups appear to be normally distributed which is good.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
+<p>Extract the residuals from the data and check their normality:</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid_oyster
+## W = 0.93592, p-value = 0.3338</code></pre>
+<p>Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)</p>
+<p><strong>2. Equality of Variance</strong></p>
+<p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
+<p>Perform Bartlett’s test on the data:</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  feeding by site
+## Bartlett's K-squared = 0.90632, df = 2, p-value = 0.6356</code></pre>
+<p>Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.</p>
+<p><strong>3. Graphical Interpretation and Diagnostic Plots</strong></p>
+<p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
+<p>Create the standard set diagnostic plots:</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># create the diagnostic plots</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># and return the window back to normal</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## hat values (leverages) are all = 0.2
+##  and there are no factor predictors; no plot no. 5</code></pre>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672"></div>
+<p>The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).</p>
+<ul>
+<li>In this example, two of the plots (top-left and bottom-left) show effectively the same thing: what the distribution of data between each group look like. These allow an informal check on the equality of variance assumption.
+<ul>
+<li>For the top-left graph we want all data to be symmetric about the 0 horizontal line and for the spread to be the same (please ignore the red line; it is an unhelpful addition to these graphs).</li>
+<li>For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.</li>
+</ul>
+</li>
+<li>The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).</li>
+</ul>
+<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is allright.</p>
+<div class="note">
+<p>At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.</p>
+<p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
+</div>
+</div>
+<div id="post-hoc-testing" class="section level2" number="14.9">
+<h2>
+<span class="header-section-number">14.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
+</h2>
+<p>One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.</p>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
+<p>Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.</p>
+<p><strong>1. Read in the data and plot</strong></p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-tukey.csv"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span></code></pre></div>
+<p><strong>2. Test for a significant difference in group means</strong></p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_tukey</span><span class="op">)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: response
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## group      2 33.850 16.9250   20.16 2.392e-07 ***
+## Residuals 57 47.854  0.8395                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Here we have a p-value of 2.39x10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.</p>
+<p>However, this was not due to all of the sample means being different, but rather just because one of the groups is very different from the others. In order to drill down and investigate this further we use a new test called <strong>Tukey’s range test</strong> (or <strong>Tukey’s honest significant difference test</strong> – this always makes me think of some terrible cowboy/western dialogue). This will compare all of the groups in a pairwise fashion and reports on whether a significant difference exists.</p>
+<p><strong>3. Performing Tukey’s test on these data</strong></p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">aov_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">aov_tukey</span><span class="op">)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = response ~ group, data = tukey)
+## 
+## $group
+##                      diff        lwr      upr     p adj
+## sample2-sample1 0.3037563 -0.3934982 1.001011 0.5498005
+## sample3-sample1 1.7233591  1.0261047 2.420614 0.0000005
+## sample3-sample2 1.4196028  0.7223484 2.116857 0.0000246</code></pre>
+<p>The first argument repeats our ANOVA using a different function ‘aov().’ We store the output of this function in an R object called <code>aov_tukey</code>.
+Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</a></code> function takes the output of the <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function as its argument and not the raw data.</p>
+<p>The bottom three lines contain the information that we want. The final column of each (entitled <code>p adj</code>) is the p-value that we’re looking for. The null hypothesis in each case is that there is no difference in the mean between the two groups. As we can see the first line shows that there isn’t a significant difference between <code>sample1</code> and <code>sample2</code> but the 2nd and 3rd lines show that there is a significant difference between <code>sample1</code> and <code>sample3</code>, as well as <code>sample2</code> and <code>sample3</code>. This matches with what we expected based on the boxplot.</p>
+<p><strong>4. Assumptions</strong></p>
+<p>When to use Tukey’s range test is a matter of debate (strangely enough a lot of statistical analysis techniques are currently matters of opinion rather than mathematical fact – it does explain a little why this whole field appears so bloody confusing!)</p>
+<ul>
+<li>Some people claim that we should only perform Tukey’s range test (or any other post-hoc tests) if the preceding ANOVA test showed that there was a significant difference between the groups and that if the ANOVA test had not shown any significant differences between groups then we would have to stop there.</li>
+<li>Other people say that this is rubbish and we can do what the hell we like, when we like as long as we tell people what we did.</li>
+</ul>
+<p>The background to this is rather involved but one of the reasons for this debate is to prevent so-called <strong>data-dredging</strong> or <strong>p-hacking</strong>. This is where scientists/analysts are so fixated on getting a “significant” result that they perform a huge variety of statistical techniques until they find one that shows that their data is significant (this was a particular problem in psychological studies for while – not to point fingers though, they are working hard to sort their stuff out. Kudos!).</p>
+<p>Whether you should use post-hoc testing or not will depend on your experimental design and the questions that you’re attempting to answer.</p>
+<p>Tukey’s range test, when we decide to use it, requires the same three assumptions as an ANOVA test:</p>
+<ol style="list-style-type: decimal">
+<li>Normality of distributions</li>
+<li>Equality of variance between groups</li>
+<li>Independence of observations</li>
+</ol>
+</div>
+<div id="exercise-7" class="section level2" number="14.10">
+<h2>
+<span class="header-section-number">14.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 14.1  </strong></span>Juvenile lobster weight</p>
+<p>Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:</p>
+<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;background-color: white !important;">
+Mussels
+</th>
+<th style="text-align:right;background-color: white !important;">
+Pellets
+</th>
+<th style="text-align:right;background-color: white !important;">
+Flakes
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+151.6
+</td>
+<td style="text-align:right;background-color: white !important;">
+117.7
+</td>
+<td style="text-align:right;background-color: white !important;">
+101.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+132.1
+</td>
+<td style="text-align:right;background-color: white !important;">
+110.8
+</td>
+<td style="text-align:right;background-color: white !important;">
+102.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+104.2
+</td>
+<td style="text-align:right;background-color: white !important;">
+128.6
+</td>
+<td style="text-align:right;background-color: white !important;">
+90.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+153.5
+</td>
+<td style="text-align:right;background-color: white !important;">
+110.1
+</td>
+<td style="text-align:right;background-color: white !important;">
+132.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+132.0
+</td>
+<td style="text-align:right;background-color: white !important;">
+175.2
+</td>
+<td style="text-align:right;background-color: white !important;">
+129.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+119.0
+</td>
+<td style="text-align:right;background-color: white !important;">
+NA
+</td>
+<td style="text-align:right;background-color: white !important;">
+129.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+161.9
+</td>
+<td style="text-align:right;background-color: white !important;">
+NA
+</td>
+<td style="text-align:right;background-color: white !important;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Is there any evidence that diet affects the growth rate of lobsters?</p>
+<ol style="list-style-type: decimal">
+<li>Write down the null and alternative hypotheses</li>
+<li>Import the data into R
+<ul>
+<li>The data are stored in the file <code>data/raw/CS2-lobsters.csv</code>
+</li>
+</ul>
+</li>
+<li>Summarise and visualise the data</li>
+<li>Check the assumptions using appropriate tests and graphical analyses</li>
+<li>Perform an ANOVA test</li>
+<li>Write down a sentence that summarise the results that you have found</li>
+<li>Perform a post-hoc test and report the findings</li>
+</ol>
+<details><summary>
+Answer
+</summary><p><strong>1. Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : all means are equal</p>
+<p><span class="math inline">\(H_1\)</span> : not all means are equal</p>
+<p><strong>2-3. Import Data, summarise and visualise</strong></p>
+<p>The data are stored in a <code>.csv</code> file in stacked format with columns called <code>weight</code> and <code>diet</code>.</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-lobsters.csv"</span><span class="op">)</span></code></pre></div>
+<p>Let’s look at the data and see what we can see.</p>
+<pre><code>##    weight    diet
+## 1   151.6 Mussels
+## 2   132.1 Mussels
+## 3   104.2 Mussels
+## 4   153.5 Mussels
+## 5   132.0 Mussels
+## 6   119.0 Mussels
+## 7   161.9 Mussels
+## 8   117.7 Pellets
+## 9   110.8 Pellets
+## 10  128.6 Pellets
+## 11  110.1 Pellets
+## 12  175.2 Pellets
+## 13  101.8  Flakes
+## 14  102.9  Flakes
+## 15   90.4  Flakes
+## 16  132.8  Flakes
+## 17  129.3  Flakes
+## 18  129.4  Flakes</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##      diet weight.Min. weight.1st Qu. weight.Median weight.Mean weight.3rd Qu.
+## 1  Flakes     90.4000       102.0750      116.1000    114.4333       129.3750
+## 2 Mussels    104.2000       125.5000      132.1000    136.3286       152.5500
+## 3 Pellets    110.1000       110.8000      117.7000    128.4800       128.6000
+##   weight.Max.
+## 1    132.8000
+## 2    161.9000
+## 3    175.2000</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+<p>As always we use the plot and summary to assess three things:</p>
+<ol style="list-style-type: decimal">
+<li>Did we load the data in properly?</li>
+</ol>
+<ul>
+<li>We see three groups with reasonable values. There aren’t any data points that are obviously wrong (negative, zero or massively big) and we have the right number of groups. So it looks as if we didn’t do anything obviously wrong.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>What do we expect as a result of a statistical test?</li>
+</ol>
+<ul>
+<li>Whilst the <code>Mussels</code> group does look higher than the other two groups, <code>Pellets</code> and <code>Flakes</code> appear almost identical in terms of average values, and there’s quite a bit of overlap with the <code>Mussels</code> group. A non-significant result is the most likely answer, and I would be surprised to see a significant p-value - especially given the small sample size that we have here.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>What do we think about assumptions?</li>
+</ol>
+<ul>
+<li>The groups appear mainly symmetric (although <code>Pellets</code> is a bit weird) and so we’re not immediately massively worried about lack of normality. Again, <code>Flakes</code> and <code>Mussels</code> appear to have very similar variances but it’s a bit hard to decide what’s going on with <code>Pellets.</code> It’s hard to say what’s going on with the assumptions and so I’ll wait and see what the other tests say.</li>
+</ul>
+<p><strong>4. Explore Assumptions</strong></p>
+<p><strong>Normality</strong></p>
+<p>We’ll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we’ll only use the Q-Q plot.</p>
+<p>We’ll need to unstack the data to use the Shapiro-Wilk test on the individual groups:</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lobst_uns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">lobsters</span>, <span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Flakes</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  lobst_uns$Flakes
+## W = 0.84368, p-value = 0.1398</code></pre>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Mussels</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  lobst_uns$Mussels
+## W = 0.94784, p-value = 0.71</code></pre>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Pellets</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  lobst_uns$Pellets
+## W = 0.76706, p-value = 0.0425</code></pre>
+<p><code>Flakes</code> and <code>Mussels</code> are fine, but, as we suspected from earlier, <code>Pellets</code> appears to have a marginally significant Normality test result.</p>
+<p>Let’s look at the Shapiro-Wilk test for all of the data together:</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">resid_lobst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_lobst</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid_lobst
+## W = 0.94779, p-value = 0.3914</code></pre>
+<p>This on the other hand says that everything is fine. Let’s look at the Q-Q-plot:</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span> , data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
+     which <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+<p>Here, I’ve used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots, but you can tell R to only plot a specific one. (If you want to know more about this have a look at the <code>plot.lm</code> help documentation using <code><a href="https://rdrr.io/r/stats/plot.lm.html">?plot.lm</a></code>). I’ve asked R to only plot the Q-Q plot with the <code>which = 2</code> argument.</p>
+<p>The Q-Q plot looks OK, not perfect, but more than good enough for us to have confidence in the normality of the data.</p>
+<p>Overall, I’d be happy that the assumption of normality has been adequately well met here. The suggested lack of normality in the <code>Pellets</code> was only just significant and we have to take into account that there are only 5 data points in that group. If there had been a lot more points in that group, or if the Q-Q plot was considerably worse then I wouldn’t be confident.</p>
+<p><strong>Equality of Variance</strong></p>
+<p>We’ll consider the Bartlett test and we’ll look at some diagnostic plots too.</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  weight by diet
+## Bartlett's K-squared = 0.71273, df = 2, p-value = 0.7002</code></pre>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
+     which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
+<p>In the above code, I’ve used the same trick as before with the <code>which</code> argument to only plot the two diagnostic plots that relate to equality of variance (residuals vs fitted and scale-location).</p>
+<p>Here all three methods agree that there isn’t any issues with equality of variance:</p>
+<ul>
+<li>the Bartlett test p-value is large and non-significant</li>
+<li>the spread of points in all three groups in the residuals vs fitted graph are roughly the same</li>
+<li>the red line in the scale-location graph is pretty horizontal</li>
+</ul>
+<p>Overall, this assumption is pretty well met.</p>
+<p><strong>5. Carry out one-way ANOVA</strong></p>
+<p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: weight
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## diet       2 1567.2  783.61  1.6432 0.2263
+## Residuals 15 7153.1  476.87</code></pre>
+<p><strong>6. Result</strong></p>
+<blockquote>
+<p>A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).</p>
+</blockquote>
+<p><strong>7. Post-hoc testing with Tukey</strong></p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = weight ~ diet, data = lobsters)
+## 
+## $diet
+##                      diff        lwr      upr     p adj
+## Mussels-Flakes  21.895238  -9.661957 53.45243 0.2024851
+## Pellets-Flakes  14.046667 -20.300196 48.39353 0.5508657
+## Pellets-Mussels -7.848571 -41.061560 25.36442 0.8148766</code></pre>
+<p>Here we can see that actually, there is no significant difference between any of the pairs of groups in this dataset.</p>
+<div class="note">
+<p>I want to reiterate that carrying out the post-hoc test after getting a non-significant result with ANOVA is something that you have to think very carefully about and it all depends on what your research question it.</p>
+<p>If your research question was:</p>
+<p><em>Does diet affect lobster weight?</em> or <em>Is there any effect of diet on lobster weight?</em></p>
+<p>Then when we got the non-significant result from the ANOVA test we should have just stopped there as we have our answer. Going digging for “significant” results by running more tests is a main factor that contributes towards lack of reproducibility in research.</p>
+<p>If on the other hand your research question was:</p>
+<p><em>Are any specific diets better or worse for lobster weight than others?</em></p>
+<p>Then we should probably have just skipped the one-way ANOVA test entirely and just jumped straight in with the Tukey’s range test, but the important point here is that the result of the one-way ANOVA test doesn’t preclude carrying out the Tukey test.</p>
+</div>
+</details>
+</div>
+</div>
+<div id="key-points-2" class="section level2" number="14.11">
+<h2>
+<span class="header-section-number">14.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></div>
+<div class="next"><a href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-4"><span class="header-section-number">14.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">14.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">14.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">14.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">14.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">14.6</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.7</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.9</span> Post-hoc testing</a></li>
+<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.11</span> Key points</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs2-practical-anova.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs2-practical-anova.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

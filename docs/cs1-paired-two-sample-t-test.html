@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Paired two-sample t-test | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Paired two-sample t-test | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 Paired two-sample t-test | Core Statistics in R">
+<meta name="twitter:description" content="A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+  <div class="header">
+    <div class="inline-table"><table class="top-menu"><tr>
+<td>
+          <div class="logo">
+            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+</div>
+        </td>
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="top-menu-right"> </td>
+      </tr></table></div>
+</div>
+<div class="body-bg"></div> <!-- .body-bg -->
+
+<div class="container-fluid">
+  <!-- Menu above dynamic content -->
+  <div class="container-menu">
+  <div class="inline-table"><table class="container-menu"><tr>
+<td class="container-menu"><a href="index.html" title="">Core Statistics in R</a></td>
+        <td class="container-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="container-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="container-menu-right"> </td>
+      </tr></table></div>
+</div>
+
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="active" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-paired-two-sample-t-test" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Paired two-sample t-test<a class="anchor" aria-label="anchor" href="#cs1-paired-two-sample-t-test"><i class="fas fa-link"></i></a>
+</h1>
+<p>A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is applicable if the number of paired points within the samples is large (&gt;30) or, if the number of points is small, then this test also works when the parent distributions are normally distributed.</p>
+<div id="section-commands-4" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are no new commands in this section.</p>
+</div>
+<div id="data-and-hypotheses-3" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>For example, suppose we measure the cortisol levels in 20 adult females (nmol/l) first thing in the morning and again in the evening. We want to test whether the cortisol levels differs between the two measurement times. We will initially form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: There is no difference in cortisol level between times (<span class="math inline">\(\mu M = \mu E\)</span>)</li>
+<li>
+<span class="math inline">\(H_1\)</span>: There is a difference in cortisol levels between times (<span class="math inline">\(\mu M \neq \mu E\)</span>)</li>
+</ul>
+<p>We use a two-sample, two-tailed paired t-test to see if we can reject the null hypothesis.</p>
+<ul>
+<li>We use a <strong>two-sample</strong> test because we now have two samples</li>
+<li>We use a <strong>two-tailed</strong> t-test because we want to know if our data suggest that the true (population) means are different from one another rather than that one mean is specifically bigger or smaller than the other</li>
+<li>We use a <strong>paired</strong> test because each data point in the first sample can be linked to another data point in the second sample by a connecting factor</li>
+<li>We’re using a <strong>t-test</strong> because we’re assuming that the parent populations are normal and have equal variance (We’ll check this in a bit)</li>
+</ul>
+<p>The data are stored in unstacked format in the file “CS1-twopaired.csv.”
+Read this into R:</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-twopaired.csv"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="summarise-and-visualise-3" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">)</span></code></pre></div>
+<pre><code>##     morning         evening     
+##  Min.   :146.1   Min.   : 60.1  
+##  1st Qu.:266.6   1st Qu.:137.8  
+##  Median :320.5   Median :188.9  
+##  Mean   :313.5   Mean   :197.4  
+##  3rd Qu.:359.7   3rd Qu.:260.8  
+##  Max.   :432.5   Max.   :379.3</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cortisol</span>, ylab <span class="op">=</span> <span class="st">"Level (nmol/l)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/cs1-pairedt-sumvisual-1.png" width="672"></div>
+<p>The box plot does not capture how the cortisol level of each individual subject has changed though. We can explore the individual changes between morning and evening by creating a boxplot of the <em>differences</em> between the two times of measurement.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># calculate the difference between evening and morning values</span>
+<span class="va">changeCor</span> <span class="op">&lt;-</span> <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span> <span class="op">-</span> <span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">changeCor</span>, ylab <span class="op">=</span> <span class="st">"Change in cortisol (nmol/l)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/cs1-pairedt-diff-1.png" width="672"></div>
+<p>The differences in cortisol levels appear to be very much less than zero, (meaning that the evening cortisol levels appear to be much lower than the morning ones). As such we would expect that the test would give a pretty significant result.</p>
+</div>
+<div id="implement-test-2" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform a two-sample, two-tailed, paired t-test:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>,
+       alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first two arguments must be vectors containing the numerical data for both samples</li>
+<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
+</li>
+<li>The fourth argument says that the data are paired</li>
+</ul>
+</div>
+<div id="interpret-output-and-report-results-2" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-2"><i class="fas fa-link"></i></a>
+</h2>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  cortisol$evening and cortisol$morning
+## t = -5.1833, df = 19, p-value = 5.288e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -162.96038  -69.20962
+## sample estimates:
+## mean of the differences 
+##                -116.085</code></pre>
+<p>From our perspective the value of interested is on the 3rd line (p-value = 5.288e10<sup>-5</sup>). Given that this is substantially less than 0.05 we can reject the null hypothesis and state:</p>
+<blockquote>
+<p>A two-tailed, paired t-test indicated that the cortisol level in adult females differed significantly between the morning (313.5 nmol/l) and the evening (197.4 nmol/l) (t = -5.1833, df = 19, p = 5.3x10<sup>-5</sup>).</p>
+</blockquote>
+</div>
+<div id="assumptions-4" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>You will do this in the exercise!</p>
+</div>
+<div id="exercise-5" class="section level2" number="10.7">
+<h2>
+<span class="header-section-number">10.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-5"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 10.1  </strong></span>Checking assumptions</p>
+<p>Check the assumptions necessary for this this paired t-test.
+Was a paired t-test an appropriate test?</p>
+<details><summary>
+Answer
+</summary><p>A paired test is really just a one-sample test in disguise. We actually don’t care too much about the distributions of the individual groups. Instead we care about the properties of the <strong>differences</strong>. So for a paired t-test to be valid for this dataset, we need the differences between the morning and evening values to be normally distributed.</p>
+<p>Let’s check this with Shapiro-Wilk and Q-Q plots using the <code>changeCor</code> variable we created earlier.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">changeCor</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  changeCor
+## W = 0.92362, p-value = 0.1164</code></pre>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">changeCor</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">changeCor</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>The Shapiro-Wilk test says that the data are normal enough and whilst the Q-Q plot is mostly fine, there is some suggestion of snaking at the bottom left. I’m actually OK with this because the suggestion of snaking is actually only due to a single point (the last point on the left). If you cover that point up with your thumb (or finger of your choice) then the remaining points in the Q-Q plot look pretty damn good, and so the suggestion of snaking is actually driven by only a single point (which can happen by chance). As such I’m actually happy that the assumption of normality is well met in this case. This <strong>single point</strong> check is a useful thing to remember when assessing diagnostic plots.</p>
+<p>So, yep, a paired t-test is appropriate for this dataset.</p>
+</details>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></div>
+<div class="next"><a href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs1-paired-two-sample-t-test"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="nav-link" href="#section-commands-4"><span class="header-section-number">10.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-3"><span class="header-section-number">10.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-3"><span class="header-section-number">10.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-2"><span class="header-section-number">10.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-2"><span class="header-section-number">10.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-4"><span class="header-section-number">10.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-5"><span class="header-section-number">10.7</span> Exercise</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-practical-two_sample_paired_t_test.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-practical-two_sample_paired_t_test.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

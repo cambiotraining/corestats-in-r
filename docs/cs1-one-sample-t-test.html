@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 1-sample t-test | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="5.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 5 1-sample t-test | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 1-sample t-test | Core Statistics in R">
+<meta name="twitter:description" content="5.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+  <div class="header">
+    <div class="inline-table"><table class="top-menu"><tr>
+<td>
+          <div class="logo">
+            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+</div>
+        </td>
+        <td class="top-menu"><a href="index.html">Course home page</a></td>
+        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="top-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="top-menu-right"> </td>
+      </tr></table></div>
+</div>
+<div class="body-bg"></div> <!-- .body-bg -->
+
+<div class="container-fluid">
+  <!-- Menu above dynamic content -->
+  <div class="container-menu">
+  <div class="inline-table"><table class="container-menu"><tr>
+<td class="container-menu"><a href="index.html" title="">Core Statistics in R</a></td>
+        <td class="container-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
+        <td class="container-menu">
+          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
+        </td>
+        <td class="container-menu-right"> </td>
+      </tr></table></div>
+</div>
+
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Core Statistics in R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <div class="searchbar">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+      <div class="menu-items" width="100%">
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="active" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+        </nav>
+</div>
+      
+    </div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-one-sample-t-test" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> 1-sample t-test<a class="anchor" aria-label="anchor" href="#cs1-one-sample-t-test"><i class="fas fa-link"></i></a>
+</h1>
+<div id="section-commands" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
+</h2>
+<p>New commands used in this section:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code></td>
+<td align="left">Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm()</a></code></td>
+<td align="left">Plots a Q-Q plot for comparison with a normal distribution.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/qqnorm.html">qqline()</a></code></td>
+<td align="left">Adds a comparison line to the Q-Q plot.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code></td>
+<td align="left">Performs a Shapiro-Wilk test for normality.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="data-and-hypotheses" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses"><i class="fas fa-link"></i></a>
+</h2>
+<p>For example, suppose we measure the body lengths of male guppies (in mm) collected from the Guanapo River in Trinidad. We want to test whether the data support the hypothesis that the mean body is actually 20 mm. We form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The mean body length is equal to 20mm (<span class="math inline">\(\mu =\)</span> 20).</li>
+<li>
+<span class="math inline">\(H_1\)</span>: The mean body length is not equal to 20mm (<span class="math inline">\(\mu \neq\)</span> 20).</li>
+</ul>
+<p>We will use a one-sample, two-tailed t-test to see if we should reject the null hypothesis or not.</p>
+<ul>
+<li>We use a <strong>one-sample</strong> test because we only have one sample.</li>
+<li>We use a <strong>two-tailed</strong> t-test because we want to know if our data suggest that the true (population) mean is different from 20 mm in either direction rather than just to see if it is greater than or less than 20 mm (in which case we would use a one-tailed test).</li>
+<li>We’re using a <strong>t-test</strong> because we don’t know any better yet and because I’m telling you to. We’ll look at what the precise assumptions/requirements need to be in a moment.</li>
+</ul>
+<p>Make sure you have downloaded the data (see: <a href="introduction.html#cs1-datasets">Datasets</a>) and placed it in the <code>data/raw</code> folder within your working directory.</p>
+<p>We then read in the data and create a vector containing the data.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># import the data</span>
+<span class="va">fishlengthDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-onesample.csv"</span><span class="op">)</span>
+
+<span class="co"># create a vector containing the data</span>
+<span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="va">fishlengthDF</span><span class="op">$</span><span class="va">Guanapo</span></code></pre></div>
+<p>The first line reads the data into R and creates an object called a <strong>data frame</strong>. This data frame only contains a single column of numbers called “Guanapo” (the name of the river). In most situations, and for most statistical analyses, having our data stored in a data frame is exactly what we’d want. However, for one sample tests we actually need our data to be stored as a vector. So, the second line extracts the values that are in the Guanapo column of our <code>fishlengthDF</code> data frame and creates a simple vector of numbers that we have called <code>fishlength</code>. This step is only necessary for one-sample tests and when we look at more complex datasets, we won’t need to do this second step at all.</p>
+</div>
+<div id="summarise-and-visualise" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
+</h2>
+<p>Summarise the data and visualise it:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    11.2    17.5    18.8    18.3    19.7    23.3</code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span>, main <span class="op">=</span> <span class="st">"Male guppies"</span>, ylab <span class="op">=</span> <span class="st">"Length (mm)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-summary-1.png" width="672"></div>
+<p>The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be “statistically significant,” although we may anticipate such a result.</p>
+</div>
+<div id="implement-the-test" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform a one-sample, two-tailed t-test:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">fishlength</span>, mu <span class="op">=</span> <span class="fl">20</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  fishlength
+## t = -3.5492, df = 28, p-value = 0.001387
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  17.31341 19.27969
+## sample estimates:
+## mean of x 
+##  18.29655</code></pre>
+<ul>
+<li>The first argument must be a numerical vector of data values.</li>
+<li>The second argument must be a number and is the mean to be tested under the null hypothesis.</li>
+<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less.</code>
+</li>
+</ul>
+</div>
+<div id="interpreting-the-output-and-report-results" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results"><i class="fas fa-link"></i></a>
+</h2>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  fishlength
+## t = -3.5492, df = 28, p-value = 0.001387
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  17.31341 19.27969
+## sample estimates:
+## mean of x 
+##  18.29655</code></pre>
+<ul>
+<li>The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called</li>
+<li>The 3rd line contains the three key outputs from the test:
+<ul>
+<li>The calculated t-value is -3.5492 (we’ll need this for reporting)</li>
+<li>There are 28 degrees of freedom (again we’ll need this for reporting)</li>
+<li>The p-value is 0.001387.</li>
+</ul>
+</li>
+<li>The 4th line simply states the alternative hypothesis</li>
+<li>The 5th and 6th lines give the 95th confidence interval (we don’t need to know this)</li>
+<li>The 7th, 8th and 9th lines give the sample mean again (18.29655).</li>
+</ul>
+<p>The p-value on the 3rd line is what we’re most interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.</p>
+<p>So:</p>
+<ul>
+<li>a high p-value means that there is a high probability of observing a sample such as ours and the null hypothesis is probably true whereas</li>
+<li>a low p-value means that there is a low probability of observing a sample such as ours and the null hypothesis is probably not true.</li>
+</ul>
+<p>It is important to realise that the p-value is just an indication and there is no absolute certainty here in this interpretation.</p>
+<p>People, however like more definite answers and so we pick an artificial probability threshold (called a significance level) in order to be able to say something more decisive. The standard significance level is 0.05 and since our p-value is smaller than this we choose to say that “it is very unlikely that we would have this particular sample if the null hypothesis were true.” Consequently, we can reject our null hypothesis and state that:</p>
+<blockquote>
+<p>A one-sample t-test indicated that the mean body length of male guppies (<span class="math inline">\(\mu\)</span> = 18.29mm) differs significantly from 20 mm (t = -3.55, df = 28, p = 0.0014).</p>
+</blockquote>
+<p>The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the actual mean value of our group(<span class="math inline">\(\mu\)</span> = 18.29mm), the test statistic (t = -3.55), the degrees of freedom (df = 28), and the p-value (p = 0.0014). In some journals you are only required to report whether the p-value is less than the critical value (e.g. p &lt; 0.05) but I would always recommend reporting the actual p-value obtained.</p>
+<p>Please feel free to ask a demonstrator if any aspect of this section is unclear as this does form the core of classical hypothesis testing and the logic here applies to all of the rest of the tests.</p>
+</div>
+<div id="assumptions" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In order to use a t-test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distribution from which the sample is taken is normally distributed (and as such the sample data are normally distributed themselves).</li>
+</ol>
+<div class="note">
+<p>It is worth noting though that the t-test is actually pretty robust in situations where the sample data are not normal. For sufficiently large sample sizes (your guess is as good as mine, but conventionally this means about 30 data points), you can use a t-test without worrying about whether the underlying population is normally distributed or not.</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Each data point in the sample is independent of the others. This is in general not something that can be tested for and instead has to be considered from the sampling procedure. For example, taking repeated measurements from the same individual would generate data that are not independent.</li>
+</ol>
+<p>The second point we know nothing about and so we ignore it here (this is an issue that needs to be considered from the experimental design), whereas the first assumption can be checked.
+There are three ways of checking for normality:</p>
+<p>In increasing order of rigour, we have</p>
+<ol style="list-style-type: decimal">
+<li>Histogram</li>
+<li>Quantile-quantile plot</li>
+<li>Shapiro-Wilk test</li>
+</ol>
+<div id="histogram-of-the-data" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Histogram of the data<a class="anchor" aria-label="anchor" href="#histogram-of-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Plot a histogram of the data, which gives:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-t-test-histogram-1.png" width="672"></div>
+<p>The distribution appears to be uni-modal and symmetric, and so it isn’t obviously non-normal. However, there are a lot of distributions that have these simple properties but which aren’t normal, so this isn’t exactly rigorous. Thankfully there are other, more rigorous tests.</p>
+<p>NB. By even looking at this distribution to assess the assumption of normality we are already going far beyond what anyone else ever does. Nevertheless, we will continue.</p>
+</div>
+<div id="q-q-plot-of-the-data" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> Q-Q plot of the data<a class="anchor" aria-label="anchor" href="#q-q-plot-of-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Q-Q plot is the short for quantile-quantile plot. This <strong>diagnostic</strong> plot (as it is sometimes called) is a way of comparing two distributions. How Q-Q plots work won’t be explained here but ask a demonstrator if you really want to know what is going on.</p>
+<p>Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot the Q-Q plot</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span>
+
+<span class="co"># and add a comparison line</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-t-test-qqplot-1.png" width="672"></div>
+<p>What is important to know is that if the data were normally distributed then all of the points should lie on (or close to) the diagonal line in this graph.</p>
+<p>In this case, the points lie quite close to the line for the most part but the sample quantiles (points) from either end of the sample distribution are either smaller (below the line on the left) or larger (above the line on the right) than expected if they were supposed to be normally distributed. This suggests that the sample distribution is a bit more spread out than would be expected if it came from a normal distribution.</p>
+<p>It is important to recognise that there isn’t a simple unambiguous answer when interpreting these types of graph, in terms of whether the assumption of normality has been well met or not and instead it often boils down to a matter of experience.</p>
+<p>It is a very rare situation indeed where the assumptions necessary for a test will be met unequivocally and a certain degree of personal interpretation is always needed. Here you have to ask yourself whether the data are normal “enough” for you to be confident in the validity of the test.</p>
+<p>Below are four examples of QQ plots for different types of distributions:</p>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-normal-dist-1.png" width="672"></div>
+<p>These two graphs relate to 200 data points that have been drawn from a normal distribution. Even here you can see that the points do not all lie perfectly on the diagonal line in the QQ plot, and a certain amount of deviation at the top and bottom of the graph can happen just by chance (if I were to draw a different set of point then the graph would look slightly different).</p>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-uniform-dist-1.png" width="672"></div>
+<p>These two graphs relate to 200 data points that have been drawn from a uniform distribution. Uniform distributions are more condensed than normal distributions, and this is reflected in the QQ plot having a very pronounced S-shaped pattern to it (this is colloquially known as <strong>snaking</strong>).</p>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-t-dist-1.png" width="672"></div>
+<p>These two graphs relate to 200 data points that have been drawn from a t distribution. t distributions are more spread out than normal distributions, and this is reflected in the QQ plot again having a very pronounced S-shaped pattern to it, but this time the snaking is a reflection of that observed for the uniform distribution.</p>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-exponential-dist-1.png" width="672"></div>
+<p>These two graphs relate to 200 data points that have been drawn from an exponential distribution. Exponential distributions are not symmetric and are very skewed compared with normal distributions. The significant right-skew in this distribution is reflected in the QQ plot again having points that curve away above the diagonal line at both ends (a left-skew would have the points being below the line at both ends).</p>
+<p>In all four cases it is worth noting that the deviations are only at the ends of the plot.</p>
+</div>
+<div id="shapiro-wilk-test" class="section level3" number="5.6.3">
+<h3>
+<span class="header-section-number">5.6.3</span> Shapiro-Wilk test<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is one of a number of formal statistical test that assess whether a given sample of numbers come from a normal distribution. It calculates the probability of getting the sample data if the underlying distribution is in fact normal. It is very easy to carry out in R.</p>
+<p>Perform a Shapiro-Wilk test on the data:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  fishlength
+## W = 0.94938, p-value = 0.1764</code></pre>
+<ul>
+<li>The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called</li>
+<li>The 3rd line contains the two key outputs from the test:
+<ul>
+<li>The calculated w-value is 0.9494 (we don’t need to know this)</li>
+<li>The p-value is 0.1764</li>
+</ul>
+</li>
+</ul>
+<p>As the p-value is bigger than 0.05 (say) then we can say that there is insufficient evidence to reject the null hypothesis that the sample came from a normal distribution.</p>
+<p>It is important to recognise that the Shapiro-Wilk test is not without limitations. It is rather sensitive to the sample size being considered. In general, for small sample sizes, the test is very relaxed about normality (and nearly all datasets are considered normal), whereas for large sample sizes the test can be overly strict, and it can fail to recognise datasets that are very nearly normal indeed.</p>
+</div>
+<div id="assumptions-overview" class="section level3" number="5.6.4">
+<h3>
+<span class="header-section-number">5.6.4</span> Assumptions overview<a class="anchor" aria-label="anchor" href="#assumptions-overview"><i class="fas fa-link"></i></a>
+</h3>
+<div class="highlight">
+<p>In terms of assessing the assumptions of a test it is always worth considering several methods, both graphical and analytic, and not just relying on a single method.</p>
+</div>
+<p>In the <code>fishlength</code> example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be…</p>
+<p>In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the <a href="cs1-onesample-wilcoxon-signed-rank.html#cs1-onesample-wilcoxon-signed-rank">one-sample Wilcoxon signed rank test</a>.</p>
+</div>
+</div>
+<div id="exercise" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 5.1  </strong></span>The following data are the dissolving times (in seconds) of a drug in agitated gastric juice:</p>
+<p><code>42.7, 43.4, 44.6, 45.1, 45.6, 45.9, 46.8, 47.6</code></p>
+<p>Do these results provide any evidence to suggest that dissolving time for this drug is different from 45 seconds?</p>
+<ol style="list-style-type: decimal">
+<li>Write down the null and alternative hypotheses.</li>
+<li>Summarise and visualise the data and perform an appropriate one-sample t-test.
+<ul>
+<li>What can you say about the dissolving time? (what sentence would you use to report this)</li>
+</ul>
+</li>
+<li>Check the assumptions for the test.
+<ul>
+<li>Was the test valid?</li>
+</ul>
+</li>
+</ol>
+<details><summary>
+Answer
+</summary><p><strong>Hypotheses</strong>
+<span class="math inline">\(H_0\)</span> : mean = 45s</p>
+<p><span class="math inline">\(H_1\)</span> : mean <span class="math inline">\(\neq\)</span> 45s</p>
+<p><strong>Create data, summarise and visualise</strong></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dissolving</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42.7</span> , <span class="fl">43.4</span> , <span class="fl">44.6</span> , <span class="fl">45.1</span> , <span class="fl">45.6</span> , <span class="fl">45.9</span> , <span class="fl">46.8</span> , <span class="fl">47.6</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   42.70   44.30   45.35   45.21   46.12   47.60</code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
+<p>There are only 8 data points, so the default histogram looks a bit rubbish / uninformative. Thankfully the box-plot is a bit more useful here. We can see:</p>
+<ol style="list-style-type: decimal">
+<li>There don’t appear to be any major errors in data entry and there aren’t any huge outliers</li>
+<li>The median value in the box-plot (the thick black line) is pretty close to 45 and so I wouldn’t be surprised if the mean of the data isn’t significantly different from 45. We can confirm that by looking at the mean and median values that we calculated using the summary command from earlier.</li>
+<li>The data appear to be symmetric, and so whilst we can’t tell if they’re normal they’re a least not massively skewed.</li>
+</ol>
+<p><strong>Carry out t-test</strong></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu<span class="op">=</span><span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  dissolving
+## t = 0.36647, df = 7, p-value = 0.7248
+## alternative hypothesis: true mean is not equal to 45
+## 95 percent confidence interval:
+##  43.84137 46.58363
+## sample estimates:
+## mean of x 
+##   45.2125</code></pre>
+<p>A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),</p>
+<p><strong>Explore Assumptions</strong>
+Normality:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dissolving
+## W = 0.98023, p-value = 0.9641</code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<ul>
+<li>The Shapiro test has a p-value of 0.964 which (given that it is bigger than 0.05) suggests that the data are normal enough.</li>
+<li>The qq-plot isn’t perfect, with some deviation of the points away from the line but since the points aren’t accelerating away from the line and, since we only have 8 points, we can claim, with some slight reservations, that the assumption of normality appears to be adequately well met.</li>
+</ul>
+<p>Overall, we are somewhat confident that the assumption of normality is well-enough met for the t-test to be an appropriate method for analysing the data. Note the ridiculous number of caveats here and the slightly political/slippery language I’m using. This is intentional and reflects the ambiguous nature of assumption checking. This is an important approach to doing statistics that you need to embrace.</p>
+<p>In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon-signed Rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don’t know about the Wilcoxon test yet as you haven’t done that section of the handout. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn’t matter how well an assumption has been met , I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don’t know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.</p>
+</details>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></div>
+<div class="next"><a href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs1-one-sample-t-test"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="nav-link" href="#section-commands"><span class="header-section-number">5.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses"><span class="header-section-number">5.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise"><span class="header-section-number">5.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-the-test"><span class="header-section-number">5.4</span> Implement the test</a></li>
+<li><a class="nav-link" href="#interpreting-the-output-and-report-results"><span class="header-section-number">5.5</span> Interpreting the output and report results</a></li>
+<li>
+<a class="nav-link" href="#assumptions"><span class="header-section-number">5.6</span> Assumptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#histogram-of-the-data"><span class="header-section-number">5.6.1</span> Histogram of the data</a></li>
+<li><a class="nav-link" href="#q-q-plot-of-the-data"><span class="header-section-number">5.6.2</span> Q-Q plot of the data</a></li>
+<li><a class="nav-link" href="#shapiro-wilk-test"><span class="header-section-number">5.6.3</span> Shapiro-Wilk test</a></li>
+<li><a class="nav-link" href="#assumptions-overview"><span class="header-section-number">5.6.4</span> Assumptions overview</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#exercise"><span class="header-section-number">5.7</span> Exercise</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/cambiotraining/corestats_in_r/blob/master/cs1-practical-one_sample_t_test.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/cambiotraining/corestats_in_r/edit/master/cs1-practical-one_sample_t_test.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
