@@ -3,20 +3,19 @@ bookdown::bs4_book:
     primary: "#004e8f"
   repo: https://github.com/cambiotraining/corestats_in_r
   css: style.css
-  template: uoc_bs4.html
+  template: templates/uoc_left_navigation.html
+
 
 bookdown::gitbook:
+  css: style.css
   config:
     toc:
-      collapse: section
       before: |
-        <li><img src="img/university_crest.svg" alt="Biostatistics Initiative" width="243px" height="82px" style = "padding: 10px" /></li>
-        <li><a href="https://www.biostats.lifesci.cam.ac.uk">Biostatistics Initiative</a></li>
-    edit:
-      link: https://github.com/cambiotraining/corestats_in_r/edit/master/%s
-      text: "Edit"
-    sharing: no
-
+        <li><a href="./">A Minimal Book Example</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+    download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
@@ -24,3 +23,4 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
+

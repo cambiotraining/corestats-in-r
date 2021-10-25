@@ -1,121 +1,419 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" class="no-js">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 ANOVA | Core Statistics in R</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chapter 4 ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="description" content="4.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   4.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 14 ANOVA | Core Statistics in R">
+<meta property="og:title" content="Chapter 4 ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta property="og:description" content="4.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   4.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 ANOVA | Core Statistics in R">
-<meta name="twitter:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="twitter:title" content="Chapter 4 ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="4.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   4.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- CSS : implied media="all" --><link rel="stylesheet" href="../stylesheets/full-stylesheet.css">
+<link rel="stylesheet" href="../stylesheets/styleguide.css">
+<!-- CSS bookdown --><link rel="stylesheet" href="style.css">
+<!-- JS bookdown --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- .JS bookdown--><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-  <div class="header">
-    <div class="inline-table"><table class="top-menu"><tr>
-<td>
-          <div class="logo">
-            <img src="img/main-logo-homepage.svg" alt="University of Cambridge" height="38px;">
+
+<!--[if lt IE 7]>
+<div class="lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<div class="lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<div class="lt-ie9">
+<![endif]-->
+
+	<a href="#primary-nav" class="campl-skipTo">skip to primary navigation</a>
+	<a href="#content" class="campl-skipTo">skip to content</a>
+	<div class="campl-row campl-global-header">
+		<div class="campl-wrap clearfix">
+			<div class="campl-header-container campl-column8" id="global-header-controls">
+				<a href="/" class="campl-main-logo">
+					<img alt="" src="../images/interface/main-logo-small.svg" height="38px;"></a>
+
+				<ul class="campl-unstyled-list campl-horizontal-navigation campl-global-navigation clearfix" id="primary-nav">
+<li>
+						<a href="#study-with-us">Study with us</a>
+					</li>
+					<li>
+						<a href="#about-the-university">About the University</a>
+					</li>
+					<li>
+						<a href="" class="campl-no-drawer">Our research</a>
+					</li>
+				</ul>
 </div>
-        </td>
-        <td class="top-menu"><a href="index.html">Course home page</a></td>
-        <td class="top-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
-        <td class="top-menu">
-          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
-        </td>
-        <td class="top-menu-right"> </td>
-      </tr></table></div>
+
+			<div class="campl-column2">
+				<div class="campl-quicklinks">
+				</div>
+			</div>
+
+			<div class="campl-column2">
+
+				<div class="campl-site-search" id="site-search-btn">
+
+					<label for="header-search" class="hidden">Search site</label>
+					<div class="campl-search-input">
+
+						<input id="header-search" type="text" value="" placeholder="Search"><input type="image" class="campl-search-submit " src="../images/interface/btn-search-header.png">
 </div>
-<div class="body-bg"></div> <!-- .body-bg -->
-
-<div class="container-fluid">
-  <!-- Menu above dynamic content -->
-  <div class="container-menu">
-  <div class="inline-table"><table class="container-menu"><tr>
-<td class="container-menu"><a href="index.html" title="">Core Statistics in R</a></td>
-        <td class="container-menu"><a href="https://www.training.cam.ac.uk/bioinformatics/search?type=events&amp;query=&amp;_action_search=Search&amp;_pastEvents=">Planned courses</a></td>
-        <td class="container-menu">
-          <a href="https://bioinfotraining.bio.cam.ac.uk">Bioinformatics Training Facility</a>
-        </td>
-        <td class="container-menu-right"> </td>
-      </tr></table></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="campl-row campl-global-header campl-search-drawer">
+		<div class="campl-wrap clearfix">
+			<form class="campl-site-search-form" id="site-search-container" action="">
+				<div class="campl-search-form-wrapper clearfix">
+					<input type="text" class="text" placeholder="Search"><input type="image" class="campl-search-submit" src="../images/interface/btn-search.png">
 </div>
+			</form>
+		</div>
+	</div>
 
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+	<div class="campl-row campl-global-navigation-drawer">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-home-link-container">
+				<a href="">Home</a>
+			</div>
+		</div>
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-global-navigation-mobile-list campl-global-navigation-list">
+				<div class="campl-global-navigation-outer clearfix" id="study-with-us">
+					<ul class="campl-unstyled-list campl-global-navigation-header-container ">
+<li><a href="">Study with us</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="">Undergraduate</a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="">Link 1</a>
+									</li>
+									<li>
+										<a href="">Link 2</a>
+									</li>
+									<li>
+										<a href="">Link 3</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="">Graduate</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="">Link 1</a>
+									</li>
+									<li>
+										<a href="">Link 2</a>
+									</li>
+									<li>
+										<a href="">Link 3</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list last">
+<li>
+								<a href="">International students</a>
+							</li>
+							<li>
+								<a href="">Lifelong learning</a>
+							</li>
+							<li>
+								<a href="">Professional learning</a>
+							</li>
+							<li>
+								<a href="">Courses in education</a>
+							</li>
+						</ul>
+</div>
+				</div>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Core Statistics in R</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
+				<div class="campl-global-navigation-outer clearfix" id="about-the-university">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="">About the University</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="">Maps</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="">Link 1</a>
+									</li>
+									<li>
+										<a href="">Link 2</a>
+									</li>
+									<li class="last">
+										<a href="">Link 3</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="">History</a>
+								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="">Link 1</a>
+									</li>
+									<li>
+										<a href="">Link 2</a>
+									</li>
+									<li class="last">
+										<a href="">Link 3</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list last">
+<li>
+								<a href="">News &amp; Events</a>
+							</li>
+							<li>
+								<a href="">Jobs</a>
+							</li>
+							<li>
+								<a href="">Give to Cambridge</a>
+							</li>
+							<li>
+								<a href="">Community outreach</a>
+							</li>
+							<li>
+								<a href="">International cambridge</a>
+							</li>
+							<li class="last">
+								<a href="">Publications</a>
+							</li>
+						</ul>
+</div>
+				</div>
 
-    <div id="main-nav" class="collapse-lg">
-      <div class="searchbar">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+				<div class="campl-global-navigation-outer clearfix" id="our-research">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="">Our research</a></li>
+					</ul>
+</div>
+			</div>
+
+			<ul class="campl-unstyled-list campl-quicklinks-list campl-global-navigation-container ">
+<li>
+					<a href="">For staff &amp; students</a>
+				</li>
+				<li>
+					<a href="">For alumni</a>
+				</li>
+				<li>
+					<a href="">For business</a>
+				</li>
+				<li>
+					<a href="">For teachers</a>
+				</li>
+				<li>
+					<a href="">Colleges &amp; departments</a>
+				</li>
+				<li>
+					<a href="">Libraries &amp; facilities</a>
+				</li>
+				<li>
+					<a href="">Museums &amp; collections</a>
+				</li>
+				<li class="last">
+					<a href="">Email &amp; phone search</a>
+				</li>
+			</ul>
+</div>
+	</div>
+
+	<div class="campl-row campl-page-header">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12">
+				<div class="campl-content-container">
+					<div class="campl-breadcrumb" id="breadcrumb">
+						<ul class="campl-unstyled-list campl-horizontal-navigation clearfix">
+<li class="first-child">
+								<a href="https://bioinfotraining.bio.cam.ac.uk" class="campl-home ir">Home</a>
+							</li>
+							<li>
+								<a href="index.html">Core Statistics in R</a>
+							</li>
+						</ul>
+</div>
+					<p class="campl-page-title">Bioinformatics Training Materials</p>
+
+					<p class="campl-mobile-parent"><a href=""><span class="campl-back-btn campl-menu-indicator"></span>Studying at Cambridge</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="campl-row campl-page-header campl-sub-section-page">
+		<div class="campl-wrap clearfix campl-local-navigation" id="local-nav">
+			<div class="campl-local-navigation-container">
+				<ul class="campl-unstyled-list">
+<li><a href="#">About us</a></li>
+					<li>
+<a href="#" class="campl-selected">Prospective Students</a>
+						<ul class="campl-unstyled-list local-dropdown-menu">
+<li>
+<a href="#">Step 1 - Why Cambridge</a>
+								<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">The City</a></li>
+									<li><a href="#">The University</a></li>
+									<li><a href="#">Benefits of Studying at Cambridge</a></li>
+								</ul>
+</li>
+							<li>
+<a href="#">Step 2 - Studying at Cambridge</a>
+								<ul class="campl-unstyled-list local-dropdown-menu">
+<li class="campl-active-page"><a href="#">Course directory</a></li>
+									<li><a href="#">Modes of Study</a></li>
+									<li><a href="#">Fees and Costs</a></li>
+									<li><a href="#">Funding Your Studies</a></li>
+									<li><a href="#">Immigration</a></li>
+									<li><a href="#">Bringing your Family</a></li>
+									<li><a href="#">Accommodation</a></li>
+									<li><a href="#">The Colleges</a></li>
+									<li><a href="#">University Policy and Guidelines</a></li>
+								</ul>
+</li>
+							<li>
+<a href="#">Step 3 - How to apply</a>
+								<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">Supporting Documentation</a></li>
+									<li><a href="#">Continuation and Readmission</a></li>
+									<li><a href="#">Your Self-Service Account</a></li>
+									<li><a href="#">Application and Funding Deadlines</a></li>
+									<li><a href="#">Application Fees</a></li>
+									<li><a href="#">College Choice</a></li>
+									<li><a href="#">Disabled Applicants</a></li>
+									<li><a href="#">Entrance Requirements</a></li>
+									<li><a href="#">Part-Time Study and Research</a></li>
+									<li><a href="#">Privacy - Your Personal Data</a></li>
+									<li><a href="#">Research Topic and Resources</a></li>
+									<li><a href="#">Staff Applicants</a></li>
+									<li><a href="#">Starting Dates</a></li>
+									<li><a href="#">Applying Paper</a></li>
+								</ul>
+</li>
+							<li>
+<a href="#">Step 4 - I've applied - What Next?</a>
+								<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">Status Of Your Application</a></li>
+									<li><a href="#">Conditions of Admission</a></li>
+									<li><a href="#">If Your Circumstances Change</a></li>
+									<li><a href="#">Confirmation of Admission</a></li>
+									<li><a href="#">Continuation</a></li>
+									<li><a href="#">Immigration</a></li>
+									<li><a href="#">Admissions Complaints</a></li>
+								</ul>
+</li>
+							<li>
+<a href="#">Frequently asked questions</a>
+								<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">Prospective Graduate Students</a></li>
+									<li><a href="#">Referees</a></li>
+								</ul>
+</li>
+							<li><a href="#">Site map</a></li>
+						</ul>
+</li>
+				</ul>
+</div>
+		</div>
+
+
+
+		<div class="campl-wrap clearfix campl-page-sub-title campl-recessed-sub-title">
+			<div class="campl-column3 campl-spacing-column">
+				 
+			</div>
+			<div class="campl-column9">
+				<div class="campl-content-container">
+					<h1 class="campl-sub-title">
+					  <a href="index.html" title="">Core Statistics in R</a>
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<div class="campl-row campl-content campl-recessed-content">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column3">
+					<div class="campl-tertiary-navigation toc-css">
+						<header class="campl-tertiary-navigation-structure sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+              <div class="d-flex align-items-start justify-content-between">
+                <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+              </div>
+
+              <div id="main-nav" class="collapse-lg">
+                <form role="search">
+                  <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
 </form>
-      </div>
-      <div class="menu-items" width="100%">
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+
+                <nav aria-label="Table of contents"><h2>Table of contents</h2>
+                  <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li class="book-part">CoreStats 1 (Practicals)</li>
-<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Single categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
-<li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="active" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
-<li class="book-part">CoreStats 3: Single continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
-<li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
-<li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
-<li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="active" href="cs2-anova.html"><span class="header-section-number">4</span> ANOVA</a></li>
 </ul>
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-        </nav>
+                  <div class="book-extra">
+                    <p><a id="book-repo" href="https://github.com/cambiotraining/corestats_in_r">View book source <i class="fab fa-github"></i></a></p>
+                  </div>
+                </nav>
 </div>
-      
-    </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs2-anova" class="section level1" number="14">
+            </header><!-- .main side menu-->
+</div>
+				</div>
+				<div class="campl-column9 campl-main-content" id="content">
+
+					<div class="campl-content-container">
+  <div class="container-fluid">
+<div class="row">
+
+  <main id="content"><div id="cs2-anova" class="section level1" number="4">
 <h1>
-<span class="header-section-number">14</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> ANOVA<a class="anchor" aria-label="anchor" href="#cs2-anova"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-4" class="section level2" number="14.1">
+<div id="objectives-2" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">14.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -130,15 +428,15 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-2" class="section level2" number="14.2">
+<div id="purpose-and-aim" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">14.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
 </h2>
 <p>Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.</p>
 </div>
-<div id="section-commands-6" class="section level2" number="14.3">
+<div id="section-commands" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">14.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands used in this section.</p>
 <div class="inline-table"><table class="table table-sm">
@@ -158,9 +456,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-5" class="section level2" number="14.4">
+<div id="data-and-hypotheses" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">14.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses"><i class="fas fa-link"></i></a>
 </h2>
 <p>For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called <code>exposed</code> (E), <code>partially sheltered</code> (P) and <code>sheltered</code> (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -177,16 +475,16 @@
 </ul>
 <p>The data are stored in the file <code>CS2-oystercatcher.csv</code>.</p>
 </div>
-<div id="summarise-and-visualise-5" class="section level2" number="14.5">
+<div id="summarise-and-visualise" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">14.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
 </h2>
 <p>First we read in the data.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-oystercatcher.csv"</span><span class="op">)</span></code></pre></div>
 <p>Next we summarise the data and visualise them. We have a quick peek at the first few rows of our data with <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> so we can see how the data are organised.</p>
 <p>The data are in stacked format. The first column contains information on feeding rates and is called <code>feeding.</code> The second column has categorical data on the type of site and is called <code>site</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <pre><code>##   feeding    site
 ## 1    14.2 Exposed
@@ -195,7 +493,7 @@
 ## 4    15.1 Exposed
 ## 5    13.4 Exposed
 ## 6    18.4 Partial</code></pre>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##        site feeding.Min. feeding.1st Qu. feeding.Median feeding.Mean
 ## 1   Exposed         9.30           13.40          14.20        13.70
@@ -205,17 +503,17 @@
 ## 1           15.10        16.50
 ## 2           18.40        20.40
 ## 3           25.10        25.30</code></pre>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
 </div>
-<div id="implement-test-4" class="section level2" number="14.6">
+<div id="implement-test" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">14.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform an ANOVA test on the data:</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
@@ -227,9 +525,9 @@
 <li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-4" class="section level2" number="14.7">
+<div id="interpret-output-and-report-results" class="section level2" number="4.7">
 <h2>
-<span class="header-section-number">14.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## Analysis of Variance Table
@@ -260,9 +558,9 @@
 </blockquote>
 <p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
 </div>
-<div id="assumptions-6" class="section level2" number="14.8">
+<div id="assumptions" class="section level2" number="4.8">
 <h2>
-<span class="header-section-number">14.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"><i class="fas fa-link"></i></a>
 </h2>
 <p>To use an ANOVA test, we have to make three assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -273,7 +571,7 @@
 <p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
 <p><strong>1. Normality</strong></p>
 <p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
@@ -296,9 +594,9 @@
 ## data:  uns_oyster$Sheltered
 ## W = 0.88532, p-value = 0.3341</code></pre>
 <p>We can see that all three groups appear to be normally distributed which is good.</p>
-<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
 <p>Extract the residuals from the data and check their normality:</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
@@ -311,7 +609,7 @@
 <p><strong>2. Equality of Variance</strong></p>
 <p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
 <p>Perform Bartlett’s test on the data:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
@@ -322,12 +620,12 @@
 <p><strong>3. Graphical Interpretation and Diagnostic Plots</strong></p>
 <p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
 <p>Create the standard set diagnostic plots:</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># create the diagnostic plots</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># and return the window back to normal</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## hat values (leverages) are all = 0.2
@@ -349,19 +647,19 @@
 <p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
 </div>
 </div>
-<div id="post-hoc-testing" class="section level2" number="14.9">
+<div id="post-hoc-testing" class="section level2" number="4.9">
 <h2>
-<span class="header-section-number">14.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
 </h2>
 <p>One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.</p>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
 <p>Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.</p>
 <p><strong>1. Read in the data and plot</strong></p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-tukey.csv"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span></code></pre></div>
 <p><strong>2. Test for a significant difference in group means</strong></p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_tukey</span><span class="op">)</span></code></pre></div>
@@ -376,7 +674,7 @@
 <p>Here we have a p-value of 2.39x10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.</p>
 <p>However, this was not due to all of the sample means being different, but rather just because one of the groups is very different from the others. In order to drill down and investigate this further we use a new test called <strong>Tukey’s range test</strong> (or <strong>Tukey’s honest significant difference test</strong> – this always makes me think of some terrible cowboy/western dialogue). This will compare all of the groups in a pairwise fashion and reports on whether a significant difference exists.</p>
 <p><strong>3. Performing Tukey’s test on these data</strong></p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aov_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">aov_tukey</span><span class="op">)</span></code></pre></div>
@@ -408,12 +706,12 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 <li>Independence of observations</li>
 </ol>
 </div>
-<div id="exercise-7" class="section level2" number="14.10">
+<div id="exercise" class="section level2" number="4.10">
 <h2>
-<span class="header-section-number">14.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 14.1  </strong></span>Juvenile lobster weight</p>
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 4.1  </strong></span>Juvenile lobster weight</p>
 <p>Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:</p>
 <div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -529,7 +827,7 @@ Answer
 <p><span class="math inline">\(H_1\)</span> : not all means are equal</p>
 <p><strong>2-3. Import Data, summarise and visualise</strong></p>
 <p>The data are stored in a <code>.csv</code> file in stacked format with columns called <code>weight</code> and <code>diet</code>.</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-lobsters.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s look at the data and see what we can see.</p>
 <pre><code>##    weight    diet
@@ -551,7 +849,7 @@ Answer
 ## 16  132.8  Flakes
 ## 17  129.3  Flakes
 ## 18  129.4  Flakes</code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##      diet weight.Min. weight.1st Qu. weight.Median weight.Mean weight.3rd Qu.
 ## 1  Flakes     90.4000       102.0750      116.1000    114.4333       129.3750
@@ -561,7 +859,7 @@ Answer
 ## 1    132.8000
 ## 2    161.9000
 ## 3    175.2000</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
@@ -587,7 +885,7 @@ Answer
 <p><strong>Normality</strong></p>
 <p>We’ll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we’ll only use the Q-Q plot.</p>
 <p>We’ll need to unstack the data to use the Shapiro-Wilk test on the individual groups:</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lobst_uns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">lobsters</span>, <span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Flakes</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -595,14 +893,14 @@ Answer
 ## 
 ## data:  lobst_uns$Flakes
 ## W = 0.84368, p-value = 0.1398</code></pre>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Mussels</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  lobst_uns$Mussels
 ## W = 0.94784, p-value = 0.71</code></pre>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Pellets</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -611,7 +909,7 @@ Answer
 ## W = 0.76706, p-value = 0.0425</code></pre>
 <p><code>Flakes</code> and <code>Mussels</code> are fine, but, as we suspected from earlier, <code>Pellets</code> appears to have a marginally significant Normality test result.</p>
 <p>Let’s look at the Shapiro-Wilk test for all of the data together:</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">resid_lobst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_lobst</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -620,7 +918,7 @@ Answer
 ## data:  resid_lobst
 ## W = 0.94779, p-value = 0.3914</code></pre>
 <p>This on the other hand says that everything is fine. Let’s look at the Q-Q-plot:</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span> , data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
      which <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
@@ -629,14 +927,14 @@ Answer
 <p>Overall, I’d be happy that the assumption of normality has been adequately well met here. The suggested lack of normality in the <code>Pellets</code> was only just significant and we have to take into account that there are only 5 data points in that group. If there had been a lot more points in that group, or if the Q-Q plot was considerably worse then I wouldn’t be confident.</p>
 <p><strong>Equality of Variance</strong></p>
 <p>We’ll consider the Bartlett test and we’ll look at some diagnostic plots too.</p>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
 ## 
 ## data:  weight by diet
 ## Bartlett's K-squared = 0.71273, df = 2, p-value = 0.7002</code></pre>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
      which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
@@ -650,7 +948,7 @@ Answer
 <p>Overall, this assumption is pretty well met.</p>
 <p><strong>5. Carry out one-way ANOVA</strong></p>
 <p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -663,7 +961,7 @@ Answer
 <p>A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).</p>
 </blockquote>
 <p><strong>7. Post-hoc testing with Tukey</strong></p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
@@ -688,9 +986,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-2" class="section level2" number="14.11">
+<div id="key-points" class="section level2" number="4.11">
 <h2>
-<span class="header-section-number">14.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -702,24 +1000,24 @@ Answer
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></div>
-<div class="next"><a href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+<div class="chapter-nav">
+<div class="prev"><a href="cs2-intro.html"><span class="header-section-number">3</span> Introduction</a></div>
+<div class="empty"></div>
+</div></main><!-- page side menu --><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="nav-link" href="#objectives-4"><span class="header-section-number">14.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-2"><span class="header-section-number">14.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">14.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">14.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">14.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">14.6</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.7</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.8</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.9</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.10</span> Exercise</a></li>
-<li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.11</span> Key points</a></li>
+<li><a class="nav-link" href="#cs2-anova"><span class="header-section-number">4</span> ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-2"><span class="header-section-number">4.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">4.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands"><span class="header-section-number">4.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses"><span class="header-section-number">4.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise"><span class="header-section-number">4.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test"><span class="header-section-number">4.6</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results"><span class="header-section-number">4.7</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions"><span class="header-section-number">4.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">4.9</span> Post-hoc testing</a></li>
+<li><a class="nav-link" href="#exercise"><span class="header-section-number">4.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points"><span class="header-section-number">4.11</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
@@ -730,23 +1028,13 @@ Answer
 </div>
     </nav>
 </div>
+<!-- .page side menu -->
 
 </div>
 </div> <!-- .container -->
 
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Core Statistics in R</strong>" was written by Matt Castle and Martin van Rongen. It was last built on 2021-10-23.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -775,5 +1063,221 @@ for (let popover of popovers) {
   }
 }
 </script>
+</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="campl-row campl-local-footer">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">About the Faculty</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Lorem ipsum dolor</a>
+							</li>
+							<li>
+								<a href="">Sit amet</a>
+							</li>
+							<li>
+								<a href="">Consectetur adipisicing elit</a>
+							</li>
+							<li>
+								<a href="">Sed do eiusmod</a>
+							</li>
+							<li>
+								<a href="">Tempor incididunt</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">Research</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Ut labore et dolore</a>
+							</li>
+							<li>
+								<a href="">Ut enim ad minim veniam</a>
+							</li>
+							<li>
+								<a href="">Magna aliqua</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">About the University</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Quis nostrud exercitation</a>
+							</li>
+							<li>
+								<a href="">Ullamco laboris nisi</a>
+							</li>
+							<li>
+								<a href="">Ut aliquip ex ea commodo</a>
+							</li>
+							<li>
+								<a href="">Duis aute irure dolor</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">Libraries &amp; facilities</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">In reprehenderit in voluptate</a>
+							</li>
+							<li>
+								<a href="">Velit esse cillum dolore</a>
+							</li>
+							<li>
+								<a href="">Eu fugiat nulla pariatur</a>
+							</li>
+							<li>
+								<a href="">Duis aute irure dolor</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">Graduate</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Excepteur sint occaecat</a>
+							</li>
+							<li>
+								<a href="">Cupidatat non proident</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation last">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">Subjects</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Sunt in culpa qui officia</a>
+							</li>
+							<li>
+								<a href="">Deserunt mollit anim</a>
+							</li>
+							<li>
+								<a href="">Id est laborum</a>
+							</li>
+							<li>
+								<a href="">Duis aute irure dolor</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+		</div>
+		<div class="campl-row campl-global-footer">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-footer-logo">
+						<img alt="" src="../images/interface/main-logo-small.svg" height="38px;" class="campl-scale-with-grid"><p>© 2012 University of Cambridge, <br>
+							The old schools, Trinity Lane, <br>
+							Cambridge CB2 1TN, UK</p>
+							<ul class="campl-unstyled-list campl-global-footer-links">
+<li>
+									<a href="">A-Z</a>
+								</li>
+								<li>
+									<a href="">Contact us</a>
+								</li>
+								<li>
+									<a href="">Privacy</a>
+								</li>
+								<li>
+									<a href="">Accessibility</a>
+								</li>
+								<li>
+									<a href="">Freedom of information</a>
+								</li>
+							</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+
+						<div class="link-list">
+							<h3><a href="http://www.cam.ac.uk/study-at-cambridge">Study with us</a></h3>
+							<ul class="campl-unstyled-list">
+<li>
+									<a href="">Graduates</a>
+								</li>
+								<li>
+									<a href="">Undergraduates</a>
+								</li>
+								<li>
+									<a href="">International students</a>
+								</li>
+								<li>
+									<a href="">Visit us</a>
+								</li>
+							</ul>
+</div>
+					</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">About the University</a></h3>
+						<ul class="campl-unstyled-list campl-page-children">
+<li>
+								<a href="">History</a>
+							</li>
+							<li>
+								<a href="">Maps</a>
+							</li>
+							<li>
+								<a href="">News &amp; events</a>
+							</li>
+							<li>
+								<a href="">Jobs</a>
+							</li>
+							<li>
+								<a href="">Business</a>
+							</li>
+							<li>
+								<a href="">Publications</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation last">
+					<div class="campl-content-container campl-navigation-list">
+						<h3><a href="">Our Research</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="">Lorem</a>
+							</li>
+							<li>
+								<a href="">Ipsum</a>
+							</li>
+							<li>
+								<a href="">Dolor</a>
+							</li>
+							<li>
+								<a href="">Sit</a>
+							</li>
+							<li>
+								<a href="">Amet</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+		</div>
+
+<!--[if lte IE 8]>
+</div>
+<![endif]-->
+
+	<script type="text/javascript" src="../javascripts/libs/ios-orientationchange-fix.js"></script><script type="text/javascript" src="../javascripts/libs/jquery-min.js"></script><script type="text/javascript" src="../javascripts/libs/modernizr.js"></script><script type="text/javascript" src="../javascripts/custom.js"></script>
 </body>
 </html>
