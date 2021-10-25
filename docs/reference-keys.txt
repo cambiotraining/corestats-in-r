@@ -1,7 +1,0 @@
-overview
-core-aims
-core-topics
-index-datasets
-cs1-intro
-objectives
-background
