@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 1 Overview | Core Statistics in R</title>
+<title>Chapter 7 Two-sample tests | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="description" content="7.1 Objectives  Questions When do I perform a two-sample test? Which two-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Overview | Core Statistics in R">
+<meta property="og:title" content="Chapter 7 Two-sample tests | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta property="og:description" content="7.1 Objectives  Questions When do I perform a two-sample test? Which two-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Overview | Core Statistics in R">
-<meta name="twitter:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="twitter:title" content="Chapter 7 Two-sample tests | Core Statistics in R">
+<meta name="twitter:description" content="7.1 Objectives  Questions When do I perform a two-sample test? Which two-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -340,7 +340,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
@@ -348,7 +348,7 @@
 <li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
 <li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
 <li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="active" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
 <li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
 <li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
 <li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
@@ -377,66 +377,215 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1" number="1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-two-sample" class="section level1" number="7">
 <h1>
-<span class="header-section-number">1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Two-sample tests<a class="anchor" aria-label="anchor" href="#cs1-two-sample"><i class="fas fa-link"></i></a>
 </h1>
-<p>These sessions are intended to enable you to perform core data analysis techniques appropriately and confidently using R.</p>
+<div id="objectives-2" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Questions</strong></p>
 <ul>
-<li><p>6 lecture-practicals</p></li>
-<li><p>Ongoing formative assessment exercises</p></li>
-<li><p>No formal assessment</p></li>
-<li><p>No mathematical derivations</p></li>
-<li><p>No pen and paper calculations</p></li>
+<li>When do I perform a two-sample test?</li>
+<li>Which two-sample tests are there and what are the assumptions?</li>
+<li>How do I interpret and present the results of the tests?</li>
 </ul>
-<p>They are <strong>not</strong> a “how to mindlessly use a stats program” course!</p>
-<div id="core-aims" class="section level2" number="1.1">
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Set out your hypothesis for two-sample continuous data</li>
+<li>Determine the correct data format to perform a two-sample test in R</li>
+<li>Summarise and visualise the data</li>
+<li>Check underlying assumptions (normality, homogeneity of variance)</li>
+<li>Be able to choose an appropriate two-sample test and run it in R</li>
+<li>Be able to interpret and report the results</li>
+</ul>
+</div>
+</div>
+<div id="purpose-and-aim-1" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">1.1</span> Core aims<a class="anchor" aria-label="anchor" href="#core-aims"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-1"><i class="fas fa-link"></i></a>
 </h2>
+<p>These tests are used when we have two samples of continuous data where we are trying to find out if the samples came from the same parent distribution or not. This essentially boils down to finding out if there is a difference in the means of the two samples.</p>
+</div>
+<div id="two-sample-choosing-a-test" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Choosing a test<a class="anchor" aria-label="anchor" href="#two-sample-choosing-a-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are five key tests that can be used to deal with two samples. Choosing which test to use depends upon which key assumptions are satisfied by your sample data and this effectively boils down to answering four questions about your samples:</p>
+<ol style="list-style-type: decimal">
+<li>Are the samples normally distributed? (Yes/No)</li>
+<li>How big are your samples? (&lt;30 data points or &gt;30 data points)</li>
+<li>Are the samples paired? (Yes/No)</li>
+<li>Do the samples have the same variance? (Yes/No)</li>
+</ol>
+<p>There are two sets of tests to consider depending on your answers to questions 1 and 2. If your data are normally distributed or if you have big samples then you need to look at the parametric tests. If your data are not normally distributed <em>and</em> your sample size is small, then you need to look at non-parametric tests (see Figure <a href="cs1-two-sample.html#fig:fig-cs1-diagram-test">7.1</a>. Questions 3 and 4 then help you pick the specific test to use, which is summarised in Figure <a href="cs1-two-sample.html#fig:fig-cs1-diagram-which-test">7.2</a>.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig-cs1-diagram-test"></span>
+<img src="img/cs1-diagram-test.svg" alt="Category of test"><p class="caption">
+Figure 7.1: Category of test
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig-cs1-diagram-which-test"></span>
+<img src="img/cs1-diagram-which-test.svg" alt="Which test to use"><p class="caption">
+Figure 7.2: Which test to use
+</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Testing whether a sample comes from a normal distribution was covered in <a href="cs1-one-sample-tests.html#cs1-one-sample-tests">One-sample tests</a>. You need to visualise your data and/or use the Shapiro-Wilk test.</li>
+<li>The size of the sample makes things easier. Because of maths (specifically due to something called the central limit theorem which I am not even going to attempt to touch upon here) if you have large samples then you can use the tests that assume normality of the parent population (Student’s t-test, Welch’s t-test and the paired t-test) even if your parent populations are certainly not normal. If you really want to understand exactly why this works, then you will have to do some more rigorous mathematics. So, for the moment I’m going to say that it’s OK to take these facts on faith and just trust me on this.</li>
+<li>Paired samples mean that for every data point in one sample there is a matching data point in the other sample that is linked to it in some inextricable way. A typical example would involve a group of 20 test subjects being measured before and after some experiment. Providing that the experiment didn’t do anything fatal to the test subjects then the data would consist of two samples; 20 pre-experiment measurements and 20 post-experiment measurements. However, because the same test subjects were used then each pre-experiment data point can be matched exactly to one of the post-experiment data points. In this sense the two samples are said to be “paired.”</li>
+<li>There are a couple of tests (Bartlett’s test and Levene’s test) that can be used to see if two samples come from distributions with the same variance. These will be covered in a later section.</li>
+<li>Resampling techniques aren’t covered in this course and require a mixture of statistical understanding and programming skill. Ask a demonstrator (or Google it 😉) if you want to know more.</li>
+</ol>
+</div>
+<div id="tidy-data" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Tidy data<a class="anchor" aria-label="anchor" href="#tidy-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>For two samples the data can be stored in one of three formats in R:</p>
+<ol style="list-style-type: decimal">
+<li>as two separate vectors,</li>
+<li>in a stacked data frame,</li>
+<li>or in an unstacked data frame/list.</li>
+</ol>
+<p>Two separate vectors case is (hopefully) obvious.</p>
+<p>When using a data frame we have different options to organise our data. The best way of formatting data in R is by using <a href="https://r4ds.had.co.nz/tidy-data.html">the tidy data format</a>.</p>
 <div class="highlight">
-<p>To know what to do when presented with an arbitrary dataset e.g.</p>
-<ol style="list-style-type: decimal">
-<li>Know what data analysis techniques are available</li>
-<li>Know which ones are allowable</li>
-<li>Be able to carry these out and understand the results</li>
-</ol>
+<p><strong>Tidy data</strong> has the following properties:</p>
+<ul>
+<li>Each variable has its own column</li>
+<li>Each observation has its own row</li>
+<li>Each value has its own cell</li>
+</ul>
 </div>
-</div>
-<div id="core-topics" class="section level2" number="1.2">
-<h2>
-<span class="header-section-number">1.2</span> Core topics<a class="anchor" aria-label="anchor" href="#core-topics"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li><a href="cs1-intro.html#cs1-intro">Simple Hypothesis Testing</a></li>
-<li><a href="cs2-intro.html#cs2-intro">Categorical Predictor Variables</a></li>
-<li><a href="cs3-intro.html#cs3-intro">Continuous Predictors</a></li>
-<li><a href="cs4-intro.html#cs4-intro">Multiple Predictor Variables</a></li>
-<li>Linear Models</li>
-<li>Errors, Power and Multiple Comparisons</li>
-</ol>
-</div>
-<div id="index-datasets" class="section level2" number="1.3">
-<h2>
-<span class="header-section-number">1.3</span> Datasets<a class="anchor" aria-label="anchor" href="#index-datasets"><i class="fas fa-link"></i></a>
-</h2>
-<p>This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the <code>data</code> folder and copy it into your working directory. Your data should then be accessible via <code>&lt;working-directory-name&gt;/data/raw</code>.</p>
+<p>Stacked form (or <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">long format data</a>) is where the data is arranged in such a way that each variable (thing that we measured) has its own column. If we consider a dataset containing meerkat weights (in g) from two different countries then a stacked format of the data would look like:</p>
+<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+weight
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Botswana
+</td>
+<td style="text-align:right;">
+514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Botswana
+</td>
+<td style="text-align:right;">
+568
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Botswana
+</td>
+<td style="text-align:right;">
+519
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uganda
+</td>
+<td style="text-align:right;">
+624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uganda
+</td>
+<td style="text-align:right;">
+662
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uganda
+</td>
+<td style="text-align:right;">
+633
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the unstacked (or <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">wide format</a>) form a variable (measured thing) is present in more than one column. For example, let’s say we measured meerkat weight in two countries over a period of years. We could then organise our data in such a way that for each year the measured values are split by country:</p>
+<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+Botswana
+</th>
+<th style="text-align:right;">
+Uganda
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1990
+</td>
+<td style="text-align:right;">
+514
+</td>
+<td style="text-align:right;">
+624
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1992
+</td>
+<td style="text-align:right;">
+568
+</td>
+<td style="text-align:right;">
+662
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1995
+</td>
+<td style="text-align:right;">
+519
+</td>
+<td style="text-align:right;">
+633
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Having tidy data is the easiest way of doing analyses in R and I would strongly encourage you all to start adopting this format as standard for data collection and processing.</p>
 
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></div>
+<div class="prev"><a href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></div>
+<div class="next"><a href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#overview"><span class="header-section-number">1</span> Overview</a></li>
-<li><a class="nav-link" href="#core-aims"><span class="header-section-number">1.1</span> Core aims</a></li>
-<li><a class="nav-link" href="#core-topics"><span class="header-section-number">1.2</span> Core topics</a></li>
-<li><a class="nav-link" href="#index-datasets"><span class="header-section-number">1.3</span> Datasets</a></li>
+<li><a class="nav-link" href="#cs1-two-sample"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="nav-link" href="#objectives-2"><span class="header-section-number">7.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-1"><span class="header-section-number">7.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#two-sample-choosing-a-test"><span class="header-section-number">7.3</span> Choosing a test</a></li>
+<li><a class="nav-link" href="#tidy-data"><span class="header-section-number">7.4</span> Tidy data</a></li>
 </ul>
 
       <div class="book-extra">

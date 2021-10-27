@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chapter 8 Student’s t-test | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Student’s t-test | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Student’s t-test | Core Statistics in R">
+<meta name="twitter:description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/full-stylesheet.css">
+<link rel="stylesheet" href="stylesheets/styleguide.css">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<!--[if lt IE 7]>
+<div class="lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<div class="lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<div class="lt-ie9">
+<![endif]-->
+
+	<a href="#primary-nav" class="campl-skipTo">skip to primary navigation</a>
+	<a href="#content" class="campl-skipTo">skip to content</a>
+	<div class="campl-row campl-global-header">
+		<div class="campl-wrap clearfix">
+			<div class="campl-header-container campl-column8" id="global-header-controls">
+				<a href="http://www.cam.ac.uk" class="campl-main-logo">
+					<img alt="University of Cambridge" src="images/interface/main-logo-small.png" height="38px;"></a>
+
+				<ul class="campl-unstyled-list campl-horizontal-navigation campl-global-navigation clearfix">
+<li>
+						<a href="#study-with-us">Study at Cambridge</a>
+					</li>
+					<li>
+						<a href="#about-the-university">About the University</a>
+					</li>
+					<li>
+						<a href="http://www.cam.ac.uk/research" class="campl-no-drawer">Research at Cambridge</a>
+					</li>
+				</ul>
+</div>
+
+			<div class="campl-column2">
+				<div class="campl-quicklinks">
+				</div>
+			</div>
+
+			<div class="campl-column2">
+
+				<div class="campl-site-search" id="site-search-btn">
+
+					<label for="header-search" class="hidden">Search site</label>
+					<div class="campl-search-input">
+						<form action="http://search.cam.ac.uk/web" method="get">
+						<input id="header-search" type="text" name="query" value="" placeholder="Search"><input type="image" class="campl-search-submit " src="images/interface/btn-search-header.png">
+</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="campl-row campl-global-header campl-search-drawer">
+		<div class="campl-wrap clearfix">
+			<form class="campl-site-search-form" id="site-search-container" action="">
+				<div class="campl-search-form-wrapper clearfix">
+					<input type="text" class="text" placeholder="Search"><input type="image" class="campl-search-submit" src="images/interface/btn-search.png">
+</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="campl-row campl-global-navigation-drawer">
+
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-home-link-container">
+				<a href="">Home</a>
+			</div>
+		</div>
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-global-navigation-mobile-list campl-global-navigation-list">
+				<div class="campl-global-navigation-outer clearfix" id="study-with-us">
+					<ul class="campl-unstyled-list campl-global-navigation-header-container ">
+<li><a href="http://www.cam.ac.uk/study-at-cambridge">Study at Cambridge</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="http://www.study.cam.ac.uk/undergraduate/">Undergraduate</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/courses">Courses</a>
+									</li>
+									<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/applying">Applying</a>
+									</li>
+									<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/events">Events and open days</a>
+									</li>
+								  <li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/finance">Fees and finance</a>
+									</li>
+								  <li>
+										<a href="http://www.becambridge.com/">Student blogs and videos</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="http://www.graduate.study.cam.ac.uk/">Graduate</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="http://www.graduate.study.cam.ac.uk/why-cambridge/welcome-vice-chancellor">Why Cambridge</a>
+									</li>
+									<li>
+										<a href="http://www.graduate.study.cam.ac.uk/courses%0A">Course directory</a>
+									</li>
+									<li>
+									<a href="http://www.graduate.study.cam.ac.uk/how-do-i-apply">How to apply</a>
+</li>
+									<li><a href="http://www.cambridgestudents.cam.ac.uk/fees-and-funding">Fees and funding</a></li>
+									<li><a href="http://www.graduate.study.cam.ac.uk/faqs/applicant">Frequently asked questions</a></li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list last">
+<li>
+								<a href="http://www.internationalstudents.cam.ac.uk">International students</a>
+							</li>
+							<li>
+								<a href="http://www.ice.cam.ac.uk">Continuing education</a>
+							</li>
+							<li>
+								<a href="http://www.epe.admin.cam.ac.uk/">Executive and professional education</a>
+							</li>
+							<li>
+								<a href="http://www.educ.cam.ac.uk">Courses in education</a>
+							</li>
+						</ul>
+</div>
+				</div>
+
+				<div class="campl-global-navigation-outer clearfix" id="about-the-university">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="http://www.cam.ac.uk/about-the-university">About the University</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.cam.ac.uk/about-the-university/how-the-university-and-colleges-work">How the University and Colleges work</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/history">History</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/visiting-the-university">Visiting the University</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/term-dates-and-calendars">Term dates and calendars</a>
+							</li>
+							<li class="last">
+								<a href="http://map.cam.ac.uk">Map</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.communications.cam.ac.uk/">For media</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/video-and-audio">Video and audio</a>
+							</li>
+							<li>
+								<a href="http://webservices.admin.cam.ac.uk/fae/">Find an expert</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/publications">Publications</a>
+							</li>
+							<li class="last">
+								<a href="http://www.cam.ac.uk/global-cambridge">Global Cambridge</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.cam.ac.uk/news">News</a>
+							</li>
+							<li>
+								<a href="http://www.admin.cam.ac.uk/whatson/">Events</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/public-engagement">Public engagement</a>
+							</li>
+							<li>
+								<a href="http://www.jobs.cam.ac.uk">Jobs</a>
+							</li>
+							<li class="last">
+								<a href="https://www.philanthropy.cam.ac.uk/">Give to Cambridge</a>
+							</li>
+						</ul>
+</div>
+				</div>
+
+				<div class="campl-global-navigation-outer clearfix" id="our-research">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="">Research at Cambridge</a></li>
+					</ul>
+</div>
+			</div>
+
+			<ul class="campl-unstyled-list campl-quicklinks-list campl-global-navigation-container ">
+<li>
+					<a href="http://www.cam.ac.uk/for-staff">For staff</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/current-students">For current students</a>
+				</li>
+				<li>
+					<a href="http://www.alumni.cam.ac.uk">For alumni</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/for-business">For business</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/colleges-and-departments">Colleges &amp; departments</a>
+				</li>
+				<li>
+					<a href="http://www.lib.cam.ac.uk/libraries/">Libraries &amp; facilities</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/museums-and-collections">Museums &amp; collections</a>
+				</li>
+				<li class="last">
+					<a href="http://www.cam.ac.uk/email-and-phone-search">Email &amp; phone search</a>
+				</li>
+			</ul>
+</div>
+	</div>
+    <!-- .campl-global-header ends -->
+
+	<div class="campl-row campl-page-header campl-sub-section-page">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12">
+				<div class="campl-content-container">
+					<div class="campl-breadcrumb" id="breadcrumb">
+						<ul class="campl-unstyled-list campl-horizontal-navigation clearfix">
+<li class="first-child">
+								<a href="https://bioinfotraining.bio.cam.ac.uk/" class="campl-home ir">Home</a>
+							</li>
+							<li>
+								<a href="">Courses</a>
+							</li>
+							<li>
+								<a href="">Training Materials</a>
+							</li>
+							<li>
+								<a href="#">Core Statistics in R
+							</a>
+</li>
+						</ul>
+</div>
+					<p class="campl-page-title">Bioinformatics Training Materials</p>
+
+					<p class="campl-mobile-parent"><a href=""><span class="campl-back-btn campl-menu-indicator"></span>Studying at Cambridge</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="campl-row campl-page-header">
+		<div class="campl-wrap clearfix campl-local-navigation" id="local-nav">
+			<div class="campl-local-navigation-container">
+				<ul class="campl-unstyled-list">
+<li><a href="https://training.cam.ac.uk/bioinformatics/search">Course schedule</a></li>
+					<li>
+<a href="#" class="campl-selected">Additional information</a>
+						<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">Additional resources</a></li>
+							<li><a href="https://bioinfotraining.bio.cam.ac.uk/about/findus">Where to find us?</a></li>
+							<li><a href="#">Frequently asked questions</a></li>
+						</ul>
+</li>
+					<li><a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate">Further training</a></li>
+				</ul>
+</div>
+		</div>
+
+
+
+		<div class="campl-wrap clearfix campl-page-sub-title campl-recessed-sub-title">
+			<div class="campl-column12">
+				<div class="campl-content-container">
+					<p class="campl-sub-title">Core Statistics in R</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<div class="campl-row campl-content campl-recessed-content">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column9  campl-main-content" id="content">
+					<div class="campl-content-container">
+						<div>
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <br><button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
+<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
+<li><a class="active" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 2: Single categorical predictors</li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li class="book-part">CoreStats 2 (Practicals)</li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Single continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li class="book-part">CoreStats 4: Two predictor variables</li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li class="book-part">CoreStats 4 (Practicals)</li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-students-t-test" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Student’s t-test<a class="anchor" aria-label="anchor" href="#cs1-students-t-test"><i class="fas fa-link"></i></a>
+</h1>
+<p>For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other.</p>
+<div class="note">
+<p>The language used in this section is slightly different to that used in section <a href="cs1-one-sample-tests.html#cs1-one-sample-tests">4</a>. Although the language used in section <a href="cs1-one-sample-tests.html#cs1-one-sample-tests">4</a> was technically more correct, the sentences are somewhat more onerous to read. Here I’ve opted for an easier reading style at the expense of technical accuracy. Please feel free to re-write this section (at your own leisure).</p>
+</div>
+<div id="section-commands-2" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>New commands used in this section:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>aggregate</code></td>
+<td align="left">Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/utils/stack.html">unstack()</a></code></td>
+<td align="left">Converts a stacked data frame into an unstacked data frame (or a list if the lengths of the samples are different)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code></td>
+<td align="left">Perform Bartlett’s test for equality of variance</td>
+</tr>
+<tr class="even">
+<td align="left"><code>leveneTest()</code></td>
+<td align="left">Perform Levene’s test for equality of variance</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="data-and-hypotheses-1" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>For example, suppose we now measure the body lengths of male guppies (in mm) collected from two rivers in Trinidad; the Aripo and the Guanapo. We want to test whether the mean body length differs between samples. We form the following null and alternative hypotheses:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0\)</span>: The mean body length does not differ between the two groups (<span class="math inline">\(\mu A = \mu G\)</span>)</li>
+<li>
+<span class="math inline">\(H_1\)</span>: The mean body length does differ between the two groups (<span class="math inline">\(\mu A \neq \mu G\)</span>)</li>
+</ul>
+<p>We use a two-sample, two-tailed t-test to see if we can reject the null hypothesis.</p>
+<ul>
+<li>We use a two-sample test because we now have two samples.</li>
+<li>We use a two-tailed t-test because we want to know if our data suggest that the true (population) means are different from one another rather than that one mean is specifically bigger or smaller than the other.</li>
+<li>We’re using Student’s t-test because the sample sizes are big and because we’re assuming that the parent populations have equal variance (We can check this later).</li>
+</ul>
+<p>The data are stored in stacked format in the file <code>data/raw/CS1-twosample.csv</code>.</p>
+<p>Read this into R:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="cs1-students-sumvisual" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#cs1-students-sumvisual"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s summarise the data…</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##     river length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
+## 1   Aripo    17.50000       19.10000      20.10000    20.33077       21.30000
+## 2 Guanapo    11.20000       17.50000      18.80000    18.29655       19.70000
+##   length.Max.
+## 1    26.40000
+## 2    23.30000</code></pre>
+<p>and visualise it:</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
+        main <span class="op">=</span> <span class="st">"Male guppies"</span>,
+        ylab <span class="op">=</span> <span class="st">"Length (mm)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-rivers-boxplot-1.png" width="672"></div>
+<p>The boxplot does appear to suggest that the two samples have different means, and moreover that the guppies in Guanapo may be smaller than the guppies in Aripo. It isn’t immediately obvious that the two populations don’t have equal variances though, so we plough on.</p>
+</div>
+<div id="implement-test" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>Perform a two-sample, two-tailed, t-test:</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
+       alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+       var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>In this case, with the data in stacked format:</p>
+<ul>
+<li>The first argument must be in the formula format: <code>variables ~ category</code>
+</li>
+<li>The second argument must be the name of the data frame</li>
+<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
+</li>
+<li>The fourth argument says whether the variance of the two samples can be assumed to be equal (Student’s t-test) or unequal (Welch’s t-test)</li>
+</ul>
+<p>This next section shows you that we can perform exactly the same test with the data in a different (unstacked) format. This is potentially somewhat redundant (or thorough depending on your point of view). Probably best just to do it anyway just in case you gain extra insight through repetition (it works for rowers…)</p>
+<p>Convert the data to unstacked format and repeat the t test:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a new object that contains the unstacked data</span>
+<span class="va">uns_rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">rivers</span><span class="op">)</span>
+
+<span class="co"># have a look at the data</span>
+<span class="va">uns_rivers</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># perform the t-test</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span>, <span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>,
+       alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+       var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="interpret-output-and-report-results" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s look at the results of the t-test that we performed on the original (stacked) data frame:</p>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  length by river
+## t = 3.8433, df = 66, p-value = 0.0002754
+## alternative hypothesis: true difference in means between group Aripo and group Guanapo is not equal to 0
+## 95 percent confidence interval:
+##  0.9774482 3.0909868
+## sample estimates:
+##   mean in group Aripo mean in group Guanapo 
+##              20.33077              18.29655</code></pre>
+<ul>
+<li>The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called, and what variables were used.</li>
+<li>The 3rd line contains the three key outputs from the test:
+<ul>
+<li>The calculated t-value is 3.8433 (we need this for reporting)</li>
+<li>There are 66 degrees of freedom (we need this for reporting)</li>
+<li>The p-value is 0.0002754.</li>
+</ul>
+</li>
+<li>The 4th line simply states the alternative hypothesis in terms of the difference between the two sample means (testing if the two sample means are different is equivalent to testing whether the difference in the means is equal to zero).</li>
+<li>The 5th and 6th lines give the 95th confidence interval (we don’t need to know this here).</li>
+<li>The 7th, 8th and 9th lines give the sample means for each group (20.33077 in Aripo and 18.29655 in Guanapo) which we found earlier.</li>
+</ul>
+<p>Again, the p-value on the 3rd line is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say “that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis” and state that:</p>
+<blockquote>
+<p>A Student’s t-test indicated that the mean body length of male guppies in the Guanapo river (18.29 mm) differs significantly from the mean body length of male guppies in the Aripo river (20.33 mm) (t = 3.8433, df = 66, p = 0.0003).</p>
+</blockquote>
+<p>Now there’s a conversation starter.</p>
+</div>
+<div id="assumptions-2" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>In order to use a Student’s t-test (and for the results to be strictly valid) we have to make three assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distributions from which the samples are taken are both normally distributed (which would lead to the sample data being normally distributed too).</li>
+<li>Each data point in the samples is independent of the others.</li>
+<li>The parent distributions should have the same variance.</li>
+</ol>
+<p>In this example the first assumption can be ignored as the sample sizes are large enough (because of maths, with Aripo containing 2 and Guanapo 2 samples). If the samples were smaller then we would use the tests from the previous section.</p>
+<p>The second point we can do nothing about unless we know how the data were collected, so again we ignore it.</p>
+<p>The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
+This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.</p>
+<p>So we perform a <a href="cs1-one-sample-t-test.html#shapiro-wilk-test">Shapiro-Wilk test</a> on both samples separately:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_rivers$Aripo
+## W = 0.93596, p-value = 0.02802</code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_rivers$Guanapo
+## W = 0.94938, p-value = 0.1764</code></pre>
+<p>We can see that whilst the Guanapo data is probably normally distributed (p = 0.1764 &gt; 0.05), the Aripo data is unlikely to be normally distributed (p = 0.02802 &lt; 0.05). Remember that the p-value gives the probability of observing each sample if the parent population is actually normally distributed.
+The Shapiro-Wilk test is quite sensitive to sample size. This means that if you have a large sample then even small deviations from normality will cause the sample to fail the test, whereas smaller samples are allowed to pass with much larger deviations. Here the Aripo data has nearly 40 points in it compared with the Guanapo data and so it is much easier for the Aripo sample to fail compared with the Guanapo data.</p>
+</div>
+<div id="exercise-2" class="section level2" number="8.7">
+<h2>
+<span class="header-section-number">8.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 8.1  </strong></span>Q-Q plots for <code>rivers</code> data</p>
+<p>Create the Q-Q plots for the two samples and discuss with your neighbour what you see in light of the results from the above Shapiro-Wilk test.</p>
+<details><summary>
+Answer
+</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>, main <span class="op">=</span> <span class="st">"Aripo"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Aripo</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span>, main <span class="op">=</span> <span class="st">"Guanapo"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_rivers</span><span class="op">$</span><span class="va">Guanapo</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-1.png" width="672"></div>
+<p>The Q-Q plots mirror what we found with the Shapiro-Wilk tests: the data for Aripo are pretty normally distributed, whereas the assumption of normality for the Guanapo data is less certain.</p>
+</details>
+</div>
+<p><br></p>
+<div class="highlight">
+<p>Remember that statistical tests do not provide answers, they merely suggest patterns. Human interpretation is still a crucial aspect to what we do.</p>
+</div>
+<p>Nevertheless, the Shapiro-Wilk test has shown that the data are not normal <em>enough</em> and so in order to test for equality of variance we will use Levene’s test.
+Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
+<p>To install the <code>car</code> package, run the following command in your console:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
+<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
+<p>We can now perform Levene’s test:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
+<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  1  1.7732 0.1876
+##       66</code></pre>
+<p>Ignore any warning you might get about coercion to factors (the test needs to create grouped variables to work and R versions from 4.x onwards do not read in the data as factors).</p>
+<p>The key bit of information is the 3rd line under the text <code>Pr(&gt;F)</code>. This is the p-value (0.1876) for this test. And this tells us the probability of observing these two samples if they come from distributions with the same variance. As this probability is greater than our arbitrary significance level of 0.05 then we can be somewhat confident that the necessary assumptions for carrying out Student’s t-test on these two samples was valid. (Once again woohoo!)</p>
+<div class="note">
+<p><strong>For information only:</strong></p>
+<p>If we had wanted to carry out Bartlett’s test (i.e. if the data had been sufficiently normally distributed) then the command would have been:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  length by river
+## Bartlett's K-squared = 4.4734, df = 1, p-value = 0.03443</code></pre>
+<p>The relevant p-value is given on the 3rd line.</p>
+</div>
+</div>
+<div id="exercise-3" class="section level2" number="8.8">
+<h2>
+<span class="header-section-number">8.8</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 8.2  </strong></span>Serum cholesterol concentrations in turtles</p>
+<p>Using the following data, test the null hypothesis that male and female turtles have the same mean serum cholesterol concentrations.</p>
+<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:cs1-twosample-turtle-data">Table 8.1: </span>Serum cholesterol (mg/100 ml
+</caption>
+<thead><tr>
+<th style="text-align:right;background-color: white !important;">
+Male
+</th>
+<th style="text-align:right;background-color: white !important;">
+Female
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+220.1
+</td>
+<td style="text-align:right;background-color: white !important;">
+223.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+218.6
+</td>
+<td style="text-align:right;background-color: white !important;">
+221.5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+229.6
+</td>
+<td style="text-align:right;background-color: white !important;">
+230.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+228.8
+</td>
+<td style="text-align:right;background-color: white !important;">
+224.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+222.0
+</td>
+<td style="text-align:right;background-color: white !important;">
+223.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+224.1
+</td>
+<td style="text-align:right;background-color: white !important;">
+230.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: white !important;">
+226.5
+</td>
+<td style="text-align:right;background-color: white !important;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<ol style="list-style-type: decimal">
+<li>Write down the null and alternative hypotheses</li>
+<li>Choose a representation for the data (stacked or unstacked) and create a <code>csv</code> file</li>
+<li>Import the data into R</li>
+<li>Summarise and visualise the data</li>
+<li>Check your assumptions (normality and variance) using appropriate tests and plots</li>
+<li>Perform a two-sample t-test</li>
+<li>Write down a sentence that summarises the results that you have found</li>
+</ol>
+<details><summary>
+Answer
+</summary><p><strong>1. Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : male mean <span class="math inline">\(=\)</span> female mean</p>
+<p><span class="math inline">\(H_1\)</span> : male mean <span class="math inline">\(\neq\)</span> female mean</p>
+<p><strong>2-4. Import Data, Summarise and visualise</strong></p>
+<p>I’d always recommend storing data in tidy, stacked format (in fact I can’t think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-turtle.csv"</span><span class="op">)</span>
+
+<span class="va">turtle</span></code></pre></div>
+<pre><code>##    serum    sex
+## 1  220.1   Male
+## 2  218.6   Male
+## 3  229.6   Male
+## 4  228.8   Male
+## 5  222.0   Male
+## 6  224.1   Male
+## 7  226.5   Male
+## 8  223.4 Female
+## 9  221.5 Female
+## 10 230.2 Female
+## 11 224.3 Female
+## 12 223.8 Female
+## 13 230.8 Female</code></pre>
+<p>Let’s summarise the data…</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , data <span class="op">=</span> <span class="va">turtle</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>##      sex serum.Min. serum.1st Qu. serum.Median serum.Mean serum.3rd Qu.
+## 1 Female   221.5000      223.5000     224.0500   225.6667      228.7250
+## 2   Male   218.6000      221.0500     224.1000   224.2429      227.6500
+##   serum.Max.
+## 1   230.8000
+## 2   229.6000</code></pre>
+<p>and visualise the data:</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , data <span class="op">=</span> <span class="va">turtle</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-boxplot-1.png" width="672"></div>
+<p>As always we use the plot and summary to assess three things:</p>
+<ol style="list-style-type: decimal">
+<li>Does it look like we’ve loaded the data in correctly?
+<ul>
+<li>We have two groups and the extreme values of our plots seem to match with our dataset, so I’m happy that we haven’t done anything massively wrong here.</li>
+</ul>
+</li>
+<li>Do we think that there is a difference between the two groups?
+<ul>
+<li>We need the result of the formal test to make sense given the data, so it’s important to develop a sense of what we think is going to happen here. Whilst the ranges of the two groups suggests that the Female serum levels might be higher than the males when we look at things more closely we realise that isn’t the case. The boxplot shows that the median values of the two groups is virtually identical and this is backed up by the summary statistics we calculated: the medians are both about 224.1, and the means are fairly close too (225.7 vs 224.2). Based on this, and the fact that there are only 13 observations in total I would be very surprised if any test came back showing that there was a difference between the groups.</li>
+</ul>
+</li>
+<li>What do we think about assumptions?
+<ul>
+<li>Normality looks a bit worrying: whilst the Male group appears nice and symmetric (and so might be normal), the Female group appears to be quite skewed (since the median is much closer to the bottom than the top). We’ll have to look carefully at the more formal checks to decided whether we think the data are normal enough for us to use a t-test.</li>
+<li>Homogeneity of variance. At this stage the spread of the data within each group looks similar, but because of the potential skew in the Female group we’ll again want to check the assumptions carefully.</li>
+</ul>
+</li>
+</ol>
+<p><strong>5. Check Assumptions</strong></p>
+<p><strong>Normality</strong></p>
+<p>Let’s look at the normality of each of the groups separately. There are several ways of getting at the <code>serum</code> values for Males and Females separately. We’ll use the unstacking method, then use Shapiro-Wilk followed by qqplots.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">uns_turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">turtle</span>, <span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_turtle$Male
+## W = 0.94392, p-value = 0.6743</code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_turtle$Female
+## W = 0.84178, p-value = 0.1349</code></pre>
+<p>The p-values for both Shapiro-Wilk tests are non-significant which suggests that the data are normal enough. This is a bit surprising given what we saw in the boxplot but there are two bits of information that we can use to reassure us.</p>
+<ol style="list-style-type: decimal">
+<li>The p-value for the Female group is smaller than for the Male group (suggesting that the Female group is closer to being non-normal than the Male group) which makes sense.</li>
+<li>The Shapiro-Wilk test is generally quite relaxed about normality for small sample sizes (and notoriously strict for very large sample sizes). For a group with only 6 data points in it, the data would actually have to have a really, really skewed distribution. Given that the Female group only has 6 data points in it, it’s not too surprising that the Shapiro-Wilk test came back saying everything is OK.</li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, main <span class="op">=</span> <span class="st">"Male"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span>, main <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-1.png" width="672"></div>
+<p>The results from the Q-Q plots echo what we’ve already seen from the Shapiro-Wilk analyses. The Male group doesn’t look too bad whereas the Female group looks somewhat dodgy.</p>
+<p>Overall, the assumption of normality of the data doesn’t appear to be very well met at all, but we do have to bear in mind that there are only a few data points in each group and we might just be seeing this pattern in the data due to random chance rather than because the underlying populations are actually not normally distributed. Personally, though I’d edge towards non-normal here.</p>
+<p><strong>Homogeneity of Variance</strong></p>
+<p>It’s not clear whether the data are normal or not, so it isn’t clear which test to use here. The sensible approach is to do both and hope that they agree (fingers crossed!)</p>
+<p>Bartlett’s test gives us:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, <span class="va">turtle</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  serum by sex
+## Bartlett's K-squared = 0.045377, df = 1, p-value = 0.8313</code></pre>
+<p>and Levene’s test gives us:</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load if needed</span>
+<span class="co"># library(car)</span>
+
+<span class="fu">leveneTest</span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, <span class="va">turtle</span><span class="op">)</span></code></pre></div>
+<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  1  0.2434 0.6315
+##       11</code></pre>
+<p>The good news is that both Levene and Bartlett agree that there is homogeneity of variance between the two groups (thank goodness!).</p>
+<p>Overall, what this means is that we’re not too sure about normality, but that homogeneity of variance is pretty good.</p>
+<p><strong>6. Carry out a two-sample t-test</strong></p>
+<p>Because of the result of the Bartlett test I know that I can carry out a two-sample Student’s t-test (as opposed to a two-sample Welch’s t-test, if you’re confused, see Figure <a href="cs1-two-sample.html#fig:fig-cs1-diagram-which-test">7.2</a>)</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , <span class="va">turtle</span>,
+       alternative<span class="op">=</span><span class="st">"two.sided"</span>,
+       var.equal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  serum by sex
+## t = 0.62681, df = 11, p-value = 0.5436
+## alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+## 95 percent confidence interval:
+##  -3.575759  6.423378
+## sample estimates:
+## mean in group Female   mean in group Male 
+##             225.6667             224.2429</code></pre>
+<p>With a p-value of 0.544, this test tells me that there is insufficient evidence to suggest that the means of the two groups are different. A suitable summary sentence would be:</p>
+<blockquote>
+<p>A Student’s two-sample t-test indicated that the mean serum cholesterol level did not differ significantly between Male and Female turtles (t = 0.627, df = 11, p = 0.544).</p>
+</blockquote>
+<p><strong>Discussion</strong></p>
+<p>In reality, because of the ambiguous normality assumption assessment, for this dataset I would actually carry out two different tests; the two-sample t-test with equal variance and the Mann-Whitney U test. If both of them agreed then it wouldn’t matter too much which one I reported (I’d personally report both with a short sentence to say that I’m doing that because it wasn’t clear whether the assumption of normality had or had not been met), but it would be acceptable to report just one.</p>
+</details>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></div>
+<div class="next"><a href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cs1-students-t-test"><span class="header-section-number">8</span> Student’s t-test</a></li>
+<li><a class="nav-link" href="#section-commands-2"><span class="header-section-number">8.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-1"><span class="header-section-number">8.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#cs1-students-sumvisual"><span class="header-section-number">8.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test"><span class="header-section-number">8.4</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results"><span class="header-section-number">8.5</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-2"><span class="header-section-number">8.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-2"><span class="header-section-number">8.7</span> Exercise</a></li>
+<li><a class="nav-link" href="#exercise-3"><span class="header-section-number">8.8</span> Exercise</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+					</div>
+				</div>
+				<!-- Related links -->
+				<!--<div class="campl-column3 campl-secondary-content">
+					<div class="campl-content-container">
+						<div class="campl-heading-container">
+							<h2>Related Links</h2>
+						</div>
+						<ul class='campl-unstyled-list campl-related-links'>
+							<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+							<li><a href="#">Consectetur adipisicing elit</a></li>
+							<li><a href="#">Sed do eiusmod tempor incididunt extra long wrapping on to two line</a></li>
+							<li><a href="#">Labore et dolore magna aliqua</a></li>
+							<li><a href="#">Ut enim ad minim veniam</a></li>
+							<li><a href="#">Quis nostrud exercitation ullamco</a></li>
+						</ul>
+					</div>
+					<div class="campl-content-container">
+						<div class="campl-vertical-teaser campl-teaser campl-promo-teaser">
+							<div class="campl-content-container campl-vertical-teaser-txt">
+								<p class='campl-teaser-title'><a href="#">Promo teaser with title above</a></p>
+							</div>
+							<div class="campl-content-container campl-vertical-teaser-img">
+								<a href="#" class="campl-teaser-img-link"><img alt=""  src="images/content/homepage-promo-placeholder.png" class="campl-scale-with-grid" /></a>
+							</div>
+							<div class="campl-content-container campl-vertical-teaser-txt clearfix">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+								<a href="#4" class="campl-secondary-cta campl-float-right">Read more</a>
+							</div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+		</div>
+		<div class="campl-row campl-local-footer">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Contact us</h3>
+						 <div class="content">
+						   <p>Bioinformatics Training Department of Genetics University of Cambridge Downing Street Cambridge CB2 3EH United Kingdom</p>
+						   <h3>Contact:</h3> <a href="mailto:bioinfo@hermes.cam.ac.uk">bioinfo@hermes.cam.ac.uk</a>
+						 </div>
+					</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Bioinformatics Training</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/undergraduate">Undergraduate training</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate">Postgraduate training</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Postgraduate Courses by Theme</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/programming">Basic Skills and Programming</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/services">Databases and Services</a>
+							</li>
+							<li>
+							  <a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/specialized">Specialised Topics</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation last">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>About Bioinformatics Training</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about">About the Facility</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about/findus">How to find us</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about/visitors">Visiting Cambridge</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/privacy-and-cookie-policies">Privacy and Cookies policy</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+		</div>
+	<div class="campl-row campl-global-footer">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-footer-logo">
+					<img alt="University of Cambridge" src="images/interface/main-logo-small.png" height="38px;" class="campl-scale-with-grid"><p>© 2021 University of Cambridge</p>
+						<ul class="campl-unstyled-list campl-global-footer-links">
+<li>
+								<a href="http://www.cam.ac.uk/university-a-z">University A-Z</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/contact-the-university">Contact the University</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-this-site/accessibility">Accessibility</a>
+							</li>
+							<li>
+								<a href="http://www.admin.cam.ac.uk/univ/information/foi/">Freedom of information</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-this-site/terms-and-conditions">Terms and conditions</a>
+							</li>
+						</ul>
+</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-navigation-list">
+
+					<div class="link-list">
+						<h3><a href="http://www.cam.ac.uk/study-at-cambridge">Study at Cambridge</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="http://www.study.cam.ac.uk/undergraduate/">Undergraduate</a>
+							</li>
+							<li>
+								<a href="http://www.graduate.study.cam.ac.uk/">Graduate</a>
+							</li>
+							<li>
+								<a href="http://www.internationalstudents.cam.ac.uk">International students</a>
+							</li>
+							<li>
+								<a href="http://www.ice.cam.ac.uk">Continuing education</a>
+							</li>
+							<li>
+								<a href="http://www.epe.admin.cam.ac.uk/">Executive and professional education</a>
+							</li>
+							<li>
+								<a href="http://www.educ.cam.ac.uk">Courses in education</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-navigation-list">
+					<h3><a href="http://www.cam.ac.uk/about-the-university">About the University</a></h3>
+					<ul class="campl-unstyled-list campl-page-children">
+<li>
+							<a href="http://www.cam.ac.uk/about-the-university/how-the-university-and-colleges-work">How the University and Colleges work</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/about-the-university/visiting-the-university">Visiting the University</a>
+						</li>
+						<li>
+							<a href="http://map.cam.ac.uk">Map</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/news">News</a>
+						</li>
+						<li>
+							<a href="http://www.admin.cam.ac.uk/whatson/">Events</a>
+						</li>
+						<li>
+							<a href="http://www.jobs.cam.ac.uk">Jobs</a>
+						</li>
+						<li>
+							<a href="https://www.philanthropy.cam.ac.uk/">Give to Cambridge</a>
+						</li>
+					</ul>
+</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation last">
+				<div class="campl-content-container campl-navigation-list">
+					<h3><a href="http://www.cam.ac.uk/research">Research at Cambridge</a></h3>
+					<ul class="campl-unstyled-list">
+<li>
+							<a href="http://www.cam.ac.uk/research/news">News</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/features">Features</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/discussion">Discussion</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/spotlight-on">Spotlight on...</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/research-at-cambridge">About research at Cambridge</a>
+						</li>
+					</ul>
+</div>
+			</div>
+		</div>
+	</div>
+	<!-- .campl-global-footer ends -->
+
+<!--[if lte IE 8]>
+</div>
+<![endif]-->
+
+	<script type="text/javascript" src="javascripts/libs/ios-orientationchange-fix.js"></script><script type="text/javascript" src="javascripts/libs/jquery-min.js"></script><script type="text/javascript" src="javascripts/libs/modernizr.js"></script><script type="text/javascript" src="javascripts/custom.js"></script><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

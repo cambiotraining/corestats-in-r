@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 1 Overview | Core Statistics in R</title>
+<title>Chapter 22 Two-way ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Overview | Core Statistics in R">
+<meta property="og:title" content="Chapter 22 Two-way ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta property="og:description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Overview | Core Statistics in R">
-<meta name="twitter:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="twitter:title" content="Chapter 22 Two-way ANOVA | Core Statistics in R">
+<meta name="twitter:description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -340,7 +340,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
@@ -369,7 +369,7 @@
 <li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
 <li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+<li><a class="active" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -377,66 +377,124 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1" number="1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="two-way-anova" class="section level1" number="22">
 <h1>
-<span class="header-section-number">1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22</span> Two-way ANOVA<a class="anchor" aria-label="anchor" href="#two-way-anova"><i class="fas fa-link"></i></a>
 </h1>
-<p>These sessions are intended to enable you to perform core data analysis techniques appropriately and confidently using R.</p>
+<div id="objectives-10" class="section level2" number="22.1">
+<h2>
+<span class="header-section-number">22.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-10"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Questions</strong></p>
 <ul>
-<li><p>6 lecture-practicals</p></li>
-<li><p>Ongoing formative assessment exercises</p></li>
-<li><p>No formal assessment</p></li>
-<li><p>No mathematical derivations</p></li>
-<li><p>No pen and paper calculations</p></li>
+<li>How do I…</li>
+<li>What do I…</li>
 </ul>
-<p>They are <strong>not</strong> a “how to mindlessly use a stats program” course!</p>
-<div id="core-aims" class="section level2" number="1.1">
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Be able to…</li>
+<li>Use…</li>
+</ul>
+</div>
+</div>
+<div id="purpose-and-aim-6" class="section level2" number="22.2">
 <h2>
-<span class="header-section-number">1.1</span> Core aims<a class="anchor" aria-label="anchor" href="#core-aims"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-6"><i class="fas fa-link"></i></a>
 </h2>
-<div class="highlight">
-<p>To know what to do when presented with an arbitrary dataset e.g.</p>
-<ol style="list-style-type: decimal">
-<li>Know what data analysis techniques are available</li>
-<li>Know which ones are allowable</li>
-<li>Be able to carry these out and understand the results</li>
-</ol>
+<p>A two-way analysis of variance is used when we have two categorical predictor variables (or factors) and a single continuous response variable. For example, when we are looking at how body weight (continuous response variable in kilograms) is affected by gender (categorical variable, Male or Female) and exercise type (categorical variable, Control or Runner).</p>
 </div>
-</div>
-<div id="core-topics" class="section level2" number="1.2">
+<div id="section-commands-10" class="section level2" number="22.3">
 <h2>
-<span class="header-section-number">1.2</span> Core topics<a class="anchor" aria-label="anchor" href="#core-topics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-10"><i class="fas fa-link"></i></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li><a href="cs1-intro.html#cs1-intro">Simple Hypothesis Testing</a></li>
-<li><a href="cs2-intro.html#cs2-intro">Categorical Predictor Variables</a></li>
-<li><a href="cs3-intro.html#cs3-intro">Continuous Predictors</a></li>
-<li><a href="cs4-intro.html#cs4-intro">Multiple Predictor Variables</a></li>
-<li>Linear Models</li>
-<li>Errors, Power and Multiple Comparisons</li>
-</ol>
+<p>New commands used in this section:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>function_name()</code></td>
+<td align="left">Description</td>
+</tr>
+<tr class="even">
+<td align="left"><code>function_name()</code></td>
+<td align="left">Description</td>
+</tr>
+</tbody>
+</table></div>
 </div>
-<div id="index-datasets" class="section level2" number="1.3">
+<div id="data-and-hypotheses-9" class="section level2" number="22.4">
 <h2>
-<span class="header-section-number">1.3</span> Datasets<a class="anchor" aria-label="anchor" href="#index-datasets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-9"><i class="fas fa-link"></i></a>
 </h2>
-<p>This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the <code>data</code> folder and copy it into your working directory. Your data should then be accessible via <code>&lt;working-directory-name&gt;/data/raw</code>.</p>
+</div>
+<div id="summarise-and-visualise-9" class="section level2" number="22.5">
+<h2>
+<span class="header-section-number">22.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="assumptions-9" class="section level2" number="22.6">
+<h2>
+<span class="header-section-number">22.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-9"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="implement-test-9" class="section level2" number="22.7">
+<h2>
+<span class="header-section-number">22.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-9"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="interpret-output-and-report-results-9" class="section level2" number="22.8">
+<h2>
+<span class="header-section-number">22.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-9"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="exercise-12" class="section level2" number="22.9">
+<h2>
+<span class="header-section-number">22.9</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-12"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-13" class="exercise"><strong>Exercise 22.1  </strong></span>Exercise title</p>
+<p>Exercise description</p>
+<details><summary>
+Answer
+</summary><p>An elaborate answer</p>
+</details>
+</div>
+</div>
+<div id="key-points-6" class="section level2" number="22.10">
+<h2>
+<span class="header-section-number">22.10</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
 
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
+<div class="prev"><a href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></div>
 <div class="empty"></div>
-<div class="next"><a href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#overview"><span class="header-section-number">1</span> Overview</a></li>
-<li><a class="nav-link" href="#core-aims"><span class="header-section-number">1.1</span> Core aims</a></li>
-<li><a class="nav-link" href="#core-topics"><span class="header-section-number">1.2</span> Core topics</a></li>
-<li><a class="nav-link" href="#index-datasets"><span class="header-section-number">1.3</span> Datasets</a></li>
+<li><a class="nav-link" href="#two-way-anova"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+<li><a class="nav-link" href="#objectives-10"><span class="header-section-number">22.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-6"><span class="header-section-number">22.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-10"><span class="header-section-number">22.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-9"><span class="header-section-number">22.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-9"><span class="header-section-number">22.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-9"><span class="header-section-number">22.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-test-9"><span class="header-section-number">22.7</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-9"><span class="header-section-number">22.8</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-12"><span class="header-section-number">22.9</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-6"><span class="header-section-number">22.10</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
