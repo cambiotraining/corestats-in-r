@@ -15,6 +15,7 @@ exr:unlabeled-div-10
 exr:unlabeled-div-11
 exr:unlabeled-div-12
 exr:unlabeled-div-13
+exr:unlabeled-div-14
 overview
 core-aims
 core-topics
@@ -159,7 +160,6 @@ section-commands-10
 data-and-hypotheses-9
 summarise-and-visualise-9
 assumptions-9
-implement-test-9
-interpret-output-and-report-results-9
-exercise-12
+exercise-cells
+exercise-tulips
 key-points-6
