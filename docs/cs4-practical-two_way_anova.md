@@ -19,25 +19,6 @@
 A two-way analysis of variance is used when we have two categorical predictor variables (or factors) and a single continuous response variable. For example, when we are looking at how body `Weight` (continuous response variable in kilograms) is affected by gender (categorical variable, `Male` or `Female`) and exercise type (categorical variable, `Control` or `Runner`).
 
 
-<<<<<<< HEAD
-=======
-```
-## Rows: 20 Columns: 3
-```
-
-```
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ","
-## chr (2): Gender, Exercise
-## dbl (1): Weight
-```
-
-```
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
->>>>>>> 00170bb3baf52ca855af7d62dae755e3c3747e26
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
@@ -283,30 +264,16 @@ For each combination of cell type and substance concentration we add the substan
 ```r
 # read in the data
 cells <- read_csv("data/examples/cs4-cells.csv")
-<<<<<<< HEAD
-
-=======
 ```
 
-```
-## Rows: 18 Columns: 4
-```
+For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
+For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.
 
-```
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ","
-## chr (2): cell_type, concentration
-## dbl (2): id, cell_number
-```
-
-```
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
 
 ```r
->>>>>>> 00170bb3baf52ca855af7d62dae755e3c3747e26
+# read in the data
+cells <- read_csv("data/examples/cs4-cells.csv")
+
 # let's have a peek at the data
 cells
 ```
@@ -345,14 +312,14 @@ boxplot(cell_number ~ concentration,
         data = cells)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ```r
 boxplot(cell_number ~ cell_type,
         data = cells)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672" />
 
 Let's look at the interaction plots:
 
@@ -361,14 +328,14 @@ Let's look at the interaction plots:
 interaction.plot(cells$concentration, cells$cell_type, cells$cell_number)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ```r
 # by concentration
 interaction.plot(cells$cell_type, cells$concentration, cells$cell_number)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672" />
 
 We're constructed both box plots and we've also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren't parallel. Looking at the interaction plot with `concentration` on the x-axis, it appears that there is non difference between cell types when the concentration is `none`, but that there is a difference between cell types when the concentration is `low` or `high`.
 
@@ -413,7 +380,7 @@ plot(lm1)
 ##  and there are no factor predictors; no plot no. 5
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 So, these actually all look pretty good, although at first glance you might be a bit worried by some apparent heterogeneity of variance. The last group in the `Residuals vs fitted` graph does appear to be more spread out then the other 5 groups. This is echoed in the `Scale-Location` graph, where the red line kicks up at the end. Whilst this does technically signify that there is heterogeneity of variance we aren't too worried by this because there are only three data points per group. Because of this low number of data points per group when we get one data point that is a little bit more extreme than the others (purely by chance) then this has a large impact on our perception of the homogeneity of variance. If there were more data points in each group then we would be more certain that any observed heterogeneity of variance was a true feature of the underlying parent population (and therefore a problem) rather than just being caused by a single random point (and therefore not a problem).
 
@@ -444,25 +411,25 @@ This dataset has three variables; `Blooms` (which is the response variable) and 
 boxplot(Blooms ~ Water, data = tulip)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 ```r
 boxplot(Blooms ~ Shade,data = tulip)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-2.png" width="672" />
 
 ```r
 interaction.plot(tulip$Water, tulip$Shade, tulip$Blooms)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-3.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-3.png" width="672" />
 
 ```r
 interaction.plot(tulip$Shade, tulip$Water, tulip$Blooms)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-4.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-4.png" width="672" />
 
 Again, both interaction plots suggest that there might be an interaction here. Digging in a little deeper from a descriptive perspective, it looks as though that `Water` regime 1 is behaving differently to `Water` regimes 2 and 3 under different shade conditions.
 
@@ -501,7 +468,7 @@ par(mfrow = c(2, 2))
 plot(lm.tulip)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 These are actually all OK. Point number 8 is messing with the homogeneity of variance assumption a little bit, but since it's only one point we won't worry about it. Our 2-way ANOVA analysis stands.
 
