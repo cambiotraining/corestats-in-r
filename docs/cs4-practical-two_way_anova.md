@@ -89,7 +89,9 @@ In this example there are only four box plots and so it is relatively easy to co
 Create an interaction plot:
 
 ```r
-interaction.plot(Experiment$Gender, Experiment$Exercise, Experiment$Weight)
+interaction.plot(Experiment$Gender,
+                 Experiment$Exercise,
+                 Experiment$Weight)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-7-1.png" width="672" />
@@ -104,9 +106,13 @@ The default settings aren’t too great for displaying interaction plots. Try th
 
 
 ```r
-interaction.plot(Experiment$Gender, Experiment$Exercise, Experiment$Weight,
-                 xlab = "Gender", ylab = "Weight", trace.label = "Exercise",
-                 type = "b", pch = 4, col = c("blue", "red"))
+interaction.plot(Experiment$Gender,
+                 Experiment$Exercise,
+                 Experiment$Weight,
+                 xlab = "Gender", ylab = "Weight",
+                 trace.label = "Exercise",
+                 type = "b", pch = 4,
+                 col = c("blue", "red"))
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-8-1.png" width="672" />
@@ -116,9 +122,13 @@ The choice of which categorical factor is plotted on the horizontal axis and whi
 Plot the interaction plot the other way round:
 
 ```r
-interaction.plot(Experiment$Exercise, Experiment$Gender, Experiment$Weight,
-                 xlab = "Gender", ylab = "Weight", trace.label = "Exercise",
-                 type = "b", pch = 4, col = c("blue", "red"))
+interaction.plot(Experiment$Exercise,
+                 Experiment$Gender,
+                 Experiment$Weight,
+                 xlab = "Gender", ylab = "Weight",
+                 trace.label = "Exercise",
+                 type = "b", pch = 4,
+                 col = c("blue", "red"))
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-9-1.png" width="672" />
@@ -135,7 +145,8 @@ We can now attempt to answer these three questions more formally using an ANOVA 
 
 ```r
 # define the linear model
-lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment)
+lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise,
+                  data = Experiment)
 
 # perform the ANOVA
 anova(lm.exercise)
@@ -201,23 +212,25 @@ plot(lm.exercise)
 *	The second command produces 3 plots in the graphics window and one warning stating that the Residuals vs Factor Levels plot is left out. This is because all of our groups have exactly the same number of data points.
 
 * The top left graph plots the residuals against the fitted values. There is no systematic pattern here and this plot is pretty good.
-*	The top right graph allows a visual inspection of normality. Again, this looks ok (not perfect but ok).
+*	The top right graph allows a visual inspection of normality. Again, this looks OK (not perfect but OK).
 *	The bottom left graph allows us to investigate whether there is homogeneity of variance. This plot is fine (not perfect but fine).
 
 :::note
 There is a shorthand way of writing:
+
 `Weight ~ Gender + Exercise + Gender:Exercise`
 
 If you use the following syntax:
 
-`Weight ~ Gender*Exercise`
+`Weight ~ Gender * Exercise`
 
 Then R interprets it exactly the same way as writing all three terms.
 You can see this if you compare the output of the following two commands:
 
 
 ```r
-anova(lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment))
+anova(lm(Weight ~ Gender + Exercise + Gender:Exercise,
+         data = Experiment))
 ```
 
 ```
@@ -234,7 +247,8 @@ anova(lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment))
 ```
 
 ```r
-anova(lm(Weight ~ Gender * Exercise, data= Experiment))
+anova(lm(Weight ~ Gender * Exercise,
+         data = Experiment))
 ```
 
 ```
@@ -275,31 +289,19 @@ For each combination of cell type and substance concentration we add the substan
 cells <- read_csv("data/examples/cs4-cells.csv")
 
 # let's have a peek at the data
-cells
+head(cells)
 ```
 
 ```
-## # A tibble: 18 × 4
-##       id cell_type concentration cell_number
-##    <dbl> <chr>     <chr>               <dbl>
-##  1     1 A         none                    7
-##  2     2 A         none                    9
-##  3     3 A         none                    4
-##  4     4 B         none                    5
-##  5     5 B         none                    8
-##  6     6 B         none                    9
-##  7     7 A         low                    22
-##  8     8 A         low                    28
-##  9     9 A         low                    26
-## 10    10 B         low                    12
-## 11    11 B         low                    17
-## 12    12 B         low                    14
-## 13    13 A         high                   89
-## 14    14 A         high                   78
-## 15    15 A         high                   83
-## 16    16 B         high                   48
-## 17    17 B         high                   44
-## 18    18 B         high                   45
+## # A tibble: 6 × 4
+##      id cell_type concentration cell_number
+##   <dbl> <chr>     <chr>               <dbl>
+## 1     1 A         none                    7
+## 2     2 A         none                    9
+## 3     3 A         none                    4
+## 4     4 B         none                    5
+## 5     5 B         none                    8
+## 6     6 B         none                    9
 ```
 
 <details><summary>Answer</summary>
@@ -325,14 +327,18 @@ Let's look at the interaction plots:
 
 ```r
 # by cell type
-interaction.plot(cells$concentration, cells$cell_type, cells$cell_number)
+interaction.plot(cells$concentration,
+                 cells$cell_type,
+                 cells$cell_number)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ```r
 # by concentration
-interaction.plot(cells$cell_type, cells$concentration, cells$cell_number)
+interaction.plot(cells$cell_type,
+                 cells$concentration,
+                 cells$cell_number)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672" />

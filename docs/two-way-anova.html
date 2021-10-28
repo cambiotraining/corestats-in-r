@@ -278,7 +278,7 @@
 								<a href="">Training Materials</a>
 							</li>
 							<li>
-								<a href="#">Core Statistics in R
+								<a href="index.html">Core Statistics in R
 							</a>
 </li>
 						</ul>
@@ -471,7 +471,9 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <p>In this example there are only four box plots and so it is relatively easy to compare them and look for any interactions between variables, but if there were more than two levels (groups) per categorical variable, it would become harder to spot what was going on. To compare categorical variables more easily we just plot the group means which aids our ability to look for interactions and the main effects of each predictor variable.</p>
 <p>Create an interaction plot:</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
 <ul>
 <li>The first argument defines the categorical variable that will be used for the horizontal axis. This must be a factor vector (if it comes from a data.frame then it will automatically be a factor). In this function this is called the <code>x.factor</code>.</li>
@@ -481,16 +483,24 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <p>It’s common to get the order of these arguments muddled up. Remember that it’s the <strong>third argument</strong> that defines the variable that goes on the vertical axis!</p>
 <p>The default settings aren’t too great for displaying interaction plots. Try the following for (in my opinion) a more user-friendly display.</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
-                 xlab <span class="op">=</span> <span class="st">"Gender"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>, trace.label <span class="op">=</span> <span class="st">"Exercise"</span>,
-                 type <span class="op">=</span> <span class="st">"b"</span>, pch <span class="op">=</span> <span class="fl">4</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
+                 xlab <span class="op">=</span> <span class="st">"Gender"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>,
+                 trace.label <span class="op">=</span> <span class="st">"Exercise"</span>,
+                 type <span class="op">=</span> <span class="st">"b"</span>, pch <span class="op">=</span> <span class="fl">4</span>,
+                 col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>The choice of which categorical factor is plotted on the horizontal axis and which is plotted as different lines is completely arbitrary. Looking at the data both ways shouldn’t add anything but often you’ll find that you prefer one plot to another.</p>
 <p>Plot the interaction plot the other way round:</p>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>, <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
-                 xlab <span class="op">=</span> <span class="st">"Gender"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>, trace.label <span class="op">=</span> <span class="st">"Exercise"</span>,
-                 type <span class="op">=</span> <span class="st">"b"</span>, pch <span class="op">=</span> <span class="fl">4</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
+                 <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
+                 xlab <span class="op">=</span> <span class="st">"Gender"</span>, ylab <span class="op">=</span> <span class="st">"Weight"</span>,
+                 trace.label <span class="op">=</span> <span class="st">"Exercise"</span>,
+                 type <span class="op">=</span> <span class="st">"b"</span>, pch <span class="op">=</span> <span class="fl">4</span>,
+                 col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
 <p>By now you should have a good feeling for the data and could already provide some guesses to the following three questions:</p>
 <ul>
@@ -505,7 +515,8 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <p>We can now attempt to answer these three questions more formally using an ANOVA test. We have to ask R explicitly to test for three things: the interaction, the effect of <code>Exercise</code> and the effect of <code>Gender.</code> We use the following code:</p>
 <div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
-<span class="va">lm.exercise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>, data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span>
+<span class="va">lm.exercise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>,
+                  data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span>
 
 <span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.exercise</span><span class="op">)</span></code></pre></div>
@@ -554,18 +565,19 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <li><p>The first command changes the plotting parameters and splits the graphics window into 2 rows and 2 columns (you won’t notice anything whilst you run it).</p></li>
 <li><p>The second command produces 3 plots in the graphics window and one warning stating that the Residuals vs Factor Levels plot is left out. This is because all of our groups have exactly the same number of data points.</p></li>
 <li><p>The top left graph plots the residuals against the fitted values. There is no systematic pattern here and this plot is pretty good.</p></li>
-<li><p>The top right graph allows a visual inspection of normality. Again, this looks ok (not perfect but ok).</p></li>
+<li><p>The top right graph allows a visual inspection of normality. Again, this looks OK (not perfect but OK).</p></li>
 <li><p>The bottom left graph allows us to investigate whether there is homogeneity of variance. This plot is fine (not perfect but fine).</p></li>
 </ul>
 <div class="note">
-<p>There is a shorthand way of writing:
-<code>Weight ~ Gender + Exercise + Gender:Exercise</code></p>
+<p>There is a shorthand way of writing:</p>
+<p><code>Weight ~ Gender + Exercise + Gender:Exercise</code></p>
 <p>If you use the following syntax:</p>
-<p><code>Weight ~ Gender*Exercise</code></p>
+<p><code>Weight ~ Gender * Exercise</code></p>
 <p>Then R interprets it exactly the same way as writing all three terms.
 You can see this if you compare the output of the following two commands:</p>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>, data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>,
+         data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Weight
@@ -577,7 +589,8 @@ You can see this if you compare the output of the following two commands:</p>
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">*</span> <span class="va">Exercise</span>, data<span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">*</span> <span class="va">Exercise</span>,
+         data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: Weight
@@ -609,28 +622,16 @@ For each combination of cell type and substance concentration we add the substan
 <span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
 
 <span class="co"># let's have a peek at the data</span>
-<span class="va">cells</span></code></pre></div>
-<pre><code>## # A tibble: 18 × 4
-##       id cell_type concentration cell_number
-##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;
-##  1     1 A         none                    7
-##  2     2 A         none                    9
-##  3     3 A         none                    4
-##  4     4 B         none                    5
-##  5     5 B         none                    8
-##  6     6 B         none                    9
-##  7     7 A         low                    22
-##  8     8 A         low                    28
-##  9     9 A         low                    26
-## 10    10 B         low                    12
-## 11    11 B         low                    17
-## 12    12 B         low                    14
-## 13    13 A         high                   89
-## 14    14 A         high                   78
-## 15    15 A         high                   83
-## 16    16 B         high                   48
-## 17    17 B         high                   44
-## 18    18 B         high                   45</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##      id cell_type concentration cell_number
+##   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;
+## 1     1 A         none                    7
+## 2     2 A         none                    9
+## 3     3 A         none                    4
+## 4     4 B         none                    5
+## 5     5 B         none                    8
+## 6     6 B         none                    9</code></pre>
 <details><summary>
 Answer
 </summary><p>Let’s first visualise the data:</p>
@@ -645,11 +646,15 @@ Answer
 <p>Let’s look at the interaction plots:</p>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by cell type</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>, <span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>, <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
+                 <span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
+                 <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by concentration</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>, <span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>, <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
+                 <span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
+                 <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672"></div>
 <p>We’re constructed both box plots and we’ve also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren’t parallel. Looking at the interaction plot with <code>concentration</code> on the x-axis, it appears that there is non difference between cell types when the concentration is <code>none</code>, but that there is a difference between cell types when the concentration is <code>low</code> or <code>high</code>.</p>
 <p>Let’s carry out a two-way ANOVA:</p>

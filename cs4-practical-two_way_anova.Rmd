@@ -87,7 +87,9 @@ In this example there are only four box plots and so it is relatively easy to co
 
 Create an interaction plot:
 ```{r}
-interaction.plot(Experiment$Gender, Experiment$Exercise, Experiment$Weight)
+interaction.plot(Experiment$Gender,
+                 Experiment$Exercise,
+                 Experiment$Weight)
 ```
 
 * The first argument defines the categorical variable that will be used for the horizontal axis. This must be a factor vector (if it comes from a data.frame then it will automatically be a factor). In this function this is called the `x.factor`.
@@ -99,18 +101,26 @@ It’s common to get the order of these arguments muddled up. Remember that it�
 The default settings aren’t too great for displaying interaction plots. Try the following for (in my opinion) a more user-friendly display.
 
 ```{r}
-interaction.plot(Experiment$Gender, Experiment$Exercise, Experiment$Weight,
-                 xlab = "Gender", ylab = "Weight", trace.label = "Exercise",
-                 type = "b", pch = 4, col = c("blue", "red"))
+interaction.plot(Experiment$Gender,
+                 Experiment$Exercise,
+                 Experiment$Weight,
+                 xlab = "Gender", ylab = "Weight",
+                 trace.label = "Exercise",
+                 type = "b", pch = 4,
+                 col = c("blue", "red"))
 ```
 
 The choice of which categorical factor is plotted on the horizontal axis and which is plotted as different lines is completely arbitrary. Looking at the data both ways shouldn’t add anything but often you’ll find that you prefer one plot to another.
 
 Plot the interaction plot the other way round:
 ```{r}
-interaction.plot(Experiment$Exercise, Experiment$Gender, Experiment$Weight,
-                 xlab = "Gender", ylab = "Weight", trace.label = "Exercise",
-                 type = "b", pch = 4, col = c("blue", "red"))
+interaction.plot(Experiment$Exercise,
+                 Experiment$Gender,
+                 Experiment$Weight,
+                 xlab = "Gender", ylab = "Weight",
+                 trace.label = "Exercise",
+                 type = "b", pch = 4,
+                 col = c("blue", "red"))
 ```
 
 By now you should have a good feeling for the data and could already provide some guesses to the following three questions:
@@ -124,7 +134,8 @@ We can now attempt to answer these three questions more formally using an ANOVA 
 
 ```{r, results='hide'}
 # define the linear model
-lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment)
+lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise,
+                  data = Experiment)
 
 # perform the ANOVA
 anova(lm.exercise)
@@ -136,7 +147,8 @@ This produces the following output:
 
 ```{r, echo=FALSE}
 # define the linear model
-lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment)
+lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise,
+                  data = Experiment)
 
 # perform the ANOVA
 anova(lm.exercise)
@@ -176,23 +188,27 @@ plot(lm.exercise)
 *	The second command produces 3 plots in the graphics window and one warning stating that the Residuals vs Factor Levels plot is left out. This is because all of our groups have exactly the same number of data points.
 
 * The top left graph plots the residuals against the fitted values. There is no systematic pattern here and this plot is pretty good.
-*	The top right graph allows a visual inspection of normality. Again, this looks ok (not perfect but ok).
+*	The top right graph allows a visual inspection of normality. Again, this looks OK (not perfect but OK).
 *	The bottom left graph allows us to investigate whether there is homogeneity of variance. This plot is fine (not perfect but fine).
 
 :::note
 There is a shorthand way of writing:
+
 `Weight ~ Gender + Exercise + Gender:Exercise`
 
 If you use the following syntax:
 
-`Weight ~ Gender*Exercise`
+`Weight ~ Gender * Exercise`
 
 Then R interprets it exactly the same way as writing all three terms.
 You can see this if you compare the output of the following two commands:
 
 ```{r}
-anova(lm(Weight ~ Gender + Exercise + Gender:Exercise, data = Experiment))
-anova(lm(Weight ~ Gender * Exercise, data= Experiment))
+anova(lm(Weight ~ Gender + Exercise + Gender:Exercise,
+         data = Experiment))
+
+anova(lm(Weight ~ Gender * Exercise,
+         data = Experiment))
 ```
 :::
 
@@ -218,7 +234,7 @@ For each combination of cell type and substance concentration we add the substan
 cells <- read_csv("data/examples/cs4-cells.csv")
 
 # let's have a peek at the data
-cells
+head(cells)
 ```
 
 <details><summary>Answer</summary>
@@ -236,10 +252,14 @@ boxplot(cell_number ~ cell_type,
 Let's look at the interaction plots:
 ```{r}
 # by cell type
-interaction.plot(cells$concentration, cells$cell_type, cells$cell_number)
+interaction.plot(cells$concentration,
+                 cells$cell_type,
+                 cells$cell_number)
 
 # by concentration
-interaction.plot(cells$cell_type, cells$concentration, cells$cell_number)
+interaction.plot(cells$cell_type,
+                 cells$concentration,
+                 cells$cell_number)
 ```
 
 We're constructed both box plots and we've also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren't parallel. Looking at the interaction plot with `concentration` on the x-axis, it appears that there is non difference between cell types when the concentration is `none`, but that there is a difference between cell types when the concentration is `low` or `high`.
