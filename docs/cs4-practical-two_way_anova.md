@@ -19,6 +19,25 @@
 A two-way analysis of variance is used when we have two categorical predictor variables (or factors) and a single continuous response variable. For example, when we are looking at how body `Weight` (continuous response variable in kilograms) is affected by gender (categorical variable, `Male` or `Female`) and exercise type (categorical variable, `Control` or `Runner`).
 
 
+<<<<<<< HEAD
+=======
+```
+## Rows: 20 Columns: 3
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (2): Gender, Exercise
+## dbl (1): Weight
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+>>>>>>> 00170bb3baf52ca855af7d62dae755e3c3747e26
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
@@ -264,7 +283,30 @@ For each combination of cell type and substance concentration we add the substan
 ```r
 # read in the data
 cells <- read_csv("data/examples/cs4-cells.csv")
+<<<<<<< HEAD
 
+=======
+```
+
+```
+## Rows: 18 Columns: 4
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (2): cell_type, concentration
+## dbl (2): id, cell_number
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+```r
+>>>>>>> 00170bb3baf52ca855af7d62dae755e3c3747e26
 # let's have a peek at the data
 cells
 ```
