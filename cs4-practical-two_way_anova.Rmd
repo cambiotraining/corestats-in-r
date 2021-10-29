@@ -221,17 +221,12 @@ These `data/examples/cs4-cells.csv` data are from a fictional experiment that in
 For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.
 
-```{r, warning=FALSE, message=FALSE}
-# read in the data
-cells <- read_csv("data/examples/cs4-cells.csv")
-```
-
 For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.
 
 ```{r, warning=FALSE, message=FALSE}
 # read in the data
-cells <- read_csv("data/examples/cs4-cells.csv")
+cells <- read.csv("data/examples/cs4-cells.csv")
 
 # let's have a peek at the data
 head(cells)
@@ -280,7 +275,7 @@ This shows that there is definitely a significant interaction between `concentra
 Let's check the assumptions:
 
 ```{r}
-par(mfrow=c(2,2))
+par(mfrow = c(2, 2))
 
 plot(lm1)
 ```
@@ -310,9 +305,16 @@ This dataset has three variables; `Blooms` (which is the response variable) and 
 
 ```{r}
 boxplot(Blooms ~ Water, data = tulip)
-boxplot(Blooms ~ Shade,data = tulip)
-interaction.plot(tulip$Water, tulip$Shade, tulip$Blooms)
-interaction.plot(tulip$Shade, tulip$Water, tulip$Blooms)
+
+boxplot(Blooms ~ Shade, data = tulip)
+
+interaction.plot(tulip$Water,
+                 tulip$Shade,
+                 tulip$Blooms)
+
+interaction.plot(tulip$Shade,
+                 tulip$Water,
+                 tulip$Blooms)
 ```
 
 Again, both interaction plots suggest that there might be an interaction here. Digging in a little deeper from a descriptive perspective, it looks as though that `Water` regime 1 is behaving differently to `Water` regimes 2 and 3 under different shade conditions.

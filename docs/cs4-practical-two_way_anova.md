@@ -277,7 +277,7 @@ For each combination of cell type and substance concentration we add the substan
 
 ```r
 # read in the data
-cells <- read_csv("data/examples/cs4-cells.csv")
+cells <- read.csv("data/examples/cs4-cells.csv")
 ```
 
 For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
@@ -286,22 +286,20 @@ For each combination of cell type and substance concentration we add the substan
 
 ```r
 # read in the data
-cells <- read_csv("data/examples/cs4-cells.csv")
+cells <- read.csv("data/examples/cs4-cells.csv")
 
 # let's have a peek at the data
 head(cells)
 ```
 
 ```
-## # A tibble: 6 × 4
-##      id cell_type concentration cell_number
-##   <dbl> <chr>     <chr>               <dbl>
-## 1     1 A         none                    7
-## 2     2 A         none                    9
-## 3     3 A         none                    4
-## 4     4 B         none                    5
-## 5     5 B         none                    8
-## 6     6 B         none                    9
+##   id cell_type concentration cell_number
+## 1  1         A          none           7
+## 2  2         A          none           9
+## 3  3         A          none           4
+## 4  4         B          none           5
+## 5  5         B          none           8
+## 6  6         B          none           9
 ```
 
 <details><summary>Answer</summary>
@@ -420,19 +418,23 @@ boxplot(Blooms ~ Water, data = tulip)
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 ```r
-boxplot(Blooms ~ Shade,data = tulip)
+boxplot(Blooms ~ Shade, data = tulip)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-2.png" width="672" />
 
 ```r
-interaction.plot(tulip$Water, tulip$Shade, tulip$Blooms)
+interaction.plot(tulip$Water,
+                 tulip$Shade,
+                 tulip$Blooms)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-3.png" width="672" />
 
 ```r
-interaction.plot(tulip$Shade, tulip$Water, tulip$Blooms)
+interaction.plot(tulip$Shade,
+                 tulip$Water,
+                 tulip$Blooms)
 ```
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-4.png" width="672" />

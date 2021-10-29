@@ -614,24 +614,22 @@ You can see this if you compare the output of the following two commands:</p>
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.</p>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span></code></pre></div>
+<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span></code></pre></div>
 <p>For each cell type we have a <em>control</em> experiment in which no substance is added (i.e. concentration is <code>none</code>); a <code>low</code> concentration of substance and a <code>high</code> concentration of substance. The cells are called <code>A</code> and <code>B</code>.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.</p>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
+<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
 
 <span class="co"># let's have a peek at the data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 4
-##      id cell_type concentration cell_number
-##   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;               &lt;dbl&gt;
-## 1     1 A         none                    7
-## 2     2 A         none                    9
-## 3     3 A         none                    4
-## 4     4 B         none                    5
-## 5     5 B         none                    8
-## 6     6 B         none                    9</code></pre>
+<pre><code>##   id cell_type concentration cell_number
+## 1  1         A          none           7
+## 2  2         A          none           9
+## 3  3         A          none           4
+## 4  4         B          none           5
+## 5  5         B          none           8
+## 6  6         B          none           9</code></pre>
 <details><summary>
 Answer
 </summary><p>Let’s first visualise the data:</p>
@@ -708,13 +706,17 @@ Answer
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Water</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
 <div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Shade</span>,data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Shade</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-2.png" width="672"></div>
 <div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>, <span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>, <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
+                 <span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
+                 <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-3.png" width="672"></div>
 <div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>, <span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>, <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
+                 <span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
+                 <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-4.png" width="672"></div>
 <p>Again, both interaction plots suggest that there might be an interaction here. Digging in a little deeper from a descriptive perspective, it looks as though that <code>Water</code> regime 1 is behaving differently to <code>Water</code> regimes 2 and 3 under different shade conditions.</p>
 <p>Let’s carry out the two-way ANOVA and check the assumptions. It’s worth pointing out that the order in which we carry these out doesn’t really matter as we’ll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I’m fairly relaxed about the order you do these steps.</p>

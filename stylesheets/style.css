@@ -23,7 +23,7 @@ div.campl-local-navigation-container li a:hover{color:#fff;text-decoration: none
 
 /* bookdown specific things */
 
-li.book-part{background-color:#f7f8fa} /* make the part sections headers stand out more */
+li.book-part{background-color:#f7f8fa; font-weight: bold} /* make the part sections headers stand out more */
 
 /* Boxes and exercises */
 /*@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');*/
