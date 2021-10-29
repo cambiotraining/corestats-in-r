@@ -16,6 +16,7 @@ exr:unlabeled-div-11
 exr:unlabeled-div-12
 exr:unlabeled-div-13
 exr:unlabeled-div-14
+exr:unlabeled-div-15
 overview
 core-aims
 core-topics
@@ -163,3 +164,17 @@ assumptions-9
 exercise-cells
 exercise-tulips
 key-points-6
+linear-regression-with-grouped-data
+objectives-11
+purpose-and-aim-7
+section-commands-11
+data-and-hypotheses-10
+summarise-and-visualise-10
+implemention
+interpret-output-and-present-results
+finding-intercept-values
+adding-multiple-regression-lines
+assumptions-10
+dealing-with-interaction
+exercise-clover-and-yarrow
+key-points-7

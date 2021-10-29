@@ -370,6 +370,7 @@
 <li class="book-part">CoreStats 4 (Practicals)</li>
 <li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
 <li><a class="active" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
+<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></li>
 </ul>
 
         <div class="book-extra">
@@ -612,12 +613,9 @@ You can see this if you compare the output of the following two commands:</p>
 <p>These <code>data/examples/cs4-cells.csv</code> data are from a fictional experiment that involves looking at the effect of different concentrations of a substance on the growth rate of two different cell types (all annoyingly vague I know – suggestions for context are welcome here!). There are two cell types and three concentrations.</p>
 <p>For each cell type we have a <em>control</em> experiment in which no substance is added (i.e. concentration is <code>none</code>); a <code>low</code> concentration of substance and a <code>high</code> concentration of substance. The cells are called <code>A</code> and <code>B</code>.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.</p>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span></code></pre></div>
 <p>For each cell type we have a <em>control</em> experiment in which no substance is added (i.e. concentration is <code>none</code>); a <code>low</code> concentration of substance and a <code>high</code> concentration of substance. The cells are called <code>A</code> and <code>B</code>.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.</p>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
 
@@ -633,30 +631,30 @@ For each combination of cell type and substance concentration we add the substan
 <details><summary>
 Answer
 </summary><p>Let’s first visualise the data:</p>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">concentration</span>,
         data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">cell_type</span>,
         data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672"></div>
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-2.png" width="672"></div>
 <p>Let’s look at the interaction plots:</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by cell type</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by concentration</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672"></div>
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672"></div>
 <p>We’re constructed both box plots and we’ve also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren’t parallel. Looking at the interaction plot with <code>concentration</code> on the x-axis, it appears that there is non difference between cell types when the concentration is <code>none</code>, but that there is a difference between cell types when the concentration is <code>low</code> or <code>high</code>.</p>
 <p>Let’s carry out a two-way ANOVA:</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model, with interaction term</span>
 <span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">concentration</span> <span class="op">*</span> <span class="va">cell_type</span>,
           data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span>
@@ -675,13 +673,13 @@ Answer
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>This shows that there is definitely a significant interaction between <code>concentration</code> and <code>cell_type</code>.</p>
 <p>Let’s check the assumptions:</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></code></pre></div>
 <pre><code>## hat values (leverages) are all = 0.3333333
 ##  and there are no factor predictors; no plot no. 5</code></pre>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>So, these actually all look pretty good, although at first glance you might be a bit worried by some apparent heterogeneity of variance. The last group in the <code>Residuals vs fitted</code> graph does appear to be more spread out then the other 5 groups. This is echoed in the <code>Scale-Location</code> graph, where the red line kicks up at the end. Whilst this does technically signify that there is heterogeneity of variance we aren’t too worried by this because there are only three data points per group. Because of this low number of data points per group when we get one data point that is a little bit more extreme than the others (purely by chance) then this has a large impact on our perception of the homogeneity of variance. If there were more data points in each group then we would be more certain that any observed heterogeneity of variance was a true feature of the underlying parent population (and therefore a problem) rather than just being caused by a single random point (and therefore not a problem).</p>
 </details>
 </div>
@@ -698,29 +696,29 @@ Answer
 </ul>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-tulip.csv"</span><span class="op">)</span></code></pre></div>
 <p>This dataset has three variables; <code>Blooms</code> (which is the response variable) and <code>Water</code> and <code>Shade</code> (which are the two potential predictor variables). As always we’ll visualise the data first:</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Water</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Shade</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-2.png" width="672"></div>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-2.png" width="672"></div>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-3.png" width="672"></div>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-3.png" width="672"></div>
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-4.png" width="672"></div>
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-4.png" width="672"></div>
 <p>Again, both interaction plots suggest that there might be an interaction here. Digging in a little deeper from a descriptive perspective, it looks as though that <code>Water</code> regime 1 is behaving differently to <code>Water</code> regimes 2 and 3 under different shade conditions.</p>
 <p>Let’s carry out the two-way ANOVA and check the assumptions. It’s worth pointing out that the order in which we carry these out doesn’t really matter as we’ll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I’m fairly relaxed about the order you do these steps.</p>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Water</span> <span class="op">*</span> <span class="va">Shade</span>,
                data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span>
@@ -739,10 +737,10 @@ Answer
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>So we do appear to have a significant interaction between <code>Water</code> and <code>Shade</code> as expected.</p>
 <p>Let’s check the assumptions:</p>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.tulip</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-23-1.png" width="672"></div>
+<div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
 <p>These are actually all OK. Point number 8 is messing with the homogeneity of variance assumption a little bit, but since it’s only one point we won’t worry about it. Our 2-way ANOVA analysis stands.</p>
 </details>
 </div>
@@ -763,7 +761,7 @@ Answer
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></div>
-<div class="empty"></div>
+<div class="next"><a href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

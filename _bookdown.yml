@@ -29,6 +29,7 @@ rmd_files: [
   "cs4-intro.Rmd",
   "cs4-practical-introduction.Rmd",
   "cs4-practical-two_way_anova.Rmd",
+  "cs4-practical-linear-regression-grouped-data.Rmd",
 ]
 
 language:
