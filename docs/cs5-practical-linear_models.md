@@ -363,19 +363,280 @@ Temperature clearly does not have a significant effect.
 Again, check the assumptions of this temperature only model. Do they differ significantly from the previous models?
 :::
 
-## Assumptions
+### The null model
+Construct and analyse the null model:
 
-## Interpret output and present results
 
-## Exercise
+```r
+# define the null model
+lm.null <- lm(H2S ~ 1, data = airpoll)
+
+# visualise the data
+boxplot(airpoll$H2S)
+```
+
+<img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+
+```r
+# view the model
+lm.null
+```
+
+```
+## 
+## Call:
+## lm(formula = H2S ~ 1, data = airpoll)
+## 
+## Coefficients:
+## (Intercept)  
+##       5.735
+```
+
+* The first line fits a null model to the data (effectively just finding the mean of all H<sup>2</sup>S values in the dataset)
+* The second line creates a box plot
+* The third line gives us the mean of the H<sup>2</sup>S values (i.e. the coefficient of the null model)
+
+The null model by itself is rarely analysed for its own sake but is instead used a reference point for more sophisticated model selection techniques.
+
+## Exercise: trees
 :::exercise
-Exercise title
+Trees: an example with only continuous variables
 
-Exercise description
+Use the internal dataset trees. This is a data frame with 31 observations of 3 continuous variables. The variables are the height `Height`, diameter `Girth` and timber volume `Volume` of 31 felled black cherry trees.
+
+Investigate the relationship between `Volume` (as a dependent variable) and `Height` and `Girth` (as predictor variables).
+
+* Here all variables are continuous and so there isn’t a way of producing a 2D plot of all three variables for visualisation purposes using R’s standard plotting functions.
+* construct four linear models
+    * Assume volume depends on `Height`, `Girth` and an interaction between `Girth` and `Height`
+    * Assume `Volume` depends on `Height` and `Girth` but that there isn’t any interaction between them.
+    * Assume `Volume` only depends on `Girth` (plot the result, with the regression line).
+    * Assume `Volume` only depends on `Height` (plot the result, with the regression line).
+* For each linear model write down the algebraic equation that the linear model produces that relates volume to the two continuous predictor variables.
+* Check the assumptions of each model. Do you have any concerns?
+
+NB: For two continuous predictors, the interaction term is simply the two values multiplied together (so `Girth:Height` means `Girth x Height`)
+
+* Use the equations to calculate the predicted volume of a tree that has a diameter of 20 inches and a height of 67 feet in each case.
 
 <details><summary>Answer</summary>
 
-An elaborate answer
+Let's construct the four linear models in turn.
+
+### Full model
+
+The r commands are:
+
+
+```r
+# define the model
+lm.full <- lm(Volume ~ Height * Girth,
+              data = trees)
+
+# view the model
+lm.full
+```
+
+This gives us the following output:
+
+
+```
+## 
+## Call:
+## lm(formula = Volume ~ Height * Girth, data = trees)
+## 
+## Coefficients:
+##  (Intercept)        Height         Girth  Height:Girth  
+##      69.3963       -1.2971       -5.8558        0.1347
+```
+
+We can use this output to get the following equation:
+
+Volume = 69.40 + -1.30$\cdot$Height + -5.86$\cdot$Girth + 0.13$\cdot$Height$\cdot$Girth
+
+If we stick the numbers in (`Girth = 20` and `Height = 67`) we get the following equation:
+
+Volume = 69.40 + -1.30 $\cdot$ 67 + -5.86 $\cdot$ 20 + 0.13 $\cdot$ 67 $\cdot$ 20
+
+Volume =  45.81
+
+Here we note that the interaction term just requires us to multiple the three numbers together (we haven't looked at continuous predictors before in the examples and this exercise was included as a check to see if this whole process was making sense).
+
+If we look at the diagnostic plots for the model using the following commands we get:
+
+
+```r
+par(mfrow = c(2, 2))
+
+plot(lm.full)
+```
+
+<img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+
+All assumptions are OK.
+
+* There is some suggestion of heterogeneity of variance (with the variance being lower for small and large fitted (i.e. predicted Volume) values), but that can be attributed to there only being a small number of data points at the edges, so I'm not overly concerned.
+* Similarly, there is a suggestion of snaking in the Normal Q-Q plot (suggesting some lack of normality) but this is mainly due to the inclusion of point 18 and overall the plot looks acceptable.
+* There are no highly influential points
+
+### Additive model
+
+The r commands are:
+
+
+```r
+# define the model
+lm.add <- lm(Volume ~ Height + Girth,
+             data = trees)
+
+# view the model
+lm.add
+```
+
+These gives us the following output:
+
+
+```
+## 
+## Call:
+## lm(formula = Volume ~ Height + Girth, data = trees)
+## 
+## Coefficients:
+## (Intercept)       Height        Girth  
+##    -57.9877       0.3393       4.7082
+```
+
+We can use this output to get the following equation:
+
+Volume = -57.99 + 0.34$\cdot$Height + 4.71$\cdot$Girth
+
+If we stick the numbers in (`Girth = 20` and `Height = 67`) we get the following equation:
+
+Volume = -57.99 + 0.34 $\cdot$ 67 + 4.71 $\cdot$ 20
+
+Volume =  58.91
+
+If we look at the diagnostic plots for the model using the following commands we get the following:
+
+
+```r
+par(mfrow = c(2, 2))
+
+plot(lm.add)
+```
+
+<img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+
+This model isn't great.
+
+* There is a worrying lack of linearity exhibited in the Residuals vs Fitted plot suggesting that this linear model isn't appropriate.
+* Assumptions of Normality seem OK
+* Equality of variance is harder to interpret. Given the lack of linearity in the data it isn't really sensible to interpret the Scale-Location plot as it stands (since the plot is generated assuming that we've fitted a straight line through the data), but for the sake of practising interpretation we'll have a go. There is definitely suggestions of homogeneity of variance here with a cluster of points with fitted values of around 20 having noticeably lower variance than the rest of the dataset.
+* Point 31 is influential and if there weren't issues with the linearity of the model I would remove this point and repeat the analysis. As it stands there isn't much point.
+
+### Height-only model
+
+The r commands are:
+
+
+```r
+# define the model
+lm.height <- lm(Volume ~ Height,
+              data = trees)
+
+# view the model
+lm.height
+```
+
+These gives us the following output:
+
+
+```
+## 
+## Call:
+## lm(formula = Volume ~ Height, data = trees)
+## 
+## Coefficients:
+## (Intercept)       Height  
+##     -87.124        1.543
+```
+
+We can use this output to get the following equation:
+
+Volume = -87.12 + 1.54$\cdot$Height
+
+If we stick the numbers in (`Girth = 20` and `Height = 67`) we get the following equation:
+
+Volume = -87.12 + 1.54 $\cdot$ 67
+
+Volume =  16.28
+
+If we look at the diagnostic plots for the model using the following commands we get the following:
+
+
+```r
+par(mfrow = c(2, 2))
+
+plot(lm.height)
+```
+
+<img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
+This model also isn't great.
+
+* The main issue here is the clear heterogeneity of variance. For trees with bigger volumes the data are much more spread out than for trees with smaller volumes (as can be seen clearly from the Scale-Location plot).
+* Apart from that, the assumption of Normality seems OK
+* And there aren't any hugely influential points in this model
+
+### Girth-only model
+
+The r commands are:
+
+
+```r
+# define the model
+lm.girth <- lm(Volume ~ Girth,
+               data = trees)
+
+# view the model
+lm.girth
+```
+
+These gives us the following output:
+
+
+```
+## 
+## Call:
+## lm(formula = Volume ~ Girth, data = trees)
+## 
+## Coefficients:
+## (Intercept)        Girth  
+##     -36.943        5.066
+```
+
+We can use this output to get the following equation:
+
+Volume = -36.94 + 5.07$\cdot$Girth
+
+If we stick the numbers in (`Girth = 20` and `Height = 67`) we get the following equation:
+
+Volume = -36.94 + 5.07 $\cdot$ 20
+
+Volume =  64.37
+
+If we look at the diagnostic plots for the model using the following commands we get the following:
+
+
+```r
+par(mfrow = c(2, 2))
+
+plot(lm.girth)
+```
+
+<img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+
+The diagnostic plots here look rather similar to the ones we generated for the additive model and we have the same issue with a lack of linearity, heterogeneity of variance and point 31 being influential.
 
 </details>
 :::

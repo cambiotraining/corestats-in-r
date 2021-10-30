@@ -199,9 +199,12 @@ exploring-models
 additive-model
 revisiting-anova
 revisiting-regression
-assumptions-11
-interpret-output-and-present-results-1
-exercise-12
+the-null-model
+exercise-trees
+full-model
+additive-model-1
+height-only-model
+girth-only-model
 key-points-8
 model-comparisons
 objectives-14
@@ -209,8 +212,8 @@ purpose-and-aim-9
 section-commands-13
 data-and-hypotheses-12
 summarise-and-visualise-12
-assumptions-12
+assumptions-11
 implemention-2
-interpret-output-and-present-results-2
-exercise-13
+interpret-output-and-present-results-1
+exercise-12
 key-points-9
