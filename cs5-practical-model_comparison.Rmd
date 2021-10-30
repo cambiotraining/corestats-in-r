@@ -1,4 +1,8 @@
-# Topic
+```{r, echo=FALSE}
+source(file = "setup.R")
+```
+
+# Model comparisons
 
 ## Objectives
 :::objectives

@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 4 One-sample tests | Core Statistics in R</title>
+<title>Chapter 26 Linear models | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="description" content="26.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   26.2 Purpose and aim Revisiting the linear model framework and expanding to systems with three predictor variables. ...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 4 One-sample tests | Core Statistics in R">
+<meta property="og:title" content="Chapter 26 Linear models | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta property="og:description" content="26.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   26.2 Purpose and aim Revisiting the linear model framework and expanding to systems with three predictor variables. ...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 One-sample tests | Core Statistics in R">
-<meta name="twitter:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="twitter:title" content="Chapter 26 Linear models | Core Statistics in R">
+<meta name="twitter:description" content="26.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   26.2 Purpose and aim Revisiting the linear model framework and expanding to systems with three predictor variables. ...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -345,7 +345,7 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="active" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
 <li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
 <li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
 <li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
@@ -375,7 +375,7 @@
 <li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
 <li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
-<li><a class="" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
+<li><a class="active" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
 </ul>
 
@@ -384,70 +384,415 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-one-sample-tests" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-models" class="section level1" number="26">
 <h1>
-<span class="header-section-number">4</span> One-sample tests<a class="anchor" aria-label="anchor" href="#cs1-one-sample-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">26</span> Linear models<a class="anchor" aria-label="anchor" href="#linear-models"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-1" class="section level2" number="4.1">
+<div id="objectives-13" class="section level2" number="26.1">
 <h2>
-<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">26.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-13"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>When do I perform a one-sample test?</li>
-<li>Which one-sample tests are there and what are the assumptions?</li>
-<li>How do I interpret and present the results of the tests?</li>
+<li>How do I…</li>
+<li>What do I…</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Set out your hypothesis for single sample continuous data</li>
-<li>Be able to summarise and visualise the data in R</li>
-<li>Understand and assess the underlying assumptions of the tests</li>
-<li>Perform a one-sample t-test and Wilcoxon signed-rank test in R</li>
-<li>Know which test is appropriate when</li>
-<li>Be able to interpret and report the results</li>
+<li>Be able to…</li>
+<li>Use…</li>
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim" class="section level2" number="4.2">
+<div id="purpose-and-aim-8" class="section level2" number="26.2">
 <h2>
-<span class="header-section-number">4.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
+<span class="header-section-number">26.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-8"><i class="fas fa-link"></i></a>
 </h2>
-<p>These tests are used when we have a single sample of continuous data. It is used to find out if the sample came from a parent distribution with a given mean (or median). This essentially boils down to finding out if the sample mean (or median) is “close enough” to our hypothesised parent population mean (or median).
-So, in the figure below, we could use these tests to see what the probability is that the sample of ten points comes from the distribution plotted above it i.e. a population with a mean of 20 mm.</p>
-<div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-intro-1.png" width="672"></div>
+<p>Revisiting the linear model framework and expanding to systems with three predictor variables.</p>
 </div>
-<div id="choosing-a-test" class="section level2" number="4.3">
+<div id="section-commands-12" class="section level2" number="26.3">
 <h2>
-<span class="header-section-number">4.3</span> Choosing a test<a class="anchor" aria-label="anchor" href="#choosing-a-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">26.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-12"><i class="fas fa-link"></i></a>
 </h2>
-<p>There are two tests that we are going to look at in this situation; the one-sample t-test, and the one-sample Wilcoxon signed rank test. Both tests work on the sort of data that we’re considering here, but they both have different assumptions.</p>
-<p>If your data is normally distributed, then a one-sample t-test is appropriate. If your data aren’t normally distributed, but their distribution is symmetric, and the sample size is small then a one-sample Wilcoxon signed rank test is more appropriate.</p>
-<p>For each statistical test we consider there will be five tasks. These will come back again and again, so pay extra close attention.</p>
-<div class="highlight">
-<ol style="list-style-type: decimal">
-<li>Setting out of the hypothesis</li>
-<li>Summarise and visualisation of the data</li>
-<li>Assessment of assumptions</li>
-<li>Implementation of the statistical test</li>
-<li>Interpreting the output and presentation of results</li>
-</ol>
+<p>Commands used in this section</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></td>
+<td align="left">Constructs a linear model according to the formula specified</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/base/subset.html">subset()</a></code></td>
+<td align="left">Extracts a subset of the data</td>
+</tr>
+</tbody>
+</table></div>
 </div>
-<p>We won’t always carry these out in exactly the same order, but we will always consider each of the five tasks for every test.</p>
+<div id="data-and-hypotheses-11" class="section level2" number="26.4">
+<h2>
+<span class="header-section-number">26.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-11"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first section uses the following dataset:
+<code>data/raw/CS5-H2S.csv</code>. This is a dataset comprising 16 observations of three variables (one dependent and two predictor). This records the air pollution caused by H<sub>2</sub>S produced by two types of waste treatment plants. For both types of plant, we obtain eight measurements each of H<sub>2</sub>S production (ppm). We also obtain information on the daily temperature (C). The data are stacked.</p>
+</div>
+<div id="summarise-and-visualise-11" class="section level2" number="26.5">
+<h2>
+<span class="header-section-number">26.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-11"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s first load the data:</p>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS5-H2S.csv"</span><span class="op">)</span></code></pre></div>
+<p>Next, visualise the data:</p>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a plot canvas without data points</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
+     data <span class="op">=</span> <span class="va">airpoll</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
+
+<span class="co"># subset plant A</span>
+<span class="va">PlantA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">airpoll</span>, subset <span class="op">=</span> <span class="op">(</span><span class="va">Plant</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">PlantB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">airpoll</span>, subset <span class="op">=</span> <span class="op">(</span><span class="va">Plant</span> <span class="op">==</span> <span class="st">"B"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>, <span class="va">PlantA</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>, <span class="va">PlantB</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<ul>
+<li>The first line plots all of the H<sub>2</sub>S values against the temperature values from the <code>airpoll</code> dataset regardless of which plant they are from. However it neglects to actually put the points on the screen (the argument type=n prevents the actual plotting of data). This command is used simply to create a plotting region of the correct size and extent for later.</li>
+<li>The second and third lines create subsets of the data frame <code>airpoll</code>. The second line extracts all observations from the subset of <code>airpoll</code> that has the <code>Plant</code> variable equal to <code>A</code> (via the <code>subset = (Plant == "A"</code>) argument).</li>
+<li>The fourth and fifth lines add these subsetted points to the graph window using different colours and characters so that the data points for each plant can be distinguished.</li>
+</ul>
+<p>It looks as though the variable <code>Plant</code> has an effect on H<sub>2</sub>S emissions (as one cloud of points is higher than the other). there is also a suggestion that temperature might affect emissions (both data sets look like the gradient of the line of best fit through their respective cloud might not be zero) and it also appears that there might be an interaction between <code>Plant</code> and <code>Temperature</code> (the gradient of the two lines of best fit don’t look like they’ll be that similar).</p>
+</div>
+<div id="implemention-1" class="section level2" number="26.6">
+<h2>
+<span class="header-section-number">26.6</span> Implemention<a class="anchor" aria-label="anchor" href="#implemention-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Construct and analyse a full linear model.</p>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define the linear model with all terms and interactions</span>
+<span class="va">lm.full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Plant</span><span class="op">:</span><span class="va">Temp</span>,
+              data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
+
+<span class="co"># view the model</span>
+<span class="va">lm.full</span>
+
+<span class="co"># perform an ANOVA</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.full</span><span class="op">)</span>
+
+<span class="co"># plot the model</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.full</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first line creates a linear model that seeks to explain the H<sub>2</sub>S values in terms of the categorical <code>Plant</code> variable, the continuous <code>Temp</code> variable and the interaction between the two variables. This linear model object is given the name <code>lm.full</code>
+</li>
+<li>The first argument <code>H2S ~ Plant + Temp + Plant:Temp</code> is a formula that summarises the model to be fit. Here H<sub>2</sub>S is the dependent variable and we are asking R to use the <code>Plant</code>, <code>Temp</code> and <code>Plant:Temp</code> interaction terms as predictor variables.</li>
+<li>The second line produces the following output:</li>
+</ul>
+<pre><code>## 
+## Call:
+## lm(formula = H2S ~ Plant + Temp + Plant:Temp, data = airpoll)
+## 
+## Coefficients:
+## (Intercept)       PlantB         Temp  PlantB:Temp  
+##     6.20495     -2.73075     -0.05448      0.18141</code></pre>
+<p>This gives us the coefficients of the model:</p>
+<pre><code>## # A tibble: 4 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   6.20  
+## 2 PlantB       -2.73  
+## 3 Temp         -0.0545
+## 4 PlantB:Temp   0.181</code></pre>
+<p>These are best interpreted by using the linear model notation:</p>
+<p><span class="math display">\[\begin{equation}
+H_2S = 6.20495 - 0.05448 \cdot Temp + \binom{0}{-2.73075}\binom{PlantA}{PlantB} + \binom{0}{0.18141 \cdot Temp}\binom{PlantA}{PlantB}
+\end{equation}\]</span></p>
+<p>This is effectively shorthand for writing down the equation of the two straight lines (one for each categorical variable):</p>
+<p><span class="math display">\[\begin{equation}
+PlantA = 6.20495 - 0.05448 \cdot Temp
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+PlantB = 3.4742 + 0.12693 \cdot Temp
+\end{equation}\]</span></p>
+<ul>
+<li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova(lm.full)</a></code> produces the following output:</li>
+</ul>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: H2S
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Plant       1 13.3225 13.3225 54.1557 8.746e-06 ***
+## Temp        1  0.2316  0.2316  0.9415   0.35104    
+## Plant:Temp  1  1.4470  1.4470  5.8822   0.03201 *  
+## Residuals  12  2.9520  0.2460                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Here we can see that the interaction term appears to be marginally significant, implying that the effect of temperature on H<sub>2</sub>S is different for the two different plants.</p>
+<p>Finally, plotting the <code>lm.full</code> model shows us the diagnostic plots:</p>
+<div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+</div>
+<div id="exploring-models" class="section level2" number="26.7">
+<h2>
+<span class="header-section-number">26.7</span> Exploring models<a class="anchor" aria-label="anchor" href="#exploring-models"><i class="fas fa-link"></i></a>
+</h2>
+<p>Rather than stop here however, we will use the concept of the linear model to its full potential and show that we can construct and analyse any possible combination of predictor variables for this dataset. Namely we will consider the following four extra models:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Model</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1. <code>H2S ~ Plant + Temp</code>
+</td>
+<td align="left">An additive model</td>
+</tr>
+<tr class="even">
+<td align="left">2. <code>H2S ~ Plant</code>
+</td>
+<td align="left">Equivalent to a one-way ANOVA</td>
+</tr>
+<tr class="odd">
+<td align="left">3. <code>H2S ~ Temp</code>
+</td>
+<td align="left">Equivalent to a simple linear regression</td>
+</tr>
+<tr class="even">
+<td align="left">4. <code>H2S ~ 1</code>
+</td>
+<td align="left">The null model, where we have no predictors</td>
+</tr>
+</tbody>
+</table></div>
+<div id="additive-model" class="section level3" number="26.7.1">
+<h3>
+<span class="header-section-number">26.7.1</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>Construct and analyse the additive linear model.</p>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define the linear model</span>
+<span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span>,
+             data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
+
+<span class="co"># view the linear model</span>
+<span class="va">lm.add</span>
+
+<span class="co"># perform an ANOVA on the model</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.add</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first line creates a linear model that seeks to explain the <code>H2S</code> values purely in terms of the categorical <code>Plant</code> variable and the continuous <code>Temp</code> variable.</li>
+<li>The second line produces the following output:</li>
+</ul>
+<pre><code>## 
+## Call:
+## lm(formula = H2S ~ Plant + Temp, data = airpoll)
+## 
+## Coefficients:
+## (Intercept)       PlantB         Temp  
+##     3.90164      1.83861      0.03629</code></pre>
+<p>This gives us the coefficients of the additive model:</p>
+<pre><code>## # A tibble: 3 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   3.90  
+## 2 PlantB        1.84  
+## 3 Temp          0.0363</code></pre>
+<p>These are best interpreted by using the linear model notation:</p>
+<p><span class="math display">\[\begin{equation}
+H_S = 3.9 + 0.036 \cdot Temp + \binom{0}{1.8} \binom{PlantA}{PlantB}
+\end{equation}\]</span></p>
+<p>This is effectively shorthand for writing down the equation of the two straight lines (one for each categorical variable):</p>
+<p><span class="math display">\[\begin{equation}
+H_2S_{PlantA} = 3.9 + 0.036 \cdot Temp
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
+\end{equation}\]</span></p>
+<p>What is very important to note is not so much that the coefficients have changed (it is natural to assume that there would be some change in the model given that we’ve altered the predictor variables included). What is striking here is that the <strong>signs</strong> of the coefficients have changed! For example, in the full model we saw that the coefficient of <code>PlantB</code> was negative (implying that in general <code>PlantB</code> produced lower H<sub>2</sub>S values than <code>PlantA</code> by default) whereas now it is positive indicating exactly the opposite effect. Given that the difference between the two models was the inclusion of an interaction term which we saw was significant in the analysis of the full model, it perhaps, is not surprising that dropping this term would lead to very different results.</p>
+<p>But just imagine if we had never included it in the first place! If we only looked at the additive model we would come out with completely different conclusions about the baseline pollution levels of each plant.</p>
+<ul>
+<li>The 3rd line produces the following output:</li>
+</ul>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: H2S
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Plant      1 13.3225 13.3225 39.3702 2.858e-05 ***
+## Temp       1  0.2316  0.2316  0.6845     0.423    
+## Residuals 13  4.3991  0.3384                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Here we can see that the temperature term is not significant, whereas the <code>Plant</code> term is very significant indeed.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 26.1  </strong></span>Check the assumptions of this additive model. Do they differ significantly from the full model?</p>
+</div>
+</div>
+<div id="revisiting-anova" class="section level3" number="26.7.2">
+<h3>
+<span class="header-section-number">26.7.2</span> Revisiting ANOVA<a class="anchor" aria-label="anchor" href="#revisiting-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>Construct and analyse only the effect of <code>Plant</code>:</p>
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visualise the data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
+        data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define the linear model</span>
+<span class="va">lm.Plant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
+               data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
+
+<span class="co"># view the linear model</span>
+<span class="va">lm.Plant</span>
+
+<span class="co"># perform an ANOVA on the model</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.Plant</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first line creates a box plot:</li>
+</ul>
+<div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+<ul>
+<li>The second line fits a linear model to the data</li>
+<li>The third line gives us the model coefficients:</li>
+</ul>
+<pre><code>## 
+## Call:
+## lm(formula = H2S ~ Plant, data = airpoll)
+## 
+## Coefficients:
+## (Intercept)       PlantB  
+##       4.823        1.825</code></pre>
+<p>In this case it tells us the means of the groups. <code>(Intercept)</code> is the mean of the PlantA H2S data (4.8225) whilst <code>PlantB</code> tells us that the mean of the Plant B H2S data is 1.8250 more than the intercept value i.e. the mean of <code>PlantB</code> is 4.8225 + 1.8250 = 6.6475.</p>
+<ul>
+<li>The fourth line gives us the normal ANOVA table for testing whether the means of the two groups differ significantly from each other.</li>
+</ul>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: H2S
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Plant      1 13.3225 13.3225  40.278 1.809e-05 ***
+## Residuals 14  4.6307  0.3308                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 26.2  </strong></span>Check the assumptions of this plant only model. Do they differ significantly from the previous models?</p>
+</div>
+</div>
+<div id="revisiting-regression" class="section level3" number="26.7.3">
+<h3>
+<span class="header-section-number">26.7.3</span> Revisiting regression<a class="anchor" aria-label="anchor" href="#revisiting-regression"><i class="fas fa-link"></i></a>
+</h3>
+<p>Construct a simple linear regression model:</p>
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define the linear model</span>
+<span class="va">lm.Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
+              data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
+
+<span class="co"># create a scatter plot of the data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>, data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
+<span class="co"># and add a line of best fit</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lm.Temp</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># view the model</span>
+<span class="va">lm.Temp</span>
+
+<span class="co"># perform an ANOVA on the model</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.Temp</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>The first line fits a linear model to the data</li>
+<li>The second line creates a scatter plot</li>
+<li>The third line uses the results of the linear model fitting (<code>lm.Temp</code>) to add a line of best fit to the scatter plot.</li>
+</ul>
+<div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
+<ul>
+<li>The fourth line gives us the coefficients to the equation of the line of best fit</li>
+</ul>
+<pre><code>## 
+## Call:
+## lm(formula = H2S ~ Temp, data = airpoll)
+## 
+## Coefficients:
+## (Intercept)         Temp  
+##     5.21465      0.02066</code></pre>
+<p>In this case it tells us the intercept <code>(Intercept)</code> and the gradient (<code>Temp</code>) of the line of best fit.</p>
+<ul>
+<li>The fifth line gives us the ANOVA analysis:</li>
+</ul>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: H2S
+##           Df  Sum Sq Mean Sq F value Pr(&gt;F)
+## Temp       1  0.0753  0.0753   0.059 0.8117
+## Residuals 14 17.8779  1.2770</code></pre>
+<p>Temperature clearly does not have a significant effect.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 26.3  </strong></span>Again, check the assumptions of this temperature only model. Do they differ significantly from the previous models?</p>
+</div>
+</div>
+</div>
+<div id="assumptions-11" class="section level2" number="26.8">
+<h2>
+<span class="header-section-number">26.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-11"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="interpret-output-and-present-results-1" class="section level2" number="26.9">
+<h2>
+<span class="header-section-number">26.9</span> Interpret output and present results<a class="anchor" aria-label="anchor" href="#interpret-output-and-present-results-1"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="exercise-12" class="section level2" number="26.10">
+<h2>
+<span class="header-section-number">26.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-12"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 26.4  </strong></span>Exercise title</p>
+<p>Exercise description</p>
+<details><summary>
+Answer
+</summary><p>An elaborate answer</p>
+</details>
+</div>
+</div>
+<div id="key-points-8" class="section level2" number="26.11">
+<h2>
+<span class="header-section-number">26.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-8"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
-<div class="next"><a href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></div>
+<div class="prev"><a href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></div>
+<div class="next"><a href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-one-sample-tests"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="nav-link" href="#objectives-1"><span class="header-section-number">4.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">4.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#choosing-a-test"><span class="header-section-number">4.3</span> Choosing a test</a></li>
+<li><a class="nav-link" href="#linear-models"><span class="header-section-number">26</span> Linear models</a></li>
+<li><a class="nav-link" href="#objectives-13"><span class="header-section-number">26.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-8"><span class="header-section-number">26.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-12"><span class="header-section-number">26.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-11"><span class="header-section-number">26.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-11"><span class="header-section-number">26.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implemention-1"><span class="header-section-number">26.6</span> Implemention</a></li>
+<li>
+<a class="nav-link" href="#exploring-models"><span class="header-section-number">26.7</span> Exploring models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#additive-model"><span class="header-section-number">26.7.1</span> Additive model</a></li>
+<li><a class="nav-link" href="#revisiting-anova"><span class="header-section-number">26.7.2</span> Revisiting ANOVA</a></li>
+<li><a class="nav-link" href="#revisiting-regression"><span class="header-section-number">26.7.3</span> Revisiting regression</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#assumptions-11"><span class="header-section-number">26.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#interpret-output-and-present-results-1"><span class="header-section-number">26.9</span> Interpret output and present results</a></li>
+<li><a class="nav-link" href="#exercise-12"><span class="header-section-number">26.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-8"><span class="header-section-number">26.11</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
