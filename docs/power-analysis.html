@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chapter 2 Power analysis | Core Statistics in R</title>
+<meta name="author" content="Matt Castle and Martin van Rongen">
+<meta name="description" content="2.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   2.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Power analysis | Core Statistics in R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   2.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Power analysis | Core Statistics in R">
+<meta name="twitter:description" content="2.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   2.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/full-stylesheet.css">
+<link rel="stylesheet" href="stylesheets/styleguide.css">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<!--[if lt IE 7]>
+<div class="lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<div class="lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<div class="lt-ie9">
+<![endif]-->
+
+	<a href="#primary-nav" class="campl-skipTo">skip to primary navigation</a>
+	<a href="#content" class="campl-skipTo">skip to content</a>
+	<div class="campl-row campl-global-header">
+		<div class="campl-wrap clearfix">
+			<div class="campl-header-container campl-column8" id="global-header-controls">
+				<a href="http://www.cam.ac.uk" class="campl-main-logo">
+					<img alt="University of Cambridge" src="images/interface/main-logo-small.png" height="38px;"></a>
+
+				<ul class="campl-unstyled-list campl-horizontal-navigation campl-global-navigation clearfix">
+<li>
+						<a href="#study-with-us">Study at Cambridge</a>
+					</li>
+					<li>
+						<a href="#about-the-university">About the University</a>
+					</li>
+					<li>
+						<a href="http://www.cam.ac.uk/research" class="campl-no-drawer">Research at Cambridge</a>
+					</li>
+				</ul>
+</div>
+
+			<div class="campl-column2">
+				<div class="campl-quicklinks">
+				</div>
+			</div>
+
+			<div class="campl-column2">
+
+				<div class="campl-site-search" id="site-search-btn">
+
+					<label for="header-search" class="hidden">Search site</label>
+					<div class="campl-search-input">
+						<form action="http://search.cam.ac.uk/web" method="get">
+						<input id="header-search" type="text" name="query" value="" placeholder="Search"><input type="image" class="campl-search-submit " src="images/interface/btn-search-header.png">
+</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="campl-row campl-global-header campl-search-drawer">
+		<div class="campl-wrap clearfix">
+			<form class="campl-site-search-form" id="site-search-container" action="">
+				<div class="campl-search-form-wrapper clearfix">
+					<input type="text" class="text" placeholder="Search"><input type="image" class="campl-search-submit" src="images/interface/btn-search.png">
+</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="campl-row campl-global-navigation-drawer">
+
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-home-link-container">
+				<a href="">Home</a>
+			</div>
+		</div>
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12 campl-global-navigation-mobile-list campl-global-navigation-list">
+				<div class="campl-global-navigation-outer clearfix" id="study-with-us">
+					<ul class="campl-unstyled-list campl-global-navigation-header-container ">
+<li><a href="http://www.cam.ac.uk/study-at-cambridge">Study at Cambridge</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="http://www.study.cam.ac.uk/undergraduate/">Undergraduate</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/courses">Courses</a>
+									</li>
+									<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/applying">Applying</a>
+									</li>
+									<li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/events">Events and open days</a>
+									</li>
+								  <li>
+										<a href="http://www.undergraduate.study.cam.ac.uk/finance">Fees and finance</a>
+									</li>
+								  <li>
+										<a href="http://www.becambridge.com/">Student blogs and videos</a>
+									</li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list campl-global-navigation-secondary-with-children">
+<li>
+								<a href="http://www.graduate.study.cam.ac.uk/">Graduate</a>
+								<ul class="campl-global-navigation-tertiary campl-unstyled-list">
+<li>
+										<a href="http://www.graduate.study.cam.ac.uk/why-cambridge/welcome-vice-chancellor">Why Cambridge</a>
+									</li>
+									<li>
+										<a href="http://www.graduate.study.cam.ac.uk/courses%0A">Course directory</a>
+									</li>
+									<li>
+									<a href="http://www.graduate.study.cam.ac.uk/how-do-i-apply">How to apply</a>
+</li>
+									<li><a href="http://www.cambridgestudents.cam.ac.uk/fees-and-funding">Fees and funding</a></li>
+									<li><a href="http://www.graduate.study.cam.ac.uk/faqs/applicant">Frequently asked questions</a></li>
+								</ul>
+</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list last">
+<li>
+								<a href="http://www.internationalstudents.cam.ac.uk">International students</a>
+							</li>
+							<li>
+								<a href="http://www.ice.cam.ac.uk">Continuing education</a>
+							</li>
+							<li>
+								<a href="http://www.epe.admin.cam.ac.uk/">Executive and professional education</a>
+							</li>
+							<li>
+								<a href="http://www.educ.cam.ac.uk">Courses in education</a>
+							</li>
+						</ul>
+</div>
+				</div>
+
+				<div class="campl-global-navigation-outer clearfix" id="about-the-university">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="http://www.cam.ac.uk/about-the-university">About the University</a></li>
+					</ul>
+<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.cam.ac.uk/about-the-university/how-the-university-and-colleges-work">How the University and Colleges work</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/history">History</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/visiting-the-university">Visiting the University</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/term-dates-and-calendars">Term dates and calendars</a>
+							</li>
+							<li class="last">
+								<a href="http://map.cam.ac.uk">Map</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.communications.cam.ac.uk/">For media</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/video-and-audio">Video and audio</a>
+							</li>
+							<li>
+								<a href="http://webservices.admin.cam.ac.uk/fae/">Find an expert</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-the-university/publications">Publications</a>
+							</li>
+							<li class="last">
+								<a href="http://www.cam.ac.uk/global-cambridge">Global Cambridge</a>
+							</li>
+						</ul>
+</div>
+					<div class="campl-column4">
+						<ul class="campl-global-navigation-container campl-unstyled-list">
+<li>
+								<a href="http://www.cam.ac.uk/news">News</a>
+							</li>
+							<li>
+								<a href="http://www.admin.cam.ac.uk/whatson/">Events</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/public-engagement">Public engagement</a>
+							</li>
+							<li>
+								<a href="http://www.jobs.cam.ac.uk">Jobs</a>
+							</li>
+							<li class="last">
+								<a href="https://www.philanthropy.cam.ac.uk/">Give to Cambridge</a>
+							</li>
+						</ul>
+</div>
+				</div>
+
+				<div class="campl-global-navigation-outer clearfix" id="our-research">
+					<ul class="campl-global-navigation-header-container campl-unstyled-list">
+<li><a href="">Research at Cambridge</a></li>
+					</ul>
+</div>
+			</div>
+
+			<ul class="campl-unstyled-list campl-quicklinks-list campl-global-navigation-container ">
+<li>
+					<a href="http://www.cam.ac.uk/for-staff">For staff</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/current-students">For current students</a>
+				</li>
+				<li>
+					<a href="http://www.alumni.cam.ac.uk">For alumni</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/for-business">For business</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/colleges-and-departments">Colleges &amp; departments</a>
+				</li>
+				<li>
+					<a href="http://www.lib.cam.ac.uk/libraries/">Libraries &amp; facilities</a>
+				</li>
+				<li>
+					<a href="http://www.cam.ac.uk/museums-and-collections">Museums &amp; collections</a>
+				</li>
+				<li class="last">
+					<a href="http://www.cam.ac.uk/email-and-phone-search">Email &amp; phone search</a>
+				</li>
+			</ul>
+</div>
+	</div>
+    <!-- .campl-global-header ends -->
+
+	<div class="campl-row campl-page-header campl-sub-section-page">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column12">
+				<div class="campl-content-container">
+					<div class="campl-breadcrumb" id="breadcrumb">
+						<ul class="campl-unstyled-list campl-horizontal-navigation clearfix">
+<li class="first-child">
+								<a href="https://bioinfotraining.bio.cam.ac.uk/" class="campl-home ir">Home</a>
+							</li>
+							<li>
+								<a href="">Courses</a>
+							</li>
+							<li>
+								<a href="">Training Materials</a>
+							</li>
+							<li>
+								<a href="index.html">Core Statistics in R
+							</a>
+</li>
+						</ul>
+</div>
+					<p class="campl-page-title">Bioinformatics Training Materials</p>
+
+					<p class="campl-mobile-parent"><a href=""><span class="campl-back-btn campl-menu-indicator"></span>Studying at Cambridge</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="campl-row campl-page-header">
+		<div class="campl-wrap clearfix campl-local-navigation" id="local-nav">
+			<div class="campl-local-navigation-container">
+				<ul class="campl-unstyled-list">
+<li><a href="https://training.cam.ac.uk/bioinformatics/search">Course schedule</a></li>
+					<li>
+<a href="#" class="campl-selected">Additional information</a>
+						<ul class="campl-unstyled-list local-dropdown-menu">
+<li><a href="#">Additional resources</a></li>
+							<li><a href="https://bioinfotraining.bio.cam.ac.uk/about/findus">Where to find us?</a></li>
+							<li><a href="#">Frequently asked questions</a></li>
+						</ul>
+</li>
+					<li><a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate">Further training</a></li>
+				</ul>
+</div>
+		</div>
+
+
+
+		<div class="campl-wrap clearfix campl-page-sub-title campl-recessed-sub-title">
+			<div class="campl-column12">
+				<div class="campl-content-container">
+					<p class="campl-sub-title">Core Statistics in R</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<div class="campl-row campl-content campl-recessed-content">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column9  campl-main-content" id="content">
+					<div class="campl-content-container">
+						<div>
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <br><button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="active" href="power-analysis.html"><span class="header-section-number">2</span> Power analysis</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="power-analysis" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Power analysis<a class="anchor" aria-label="anchor" href="#power-analysis"><i class="fas fa-link"></i></a>
+</h1>
+<div id="objectives" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives"><i class="fas fa-link"></i></a>
+</h2>
+<div class="objectives">
+<p><strong>Questions</strong></p>
+<ul>
+<li>How do I…</li>
+<li>What do I…</li>
+</ul>
+<p><strong>Objectives</strong></p>
+<ul>
+<li>Be able to…</li>
+<li>Use…</li>
+</ul>
+</div>
+</div>
+<div id="background" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
+</h2>
+<p>All hypothesis tests can be wrong in two ways:</p>
+<ul>
+<li>we can appear to have found a significant result when there really isn’t anything there: a false positive (or Type I error), or</li>
+<li>we can fail to spot a significant result when there really is something interesting going on: a false negative (or Type II error).</li>
+</ul>
+<p>The probability of getting a false positive in our analysis is precisely the significance level we use in our analysis. So, in order to reduce the likelihood of getting a false positive we simply reduce the significance level of our test (from 0.05 down to 0.01 say). Easy as that.</p>
+<p>Unfortunately, this has unintended consequences (doesn’t everything?). It turns out that reducing the significance level means that we increase the chance of getting false negatives. This should make sense; if we’re increasing the barrier to entry in terms of acceptance then we’ll also accidentally miss out on some of the good stuff.</p>
+<p><strong>Power</strong> is the capacity of a test to detect significant different results. It is affected by three things:</p>
+<ol style="list-style-type: decimal">
+<li>the effect size: i.e. how big of a difference do you want to be able to detect, or alternatively what do you consider a meaningful effect/difference to be?</li>
+<li>sample size</li>
+<li>the significance level</li>
+</ol>
+<p>In an ideal world we would want to be carrying out highly powerful tests using low significance levels, to both reduce our chance of getting a false positive and maximise our chances of finding a true effect.</p>
+<p>*<strong>Power analysis</strong> allows us to design experiments to do just that. Given:</p>
+<ul>
+<li>a desired power (0.8 or 80% is considered pretty good)</li>
+<li>a significance level (0.05 or 5% is our trusty yet arbitrary steed once again)</li>
+<li>an effect size that we would like to detect</li>
+</ul>
+<p>we can calculate the amount of data that we need to collect in our experiments. (Woohoo! it looks as if statistics will actually give us an answer at last rather than these perpetual shades-of-grey “maybes”).</p>
+<p>The reality is that most of the easily usable power analysis functions all operate under the assumption that the data that you will collect will meet all of the assumptions of your chosen statistical test perfectly. So, for example, if you want to design an experiment investigating the effectiveness of a single drug compared to a placebo (so a simple t-test) and you want to know how many patients to have in each group in order for the test to work, then the standard power analysis techniques will still assume that all of the data that you end up collecting will meet the assumptions of the t-test that you have to carry out (Sorry to have raised your hopes ever so slightly 😉).</p>
+<div id="effect-size" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
+</h3>
+<p>As we shall see the commands for carrying out power analyses are very simple to implement apart from the concept of effect size. This is a tricky issue for most people to get to grips with for two reasons:</p>
+<ol style="list-style-type: decimal">
+<li>Effect size is related to biological significance rather than statistical significance</li>
+<li>The way in which we specify effect sizes</li>
+</ol>
+<p>With respect to the first point a common conversation goes a bit like this:</p>
+<p>me: “So you’ve been told to carry out a power analysis, eh? Lucky you. What sort of effect size are you looking for?”</p>
+<p>you: “I have no idea what you’re talking about. I want to know if my drug is any better than a placebo. How many patients do I need?”</p>
+<p>me: “It depends on how big a difference you think your drug will have compared to the placebo.”</p>
+<p>you: “I haven’t carried out my experiment yet, so I have absolutely no idea how big the effect will be!”</p>
+<p>me: <sigh></sigh></p>
+<p>(To be honest this would be a relatively well-informed conversation: <a href="https://www.youtube.com/watch?v=Hz1fyhVOjr4">this is much closer</a> to how things actually go)</p>
+<p>The key point about effect sizes and power analyses is that you need to specify an effect size that you would be interested in observing, or one that would be biologically relevant to see. There may well actually be a 0.1% difference in effectiveness of your drug over a placebo but designing an experiment to detect that would require markedly more individuals than an experiment that was trying to detect a 50% difference in effectiveness. In reality there are three places we can get a sense of effect sizes from:</p>
+<ol style="list-style-type: decimal">
+<li>A pilot study</li>
+<li>Previous literature or theory</li>
+<li>Jacob Cohen</li>
+</ol>
+<p><a href="https://en.wikipedia.org/wiki/Jacob_Cohen_(statistician)">Jacob Cohen</a> was an American statistician who developed a large set of measures for effect sizes (which we will use today). He came up with a rough set of numerical measures for “small,” “medium” and “large” effect sizes that are still in use today. These do come with some caveats though; Jacob was a psychologist and so his assessment of what was a large effect may be somewhat different from yours. They do form a useful starting point however.</p>
+<p>There a lot of different ways of specifying effects sizes, but we can split them up into three distinct families of estimates:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Correlation estimates</strong>: these use R<sup>2</sup> as a measure of variance explained by a model (for linear models, anova etc. A large R<sup>2</sup> value would indicate that a lot of variance has been explained by our model and we would expect to see a lot of difference between groups, or a tight cluster of points around a line of best fit. The argument goes that we would need fewer data points to observe such a relationship with confidence. Trying to find a relationship with a low R<sup>2</sup> value would be trickier and would therefore require more data points for an equivalent power.</li>
+<li>
+<strong>Difference between means</strong>: these look at how far apart the means of two groups are, measured in units of standard deviations (for t-tests). An effect size of 2 in this case would be interpreted as the two groups having means that were two standard deviations away from each other (quite a big difference), whereas an effect size of 0.2 would be harder to detect and would require more data to pick it up.</li>
+<li>
+<strong>Difference between count data</strong>: these I freely admit I have no idea how to intuitively explain them (shock, horror). Mathematically they are based on the chi-squared statistic but that’s as good as I can tell you I’m afraid. They are, however, pretty easy to calculate.</li>
+</ol>
+<p>For reference here are some of Cohen’s suggested values for effect sizes for different tests. You’ll probably be surprised by how small some of these are.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Test</th>
+<th align="left">Small</th>
+<th align="left">Medium</th>
+<th align="left">Large</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">t-tests</td>
+<td align="left">0.2</td>
+<td align="left">0.5</td>
+<td align="left">0.8</td>
+</tr>
+<tr class="even">
+<td align="left">anova</td>
+<td align="left">0.1</td>
+<td align="left">0.25</td>
+<td align="left">0.4</td>
+</tr>
+<tr class="odd">
+<td align="left">linear models</td>
+<td align="left">0.02</td>
+<td align="left">0.15</td>
+<td align="left">0.35</td>
+</tr>
+<tr class="even">
+<td align="left">chi-squared</td>
+<td align="left">0.1</td>
+<td align="left">0.3</td>
+<td align="left">0.5</td>
+</tr>
+</tbody>
+</table></div>
+<p>We will look at how to carry out power analyses and estimate effect sizes in this section.</p>
+</div>
+</div>
+<div id="packages" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will be using the <code>pwr</code> and <code>powerAnalysis</code> packages during this section. Please install those now.</p>
+<p>You can do this by running the following code in your console:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pwr"</span>, <span class="st">"powerAnalysis"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Next, load them by running:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">powerAnalysis</span><span class="op">)</span></code></pre></div>
+<p>These packages have a lot of overlap but unfortunately neither one of them quite has all the functionality I’d like. <code>powerAnalysis</code> has more functions for explicitly calculating effect sizes from previous studies but has a smaller range of power calculation functions. <code>pwr</code> has more power functions but fewer effect size functions. However, together they do the job.</p>
+</div>
+<div id="section-commands" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
+</h2>
+<p>New commands used in this section:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test()</a></code></td>
+<td align="left">Power analysis for 1-sample, 2-sample and paired t-tests</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test()</a></code></td>
+<td align="left">Power analysis for linear models</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES()</a></code></td>
+<td align="left">Conventional effect sizes for all tests</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.one.html">ES.t.one()</a></code></td>
+<td align="left">Effect size calculation for t-test</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.two.html">ES.t.two()</a></code></td>
+<td align="left">Effect size calculation for t-test</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.paired.html">ES.t.paired()</a></code></td>
+<td align="left">Effect size calculation for t-test</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="t-tests" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> t-tests<a class="anchor" aria-label="anchor" href="#t-tests"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s assume that we want to design an experiment to determine whether there is a difference in the mean price of what male and female students pay at a cafe. How many male and female students would we need to observe in order to detect a “medium” effect size with 80% power and a significance level of 0.05?</p>
+<p>We first need to think about which test we would use to analyse the data. Here we would have two groups of continuous response. Clearly a t-test.</p>
+<div id="get-the-effect-size" class="section level3" number="2.5.1">
+<h3>
+<span class="header-section-number">2.5.1</span> Get the effect size<a class="anchor" aria-label="anchor" href="#get-the-effect-size"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we need to work out what a “medium” effect size would be. In the absence of any other information we appeal to Cohen’s conventional values:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"t"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Conventional effect size from Cohen (1982) 
+## 
+##            test = t
+##            size = medium
+##     effect.size = 0.5</code></pre>
+<p>This function just returns the default conventional values for effect sizes as determined by Jacob Cohen back in the day. It just saves us scrolling back up the page to look at the table I provided. It only takes two arguments:</p>
+<ul>
+<li>test which is one of
+<ul>
+<li>“t,” for t-tests,</li>
+<li>“anova” for anova,</li>
+<li>“f2” for linear models</li>
+<li>“chisq” for chi-squared test</li>
+</ul>
+</li>
+<li>size, which is just one of “small,” “medium” or “large.”</li>
+</ul>
+<p>The bit we want is on the bottom line; we apparently want an effect size of 0.5.
+For this sort of study effect size is measured in terms of Cohen’s d statistic. This is simply a measure of how different the means of the two groups are expressed in terms of the number of standard deviations they are apart from each other. So, in this case we’re looking to detect two means that are 0.5 standard deviations away from each other. In a minute we’ll look at what this means for real data.</p>
+</div>
+<div id="carry-out-a-power-analysis" class="section level3" number="2.5.2">
+<h3>
+<span class="header-section-number">2.5.2</span> Carry out a power analysis<a class="anchor" aria-label="anchor" href="#carry-out-a-power-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<p>We do this as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
+           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 63.76561
+##               d = 0.5
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>The first line is what we’re looking for <code>n = 63.76</code> tells that we need 64 (rounding up) students in each group (so 128 in total) in order to carry out this study with sufficient power. The other lines should be self-explanatory (well they should be by this stage; if you need me to tell you that the function is just returning the values that you’ve just typed in then you have bigger problems to worry about).</p>
+<p>The <code><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test()</a></code> function has six arguments. Two of them specify what sort of t-test you’ll be carrying out
+* <code>type</code>; which describes the type of t-test you will eventually be carrying out (one of <code>two.sample</code>, <code>one.sample</code> or <code>paired</code>), and
+* <code>alternative</code>; which describes the type of alternative hypothesis you want to test (one of <code>two.sided</code>, <code>less</code> or <code>greater</code>)</p>
+<p>The other four arguments are what is used in the power analysis:</p>
+<ul>
+<li>
+<code>d</code>; this is the effect size, a single number calculated using Cohen’s d statistic.</li>
+<li>
+<code>sig.level</code>; this is the significance level</li>
+<li>
+<code>power</code>; is the power</li>
+<li>
+<code>n</code>; this is the number of observations per sample.</li>
+</ul>
+<p>The function works by allowing you to specify any three of these four arguments and the function works out the fourth. In the example above we have used the test in the standard fashion by specifying power, significance and desired effect size and getting the function to tell us the necessary sample size.</p>
+<p>We can use the function to answer a different question:</p>
+<blockquote>
+<p>If I know in advance that I can only observe 30 students per group, what is the effect size that I should be able to observe with 80% power at a 5% significance level?</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
+           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 30
+##               d = 0.7356292
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>This time we want to see what the effect size is so we look at the second line and we can see that an experiment with this many people would only be expected to detect a difference in means of <code>d = 0.74</code> standard deviations. Is this good or bad? Well, it depends on the natural variation of your data; if your data is really noisy then it will have a large variation and a large standard deviation which will mean that 0.74 standard deviations might actually be quite a big difference between your groups. If on the other hand your data doesn’t vary very much, then 0.74 standard deviations might actually be a really small number and this test could pick up even quite small differences in mean.</p>
+<p>In both of the previous two examples we were a little bit context-free in terms of effect size. Let’s look at how we can use a pilot study with real data to calculate effect sizes and perform a power analysis to inform a future study.</p>
+<p>Let’s look again at the <code>fishlength</code> data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as <code>data/raw/CS6-fishlength.csv</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># read in the data</span>
+<span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-fishlength.csv"</span><span class="op">)</span>
+
+<span class="co"># summarise the data</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<pre><code>##      length         river          
+##  Min.   :11.20   Length:68         
+##  1st Qu.:18.40   Class :character  
+##  Median :19.30   Mode  :character  
+##  Mean   :19.46                     
+##  3rd Qu.:20.93                     
+##  Max.   :26.40</code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visualise the data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
+        data <span class="op">=</span> <span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># perform a t-test, assuming equal variance</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
+       data <span class="op">=</span> <span class="va">fishlength</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  length by river
+## t = 3.8433, df = 66, p-value = 0.0002754
+## alternative hypothesis: true difference in means between group Aripo and group Guanapo is not equal to 0
+## 95 percent confidence interval:
+##  0.9774482 3.0909868
+## sample estimates:
+##   mean in group Aripo mean in group Guanapo 
+##              20.33077              18.29655</code></pre>
+<p>From the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> command we can see that there are 39 records for the Aripo river and only 29 records for the Guanapo river. From the box plot we see that the groups appear to have different means and from the t-test analysis we can see that this difference is significant.</p>
+<p>Can we use this information to design a more efficient experiment? One that we would be confident was powerful enough to pick up a difference in means as big as was observed in this study but with fewer observations?</p>
+<p>Let’s first work out exactly what the effect size of this previous study really was by estimating Cohen’s d using this data.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.two.html">ES.t.two</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">3.8433</span>, n1 <span class="op">=</span> <span class="fl">39</span>, n2 <span class="op">=</span> <span class="fl">29</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      effect size (Cohen's d) of independent two-sample t test 
+## 
+##               d = 0.942383
+##     alternative = two.sided
+## 
+## NOTE: The alternative hypothesis is m1 != m2
+## small effect size:  d = 0.2
+## medium effect size: d = 0.5
+## large effect size:  d = 0.8</code></pre>
+<p>This function calculates the effect size using the t-statistic (<code>t</code>) and the values of the sample sizes of the two groups (<code>n1</code>, <code>n2</code>). The function can perform the same calculation is given other information (means of the two groups, standard deviations of the two groups etc.) Have a look at the five examples at the bottom of the help file (<code><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.two.html">?ES.t.two</a></code>) to see other ways in which it can be used.</p>
+<ul>
+<li>The second line has the <code>d</code> value that we want.</li>
+<li>The rest of the output is just padding and reminds us of the conventional values of effect sizes for reference only.</li>
+</ul>
+<p>We can know actually answer our question and see how many fish we really need to catch in the future:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.94</span>, power <span class="op">=</span> <span class="fl">0.8</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,
+           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 18.77618
+##               d = 0.94
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>From this we can see that any future experiments would really only need to use 19 fish for each group (18.77 from the first line rounded up, so no fish will be harmed during the experiment…) if we wanted to be confident of detecting the difference we observed in the previous study.</p>
+<p>This approach can also be used when the pilot study showed a smaller effect size that wasn’t observed to be significant (indeed arguably, a pilot study shouldn’t really concern itself with significance but should only really be used as a way of assessing potential effect sizes which can then be used in a follow-up study).</p>
+</div>
+</div>
+<div id="exercise-one-sample" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Exercise: one-sample<a class="anchor" aria-label="anchor" href="#exercise-one-sample"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 2.1  </strong></span>Performing a power analysis on a one-sample data set</p>
+<p>Load in <code>data/raw/CS6-onesample.csv</code> (this is the same data we looked at in the earlier practical containing information on fish lengths from a single river).</p>
+<ol style="list-style-type: lower-alpha">
+<li>Assume this was a pilot study and analyse the data using a one-sample t-test to see if there is any evidence that the mean length of fish differs from 19 cm.</li>
+<li>Use the results of this analysis to estimate the effect size.</li>
+<li>Work out how big a sample size would be required to detect an effect this big with power 0.8 and significance 0.05.</li>
+<li>How would the sample size change if we wanted 0.9 power and significance 0.01?</li>
+</ol>
+<details><summary>
+Answer
+</summary><p>First, read in the data:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">exOne</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-onesample.csv"</span><span class="op">)</span></code></pre></div>
+<p>Let’s run the one-sample t-test as we did before:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exOne</span><span class="op">$</span><span class="va">Guanapo</span> , mu <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  exOne$Guanapo
+## t = -1.4657, df = 28, p-value = 0.1539
+## alternative hypothesis: true mean is not equal to 19
+## 95 percent confidence interval:
+##  17.31341 19.27969
+## sample estimates:
+## mean of x 
+##  18.29655</code></pre>
+<p>OK, there doesn’t appear to be a statistically significant result here; the mean length of the fish doesn’t appear to be different from 19cm. From the output though we do see that the mean length of our sample of fish is 18.30 (2dp), so the sample is a little bit smaller than 19 cm.</p>
+<p>Let’s calculate the effect size using the t-statistic and the degrees of freedom from the t-test output above. This gives us the following value for the effect size in terms of the Cohen’s d metric.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.one.html">ES.t.one</a></span><span class="op">(</span>t <span class="op">=</span> <span class="op">-</span><span class="fl">1.4657</span> , df <span class="op">=</span> <span class="fl">28</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      effect size (Cohen's d) of one-sample t test 
+## 
+##               d = 0.2769913
+##     alternative = two.sided
+## 
+## NOTE: The alternative hypothesis is m != mu
+## small effect size:  d = 0.2
+## medium effect size: d = 0.5
+## large effect size:  d = 0.8</code></pre>
+<p>Our effect size is 0.277 which is somewhere between a small and medium effect size. This means that this would be hard to detect with a small sample size and it’s likely that we would need more than just 29 observations to detect an effect this big.</p>
+<p>Now, let’s do the power analysis to actually calculate the sample size required:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
+           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      One-sample t test power calculation 
+## 
+##               n = 104.2368
+##               d = 0.2769913
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided</code></pre>
+<p>We would need 105 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let’s see what would happen if we wanted to be even more stringent:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.9</span>,
+           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      One-sample t test power calculation 
+## 
+##               n = 197.2625
+##               d = 0.2769913
+##       sig.level = 0.01
+##           power = 0.9
+##     alternative = two.sided</code></pre>
+<p>198 observations! We would need to do a lot of work if we wanted to work to this level of significance and power. Are such small differences in fish length biologically meaningful?</p>
+</details>
+</div>
+</div>
+<div id="exercise-two-sample-paired" class="section level2" number="2.7">
+<h2>
+<span class="header-section-number">2.7</span> Exercise: two-sample paired<a class="anchor" aria-label="anchor" href="#exercise-two-sample-paired"><i class="fas fa-link"></i></a>
+</h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 2.2  </strong></span>Power analysis on a paired two-sample data set</p>
+<p>Load in <code>data/raw/CS6-twopaired.csv</code> (again this is the same data that we used in an earlier practical and relates to cortisol levels measured on 20 participants in the morning and evening).</p>
+<ol style="list-style-type: lower-alpha">
+<li>first carry out a power analysis to work out how big of an effect size this experiment should be able to detect at a power of 0.8 and significance level of 0.05. Don’t look at the data just yet!</li>
+<li>Now calculate the actual observed effect size from the study.</li>
+<li>If you were to repeat the study in the future, how many observations would be necessary to detect the observed effect with 80% power and significance level 0.01?</li>
+</ol>
+<details><summary>
+Answer
+</summary><p>First, read in the data:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">exTwo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-twopaired.csv"</span><span class="op">)</span></code></pre></div>
+<p>We have a paired dataset with 20 pairs of observations, what sort of effect size could we detect at a significance level of 0.05 and power of 0.8?</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
+           type<span class="op">=</span><span class="st">"paired"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Paired t test power calculation 
+## 
+##               n = 20
+##               d = 0.6604413
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number of *pairs*</code></pre>
+<p>Remember that we get effect size measured in Cohen’s d metric. So here this experimental design would be able to detect a d value of 0.66 (2dp) which is a medium to large effect size.</p>
+<p>Now let’s look at the actual data and work out what the effect size actually is:</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exTwo</span><span class="op">$</span><span class="va">morning</span>, <span class="va">exTwo</span><span class="op">$</span><span class="va">evening</span>, paired<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  exTwo$morning and exTwo$evening
+## t = 5.1833, df = 19, p-value = 5.288e-05
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   69.20962 162.96038
+## sample estimates:
+## mean of the differences 
+##                 116.085</code></pre>
+<p>Use the t-statistic to calculate the effect size:</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.paired.html">ES.t.paired</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">5.1833</span>, df <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      effect size (Cohen's d) of paired two-sample t test 
+## 
+##               d = 1.189131
+##     alternative = two.sided
+## 
+## NOTE: The alternative hypothesis is md != 0
+## small effect size:  d = 0.2
+## medium effect size: d = 0.5
+## large effect size:  d = 0.8</code></pre>
+<p>This (1.19) is a massive effect size. It’s quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">1.189131</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power<span class="op">=</span><span class="fl">0.8</span>,
+           type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##      Paired t test power calculation 
+## 
+##               n = 11.67291
+##               d = 1.189131
+##       sig.level = 0.01
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number of *pairs*</code></pre>
+<p>So we would have only needed 12 pairs of participants in this study given the size of effect we were trying to detect.</p>
+</details>
+</div>
+</div>
+<div id="key-points" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points"><i class="fas fa-link"></i></a>
+</h2>
+<div class="keypoints">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Overview</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#power-analysis"><span class="header-section-number">2</span> Power analysis</a></li>
+<li><a class="nav-link" href="#objectives"><span class="header-section-number">2.1</span> Objectives</a></li>
+<li>
+<a class="nav-link" href="#background"><span class="header-section-number">2.2</span> Background</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#effect-size"><span class="header-section-number">2.2.1</span> Effect size</a></li></ul>
+</li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">2.3</span> Packages</a></li>
+<li><a class="nav-link" href="#section-commands"><span class="header-section-number">2.4</span> Section commands</a></li>
+<li>
+<a class="nav-link" href="#t-tests"><span class="header-section-number">2.5</span> t-tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#get-the-effect-size"><span class="header-section-number">2.5.1</span> Get the effect size</a></li>
+<li><a class="nav-link" href="#carry-out-a-power-analysis"><span class="header-section-number">2.5.2</span> Carry out a power analysis</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#exercise-one-sample"><span class="header-section-number">2.6</span> Exercise: one-sample</a></li>
+<li><a class="nav-link" href="#exercise-two-sample-paired"><span class="header-section-number">2.7</span> Exercise: two-sample paired</a></li>
+<li><a class="nav-link" href="#key-points"><span class="header-section-number">2.8</span> Key points</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+					</div>
+				</div>
+				<!-- Related links -->
+				<!--<div class="campl-column3 campl-secondary-content">
+					<div class="campl-content-container">
+						<div class="campl-heading-container">
+							<h2>Related Links</h2>
+						</div>
+						<ul class='campl-unstyled-list campl-related-links'>
+							<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+							<li><a href="#">Consectetur adipisicing elit</a></li>
+							<li><a href="#">Sed do eiusmod tempor incididunt extra long wrapping on to two line</a></li>
+							<li><a href="#">Labore et dolore magna aliqua</a></li>
+							<li><a href="#">Ut enim ad minim veniam</a></li>
+							<li><a href="#">Quis nostrud exercitation ullamco</a></li>
+						</ul>
+					</div>
+					<div class="campl-content-container">
+						<div class="campl-vertical-teaser campl-teaser campl-promo-teaser">
+							<div class="campl-content-container campl-vertical-teaser-txt">
+								<p class='campl-teaser-title'><a href="#">Promo teaser with title above</a></p>
+							</div>
+							<div class="campl-content-container campl-vertical-teaser-img">
+								<a href="#" class="campl-teaser-img-link"><img alt=""  src="images/content/homepage-promo-placeholder.png" class="campl-scale-with-grid" /></a>
+							</div>
+							<div class="campl-content-container campl-vertical-teaser-txt clearfix">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+								<a href="#4" class="campl-secondary-cta campl-float-right">Read more</a>
+							</div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+		</div>
+		<div class="campl-row campl-local-footer">
+			<div class="campl-wrap clearfix">
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Contact us</h3>
+						 <div class="content">
+						   <p>Bioinformatics Training Department of Genetics University of Cambridge Downing Street Cambridge CB2 3EH United Kingdom</p>
+						   <h3>Contact:</h3> <a href="mailto:bioinfo@hermes.cam.ac.uk">bioinfo@hermes.cam.ac.uk</a>
+						 </div>
+					</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Bioinformatics Training</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/undergraduate">Undergraduate training</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate">Postgraduate training</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>Postgraduate Courses by Theme</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/programming">Basic Skills and Programming</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/services">Databases and Services</a>
+							</li>
+							<li>
+							  <a href="https://bioinfotraining.bio.cam.ac.uk/postgraduate/specialized">Specialised Topics</a>
+							</li>
+						</ul>
+</div>
+				</div>
+				<div class="campl-column3 campl-footer-navigation last">
+					<div class="campl-content-container campl-navigation-list">
+						<h3>About Bioinformatics Training</h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about">About the Facility</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about/findus">How to find us</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/about/visitors">Visiting Cambridge</a>
+							</li>
+							<li>
+								<a href="https://bioinfotraining.bio.cam.ac.uk/privacy-and-cookie-policies">Privacy and Cookies policy</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+		</div>
+	<div class="campl-row campl-global-footer">
+		<div class="campl-wrap clearfix">
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-footer-logo">
+					<img alt="University of Cambridge" src="images/interface/main-logo-small.png" height="38px;" class="campl-scale-with-grid"><p>© 2021 University of Cambridge</p>
+						<ul class="campl-unstyled-list campl-global-footer-links">
+<li>
+								<a href="http://www.cam.ac.uk/university-a-z">University A-Z</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/contact-the-university">Contact the University</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-this-site/accessibility">Accessibility</a>
+							</li>
+							<li>
+								<a href="http://www.admin.cam.ac.uk/univ/information/foi/">Freedom of information</a>
+							</li>
+							<li>
+								<a href="http://www.cam.ac.uk/about-this-site/terms-and-conditions">Terms and conditions</a>
+							</li>
+						</ul>
+</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-navigation-list">
+
+					<div class="link-list">
+						<h3><a href="http://www.cam.ac.uk/study-at-cambridge">Study at Cambridge</a></h3>
+						<ul class="campl-unstyled-list">
+<li>
+								<a href="http://www.study.cam.ac.uk/undergraduate/">Undergraduate</a>
+							</li>
+							<li>
+								<a href="http://www.graduate.study.cam.ac.uk/">Graduate</a>
+							</li>
+							<li>
+								<a href="http://www.internationalstudents.cam.ac.uk">International students</a>
+							</li>
+							<li>
+								<a href="http://www.ice.cam.ac.uk">Continuing education</a>
+							</li>
+							<li>
+								<a href="http://www.epe.admin.cam.ac.uk/">Executive and professional education</a>
+							</li>
+							<li>
+								<a href="http://www.educ.cam.ac.uk">Courses in education</a>
+							</li>
+						</ul>
+</div>
+				</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation">
+				<div class="campl-content-container campl-navigation-list">
+					<h3><a href="http://www.cam.ac.uk/about-the-university">About the University</a></h3>
+					<ul class="campl-unstyled-list campl-page-children">
+<li>
+							<a href="http://www.cam.ac.uk/about-the-university/how-the-university-and-colleges-work">How the University and Colleges work</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/about-the-university/visiting-the-university">Visiting the University</a>
+						</li>
+						<li>
+							<a href="http://map.cam.ac.uk">Map</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/news">News</a>
+						</li>
+						<li>
+							<a href="http://www.admin.cam.ac.uk/whatson/">Events</a>
+						</li>
+						<li>
+							<a href="http://www.jobs.cam.ac.uk">Jobs</a>
+						</li>
+						<li>
+							<a href="https://www.philanthropy.cam.ac.uk/">Give to Cambridge</a>
+						</li>
+					</ul>
+</div>
+			</div>
+			<div class="campl-column3 campl-footer-navigation last">
+				<div class="campl-content-container campl-navigation-list">
+					<h3><a href="http://www.cam.ac.uk/research">Research at Cambridge</a></h3>
+					<ul class="campl-unstyled-list">
+<li>
+							<a href="http://www.cam.ac.uk/research/news">News</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/features">Features</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/discussion">Discussion</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/spotlight-on">Spotlight on...</a>
+						</li>
+						<li>
+							<a href="http://www.cam.ac.uk/research/research-at-cambridge">About research at Cambridge</a>
+						</li>
+					</ul>
+</div>
+			</div>
+		</div>
+	</div>
+	<!-- .campl-global-footer ends -->
+
+<!--[if lte IE 8]>
+</div>
+<![endif]-->
+
+	<script type="text/javascript" src="javascripts/libs/ios-orientationchange-fix.js"></script><script type="text/javascript" src="javascripts/libs/jquery-min.js"></script><script type="text/javascript" src="javascripts/libs/modernizr.js"></script><script type="text/javascript" src="javascripts/custom.js"></script>
+</body>
+</html>
