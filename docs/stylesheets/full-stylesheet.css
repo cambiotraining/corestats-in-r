@@ -31,7 +31,7 @@ ul{padding: 0;margin: 0 0 9px 15px;}
 ul ul,ul ol,ol ol,ol ul {margin-bottom: 0;}
 
 ul {list-style: square;}
-ol{margin-left:-20px}
+ol{margin-left:0px} /* original is -20px */
 .lt-ie8 ol { padding: 0;margin: 0 0 9px 25px; }
 li {/*line-height: 18px*/;display:list-item}
 
