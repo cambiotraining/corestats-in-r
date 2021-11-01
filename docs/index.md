@@ -40,9 +40,9 @@ To know what to do when presented with an arbitrary dataset e.g.
 2. [Categorical Predictor Variables](#cs2-intro)
 3. [Continuous Predictors](#cs3-intro) 
 4. [Multiple Predictor Variables](#cs4-intro)
-5. Linear Models 
-6. Errors, Power and Multiple Comparisons
+5. [Linear Models](#cs5-intro) 
+6. [Power analysis](#cs6-intro)
 
 ## Datasets {#index-datasets}
 
-This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/raw`.
+This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder [here](data.zip) by right-clicking on the link and <kbd>Save as...</kbd>. Next unzip the file and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/raw`.
