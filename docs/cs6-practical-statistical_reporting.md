@@ -1,6 +1,4 @@
-```{r, echo=FALSE}
-source(file = "setup.R")
-```
+
 
 # Statistical reporting
 
@@ -108,57 +106,13 @@ For example:
 
 The response variable yield was plotted against the two categorical variables `Pho` and `Nit` independently, and the means of the different categorical combinations were calculated and plotted. These are shown in Figure 1:
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# read in the data
-NPYield <- read_csv("data/raw/CS6-NPYield.csv")
-
-panel1A <- ggplot(NPYield, aes(Pho, yield)) +
-  geom_boxplot() +
-  theme_classic() +
-    labs(x = "Phosphate",
-       y = "Yield")
-
-panel1B <- ggplot(NPYield, aes(Nit, yield)) +
-  geom_boxplot() +
-  theme_classic() +
-    labs(x = "Nitrate",
-       y = "Yield")
-
-
-panel1C <- ggplot(NPYield, aes(Pho, yield, colour = Nit)) +
-  geom_point(shape = 4, size = 3) +
-  stat_summary(fun = mean,
-           geom = "point", size = 3, aes(colour = Nit)) +
-  stat_summary(fun = mean,
-               geom = "line", aes(group = Nit)) +
-  scale_colour_brewer(palette = "Dark2") +
-  theme_classic() +
-  labs(x = "Phosphate",
-       y = "Yield",
-       colour = "Nitrate")
-
-(panel1A + panel1B) / panel1C +
-  plot_annotation(tag_levels = "A",
-                  title = "Figure 1")
-
-```
+<img src="cs6-practical-statistical_reporting_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 Figure 1a appears to suggest that there isn’t an effect of phosphate on yield. Figure 1b indicates that there might be an effect of nitrogen on yield. Figure 1c suggests that there might be an interaction effect of nitrogen and phosphate on yield, although this might be due to the presence of an outlier in the (No Phosphate & Nitrogen) group.
 
 A full linear model containing both variables and the interaction between them was fitted to the data (`yield ~ Nit + Pho + Nit:Pho`) and the model assumptions were checked using a full residual analysis (see Figure 2). The assumptions of equal variance and normality appear to be met, suggesting that a linear model analysis may be adequate for the data.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# define the model
-lm_NPYield <- lm(yield ~ Nit + Pho + Nit:Pho,
-                 data = NPYield)
-
-panel2A <- resid_panel(lm_NPYield, plots = c("resid"), theme = "classic")
-panel2B <- resid_panel(lm_NPYield, plots = c("qq"), theme = "classic")
-
-panel2A + panel2B +
-  plot_annotation(tag_levels = "A",
-                  title = "Figure 2")
-```
+<img src="cs6-practical-statistical_reporting_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 The ANOVA analysis for the full model compared with the null model results gives a non-significant result (F<sub>3,20</sub> = 2.21, p = 0.12) suggesting that there is insufficient evidence that yield is affected by all of the variables.
 
@@ -177,27 +131,7 @@ yield = 52.07 + \binom{0}{5.62} \binom{Nit:N}{Nit:Y}
 
 A box plot of the final model result (a) alongside the diagnostic plots for this minimal model (b, c) are shown in Figure 3. The assumptions of equal variance and normality still appear to be met, again suggesting that a linear model analysis is appropriate for the data.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-# final model
-lm_NPYield_final <- lm(yield ~ Nit, data = NPYield)
-
-# panel A
-panel3A <- ggplot(NPYield, aes(Nit, yield)) +
-  geom_boxplot() +
-  theme_classic() +
-  labs(x = "Nitrate",
-       y = "Yield")
-
-# panel B
-panel3B <- resid_panel(lm_NPYield_final, plots = c("resid"), theme = "classic")
-panel3C <- resid_panel(lm_NPYield_final, plots = c("qq"), theme = "classic")
-
-# patchwork
-panel3A + (panel3B / panel3C) +
-  plot_annotation(tag_levels = "A",
-                  title = "Figure 3")
-
-```
+<img src="cs6-practical-statistical_reporting_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ### Discussion
 In this section we aim to:
