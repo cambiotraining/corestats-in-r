@@ -14,7 +14,7 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`aggregate`| Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form |
+|`aggregate()`| Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form |
 |`unstack()`| Converts a stacked data frame into an unstacked data frame (or a list if the lengths of the samples are different) |
 |`bartlett.test()`| Perform Bartlett's test for equality of variance |
 |`leveneTest()`| Perform Levene's test for equality of variance |

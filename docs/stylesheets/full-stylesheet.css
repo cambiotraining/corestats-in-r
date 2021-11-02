@@ -31,7 +31,7 @@ ul{padding: 0;margin: 0 0 9px 15px;}
 ul ul,ul ol,ol ol,ol ul {margin-bottom: 0;}
 
 ul {list-style: square;}
-ol{margin-left:0px} /* original is -20px */
+ol{margin: 0 0 9px 15px;} /* MvR: original is margin-left:-20px */
 .lt-ie8 ol { padding: 0;margin: 0 0 9px 25px; }
 li {/*line-height: 18px*/;display:list-item}
 
@@ -79,6 +79,8 @@ mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
 
 abbr[title] {cursor: help;border-bottom: 1px dotted #999999;}
 abbr.initialism {font-size: 90%;text-transform: uppercase;}
+
+/* MvR: removed code formatting, so that the bookdown formatting is used */
 
 /*code, kbd, samp, pre {padding: 0 3px 2px;font-family: "Courier New", monospace;font-size: 12px;color: #333333;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 code {padding: 2px 4px;color: #d14;background-color: #f7f7f9;border: 1px solid #e1e1e8;}
@@ -202,7 +204,7 @@ body, label, input, button, select, textarea{font-size: 12px;font-weight: normal
 
 /* 3.0 LINK STYLES AND BUTTONS  (Button styles from twitter bootstrap )--------------------------------------------------------------------------------------*/
 a, .campl-vertical-breadcrumb , .campl-vertical-breadcrumb-navigation, .campl-vertical-breadcrumb-children a{ color: #0072cf; text-decoration:none;border-bottom:0;outline: none;}
-a:visited { color: #8a00bc; text-decoration:none;border-bottom:1px dotted #ddbfdc}
+/*a:visited { color: #8a00bc; text-decoration:none;border-bottom:1px dotted #ddbfdc}*/ /* MvR: I do not like visited links */
 a:focus { color: #0072cf; outline: thin dotted;border-bottom:0 }
 a:hover { color: #0072cf; text-decoration:underline;border-bottom:0 }
 a:hover, a:active { outline: none; }
@@ -1427,6 +1429,7 @@ caption{background:#fff;padding:5px 0}
 /* COLOUR LEGEND */
 
 /* Default - turquoise */
+
 .campl-page-header,
 .campl-local-footer{background:#106470}
 .campl-local-footer, .campl-local-footer h3 a{color:#91b9a4;}
@@ -1548,6 +1551,7 @@ th.campl-alt{background:#fff;color:#28828a}
 	#91b9a4 pale tone - lightest highlight/footer headings
 	#d2f3e1 pale - table bg
 */
+
 .campl-theme-2 .campl-page-header,
 .campl-theme-2 .campl-local-footer{background:#106470}
 .campl-theme-2 .campl-local-footer, .campl-theme-2 .campl-local-footer h3 a{color:#91b9a4;}
@@ -2413,4 +2417,3 @@ table th{border-bottom:#e4e4e4 1px solid}
  * z-index:15 	global header
  * z-index:16
 */
-

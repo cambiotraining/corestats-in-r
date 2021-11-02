@@ -3,29 +3,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 4 One-sample tests | Core Statistics in R</title>
+<title>Chapter 25 Introduction | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="description" content="25.1 Datasets This section uses various data sets. They are all located in the data/raw/ folder in your working directory. Please see Datasets for more information.">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 4 One-sample tests | Core Statistics in R">
+<meta property="og:title" content="Chapter 25 Introduction | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta property="og:description" content="25.1 Datasets This section uses various data sets. They are all located in the data/raw/ folder in your working directory. Please see Datasets for more information.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 One-sample tests | Core Statistics in R">
-<meta name="twitter:description" content="4.1 Objectives  Questions When do I perform a one-sample test? Which one-sample tests are there and what are the assumptions? How do I interpret and present the results of the tests? Objectives...">
+<meta name="twitter:title" content="Chapter 25 Introduction | Core Statistics in R">
+<meta name="twitter:description" content="25.1 Datasets This section uses various data sets. They are all located in the data/raw/ folder in your working directory. Please see Datasets for more information.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
+<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
-<link rel="stylesheet" href="stylesheets/style.css">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
-<body class="campl-theme-2" data-spy="scroll" data-target="#toc">
+<body data-spy="scroll" data-target="#toc">
 
 <!--[if lt IE 7]>
 <div class="lt-ie9 lt-ie8 lt-ie7">
@@ -345,7 +345,7 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="active" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
+<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
 <li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></li>
 <li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
 <li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
@@ -374,7 +374,7 @@
 <li class="book-part">CoreStats 5: Multiple predictor variables</li>
 <li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
+<li><a class="active" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
 <li class="book-part">CoreStats 6: Power analysis</li>
@@ -390,70 +390,26 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-one-sample-tests" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction-4" class="section level1" number="25">
 <h1>
-<span class="header-section-number">4</span> One-sample tests<a class="anchor" aria-label="anchor" href="#cs1-one-sample-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-4"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-1" class="section level2" number="4.1">
+<div id="cs5-datasets" class="section level2" number="25.1">
 <h2>
-<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.1</span> Datasets<a class="anchor" aria-label="anchor" href="#cs5-datasets"><i class="fas fa-link"></i></a>
 </h2>
-<div class="objectives">
-<p><strong>Questions</strong></p>
-<ul>
-<li>When do I perform a one-sample test?</li>
-<li>Which one-sample tests are there and what are the assumptions?</li>
-<li>How do I interpret and present the results of the tests?</li>
-</ul>
-<p><strong>Objectives</strong></p>
-<ul>
-<li>Set out your hypothesis for single sample continuous data</li>
-<li>Be able to summarise and visualise the data in R</li>
-<li>Understand and assess the underlying assumptions of the tests</li>
-<li>Perform a one-sample t-test and Wilcoxon signed-rank test in R</li>
-<li>Know which test is appropriate when</li>
-<li>Be able to interpret and report the results</li>
-</ul>
-</div>
-</div>
-<div id="purpose-and-aim" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
-</h2>
-<p>These tests are used when we have a single sample of continuous data. It is used to find out if the sample came from a parent distribution with a given mean (or median). This essentially boils down to finding out if the sample mean (or median) is “close enough” to our hypothesised parent population mean (or median).
-So, in the figure below, we could use these tests to see what the probability is that the sample of ten points comes from the distribution plotted above it i.e. a population with a mean of 20 mm.</p>
-<div class="inline-figure"><img src="cs1-practical-one_sample_files/figure-html/cs1-one-sample-intro-1.png" width="672"></div>
-</div>
-<div id="choosing-a-test" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Choosing a test<a class="anchor" aria-label="anchor" href="#choosing-a-test"><i class="fas fa-link"></i></a>
-</h2>
-<p>There are two tests that we are going to look at in this situation; the one-sample t-test, and the one-sample Wilcoxon signed rank test. Both tests work on the sort of data that we’re considering here, but they both have different assumptions.</p>
-<p>If your data is normally distributed, then a one-sample t-test is appropriate. If your data aren’t normally distributed, but their distribution is symmetric, and the sample size is small then a one-sample Wilcoxon signed rank test is more appropriate.</p>
-<p>For each statistical test we consider there will be five tasks. These will come back again and again, so pay extra close attention.</p>
-<div class="highlight">
-<ol style="list-style-type: decimal">
-<li>Setting out of the hypothesis</li>
-<li>Summarise and visualisation of the data</li>
-<li>Assessment of assumptions</li>
-<li>Implementation of the statistical test</li>
-<li>Interpreting the output and presentation of results</li>
-</ol>
-</div>
-<p>We won’t always carry these out in exactly the same order, but we will always consider each of the five tasks for every test.</p>
+<p>This section uses various data sets. They are all located in the <code>data/raw/</code> folder in your working directory. Please see <a href="index.html#index-datasets">Datasets</a> for more information.</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
-<div class="next"><a href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> 1-sample t-test</a></div>
+<div class="prev"><a href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></div>
+<div class="next"><a href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-one-sample-tests"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="nav-link" href="#objectives-1"><span class="header-section-number">4.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">4.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#choosing-a-test"><span class="header-section-number">4.3</span> Choosing a test</a></li>
+<li><a class="nav-link" href="#introduction-4"><span class="header-section-number">25</span> Introduction</a></li>
+<li><a class="nav-link" href="#cs5-datasets"><span class="header-section-number">25.1</span> Datasets</a></li>
 </ul>
 
       <div class="book-extra">

@@ -13,6 +13,29 @@ pre code {
   white-space: inherit;
 }
 
+/* ---------------------------------- */
+/* ----------- odd things ----------- */
+/* ---------------------------------- */
+/* Default - turquoise */
+/* Theme 1 - blue
+	#003e74 page header colours/global footer
+  Theme 2 - turquoise
+	#106470 page header colours/global footer
+  Theme 3 - purple
+	#422e5d page header colours/global footer
+  Theme 4 - green
+	#304220 page header colours/global footer
+  Theme 5 - orange
+	#c44101 page header colours/global footer
+  Theme 6 - red
+	#851735 page header colours/global footer
+*/
+
+.box, .exercise, .keypoints, .objectives, .highlight, .warning, .note{background-color: #f7f8fa}
+
+/* change the border colour to match the theme */
+div.highlight, div.keypoints, div.objectives{border-left: 10px solid #106470}
+
 /* odd things from the full-stylesheet that need a nicer solution at some point */
 
 /* make a:hover white for local navigation */
@@ -21,7 +44,9 @@ div.campl-local-navigation-container li a:hover{color:#fff;text-decoration: none
 /* reduce font size for global and local navigation, local footer and global footer */
 .campl-global-header, .campl-header-container, .campl-global-navigation, .campl-horizontal-navigation, .campl-local-navigation, .campl-local-footer, .campl-global-footer, .campl-horizontal-navigation li a, .campl-global-navigation li a, div.campl-search-input, div.campl-quicklinks{font-size: 0.8em}
 
-/* bookdown specific things */
+/* ---------------------------------- */
+/* ---- bookdown specific things ---- */
+/* ---------------------------------- */
 
 li.book-part{background-color:#f7f8fa; font-weight: bold} /* make the part sections headers stand out more */
 
@@ -35,7 +60,6 @@ div.inline-figure img {
 
 /* Style properties for exercise */
 div.exercise {
-  background-color: #fef9f1;
   /*box-shadow: 0 0 3px 2px #fcedd7;*/
   background-image: url("../img/exercise.svg");
   padding: 1em 1em 1em 3em;
@@ -78,7 +102,6 @@ details summary > * {
   background-position: 0.5em 1em;
   background-size: 2em;
   margin: 10px;
-  background-color: #f7f8fa;
   color: black;
 }
 
@@ -91,23 +114,19 @@ details summary > * {
 }
 
 .objectives {
-  background-color: #d2e4f3;
   background-image: url("../img/warning.svg"); /* https://fonts.gstatic.com/s/i/materialiconsoutlined/error_outline/v11/24px.svg */
 }
 
 .keypoints {
-  background-color: #d2e4f3;
   background-image: url("../img/warning.svg"); /* https://fonts.gstatic.com/s/i/materialiconsoutlined/error_outline/v11/24px.svg */
 }
 
 .warning {
-  background-color: #fff6f5;
   /*box-shadow: 0 0 3px 2px #fce4e1;*/
   background-image: url("../img/warning.svg"); /* https://fonts.gstatic.com/s/i/materialiconsoutlined/error_outline/v11/24px.svg */
 }
 
 .note {
-  background-color: #ebebf2;
   color: #1b1b1b;
   /*box-shadow: 0 0 3px 2px #ebebf2;*/
   background-image: url("../img/note.svg"); /*https://fonts.gstatic.com/s/i/materialiconsoutlined/info/v15/24px.svg*/
@@ -115,7 +134,6 @@ details summary > * {
 
 .highlight {
   background-image: url("../img/highlight.svg"); /* https://fonts.gstatic.com/s/i/materialiconsoutlined/tips_and_updates/v1/24px.svg */
-  border-left: 10px solid #e87722;
 }
 
 .box {
