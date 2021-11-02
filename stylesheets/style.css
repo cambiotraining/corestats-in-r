@@ -44,7 +44,7 @@ div.highlight, div.keypoints, div.objectives{border-left: 10px solid #106470}
 div.campl-local-navigation-container li a:hover{color:#fff;text-decoration: none;}
 
 /* reduce font size for global and local navigation, local footer and global footer */
-.campl-global-header, .campl-header-container, .campl-global-navigation, .campl-horizontal-navigation, .campl-local-navigation, .campl-local-footer, .campl-global-footer, .campl-horizontal-navigation li a, .campl-global-navigation li a, div.campl-search-input, div.campl-quicklinks{font-size: 0.8em}
+/*.campl-global-header, .campl-header-container, .campl-global-navigation, .campl-horizontal-navigation, .campl-local-navigation, .campl-local-footer, .campl-global-footer, .campl-horizontal-navigation li a, .campl-global-navigation li a, div.campl-search-input, div.campl-quicklinks{font-size: 0.8em}*/
 
 /* ---------------------------------- */
 /* ---- bookdown specific things ---- */
