@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -425,7 +424,7 @@
 <span class="header-section-number">11.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a two-tailed, Wilcoxon signed-rank test:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>,
             alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -463,101 +462,19 @@
 <div class="exercise">
 <p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 11.1  </strong></span>Deer legs</p>
 <p>Using the following data, test the null hypothesis that the fore and hind legs of deer are the same length.</p>
-<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:cs1-pairedwilcoxon-example">Table 11.1: </span>Deer leg length (cm)
-</caption>
-<thead><tr>
-<th style="text-align:right;background-color: white !important;">
-hindleg
-</th>
-<th style="text-align:right;background-color: white !important;">
-foreleg
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-<td style="text-align:right;background-color: white !important;">
-138
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-140
-</td>
-<td style="text-align:right;background-color: white !important;">
-136
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-144
-</td>
-<td style="text-align:right;background-color: white !important;">
-147
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-144
-</td>
-<td style="text-align:right;background-color: white !important;">
-139
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-<td style="text-align:right;background-color: white !important;">
-143
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-146
-</td>
-<td style="text-align:right;background-color: white !important;">
-141
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-149
-</td>
-<td style="text-align:right;background-color: white !important;">
-143
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-150
-</td>
-<td style="text-align:right;background-color: white !important;">
-145
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-<td style="text-align:right;background-color: white !important;">
-136
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-148
-</td>
-<td style="text-align:right;background-color: white !important;">
-146
-</td>
-</tr>
-</tbody>
-</table></div>
+<pre><code>## # A tibble: 10 × 2
+##    hindleg foreleg
+##      &lt;dbl&gt;   &lt;dbl&gt;
+##  1     142     138
+##  2     140     136
+##  3     144     147
+##  4     144     139
+##  5     142     143
+##  6     146     141
+##  7     149     143
+##  8     150     145
+##  9     142     136
+## 10     148     146</code></pre>
 <p>Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?</p>
 <ol style="list-style-type: decimal">
 <li>Write down the null and alternative hypotheses</li>
@@ -577,246 +494,34 @@ Answer
 <p><span class="math inline">\(H_1\)</span> : foreleg average <span class="math inline">\(\neq\)</span> hindleg average</p>
 <p><strong>2-4. Import Data, Summarise and visualise</strong></p>
 <p>I always recommend storing data in stacked format even in this example, even though in this case it might seem easier to store your data in unstacked format (this is pretty much the only time where this is even a sensible option). So for this example I manually input the data into excel in the following layout:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-deer.csv"</span><span class="op">)</span></code></pre></div>
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;background-color: white !important;">
-id
-</th>
-<th style="text-align:left;background-color: white !important;">
-leg
-</th>
-<th style="text-align:right;background-color: white !important;">
-length
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-1
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-2
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-140
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-3
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-144
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-4
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-144
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-5
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-6
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-146
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-7
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-149
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-8
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-150
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-9
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-142
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-10
-</td>
-<td style="text-align:left;background-color: white !important;">
-hindleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-148
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-1
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-138
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-2
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-136
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-3
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-147
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-4
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-139
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-5
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-143
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-6
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-141
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-7
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-143
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-8
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-145
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-9
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-136
-</td>
-</tr>
-<tr>
-<td style="text-align:right;background-color: white !important;">
-10
-</td>
-<td style="text-align:left;background-color: white !important;">
-foreleg
-</td>
-<td style="text-align:right;background-color: white !important;">
-146
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>## # A tibble: 20 × 3
+##       id leg     length
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+##  1     1 hindleg    142
+##  2     2 hindleg    140
+##  3     3 hindleg    144
+##  4     4 hindleg    144
+##  5     5 hindleg    142
+##  6     6 hindleg    146
+##  7     7 hindleg    149
+##  8     8 hindleg    150
+##  9     9 hindleg    142
+## 10    10 hindleg    148
+## 11     1 foreleg    138
+## 12     2 foreleg    136
+## 13     3 foreleg    147
+## 14     4 foreleg    139
+## 15     5 foreleg    143
+## 16     6 foreleg    141
+## 17     7 foreleg    143
+## 18     8 foreleg    145
+## 19     9 foreleg    136
+## 20    10 foreleg    146</code></pre>
 <p>The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an <code>id</code> column, where each observation has a unique ID.</p>
 <p>Let’s look at the data and see what we can see.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##       leg length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
 ## 1 foreleg      136.00         138.25        142.00      141.40         144.50
@@ -824,22 +529,22 @@ foreleg
 ##   length.Max.
 ## 1      147.00
 ## 2      150.00</code></pre>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p>It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have <em>paired</em> data. What we really need to look at is the difference in leg length for each deer:</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uns_deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">deer</span>, <span class="va">length</span> <span class="op">~</span> <span class="va">leg</span><span class="op">)</span>
 <span class="va">deerDiff</span> <span class="op">&lt;-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">hindleg</span> <span class="op">-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">foreleg</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    -3.0     2.5     4.5     3.3     5.0     6.0</code></pre>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <p>This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).</p>
 <p><strong>5. Perform a two-sample t-test</strong></p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -854,7 +559,7 @@ foreleg
 ##                    -3.3</code></pre>
 <p>The paired t-test here assumes that the data is stored exactly as we have entered it (i.e. that the first hindleg row matches the first foreleg row). Here we apparently see a significant difference.</p>
 <p><strong>6. Perform a paired Wilcoxon test</strong></p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in wilcox.test.default(x = c(138L, 136L, 147L, 139L, 143L, 141L, :
 ## cannot compute exact p-value with ties</code></pre>
@@ -867,14 +572,14 @@ foreleg
 <p>The paired Wilcoxon test makes the same assumptions about the order of the data as the paired t-test. Here again we have a significant difference.</p>
 <p><strong>7. Check assumptions</strong></p>
 <p>We need to consider the distribution of the <em>difference</em> in leg lengths rather than the individual distributions.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  deerDiff
 ## W = 0.81366, p-value = 0.02123</code></pre>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">deerDiff</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>

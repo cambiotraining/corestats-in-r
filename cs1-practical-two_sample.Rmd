@@ -111,9 +111,7 @@ Stacked form (or [long format data](https://tidyr.tidyverse.org/reference/pivot_
 
 ```{r stacked-table, echo=FALSE, message=FALSE}
 read_csv("data/examples/cs1-meerkats.csv") %>% 
-  select(-id, -year) %>% 
-  kbl() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE)
+  select(-id, -year)
 ```
 
 In the unstacked (or [wide format](https://tidyr.tidyverse.org/reference/pivot_wider.html)) form a variable (measured thing) is present in more than one column. For example, let's say we measured meerkat weight in two countries over a period of years. We could then organise our data in such a way that for each year the measured values are split by country:
@@ -121,9 +119,7 @@ In the unstacked (or [wide format](https://tidyr.tidyverse.org/reference/pivot_w
 ```{r unstacked-table, echo=FALSE, message=FALSE}
 read_csv("data/examples/cs1-meerkats.csv") %>% 
   select(-id) %>% 
-  pivot_wider(names_from = country, values_from = weight) %>% 
-  kbl() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE)
+  pivot_wider(names_from = country, values_from = weight)
 ```
 
 Having tidy data is the easiest way of doing analyses in R and I would strongly encourage you all to start adopting this format as standard for data collection and processing.

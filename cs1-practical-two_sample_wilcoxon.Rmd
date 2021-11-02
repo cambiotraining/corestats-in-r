@@ -56,13 +56,10 @@ Deer legs
 Using the following data, test the null hypothesis that the fore and hind legs of deer are the same length.
 
 ```{r cs1-pairedwilcoxon-example, echo=FALSE, warning=FALSE, message=FALSE}
+# deer leg length (cm)
 read_csv("data/examples/cs1-deer.csv") %>% 
   pivot_wider(names_from = leg, values_from = length) %>% 
-  select(-id) %>% 
-  kbl(caption = "Deer leg length (cm)") %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE) %>% 
-  row_spec(0, background = "white") %>% 
-  column_spec(c(1,2), background = "white")
+  select(-id)
 ```
 
 Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?
@@ -94,11 +91,7 @@ deer <- read.csv("data/examples/cs1-deer.csv")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-read_csv("data/examples/cs1-deer.csv") %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE) %>% 
-  row_spec(0, background = "white") %>% 
-  column_spec(c(1,2,3), background = "white")
+read_csv("data/examples/cs1-deer.csv")
 ```
 
 The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an `id` column, where each observation has a unique ID.

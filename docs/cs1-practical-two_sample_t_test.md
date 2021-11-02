@@ -271,45 +271,19 @@ Serum cholesterol concentrations in turtles
 
 Using the following data, test the null hypothesis that male and female turtles have the same mean serum cholesterol concentrations.
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:cs1-twosample-turtle-data)Serum cholesterol (mg/100 ml</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;background-color: white !important;"> Male </th>
-   <th style="text-align:right;background-color: white !important;"> Female </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 220.1 </td>
-   <td style="text-align:right;background-color: white !important;"> 223.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 218.6 </td>
-   <td style="text-align:right;background-color: white !important;"> 221.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 229.6 </td>
-   <td style="text-align:right;background-color: white !important;"> 230.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 228.8 </td>
-   <td style="text-align:right;background-color: white !important;"> 224.3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 222.0 </td>
-   <td style="text-align:right;background-color: white !important;"> 223.8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 224.1 </td>
-   <td style="text-align:right;background-color: white !important;"> 230.8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 226.5 </td>
-   <td style="text-align:right;background-color: white !important;"> NA </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 7 × 2
+##    Male Female
+##   <dbl>  <dbl>
+## 1  220.   223.
+## 2  219.   222.
+## 3  230.   230.
+## 4  229.   224.
+## 5  222    224.
+## 6  224.   231.
+## 7  226.    NA
+```
 
 1. Write down the null and alternative hypotheses
 2. Choose a representation for the data (stacked or unstacked) and create a `csv` file

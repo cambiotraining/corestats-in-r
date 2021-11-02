@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -447,7 +446,7 @@
 <p>We will use the <code>USArrests</code> dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. <code>USArrests</code> is an unstacked data frame with 50 observations of four variables: <code>Murder</code>, <code>Assault</code>, <code>UrbanPop</code> and <code>Robbery</code>.</p>
 <p>The data are stored in the file <code>data/raw/CS3-usarrests.csv</code>.</p>
 <p>First we read in the data:</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">USArrests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS3-usarrests.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
@@ -472,7 +471,7 @@
 <span class="header-section-number">18.6</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>Run this command:</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USArrests</span>, lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <ul>
@@ -486,7 +485,7 @@
 <span class="header-section-number">18.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s test if there are any possible correlations between the variables:</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USArrests</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>The first argument is a matrix or a data frame</li>
@@ -522,7 +521,7 @@
 <details><summary>
 Answer
 </summary><p><strong>1. Read in the data</strong></p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">USAstate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS3-statedata.csv"</span>,
                      row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
@@ -536,11 +535,11 @@ Answer
 ## California      21198   5114        1.1   71.71   10.3   62.6    20 156361
 ## Colorado         2541   4884        0.7   72.06    6.8   63.9   166 103766</code></pre>
 <p><strong>2. Look at the pair-wise comparisons</strong></p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USAstate</span>, lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p><strong>3. Create a correlation matrix</strong></p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
 <pre><code>##             Population     Income  Illiteracy     LifeExp     Murder
 ## Population  1.00000000  0.2082276  0.10762237 -0.06805195  0.3436428
@@ -578,7 +577,7 @@ Answer
 <span class="header-section-number">18.11</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>We are using the same <code>USArrests</code> data set as before, so run this command:</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USArrests</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>The first argument is a matrix or a data frame</li>
@@ -616,7 +615,7 @@ Hint
 <li>The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function can be very useful to visualise matrices</li>
 </ol></details><details><summary>
 Answer
-</summary><div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
 <pre><code>##            Population      Income Illiteracy    LifeExp     Murder     HSGrad
 ## Population  1.0000000  0.12460984  0.3130496 -0.1040171  0.3457401 -0.3833649
@@ -638,19 +637,19 @@ Answer
 ## Area        0.1122878  1.00000000</code></pre>
 <p>In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we’re using R is that we can be a bit more <strong>programmatic</strong> about these things.</p>
 <p>Let’s calculate the difference between the two correlation matrices:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
 <span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span>
 <span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span></code></pre></div>
 <p>Again, we could now just look at a grid of 64 numbers and see if we can spot the biggest differences, but our eyes aren’t that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data. We can do that using some R plotting functions, <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> to be exact. The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function has a lot of features that we don’t need and so I’m not going to go into it in detail here. The main reason I’m using it is that it displays matrices the right way round (other plotting functions display matrices rotated by 90 degrees) and automatically labels the rows and columns.</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html">heatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">corDiff</span><span class="op">)</span>, symm <span class="op">=</span> <span class="cn">TRUE</span>, Rowv <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
 <p>The <code><a href="https://rdrr.io/r/base/MathFun.html">abs()</a></code> function calculates the absolute value (i.e. just the magnitude) of the matrix values. This is just because I only care about situations where the two correlation coefficients are different from each other but I don’t care which is the larger. The <code>symm</code> argument tells the function that we have a symmetric matrix and in conjunction with the <code>Rowv = NA</code> argument stops the plot from reordering the rows and columns. The <code>Rowv = NA</code> argument also stops the function from adding dendrograms to the margins of the plot.</p>
 <p>The plot itself is coloured from yellow, indicating the smallest values (which in this case correspond to no difference in correlation coefficients), through orange to dark red, indicating the biggest values (which in this case correspond to the variables with the biggest difference in correlation coefficients).</p>
 <p>The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light yellow in colour, which means that there isn’t much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the <code>Area</code> row/column suggesting that there’s a big difference in the correlation coefficients there.</p>
 <p>We can now revisit the pairwise scatter plot from before to see if this makes sense:</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USAstate</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the <code>Area</code> vs <code>Income</code> graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.</p>

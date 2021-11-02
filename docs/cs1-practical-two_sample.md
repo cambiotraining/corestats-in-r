@@ -74,68 +74,29 @@ When using a data frame we have different options to organise our data. The best
 
 Stacked form (or [long format data](https://tidyr.tidyverse.org/reference/pivot_longer.html)) is where the data is arranged in such a way that each variable (thing that we measured) has its own column. If we consider a dataset containing meerkat weights (in g) from two different countries then a stacked format of the data would look like:
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> country </th>
-   <th style="text-align:right;"> weight </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Botswana </td>
-   <td style="text-align:right;"> 514 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Botswana </td>
-   <td style="text-align:right;"> 568 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Botswana </td>
-   <td style="text-align:right;"> 519 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Uganda </td>
-   <td style="text-align:right;"> 624 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Uganda </td>
-   <td style="text-align:right;"> 662 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Uganda </td>
-   <td style="text-align:right;"> 633 </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 6 × 2
+##   country  weight
+##   <chr>     <dbl>
+## 1 Botswana    514
+## 2 Botswana    568
+## 3 Botswana    519
+## 4 Uganda      624
+## 5 Uganda      662
+## 6 Uganda      633
+```
 
 In the unstacked (or [wide format](https://tidyr.tidyverse.org/reference/pivot_wider.html)) form a variable (measured thing) is present in more than one column. For example, let's say we measured meerkat weight in two countries over a period of years. We could then organise our data in such a way that for each year the measured values are split by country:
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> year </th>
-   <th style="text-align:right;"> Botswana </th>
-   <th style="text-align:right;"> Uganda </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1990 </td>
-   <td style="text-align:right;"> 514 </td>
-   <td style="text-align:right;"> 624 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1992 </td>
-   <td style="text-align:right;"> 568 </td>
-   <td style="text-align:right;"> 662 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1995 </td>
-   <td style="text-align:right;"> 519 </td>
-   <td style="text-align:right;"> 633 </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 3 × 3
+##    year Botswana Uganda
+##   <dbl>    <dbl>  <dbl>
+## 1  1990      514    624
+## 2  1992      568    662
+## 3  1995      519    633
+```
 
 Having tidy data is the easiest way of doing analyses in R and I would strongly encourage you all to start adopting this format as standard for data collection and processing.

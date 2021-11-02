@@ -361,52 +361,19 @@ Juvenile lobster weight
 
 Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;background-color: white !important;"> Mussels </th>
-   <th style="text-align:right;background-color: white !important;"> Pellets </th>
-   <th style="text-align:right;background-color: white !important;"> Flakes </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 151.6 </td>
-   <td style="text-align:right;background-color: white !important;"> 117.7 </td>
-   <td style="text-align:right;background-color: white !important;"> 101.8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 132.1 </td>
-   <td style="text-align:right;background-color: white !important;"> 110.8 </td>
-   <td style="text-align:right;background-color: white !important;"> 102.9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 104.2 </td>
-   <td style="text-align:right;background-color: white !important;"> 128.6 </td>
-   <td style="text-align:right;background-color: white !important;"> 90.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 153.5 </td>
-   <td style="text-align:right;background-color: white !important;"> 110.1 </td>
-   <td style="text-align:right;background-color: white !important;"> 132.8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 132.0 </td>
-   <td style="text-align:right;background-color: white !important;"> 175.2 </td>
-   <td style="text-align:right;background-color: white !important;"> 129.3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 119.0 </td>
-   <td style="text-align:right;background-color: white !important;"> NA </td>
-   <td style="text-align:right;background-color: white !important;"> 129.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 161.9 </td>
-   <td style="text-align:right;background-color: white !important;"> NA </td>
-   <td style="text-align:right;background-color: white !important;"> NA </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 7 × 3
+##   Mussels Pellets Flakes
+##     <dbl>   <dbl>  <dbl>
+## 1    152.    118.  102. 
+## 2    132.    111.  103. 
+## 3    104.    129.   90.4
+## 4    154.    110.  133. 
+## 5    132     175.  129. 
+## 6    119      NA   129. 
+## 7    162.     NA    NA
+```
 
 Is there any evidence that diet affects the growth rate of lobsters?
 

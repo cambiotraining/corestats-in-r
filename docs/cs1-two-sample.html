@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -475,115 +474,22 @@ Figure 7.2: Which test to use
 </ul>
 </div>
 <p>Stacked form (or <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">long format data</a>) is where the data is arranged in such a way that each variable (thing that we measured) has its own column. If we consider a dataset containing meerkat weights (in g) from two different countries then a stacked format of the data would look like:</p>
-<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:left;">
-country
-</th>
-<th style="text-align:right;">
-weight
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Botswana
-</td>
-<td style="text-align:right;">
-514
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Botswana
-</td>
-<td style="text-align:right;">
-568
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Botswana
-</td>
-<td style="text-align:right;">
-519
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Uganda
-</td>
-<td style="text-align:right;">
-624
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Uganda
-</td>
-<td style="text-align:right;">
-662
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Uganda
-</td>
-<td style="text-align:right;">
-633
-</td>
-</tr>
-</tbody>
-</table></div>
+<pre><code>## # A tibble: 6 × 2
+##   country  weight
+##   &lt;chr&gt;     &lt;dbl&gt;
+## 1 Botswana    514
+## 2 Botswana    568
+## 3 Botswana    519
+## 4 Uganda      624
+## 5 Uganda      662
+## 6 Uganda      633</code></pre>
 <p>In the unstacked (or <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">wide format</a>) form a variable (measured thing) is present in more than one column. For example, let’s say we measured meerkat weight in two countries over a period of years. We could then organise our data in such a way that for each year the measured values are split by country:</p>
-<div class="inline-table"><table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-year
-</th>
-<th style="text-align:right;">
-Botswana
-</th>
-<th style="text-align:right;">
-Uganda
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1990
-</td>
-<td style="text-align:right;">
-514
-</td>
-<td style="text-align:right;">
-624
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1992
-</td>
-<td style="text-align:right;">
-568
-</td>
-<td style="text-align:right;">
-662
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1995
-</td>
-<td style="text-align:right;">
-519
-</td>
-<td style="text-align:right;">
-633
-</td>
-</tr>
-</tbody>
-</table></div>
+<pre><code>## # A tibble: 3 × 3
+##    year Botswana Uganda
+##   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1  1990      514    624
+## 2  1992      568    662
+## 3  1995      519    633</code></pre>
 <p>Having tidy data is the easiest way of doing analyses in R and I would strongly encourage you all to start adopting this format as standard for data collection and processing.</p>
 
 </div>

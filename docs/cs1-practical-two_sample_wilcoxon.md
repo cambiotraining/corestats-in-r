@@ -56,57 +56,22 @@ Deer legs
 
 Using the following data, test the null hypothesis that the fore and hind legs of deer are the same length.
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:cs1-pairedwilcoxon-example)Deer leg length (cm)</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;background-color: white !important;"> hindleg </th>
-   <th style="text-align:right;background-color: white !important;"> foreleg </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-   <td style="text-align:right;background-color: white !important;"> 138 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 140 </td>
-   <td style="text-align:right;background-color: white !important;"> 136 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 144 </td>
-   <td style="text-align:right;background-color: white !important;"> 147 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 144 </td>
-   <td style="text-align:right;background-color: white !important;"> 139 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-   <td style="text-align:right;background-color: white !important;"> 143 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 146 </td>
-   <td style="text-align:right;background-color: white !important;"> 141 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 149 </td>
-   <td style="text-align:right;background-color: white !important;"> 143 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 150 </td>
-   <td style="text-align:right;background-color: white !important;"> 145 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-   <td style="text-align:right;background-color: white !important;"> 136 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 148 </td>
-   <td style="text-align:right;background-color: white !important;"> 146 </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 10 × 2
+##    hindleg foreleg
+##      <dbl>   <dbl>
+##  1     142     138
+##  2     140     136
+##  3     144     147
+##  4     144     139
+##  5     142     143
+##  6     146     141
+##  7     149     143
+##  8     150     145
+##  9     142     136
+## 10     148     146
+```
 
 Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?
 
@@ -137,117 +102,32 @@ I always recommend storing data in stacked format even in this example, even tho
 deer <- read.csv("data/examples/cs1-deer.csv")
 ```
 
-<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;background-color: white !important;"> id </th>
-   <th style="text-align:left;background-color: white !important;"> leg </th>
-   <th style="text-align:right;background-color: white !important;"> length </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 1 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 2 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 140 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 3 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 144 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 4 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 144 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 5 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 6 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 146 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 7 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 149 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 8 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 150 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 9 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 142 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 10 </td>
-   <td style="text-align:left;background-color: white !important;"> hindleg </td>
-   <td style="text-align:right;background-color: white !important;"> 148 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 1 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 138 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 2 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 136 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 3 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 147 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 4 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 139 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 5 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 143 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 6 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 141 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 7 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 143 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 8 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 145 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 9 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 136 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;background-color: white !important;"> 10 </td>
-   <td style="text-align:left;background-color: white !important;"> foreleg </td>
-   <td style="text-align:right;background-color: white !important;"> 146 </td>
-  </tr>
-</tbody>
-</table>
+
+```
+## # A tibble: 20 × 3
+##       id leg     length
+##    <dbl> <chr>    <dbl>
+##  1     1 hindleg    142
+##  2     2 hindleg    140
+##  3     3 hindleg    144
+##  4     4 hindleg    144
+##  5     5 hindleg    142
+##  6     6 hindleg    146
+##  7     7 hindleg    149
+##  8     8 hindleg    150
+##  9     9 hindleg    142
+## 10    10 hindleg    148
+## 11     1 foreleg    138
+## 12     2 foreleg    136
+## 13     3 foreleg    147
+## 14     4 foreleg    139
+## 15     5 foreleg    143
+## 16     6 foreleg    141
+## 17     7 foreleg    143
+## 18     8 foreleg    145
+## 19     9 foreleg    136
+## 20    10 foreleg    146
+```
 
 The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an `id` column, where each observation has a unique ID.
 

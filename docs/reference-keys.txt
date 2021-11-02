@@ -4,11 +4,9 @@ fig:fig-cs1-diagram-test
 fig:fig-cs1-diagram-which-test
 exr:unlabeled-div-3
 exr:unlabeled-div-4
-tab:cs1-twosample-turtle-data
 exr:unlabeled-div-5
 exr:unlabeled-div-6
 exr:unlabeled-div-7
-tab:cs1-pairedwilcoxon-example
 exr:unlabeled-div-8
 exr:unlabeled-div-9
 exr:unlabeled-div-10
