@@ -623,7 +623,7 @@
 </li>
 <li>The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).</li>
 </ul>
-<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is allright.</p>
+<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is alright.</p>
 <div class="note">
 <p>At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.</p>
 <p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
@@ -722,10 +722,17 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>1. Hypotheses</strong></p>
+</summary><div id="hypotheses" class="section level3" number="14.10.1">
+<h3>
+<span class="header-section-number">14.10.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses"><i class="fas fa-link"></i></a>
+</h3>
 <p><span class="math inline">\(H_0\)</span> : all means are equal</p>
 <p><span class="math inline">\(H_1\)</span> : not all means are equal</p>
-<p><strong>2-3. Import Data, summarise and visualise</strong></p>
+</div>
+<div id="import-data-summarise-and-visualise" class="section level3" number="14.10.2">
+<h3>
+<span class="header-section-number">14.10.2</span> Import Data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise"><i class="fas fa-link"></i></a>
+</h3>
 <p>The data are stored in a <code>.csv</code> file in stacked format with columns called <code>weight</code> and <code>diet</code>.</p>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-lobsters.csv"</span><span class="op">)</span></code></pre></div>
@@ -781,7 +788,11 @@ Answer
 <ul>
 <li>The groups appear mainly symmetric (although <code>Pellets</code> is a bit weird) and so we’re not immediately massively worried about lack of normality. Again, <code>Flakes</code> and <code>Mussels</code> appear to have very similar variances but it’s a bit hard to decide what’s going on with <code>Pellets.</code> It’s hard to say what’s going on with the assumptions and so I’ll wait and see what the other tests say.</li>
 </ul>
-<p><strong>4. Explore Assumptions</strong></p>
+</div>
+<div id="explore-assumptions" class="section level3" number="14.10.3">
+<h3>
+<span class="header-section-number">14.10.3</span> Explore Assumptions<a class="anchor" aria-label="anchor" href="#explore-assumptions"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Normality</strong></p>
 <p>We’ll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we’ll only use the Q-Q plot.</p>
 <p>We’ll need to unstack the data to use the Shapiro-Wilk test on the individual groups:</p>
@@ -846,7 +857,11 @@ Answer
 <li>the red line in the scale-location graph is pretty horizontal</li>
 </ul>
 <p>Overall, this assumption is pretty well met.</p>
-<p><strong>5. Carry out one-way ANOVA</strong></p>
+</div>
+<div id="carry-out-one-way-anova" class="section level3" number="14.10.4">
+<h3>
+<span class="header-section-number">14.10.4</span> Carry out one-way ANOVA<a class="anchor" aria-label="anchor" href="#carry-out-one-way-anova"><i class="fas fa-link"></i></a>
+</h3>
 <p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -856,11 +871,19 @@ Answer
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
 ## diet       2 1567.2  783.61  1.6432 0.2263
 ## Residuals 15 7153.1  476.87</code></pre>
-<p><strong>6. Result</strong></p>
+</div>
+<div id="result" class="section level3" number="14.10.5">
+<h3>
+<span class="header-section-number">14.10.5</span> Result<a class="anchor" aria-label="anchor" href="#result"><i class="fas fa-link"></i></a>
+</h3>
 <blockquote>
 <p>A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).</p>
 </blockquote>
-<p><strong>7. Post-hoc testing with Tukey</strong></p>
+</div>
+<div id="post-hoc-testing-with-tukey" class="section level3" number="14.10.6">
+<h3>
+<span class="header-section-number">14.10.6</span> Post-hoc testing with Tukey<a class="anchor" aria-label="anchor" href="#post-hoc-testing-with-tukey"><i class="fas fa-link"></i></a>
+</h3>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
@@ -882,6 +905,8 @@ Answer
 <p>If on the other hand your research question was:</p>
 <p><em>Are any specific diets better or worse for lobster weight than others?</em></p>
 <p>Then we should probably have just skipped the one-way ANOVA test entirely and just jumped straight in with the Tukey’s range test, but the important point here is that the result of the one-way ANOVA test doesn’t preclude carrying out the Tukey test.</p>
+</div>
+
 </div>
 </details>
 </div>
@@ -916,7 +941,16 @@ Answer
 <li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">14.7</span> Interpret output and report results</a></li>
 <li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">14.8</span> Assumptions</a></li>
 <li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">14.9</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">14.10</span> Exercise</a></li>
+<li>
+<a class="nav-link" href="#exercise-7"><span class="header-section-number">14.10</span> Exercise</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses"><span class="header-section-number">14.10.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#import-data-summarise-and-visualise"><span class="header-section-number">14.10.2</span> Import Data, summarise and visualise</a></li>
+<li><a class="nav-link" href="#explore-assumptions"><span class="header-section-number">14.10.3</span> Explore Assumptions</a></li>
+<li><a class="nav-link" href="#carry-out-one-way-anova"><span class="header-section-number">14.10.4</span> Carry out one-way ANOVA</a></li>
+<li><a class="nav-link" href="#result"><span class="header-section-number">14.10.5</span> Result</a></li>
+<li><a class="nav-link" href="#post-hoc-testing-with-tukey"><span class="header-section-number">14.10.6</span> Post-hoc testing with Tukey</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#key-points-2"><span class="header-section-number">14.11</span> Key points</a></li>
 </ul>
 

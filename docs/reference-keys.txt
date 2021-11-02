@@ -115,6 +115,12 @@ interpret-output-and-report-results-4
 assumptions-6
 post-hoc-testing
 exercise-7
+hypotheses
+import-data-summarise-and-visualise
+explore-assumptions
+carry-out-one-way-anova
+result
+post-hoc-testing-with-tukey
 key-points-2
 kruskal-wallis-test
 objectives-5

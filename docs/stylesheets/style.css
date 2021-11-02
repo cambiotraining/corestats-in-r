@@ -16,7 +16,9 @@ pre code {
 /* ---------------------------------- */
 /* ----------- odd things ----------- */
 /* ---------------------------------- */
+
 /* Default - turquoise */
+
 /* Theme 1 - blue
 	#003e74 page header colours/global footer
   Theme 2 - turquoise
@@ -53,10 +55,10 @@ li.book-part{background-color:#f7f8fa; font-weight: bold} /* make the part secti
 /* Boxes and exercises */
 /*@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');*/
 
-/* Make sure that images are rescaled to 100% instead of fixed size */
-div.inline-figure img {
-  width: 100%;
-}
+/* Make sure that images are rescaled to a maximum of 100% instead of fixed size */
+div.inline-figure img{max-width: 100%}
+
+div.exercise img{max-width: 100%}
 
 /* Style properties for exercise */
 div.exercise {

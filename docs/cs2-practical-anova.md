@@ -264,7 +264,7 @@ The second line creates the three diagnostic plots (it actually tries to create 
     - For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.
 - The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).
 
-We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is allright.
+We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is alright.
 
 :::note
 At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.
@@ -388,13 +388,13 @@ Is there any evidence that diet affects the growth rate of lobsters?
 
 <details><summary>Answer</summary>
 
-**1. Hypotheses**
+### Hypotheses
 
 $H_0$ : all means are equal
 
 $H_1$ : not all means are equal
 
-**2-3. Import Data, summarise and visualise**
+### Import Data, summarise and visualise
 
 The data are stored in a `.csv` file in stacked format with columns called `weight` and `diet`.
 
@@ -459,7 +459,7 @@ As always we use the plot and summary to assess three things:
 3. What do we think about assumptions?
   * The groups appear mainly symmetric (although `Pellets` is a bit weird) and so we're not immediately massively worried about lack of normality. Again, `Flakes` and `Mussels` appear to have very similar variances but it's a bit hard to decide what's going on with `Pellets.` It's hard to say what's going on with the assumptions and so I'll wait and see what the other tests say.
 
-**4. Explore Assumptions**
+### Explore Assumptions
 
 **Normality**
 
@@ -573,7 +573,7 @@ Here all three methods agree that there isn't any issues with equality of varian
 
 Overall, this assumption is pretty well met.
 
-**5. Carry out one-way ANOVA**
+### Carry out one-way ANOVA
 
 With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.
 
@@ -592,11 +592,11 @@ anova(lm(weight ~ diet, data = lobsters))
 ```
 
 
-**6. Result**
+### Result
 
 > A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).
 
-**7. Post-hoc testing with Tukey**
+### Post-hoc testing with Tukey
 
 
 ```r
