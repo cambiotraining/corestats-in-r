@@ -8,13 +8,14 @@ source(file = "setup.R")
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- When is the use of a two-way ANOVA appropriate?
+- How do I perform this in R?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform a two-way ANOVA in R
+- Understand the concept of interaction between two predictor variables
+- Be able to plot interactions in R
 :::
 
 ## Purpose and aim
@@ -47,7 +48,7 @@ New commands used in this section:
 |:- |:- |
 |`boxplot()`| Creates a boxplot |
 |`interaction.plot()`| Creates an interaction plot |
-|`aov()`| Carries out an ANOVA test |
+|`anova()`| Carries out an ANOVA test |
 
 ## Data and hypotheses
 We will recreate the example analysis used in the lecture. The data are stored as a .csv file called `CS4-exercise.csv`.
@@ -346,7 +347,11 @@ These are actually all OK. Point number 8 is messing with the homogeneity of var
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- A two-way ANOVA is used when there are two categorical variables and a single continuous variable
+- We can visually check for interactions between the categorical variables by using `interaction.plot()`
+- The two-way ANOVA is a type of linear model and assumes the following:
+    1. the data have no systematic pattern
+    2. the residuals are normally distributed
+    3. the residuals have homogeneity of variance
+    4. the fit does not depend on a single point (no single point has high leverage)
 :::
