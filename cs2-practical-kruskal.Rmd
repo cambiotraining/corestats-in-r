@@ -8,13 +8,15 @@ source(file = "setup.R")
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I analyse multiple samples of continuous data if the data are not normally distributed?
+- What is a Kruskal-Wallis test?
+- How do I check for differences between groups?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform an Kruskal-Wallis test in R
+- Understand the output of the test and evaluate the assumptions
+- Be able to perform post-hoc testing after a Kruskal-Wallis test
 :::
 
 ## Purpose and aim
@@ -147,7 +149,7 @@ dunn.test(spidermonkey$aggression, spidermonkey$familiarity)
 
 You can see that the `dunn.test()` function also performs a Kruskal-Wallis test on the data, and these results are reported initially.
 
-The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity an no familiarity groups and between the low and no groups are significant though.
+The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.
 
 ## Exercise
 :::exercise
@@ -205,7 +207,10 @@ Either way, here we can see that none of the comparisons are significant (as bef
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- We use Kruskal-Wallis test to see if there is a difference in medians between multiple continuous variables
+- In R we first define a linear model with `lm()`, using the format `response ~ predictor`
+- Next, we perform a Kruskal-Wallis test on the linear model with `kruskal.test()`
+- We assume parent distributions have the same shape; each data point is independent and the parent distributions have the same variance
+- We test for equality of variance using `LeveneTest()` from the `car` package
+- Post-hoc testing to check for significant differences in the group medians is done with `dunn.test()` from the `dunn.test` package
 :::
