@@ -4,13 +4,14 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- What is power analysis?
+- How can I use power analysis to design better experiments?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform power analysis in R
+- Understand the importance of effect size
+- Use power, significance level and effect size to optimise your experimental design
 :::
 
 ## Background
@@ -609,7 +610,10 @@ We get a denominator df of 116, which means that we would need at least 123 part
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
+- Power is the capacity of a test to detect significant results and is affected by
+    1. the effect size
+    2. sample size
+    3. the significance level
+- Power analysis optimises the trade-off between power, significance level and the desired effect size that we would like to detect
 - Point 3
 :::
