@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 15 Kruskal-Wallis test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="15.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   15.2 Purpose and aim The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used...">
+<meta name="description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 15 Kruskal-Wallis test | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="15.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   15.2 Purpose and aim The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used...">
+<meta property="og:description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 15 Kruskal-Wallis test | Core Statistics in R">
-<meta name="twitter:description" content="15.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   15.2 Purpose and aim The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used...">
+<meta name="twitter:description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,15 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>How do I analyse multiple samples of continuous data if the data are not normally distributed?</li>
+<li>What is a Kruskal-Wallis test?</li>
+<li>How do I check for differences between groups?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform an Kruskal-Wallis test in R</li>
+<li>Understand the output of the test and evaluate the assumptions</li>
+<li>Be able to perform post-hoc testing after a Kruskal-Wallis test</li>
 </ul>
 </div>
 </div>
@@ -582,7 +584,7 @@ Dunn’s test is also not included in the default R packages and may require the
 ## alpha = 0.05
 ## Reject Ho if p &lt;= alpha/2</code></pre>
 <p>You can see that the <code>dunn.test()</code> function also performs a Kruskal-Wallis test on the data, and these results are reported initially.</p>
-<p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity an no familiarity groups and between the low and no groups are significant though.</p>
+<p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
 </div>
 <div id="exercise-8" class="section level2" number="15.10">
 <h2>
@@ -656,9 +658,14 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>We use Kruskal-Wallis test to see if there is a difference in medians between multiple continuous variables</li>
+<li>In R we first define a linear model with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, using the format <code>response ~ predictor</code>
+</li>
+<li>Next, we perform a Kruskal-Wallis test on the linear model with <code><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test()</a></code>
+</li>
+<li>We assume parent distributions have the same shape; each data point is independent and the parent distributions have the same variance</li>
+<li>We test for equality of variance using <code>LeveneTest()</code> from the <code>car</code> package</li>
+<li>Post-hoc testing to check for significant differences in the group medians is done with <code>dunn.test()</code> from the <code>dunn.test</code> package</li>
 </ul>
 </div>
 

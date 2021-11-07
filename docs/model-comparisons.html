@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 27 Model comparisons | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="27.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   27.2 Purpose and aim In the previous example we used a single dataset and fitted five linear models to it depending on...">
+<meta name="description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 27 Model comparisons | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="27.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   27.2 Purpose and aim In the previous example we used a single dataset and fitted five linear models to it depending on...">
+<meta property="og:description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 27 Model comparisons | Core Statistics in R">
-<meta name="twitter:description" content="27.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   27.2 Purpose and aim In the previous example we used a single dataset and fitted five linear models to it depending on...">
+<meta name="twitter:description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,13 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>How do I compare linear models?</li>
+<li>How do decide which one is the “best” model?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to compare models using the Akaike Information Criterion (AIC)</li>
+<li>Use AIC in the context of Backwards Stepwise Elimination in R</li>
 </ul>
 </div>
 </div>
@@ -728,9 +728,9 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>We can use Backwards Stepwise Elimination (BSE) on a full model to see if certain terms add to the predictive power of the model or not</li>
+<li>The AIC allows us to compare different models - if there is a difference in AIC of more than 2 between two models, then the smallest AIC score is more supported</li>
+<li>We can use the <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> function to let R perform an automatic BSE</li>
 </ul>
 </div>
 

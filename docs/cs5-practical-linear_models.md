@@ -6,13 +6,13 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I use the linear model framework with three predictor variables?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to expand the linear model framework in R to three predictor variables
+- Define the equation for the line of best fit for each categorical variable
+- Be able to construct and analyse any possible combination of predictor variables in the data
 :::
 
 ## Purpose and aim

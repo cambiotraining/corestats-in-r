@@ -6,13 +6,14 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I perform a linear regression on grouped data?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform a linear regression on grouped data in R
+- Calculate the linear regression for individual groups and visualise these with the data
+- Understand and be able to create equations of the line of best fit
+- Be able to deal with interactions in this context
 :::
 
 ## Purpose and aim
@@ -621,7 +622,9 @@ So now we know that `Yarrow` is a significant predictor of `Yield` and we're hap
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- A linear regression analysis with grouped data is used when we have one categorical and one continuous predictor variable, together with one continuous response variable
+- We can visualise the data by plotting a line of best fit together with the raw data
+- When performing an ANOVA, we need to check for interaction terms
+- Again, we check the underlying assumptions using diagnostic plots
+- We can create an equation for the line of best fit for each group in the data using the `lm()` output
 :::

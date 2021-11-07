@@ -6,13 +6,13 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I compare linear models?
+- How do decide which one is the "best" model?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to compare models using the Akaike Information Criterion (AIC)
+- Use AIC in the context of Backwards Stepwise Elimination in R
 :::
 
 ## Purpose and aim
@@ -382,7 +382,7 @@ This time we manage three steps. We first successful manage to drop the three-wa
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- We can use Backwards Stepwise Elimination (BSE) on a full model to see if certain terms add to the predictive power of the model or not
+- The AIC allows us to compare different models - if there is a difference in AIC of more than 2 between two models, then the smallest AIC score is more supported
+- We can use the `step()` function to let R perform an automatic BSE
 :::

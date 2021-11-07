@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 23 Linear regression with grouped data | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="23.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   23.2 Purpose and aim A linear regression analysis with grouped data is used when we have one categorical predictor...">
+<meta name="description" content="23.1 Objectives  Questions How do I perform a linear regression on grouped data? Objectives Be able to perform a linear regression on grouped data in R Calculate the linear regression for...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 23 Linear regression with grouped data | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="23.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   23.2 Purpose and aim A linear regression analysis with grouped data is used when we have one categorical predictor...">
+<meta property="og:description" content="23.1 Objectives  Questions How do I perform a linear regression on grouped data? Objectives Be able to perform a linear regression on grouped data in R Calculate the linear regression for...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 23 Linear regression with grouped data | Core Statistics in R">
-<meta name="twitter:description" content="23.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   23.2 Purpose and aim A linear regression analysis with grouped data is used when we have one categorical predictor...">
+<meta name="twitter:description" content="23.1 Objectives  Questions How do I perform a linear regression on grouped data? Objectives Be able to perform a linear regression on grouped data in R Calculate the linear regression for...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,14 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>How do I perform a linear regression on grouped data?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform a linear regression on grouped data in R</li>
+<li>Calculate the linear regression for individual groups and visualise these with the data</li>
+<li>Understand and be able to create equations of the line of best fit</li>
+<li>Be able to deal with interactions in this context</li>
 </ul>
 </div>
 </div>
@@ -881,9 +882,11 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>A linear regression analysis with grouped data is used when we have one categorical and one continuous predictor variable, together with one continuous response variable</li>
+<li>We can visualise the data by plotting a line of best fit together with the raw data</li>
+<li>When performing an ANOVA, we need to check for interaction terms</li>
+<li>Again, we check the underlying assumptions using diagnostic plots</li>
+<li>We can create an equation for the line of best fit for each group in the data using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> output</li>
 </ul>
 </div>
 

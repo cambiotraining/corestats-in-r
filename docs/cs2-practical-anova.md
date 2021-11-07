@@ -6,13 +6,15 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I analyse multiple samples of continuous data?
+- What is an ANOVA?
+- How do I check for differences between groups?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to perform an ANOVA in R
+- Understand the ANOVA output and evaluate the assumptions
+- Understand what post-hoc testing is and how to do this in R
 :::
 
 ## Purpose and aim
@@ -640,7 +642,9 @@ Then we should probably have just skipped the one-way ANOVA test entirely and ju
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- We use an ANOVA to test if there is a difference in means between multiple continuous variables
+- In R we first define a linear model with `lm()`, using the format `response ~ predictor`
+- Next, we perform an ANOVA on the linear model with `anova()`
+- We check assumptions with diagnostic plots and check if the residuals are normally distributed
+- We use post-hoc testing to check for significant differences in the group means, for example using Tukey's range test
 :::

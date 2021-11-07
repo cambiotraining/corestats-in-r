@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 22 Two-way ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
+<meta name="description" content="22.1 Objectives  Questions When is the use of a two-way ANOVA appropriate? How do I perform this in R? Objectives Be able to perform a two-way ANOVA in R Understand the concept of interaction...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 22 Two-way ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
+<meta property="og:description" content="22.1 Objectives  Questions When is the use of a two-way ANOVA appropriate? How do I perform this in R? Objectives Be able to perform a two-way ANOVA in R Understand the concept of interaction...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 22 Two-way ANOVA | Core Statistics in R">
-<meta name="twitter:description" content="22.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   22.2 Purpose and aim A two-way analysis of variance is used when we have two categorical predictor variables (or...">
+<meta name="twitter:description" content="22.1 Objectives  Questions When is the use of a two-way ANOVA appropriate? How do I perform this in R? Objectives Be able to perform a two-way ANOVA in R Understand the concept of interaction...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,14 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>When is the use of a two-way ANOVA appropriate?</li>
+<li>How do I perform this in R?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform a two-way ANOVA in R</li>
+<li>Understand the concept of interaction between two predictor variables</li>
+<li>Be able to plot interactions in R</li>
 </ul>
 </div>
 </div>
@@ -443,7 +444,7 @@
 <td align="left">Creates an interaction plot</td>
 </tr>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code></td>
+<td align="left"><code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code></td>
 <td align="left">Carries out an ANOVA test</td>
 </tr>
 </tbody>
@@ -762,9 +763,17 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>A two-way ANOVA is used when there are two categorical variables and a single continuous variable</li>
+<li>We can visually check for interactions between the categorical variables by using <code><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot()</a></code>
+</li>
+<li>The two-way ANOVA is a type of linear model and assumes the following:
+<ol style="list-style-type: decimal">
+<li>the data have no systematic pattern</li>
+<li>the residuals are normally distributed</li>
+<li>the residuals have homogeneity of variance</li>
+<li>the fit does not depend on a single point (no single point has high leverage)</li>
+</ol>
+</li>
 </ul>
 </div>
 

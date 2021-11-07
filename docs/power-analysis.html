@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 30 Power analysis | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="30.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   30.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta name="description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 30 Power analysis | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="30.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   30.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta property="og:description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 30 Power analysis | Core Statistics in R">
-<meta name="twitter:description" content="30.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   30.2 Background All hypothesis tests can be wrong in two ways: we can appear to have found a significant result when...">
+<meta name="twitter:description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,14 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>What is power analysis?</li>
+<li>How can I use power analysis to design better experiments?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform power analysis in R</li>
+<li>Understand the importance of effect size</li>
+<li>Use power, significance level and effect size to optimise your experimental design</li>
 </ul>
 </div>
 </div>
@@ -1228,8 +1229,14 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
+<li>Power is the capacity of a test to detect significant results and is affected by
+<ol style="list-style-type: decimal">
+<li>the effect size</li>
+<li>sample size</li>
+<li>the significance level</li>
+</ol>
+</li>
+<li>Power analysis optimises the trade-off between power, significance level and the desired effect size that we would like to detect</li>
 <li>Point 3</li>
 </ul>
 </div>

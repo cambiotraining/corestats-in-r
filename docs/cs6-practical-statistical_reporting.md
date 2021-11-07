@@ -6,13 +6,12 @@
 :::objectives
 **Questions**
 
-- How do I...
-- What do I...
+- How do I consistently report on statistical results?
 
 **Objectives**
 
-- Be able to...
-- Use...
+- Be able to follow a consistent analysis methodology in R
+- Report the statistical results in a clear and structured way
 :::
 
 ## Purpose and aim
@@ -204,7 +203,14 @@ But we won’t usually plot continuous x continuous two-variable plots (since th
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+- A useful analysis methodology would be:
+    1. identify the variables and the question to be explored
+    2. describe the data (plots, summaries)
+    3. perform tests or fit models
+    4. check assumptions of the tests/models
+- Writing up the statistical analysis often follows this structure:
+    1. Introduction (description of data in non-technical way; collection methods; question to answer)
+    2. Methods & Results (description of data; procedures; present figures and key results; results of assumptions checks)
+    3. Discussion (summarise results; discuss results of assumptions; limitations of data)
+    4. Appendix (optional, can include R output)
 :::

@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 14 ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="description" content="14.1 Objectives  Questions How do I analyse multiple samples of continuous data? What is an ANOVA? How do I check for differences between groups? Objectives Be able to perform an ANOVA in R...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 14 ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta property="og:description" content="14.1 Objectives  Questions How do I analyse multiple samples of continuous data? What is an ANOVA? How do I check for differences between groups? Objectives Be able to perform an ANOVA in R...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 14 ANOVA | Core Statistics in R">
-<meta name="twitter:description" content="14.1 Objectives  Questions How do I… What do I… Objectives Be able to… Use…   14.2 Purpose and aim Analysis of variance or ANOVA is a test than can be used when we have multiple samples of...">
+<meta name="twitter:description" content="14.1 Objectives  Questions How do I analyse multiple samples of continuous data? What is an ANOVA? How do I check for differences between groups? Objectives Be able to perform an ANOVA in R...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -400,13 +400,15 @@
 <div class="objectives">
 <p><strong>Questions</strong></p>
 <ul>
-<li>How do I…</li>
-<li>What do I…</li>
+<li>How do I analyse multiple samples of continuous data?</li>
+<li>What is an ANOVA?</li>
+<li>How do I check for differences between groups?</li>
 </ul>
 <p><strong>Objectives</strong></p>
 <ul>
-<li>Be able to…</li>
-<li>Use…</li>
+<li>Be able to perform an ANOVA in R</li>
+<li>Understand the ANOVA output and evaluate the assumptions</li>
+<li>Understand what post-hoc testing is and how to do this in R</li>
 </ul>
 </div>
 </div>
@@ -917,9 +919,13 @@ Answer
 </h2>
 <div class="keypoints">
 <ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
+<li>We use an ANOVA to test if there is a difference in means between multiple continuous variables</li>
+<li>In R we first define a linear model with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, using the format <code>response ~ predictor</code>
+</li>
+<li>Next, we perform an ANOVA on the linear model with <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>
+</li>
+<li>We check assumptions with diagnostic plots and check if the residuals are normally distributed</li>
+<li>We use post-hoc testing to check for significant differences in the group means, for example using Tukey’s range test</li>
 </ul>
 </div>
 
