@@ -16,8 +16,8 @@ There are no new commands in this section.
 ## Data and hypotheses
 Using the `cortisol` dataset from before we form the following null and alternative hypotheses:
 
--	$H_0$: The median of the difference in cortisol levels between the two groups is 0 ($\mu M = \mu E$)
--	$H_1$: The median of the difference in cortisol levels between the two groups is not 0 ($\mu M \neq \mu E$)
+-	$H_0$: The median of the difference in cortisol levels between the two groups is 0 $(\mu M = \mu E)$
+-	$H_1$: The median of the difference in cortisol levels between the two groups is not 0 $(\mu M \neq \mu E)$
 
 We use a two-tailed Wilcoxon signed-rank test to see if we can reject the null hypothesis.
 

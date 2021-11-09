@@ -20,8 +20,8 @@ New commands used in this section:
 ## Data and hypotheses
 For example, suppose we now measure the body lengths of male guppies (in mm) collected from two rivers in Trinidad; the Aripo and the Guanapo. We want to test whether the mean body length differs between samples. We form the following null and alternative hypotheses:
 
--	$H_0$: The mean body length does not differ between the two groups ($\mu A = \mu G$)
--	$H_1$: The mean body length does differ between the two groups ($\mu A \neq \mu G$)
+-	$H_0$: The mean body length does not differ between the two groups $(\mu A = \mu G)$
+-	$H_1$: The mean body length does differ between the two groups $(\mu A \neq \mu G)$
 
 We use a two-sample, two-tailed t-test to see if we can reject the null hypothesis.
 
