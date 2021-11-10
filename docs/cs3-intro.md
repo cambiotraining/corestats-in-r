@@ -1,4 +1,4 @@
-# (PART) CoreStats 3: Single continuous predictors {.unnumbered}
+# (PART) CoreStats 3: Continuous predictors {.unnumbered}
 
 # Introduction {#cs3-intro}
 

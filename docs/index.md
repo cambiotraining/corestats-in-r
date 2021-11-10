@@ -1,7 +1,7 @@
 --- 
 title: "Core Statistics in R"
 author: "Matt Castle and Martin van Rongen"
-date: "2021-11-09"
+date: "2021-11-10"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -36,11 +36,11 @@ To know what to do when presented with an arbitrary dataset e.g.
 
 ## Core topics
 
-1. [Simple Hypothesis Testing](#cs1-intro)
-2. [Categorical Predictor Variables](#cs2-intro)
-3. [Continuous Predictors](#cs3-intro) 
-4. [Multiple Predictor Variables](#cs4-intro)
-5. [Linear Models](#cs5-intro) 
+1. [Simple hypothesis testing](#cs1-intro)
+2. [Categorical predictor variables](#cs2-intro)
+3. [Continuous predictors](#cs3-intro) 
+4. [Two predictor variables](#cs4-intro)
+5. [Multiple predictor variables](#cs5-intro) 
 6. [Power analysis](#cs6-intro)
 
 ## Datasets {#index-datasets}
