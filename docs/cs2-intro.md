@@ -1,4 +1,4 @@
-# (PART) CoreStats 2: Single categorical predictors {.unnumbered}
+# (PART) CoreStats 2: Categorical predictors {.unnumbered}
 
 # Introduction {#cs2-intro}
 
