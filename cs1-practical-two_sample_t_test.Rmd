@@ -212,7 +212,9 @@ Using the following data, test the null hypothesis that male and female turtles 
 read_csv("data/examples/cs1-turtle_example.csv") %>% 
   select(-id) %>% 
   pivot_wider(names_from = sex, values_from = serum) %>% 
-  select(-group)
+  select(-group) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "center")
 ```
 
 1. Write down the null and alternative hypotheses

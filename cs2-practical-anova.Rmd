@@ -265,7 +265,9 @@ Juvenile lobsters in aquaculture were grown on three different diets (fresh muss
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 read_csv("data/examples/cs2-messy_lobsters.csv") %>%
   pivot_wider(names_from = diet, values_from = weight) %>% 
-  select(-group)
+  select(-group) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "center")
 ```
 
 Is there any evidence that diet affects the growth rate of lobsters?

@@ -22,7 +22,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -464,11 +465,11 @@
 <span class="header-section-number">14.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>First we read in the data.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-oystercatcher.csv"</span><span class="op">)</span></code></pre></div>
 <p>Next we summarise the data and visualise them. We have a quick peek at the first few rows of our data with <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> so we can see how the data are organised.</p>
 <p>The data are in stacked format. The first column contains information on feeding rates and is called <code>feeding.</code> The second column has categorical data on the type of site and is called <code>site</code>.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <pre><code>##   feeding    site
 ## 1    14.2 Exposed
@@ -477,7 +478,7 @@
 ## 4    15.1 Exposed
 ## 5    13.4 Exposed
 ## 6    18.4 Partial</code></pre>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##        site feeding.Min. feeding.1st Qu. feeding.Median feeding.Mean
 ## 1   Exposed         9.30           13.40          14.20        13.70
@@ -487,7 +488,7 @@
 ## 1           15.10        16.50
 ## 2           18.40        20.40
 ## 3           25.10        25.30</code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
@@ -497,7 +498,7 @@
 <span class="header-section-number">14.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform an ANOVA test on the data:</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
@@ -555,7 +556,7 @@
 <p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
 <p><strong>1. Normality</strong></p>
 <p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
@@ -580,7 +581,7 @@
 <p>We can see that all three groups appear to be normally distributed which is good.</p>
 <p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
 <p>Extract the residuals from the data and check their normality:</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
@@ -593,7 +594,7 @@
 <p><strong>2. Equality of Variance</strong></p>
 <p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
 <p>Perform Bartlett’s test on the data:</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
@@ -604,12 +605,12 @@
 <p><strong>3. Graphical Interpretation and Diagnostic Plots</strong></p>
 <p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
 <p>Create the standard set diagnostic plots:</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># create the diagnostic plots</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># and return the window back to normal</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## hat values (leverages) are all = 0.2
@@ -639,11 +640,11 @@
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
 <p>Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.</p>
 <p><strong>1. Read in the data and plot</strong></p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-tukey.csv"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span></code></pre></div>
 <p><strong>2. Test for a significant difference in group means</strong></p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_tukey</span><span class="op">)</span></code></pre></div>
@@ -658,7 +659,7 @@
 <p>Here we have a p-value of 2.39x10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.</p>
 <p>However, this was not due to all of the sample means being different, but rather just because one of the groups is very different from the others. In order to drill down and investigate this further we use a new test called <strong>Tukey’s range test</strong> (or <strong>Tukey’s honest significant difference test</strong> – this always makes me think of some terrible cowboy/western dialogue). This will compare all of the groups in a pairwise fashion and reports on whether a significant difference exists.</p>
 <p><strong>3. Performing Tukey’s test on these data</strong></p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aov_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">aov_tukey</span><span class="op">)</span></code></pre></div>
@@ -697,16 +698,98 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 <div class="exercise">
 <p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 14.1  </strong></span>Juvenile lobster weight</p>
 <p>Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:</p>
-<pre><code>## # A tibble: 7 × 3
-##   Mussels Pellets Flakes
-##     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-## 1    152.    118.  102. 
-## 2    132.    111.  103. 
-## 3    104.    129.   90.4
-## 4    154.    110.  133. 
-## 5    132     175.  129. 
-## 6    119      NA   129. 
-## 7    162.     NA    NA</code></pre>
+<div class="inline-table"><table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+Mussels
+</th>
+<th style="text-align:right;">
+Pellets
+</th>
+<th style="text-align:right;">
+Flakes
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+151.6
+</td>
+<td style="text-align:right;">
+117.7
+</td>
+<td style="text-align:right;">
+101.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+132.1
+</td>
+<td style="text-align:right;">
+110.8
+</td>
+<td style="text-align:right;">
+102.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+104.2
+</td>
+<td style="text-align:right;">
+128.6
+</td>
+<td style="text-align:right;">
+90.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+153.5
+</td>
+<td style="text-align:right;">
+110.1
+</td>
+<td style="text-align:right;">
+132.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+132.0
+</td>
+<td style="text-align:right;">
+175.2
+</td>
+<td style="text-align:right;">
+129.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+119.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+129.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+161.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
 <p>Is there any evidence that diet affects the growth rate of lobsters?</p>
 <ol style="list-style-type: decimal">
 <li>Write down the null and alternative hypotheses</li>
@@ -736,7 +819,7 @@ Answer
 <span class="header-section-number">14.10.2</span> Import Data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise"><i class="fas fa-link"></i></a>
 </h3>
 <p>The data are stored in a <code>.csv</code> file in stacked format with columns called <code>weight</code> and <code>diet</code>.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-lobsters.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s look at the data and see what we can see.</p>
 <pre><code>##    weight    diet
@@ -758,7 +841,7 @@ Answer
 ## 16  132.8  Flakes
 ## 17  129.3  Flakes
 ## 18  129.4  Flakes</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##      diet weight.Min. weight.1st Qu. weight.Median weight.Mean weight.3rd Qu.
 ## 1  Flakes     90.4000       102.0750      116.1000    114.4333       129.3750
@@ -768,7 +851,7 @@ Answer
 ## 1    132.8000
 ## 2    161.9000
 ## 3    175.2000</code></pre>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
@@ -798,7 +881,7 @@ Answer
 <p><strong>Normality</strong></p>
 <p>We’ll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we’ll only use the Q-Q plot.</p>
 <p>We’ll need to unstack the data to use the Shapiro-Wilk test on the individual groups:</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lobst_uns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">lobsters</span>, <span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Flakes</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -806,14 +889,14 @@ Answer
 ## 
 ## data:  lobst_uns$Flakes
 ## W = 0.84368, p-value = 0.1398</code></pre>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Mussels</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  lobst_uns$Mussels
 ## W = 0.94784, p-value = 0.71</code></pre>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">lobst_uns</span><span class="op">$</span><span class="va">Pellets</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -822,7 +905,7 @@ Answer
 ## W = 0.76706, p-value = 0.0425</code></pre>
 <p><code>Flakes</code> and <code>Mussels</code> are fine, but, as we suspected from earlier, <code>Pellets</code> appears to have a marginally significant Normality test result.</p>
 <p>Let’s look at the Shapiro-Wilk test for all of the data together:</p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">resid_lobst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_lobst</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -831,7 +914,7 @@ Answer
 ## data:  resid_lobst
 ## W = 0.94779, p-value = 0.3914</code></pre>
 <p>This on the other hand says that everything is fine. Let’s look at the Q-Q-plot:</p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span> , data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
      which <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
@@ -840,14 +923,14 @@ Answer
 <p>Overall, I’d be happy that the assumption of normality has been adequately well met here. The suggested lack of normality in the <code>Pellets</code> was only just significant and we have to take into account that there are only 5 data points in that group. If there had been a lot more points in that group, or if the Q-Q plot was considerably worse then I wouldn’t be confident.</p>
 <p><strong>Equality of Variance</strong></p>
 <p>We’ll consider the Bartlett test and we’ll look at some diagnostic plots too.</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
 ## 
 ## data:  weight by diet
 ## Bartlett's K-squared = 0.71273, df = 2, p-value = 0.7002</code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>,
      which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-2.png" width="672"></p>
@@ -865,7 +948,7 @@ Answer
 <span class="header-section-number">14.10.4</span> Carry out one-way ANOVA<a class="anchor" aria-label="anchor" href="#carry-out-one-way-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -886,7 +969,7 @@ Answer
 <h3>
 <span class="header-section-number">14.10.6</span> Post-hoc testing with Tukey<a class="anchor" aria-label="anchor" href="#post-hoc-testing-with-tukey"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level

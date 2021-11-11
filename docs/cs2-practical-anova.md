@@ -363,19 +363,52 @@ Juvenile lobster weight
 
 Juvenile lobsters in aquaculture were grown on three different diets (fresh mussels, semi-dry pellets and dry flakes). After nine weeks, their wet weight was:
 
-
-```
-## # A tibble: 7 × 3
-##   Mussels Pellets Flakes
-##     <dbl>   <dbl>  <dbl>
-## 1    152.    118.  102. 
-## 2    132.    111.  103. 
-## 3    104.    129.   90.4
-## 4    154.    110.  133. 
-## 5    132     175.  129. 
-## 6    119      NA   129. 
-## 7    162.     NA    NA
-```
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Mussels </th>
+   <th style="text-align:right;"> Pellets </th>
+   <th style="text-align:right;"> Flakes </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 151.6 </td>
+   <td style="text-align:right;"> 117.7 </td>
+   <td style="text-align:right;"> 101.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 132.1 </td>
+   <td style="text-align:right;"> 110.8 </td>
+   <td style="text-align:right;"> 102.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 104.2 </td>
+   <td style="text-align:right;"> 128.6 </td>
+   <td style="text-align:right;"> 90.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 153.5 </td>
+   <td style="text-align:right;"> 110.1 </td>
+   <td style="text-align:right;"> 132.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 132.0 </td>
+   <td style="text-align:right;"> 175.2 </td>
+   <td style="text-align:right;"> 129.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 119.0 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 129.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 161.9 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+</tbody>
+</table>
 
 Is there any evidence that diet affects the growth rate of lobsters?
 
