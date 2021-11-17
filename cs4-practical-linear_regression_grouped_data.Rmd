@@ -140,16 +140,17 @@ You should now have a basic plot that looks similar to the figure above (but wit
 
 Looking at this plot, there doesn’t appear to be any significant interaction between the woodland type (`Broadleaf` and `Conifer`) and the depth at which light measurements were taken (`Depth`) on the amount of light intensity getting through the canopy as the gradients of the two lines appear to be very similar. There does appear to be a noticeable slope to both lines and both lines look as though they have very different intercepts. All of this suggests that there isn’t any interaction but that both `Depth` and `Species` have a significant effect on `Light` independently.
 
-## Implemention
+## Implement the test
+In this case we're going to implement the test before checking the assumptions (I know, let's live a little!). You'll find out why soon...
 
-We can test for this more formally:
+We can test for a possible interaction more formally:
 
 ```{r, results='hide'}
 anova(lm(Light ~ Depth * Species,
          data = treelight))
 ```
 
-Remember that `Depth * Species` is a shorthand way of writing the full set of `Depth + Species + Depth:Species` terms in R i.e. both main effects and the interaction effect.
+Remember that `Depth * Species` is a shorthand way of writing the full set of `Depth + Species + Depth:Species` terms in R _i.e._ both main effects and the interaction effect.
 
 ## Interpret output and present results
 This gives the following output:
@@ -290,7 +291,9 @@ abline(cf.Conifer, col = "red")
 ```
 
 ## Assumptions
-Hopefully, you’ve got the gist of checking assumptions for linear models by now: diagnostic plots!
+In this case we first wanted to check if the interaction was significant, prior to checking the assumptions. If we would have checked the assumptions first, then we would have done that one the full model (with the interaction), then done the ANOVA if everything was OK. We would have then found out that the interaction was not significant, meaning we'd have to re-check the assumptions with the new model. In what order you do it is a bit less important here. The main thing is that you check the assumptions and report on it!
+
+Anyway, hopefully you’ve got the gist of checking assumptions for linear models by now: diagnostic plots!
 
 ```{r}
 par(mfrow = c(2, 2))

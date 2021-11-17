@@ -514,10 +514,10 @@
 </h2>
 <p>We will be using the <code>pwr</code> and <code>powerAnalysis</code> packages during this section. Please install those now.</p>
 <p>You can do this by running the following code in your console:</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pwr"</span>, <span class="st">"powerAnalysis"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Next, load them by running:</p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">powerAnalysis</span><span class="op">)</span></code></pre></div>
 <p>These packages have a lot of overlap but unfortunately neither one of them quite has all the functionality I’d like. <code>powerAnalysis</code> has more functions for explicitly calculating effect sizes from previous studies but has a smaller range of power calculation functions. <code>pwr</code> has more power functions but fewer effect size functions. However, together they do the job.</p>
@@ -571,7 +571,7 @@
 <span class="header-section-number">30.5.1</span> Get the effect size<a class="anchor" aria-label="anchor" href="#get-the-effect-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now we need to work out what a “medium” effect size would be. In the absence of any other information we appeal to Cohen’s conventional values:</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"t"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
@@ -599,7 +599,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <span class="header-section-number">30.5.2</span> Carry out a power analysis<a class="anchor" aria-label="anchor" href="#carry-out-a-power-analysis"><i class="fas fa-link"></i></a>
 </h3>
 <p>We do this as follows:</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -633,7 +633,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>If I know in advance that I can only observe 30 students per group, what is the effect size that I should be able to observe with 80% power at a 5% significance level?</p>
 </blockquote>
 <p>Let’s see how we do this:</p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -649,7 +649,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>This time we want to see what the effect size is so we look at the second line and we can see that an experiment with this many people would only be expected to detect a difference in means of <code>d = 0.74</code> standard deviations. Is this good or bad? Well, it depends on the natural variation of your data; if your data is really noisy then it will have a large variation and a large standard deviation which will mean that 0.74 standard deviations might actually be quite a big difference between your groups. If on the other hand your data doesn’t vary very much, then 0.74 standard deviations might actually be a really small number and this test could pick up even quite small differences in mean.</p>
 <p>In both of the previous two examples we were a little bit context-free in terms of effect size. Let’s look at how we can use a pilot study with real data to calculate effect sizes and perform a power analysis to inform a future study.</p>
 <p>Let’s look again at the <code>fishlength</code> data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as <code>data/raw/CS6-fishlength.csv</code>.</p>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-fishlength.csv"</span><span class="op">)</span>
 
@@ -662,12 +662,12 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 ##  Mean   :19.46                     
 ##  3rd Qu.:20.93                     
 ##  Max.   :26.40</code></pre>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
         data <span class="op">=</span> <span class="va">fishlength</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform a t-test, assuming equal variance</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
        data <span class="op">=</span> <span class="va">fishlength</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -685,7 +685,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>From the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> command we can see that there are 39 observations for the Aripo river and only 29 observations for the Guanapo river. From the box plot we see that the groups appear to have different means and from the t-test analysis we can see that this difference is significant.</p>
 <p>Can we use this information to design a more efficient experiment? One that we would be confident was powerful enough to pick up a difference in means as big as was observed in this study but with fewer observations?</p>
 <p>Let’s first work out exactly what the effect size of this previous study really was by estimating Cohen’s d using this data.</p>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.two.html">ES.t.two</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">3.8433</span>, n1 <span class="op">=</span> <span class="fl">39</span>, n2 <span class="op">=</span> <span class="fl">29</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of independent two-sample t test 
@@ -703,7 +703,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <li>The rest of the output is just padding and reminds us of the conventional values of effect sizes for reference only.</li>
 </ul>
 <p>We can know actually answer our question and see how many fish we really need to catch in the future:</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.94</span>, power <span class="op">=</span> <span class="fl">0.8</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -736,10 +736,10 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <details><summary>
 Answer
 </summary><p>First, read in the data:</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exOne</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-onesample.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s run the one-sample t-test as we did before:</p>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exOne</span><span class="op">$</span><span class="va">Guanapo</span>, mu <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -754,7 +754,7 @@ Answer
 ##  18.29655</code></pre>
 <p>OK, there doesn’t appear to be a statistically significant result here; the mean length of the fish doesn’t appear to be different from 19cm. From the output though we do see that the mean length of our sample of fish is 18.30 (2dp), so the sample is a little bit smaller than 19 cm.</p>
 <p>Let’s calculate the effect size using the t-statistic and the degrees of freedom from the t-test output above. This gives us the following value for the effect size in terms of the Cohen’s d metric.</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.one.html">ES.t.one</a></span><span class="op">(</span>t <span class="op">=</span> <span class="op">-</span><span class="fl">1.4657</span>, df <span class="op">=</span> <span class="fl">28</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of one-sample t test 
@@ -768,7 +768,7 @@ Answer
 ## large effect size:  d = 0.8</code></pre>
 <p>Our effect size is 0.277 which is somewhere between a small and medium effect size. This means that this would be hard to detect with a small sample size and it’s likely that we would need more than just 29 observations to detect an effect this big.</p>
 <p>Now, let’s do the power analysis to actually calculate the sample size required:</p>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -780,7 +780,7 @@ Answer
 ##           power = 0.8
 ##     alternative = two.sided</code></pre>
 <p>We would need 105 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let’s see what would happen if we wanted to be even more stringent:</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.9</span>,
            type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -810,10 +810,10 @@ Answer
 <details><summary>
 Answer
 </summary><p>First, read in the data:</p>
-<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exTwo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-twopaired.csv"</span><span class="op">)</span></code></pre></div>
 <p>We have a paired dataset with 20 pairs of observations, what sort of effect size could we detect at a significance level of 0.05 and power of 0.8?</p>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -828,7 +828,7 @@ Answer
 ## NOTE: n is number of *pairs*</code></pre>
 <p>Remember that we get effect size measured in Cohen’s d metric. So here this experimental design would be able to detect a d value of 0.66 (2dp) which is a medium to large effect size.</p>
 <p>Now let’s look at the actual data and work out what the effect size actually is:</p>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exTwo</span><span class="op">$</span><span class="va">morning</span>, <span class="va">exTwo</span><span class="op">$</span><span class="va">evening</span>, paired<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -842,7 +842,7 @@ Answer
 ## mean of the differences 
 ##                 116.085</code></pre>
 <p>Use the t-statistic to calculate the effect size:</p>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.paired.html">ES.t.paired</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">5.1833</span>, df <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of paired two-sample t test 
@@ -855,7 +855,7 @@ Answer
 ## medium effect size: d = 0.5
 ## large effect size:  d = 0.8</code></pre>
 <p>This (1.19) is a massive effect size. It’s quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:</p>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">1.189131</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -880,7 +880,7 @@ Answer
 <p>For linear models we’ll just use <code><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test()</a></code> to do the power calculation and we won’t need a function for effect sizes (because it’s just based on R<sup>2</sup> and we should just be able to read that off the screen).</p>
 <p>Read in <code>data/raw/CS6-lobsters.csv</code>. This dataset was used in an earlier practical and describes the effect on lobster weight of three different food sources.</p>
 <p>Type this in:</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-lobsters.csv"</span><span class="op">)</span>
 
@@ -889,7 +889,7 @@ Answer
 
 <span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.lob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>
 
@@ -911,7 +911,7 @@ Answer
 f^2 = \frac{R^2}{1-R^2}
 \end{equation}\]</span></p>
 <p>We find R<sup>2</sup> by looking at the <code>lm.lob</code> object:</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm.lob</span><span class="op">)</span></code></pre></div>
 <p>This should give you the following:</p>
 <pre><code>## 
@@ -955,7 +955,7 @@ Using R as a calculator we can work out the Cohen’s f<sup>2</sup> value and we
 <li>
 <code>f2</code> to represent Cohen’s f<sup>2</sup> effect size value</li>
 </ul>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">2</span>, f2 <span class="op">=</span> <span class="fl">0.219</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1031,16 +1031,16 @@ There are two questions you might now ask (if you’re still following all of th
 <details><summary>
 Answer
 </summary><p>Let’s load in the data:</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">musseldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-shelllength.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,
         data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
 <p>So we are effectively looking at a one-way ANOVA with five groups. This will be useful to know later.</p>
 <p>Now we fit a linear model:</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,
                 data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span>
@@ -1069,12 +1069,12 @@ Answer
 ## Multiple R-squared:  0.4559, Adjusted R-squared:  0.3918 
 ## F-statistic: 7.121 on 4 and 34 DF,  p-value: 0.0002812</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.4559 and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.4559</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.4559</span><span class="op">)</span>
 <span class="va">f2</span></code></pre></div>
 <pre><code>## [1] 0.8378974</code></pre>
 <p>Now, our model has 5 parameters (because we have 5 groups) and so the numerator degrees of freedom will be 4 <span class="math inline">\((5 - 1 = 4)\)</span>. This means that we can now carry our our power analysis:</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">4</span>, f2 <span class="op">=</span> <span class="fl">0.8378974</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1103,16 +1103,16 @@ Answer
 <details><summary>
 Answer
 </summary><p>Let’s load in the data:</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epilepsydat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-epilepsy1.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,
      data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-29-1.png" width="672"></div>
 <p>So we are effectively looking at a simple linear regression here.</p>
 <p>Now we fit a linear model:</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.epilepsy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,
                   data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span>
@@ -1138,13 +1138,13 @@ Answer
 ## Multiple R-squared:  0.0009134,  Adjusted R-squared:  -0.003356 
 ## F-statistic: 0.2139 on 1 and 234 DF,  p-value: 0.6441</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.0009134 (which is tiny!) and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.0009134</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.0009134</span><span class="op">)</span>
 <span class="va">f2</span></code></pre></div>
 <pre><code>## [1] 0.0009142351</code></pre>
 <p>This effect size is absolutely tiny. If we really wanted to design an experiment to pick up an effect size this small then we would expect that we’ll need 1000s of participants.</p>
 <p>Now, our model has 2 parameters (an intercept and a slope) and so the numerator degrees of freedom (<code>u</code>) will be 1 (2 - 1 = 1!). This means that we can now carry our our power analysis:</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">1</span>, f2 <span class="op">=</span> <span class="fl">0.0009142351</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1182,7 +1182,7 @@ Answer
 <li>The <strong>numerator degrees of freedom</strong>. This is the tricky bit. We can do this by adding up the degrees of freedom for each term separately.</li>
 </ol>
 <p>The effect size is easy to get:</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"f2"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
@@ -1209,7 +1209,7 @@ Answer
 </ul>
 <p>Rather boring that all of them were 1 to be honest. Anyway, given that the denominator degrees of freedom is just the sum of all of these, we can see that <span class="math inline">\(u = 6\)</span>.</p>
 <p>We now have all of the information to carry out the power analysis:</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">6</span>, f2 <span class="op">=</span> <span class="fl">0.15</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 <pre><code>## 

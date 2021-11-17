@@ -141,51 +141,20 @@ By now you should have a good feeling for the data and could already provide som
     * Does `Exercise` have an effect on `Weight`?
     * Does `Gender` have an effect on `Weight`?
     
-We can now attempt to answer these three questions more formally using an ANOVA test. We have to ask R explicitly to test for three things: the interaction, the effect of `Exercise` and the effect of `Gender.` We use the following code:
+We can now attempt to answer these three questions more formally using an ANOVA test. We have to ask R explicitly to test for three things: the interaction, the effect of `Exercise` and the effect of `Gender.`
+
+## Assumptions
+Before we can formally test these things we first need to define the model and check the underlying assumptions. We use the following code to define the model:
 
 
 ```r
 # define the linear model
 lm.exercise <- lm(Weight ~ Gender + Exercise + Gender:Exercise,
                   data = Experiment)
-
-# perform the ANOVA
-anova(lm.exercise)
 ```
 
 The `Gender:Exercise` term is how R represents the concept of an interaction between these two variables.
 
-This produces the following output:
-
-
-```
-## Analysis of Variance Table
-## 
-## Response: Weight
-##                 Df Sum Sq Mean Sq F value    Pr(>F)    
-## Gender           1 607.20  607.20 43.1144 6.493e-06 ***
-## Exercise         1 184.83  184.83 13.1240  0.002287 ** 
-## Gender:Exercise  1  82.42   82.42  5.8521  0.027839 *  
-## Residuals       16 225.34   14.08                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-We have a row in the table for each of the different effects that we’ve asked R to consider. The last column is the important one as this contains the p-values (although we will also need the F-values and the degrees of freedom for reporting purposes). We need to look at the interaction row first.
-
-`Gender:Exercise` has a p-value of about 0.028 (which is smaller than 0.05) and so we can conclude that the interaction between `Gender` and `Exercise` is significant.
-
-This is where we must stop.
-
-The top two lines (corresponding to the effects of `Gender` and `Exercise`) are meaningless now and the p-values that have been reported are utterly redundant (in particular we do not in any way care that their p-values are so small).
-
-If a model has a significant interaction then it is logically impossible to meaningfully interpret the main effects.
-
-We would report this as follows:
-
-> A two-way ANOVA test showed that there was a significant interaction between the effects of Gender and Exercise on Weight (F = 5.8521, df = 1,16, p = 0.028). Exercise was associated with a small loss of weight in males but a larger loss of weight in females.
-
-## Assumptions
 As the two-way ANOVA is a type of linear model we need to satisfy pretty much the same assumptions as we did for a simple linear regression or a one-way ANOVA:
 
 1. The data must not have any systematic pattern to it
@@ -207,7 +176,7 @@ plot(lm.exercise)
 ##  and there are no factor predictors; no plot no. 5
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 *	The first command changes the plotting parameters and splits the graphics window into 2 rows and 2 columns (you won’t notice anything whilst you run it).
 *	The second command produces 3 plots in the graphics window and one warning stating that the Residuals vs Factor Levels plot is left out. This is because all of our groups have exactly the same number of data points.
@@ -266,6 +235,46 @@ anova(lm(Weight ~ Gender * Exercise,
 ```
 :::
 
+## Implement the test
+The assumptions appear to be met well enough, meaning we can implement the ANOVA. We do this as follows (this is probably the easiest bit!):
+
+
+```r
+# perform the ANOVA
+anova(lm.exercise)
+```
+
+## Interpret output and present results
+Performing the ANOVA gives us the following output:
+
+
+```
+## Analysis of Variance Table
+## 
+## Response: Weight
+##                 Df Sum Sq Mean Sq F value    Pr(>F)    
+## Gender           1 607.20  607.20 43.1144 6.493e-06 ***
+## Exercise         1 184.83  184.83 13.1240  0.002287 ** 
+## Gender:Exercise  1  82.42   82.42  5.8521  0.027839 *  
+## Residuals       16 225.34   14.08                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+We have a row in the table for each of the different effects that we’ve asked R to consider. The last column is the important one as this contains the p-values (although we will also need the F-values and the degrees of freedom for reporting purposes). We need to look at the interaction row first.
+
+`Gender:Exercise` has a p-value of about 0.028 (which is smaller than 0.05) and so we can conclude that the interaction between `Gender` and `Exercise` is significant.
+
+This is where we must stop.
+
+The top two lines (corresponding to the effects of `Gender` and `Exercise`) are meaningless now and the p-values that have been reported are utterly redundant (in particular we do not in any way care that their p-values are so small).
+
+If a model has a significant interaction then it is logically impossible to meaningfully interpret the main effects.
+
+We would report this as follows:
+
+> A two-way ANOVA test showed that there was a significant interaction between the effects of Gender and Exercise on Weight (F = 5.8521, df = 1,16, p = 0.028). Exercise was associated with a small loss of weight in males but a larger loss of weight in females.
+
 ## Exercise: Cells
 :::exercise
 Cell growth
@@ -277,6 +286,18 @@ For each combination of cell type and substance concentration we add the substan
 
 For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.
+
+Questions to answer:
+
+* Visualise the data using boxplots and interaction plots.
+* Does there appear to be any interaction?
+* Carry out a two-way ANOVA test.
+* Check the assumptions.
+* What can you conclude? (Write a sentence to summarise).
+
+<details><summary>Answer</summary>
+
+### Load the data
 
 
 ```r
@@ -297,9 +318,7 @@ head(cells)
 ## 6  6         B          none           9
 ```
 
-<details><summary>Answer</summary>
-
-Let's first visualise the data:
+### Visualise the data
 
 
 ```r
@@ -307,14 +326,14 @@ boxplot(cell_number ~ concentration,
         data = cells)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ```r
 boxplot(cell_number ~ cell_type,
         data = cells)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672" />
 
 Let's look at the interaction plots:
 
@@ -325,7 +344,7 @@ interaction.plot(cells$concentration,
                  cells$cell_number)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ```r
 # by concentration
@@ -334,18 +353,43 @@ interaction.plot(cells$cell_type,
                  cells$cell_number)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672" />
 
 We're constructed both box plots and we've also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren't parallel. Looking at the interaction plot with `concentration` on the x-axis, it appears that there is non difference between cell types when the concentration is `none`, but that there is a difference between cell types when the concentration is `low` or `high`.
 
-Let's carry out a two-way ANOVA:
+### Assumptions
+First we need to define the model:
 
 
 ```r
 # define the linear model, with interaction term
 lm1 <- lm(cell_number ~ concentration * cell_type,
           data = cells)
+```
 
+Next, we check the assumptions:
+
+
+```r
+par(mfrow = c(2, 2))
+
+plot(lm1)
+```
+
+```
+## hat values (leverages) are all = 0.3333333
+##  and there are no factor predictors; no plot no. 5
+```
+
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+
+So, these actually all look pretty good, although at first glance you might be a bit worried by some apparent heterogeneity of variance. The last group in the `Residuals vs fitted` graph does appear to be more spread out then the other 5 groups. This is echoed in the `Scale-Location` graph, where the red line kicks up at the end. Whilst this does technically signify that there is heterogeneity of variance we aren't too worried by this because there are only three data points per group. Because of this low number of data points per group when we get one data point that is a little bit more extreme than the others (purely by chance) then this has a large impact on our perception of the homogeneity of variance. If there were more data points in each group then we would be more certain that any observed heterogeneity of variance was a true feature of the underlying parent population (and therefore a problem) rather than just being caused by a single random point (and therefore not a problem).
+
+### Implement the test
+Let's carry out a two-way ANOVA:
+
+
+```r
 # perform the ANOVA
 anova(lm1)
 ```
@@ -363,25 +407,8 @@ anova(lm1)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-This shows that there is definitely a significant interaction between `concentration` and `cell_type`.
-
-Let's check the assumptions:
-
-
-```r
-par(mfrow = c(2, 2))
-
-plot(lm1)
-```
-
-```
-## hat values (leverages) are all = 0.3333333
-##  and there are no factor predictors; no plot no. 5
-```
-
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-18-1.png" width="672" />
-
-So, these actually all look pretty good, although at first glance you might be a bit worried by some apparent heterogeneity of variance. The last group in the `Residuals vs fitted` graph does appear to be more spread out then the other 5 groups. This is echoed in the `Scale-Location` graph, where the red line kicks up at the end. Whilst this does technically signify that there is heterogeneity of variance we aren't too worried by this because there are only three data points per group. Because of this low number of data points per group when we get one data point that is a little bit more extreme than the others (purely by chance) then this has a large impact on our perception of the homogeneity of variance. If there were more data points in each group then we would be more certain that any observed heterogeneity of variance was a true feature of the underlying parent population (and therefore a problem) rather than just being caused by a single random point (and therefore not a problem).
+### Interpret the output and report the results
+There is definitely a significant interaction between `concentration` and `cell_type`.
 
 </details>
 :::
@@ -397,26 +424,44 @@ The `data/raw/CS4-tulip.csv` dataset contains information on an experiment to de
 
 <details><summary>Answer</summary>
 
+### Load the data
+
 
 ```r
 # read in the data
 tulip <- read.csv("data/raw/CS4-tulip.csv")
+
+# have a quick look at the data
+head(tulip)
 ```
 
-This dataset has three variables; `Blooms` (which is the response variable) and `Water` and `Shade` (which are the two potential predictor variables). As always we'll visualise the data first:
+```
+##   Water Shade Blooms
+## 1     1     1   0.00
+## 2     1     2   0.00
+## 3     1     3 111.04
+## 4     2     1 183.47
+## 5     2     2  59.16
+## 6     2     3  76.75
+```
+
+This dataset has three variables; `Blooms` (which is the response variable) and `Water` and `Shade` (which are the two potential predictor variables). 
+
+### Visualise the data
+As always we'll visualise the data first:
 
 
 ```r
 boxplot(Blooms ~ Water, data = tulip)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 boxplot(Blooms ~ Shade, data = tulip)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-2.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 ```r
 interaction.plot(tulip$Water,
@@ -424,7 +469,7 @@ interaction.plot(tulip$Water,
                  tulip$Blooms)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-3.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-3.png" width="672" />
 
 ```r
 interaction.plot(tulip$Shade,
@@ -432,18 +477,37 @@ interaction.plot(tulip$Shade,
                  tulip$Blooms)
 ```
 
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-20-4.png" width="672" />
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-4.png" width="672" />
 
 Again, both interaction plots suggest that there might be an interaction here. Digging in a little deeper from a descriptive perspective, it looks as though that `Water` regime 1 is behaving differently to `Water` regimes 2 and 3 under different shade conditions.
 
-Let's carry out the two-way ANOVA and check the assumptions. It's worth pointing out that the order in which we carry these out doesn't really matter as we'll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I'm fairly relaxed about the order you do these steps.
+### Assumptions
+First we need to define the model:
 
 
 ```r
 # define the linear model
 lm.tulip <- lm(Blooms ~ Water * Shade,
                data = tulip)
+```
 
+Next, we check the assumptions:
+
+
+```r
+par(mfrow = c(2, 2))
+plot(lm.tulip)
+```
+
+<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+
+These are actually all OK. Point number 8 is messing with the homogeneity of variance assumption a little bit, but since it's only one point we won't worry about it. A two-way ANOVA analysis is still on the cards.
+
+### Implement the test
+Let's carry out the two-way ANOVA and check the assumptions. It's worth pointing out that the order in which we carry these out doesn't really matter as we'll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I'm fairly relaxed about the order you do these steps.
+
+
+```r
 # perform the ANOVA
 anova(lm.tulip)
 ```
@@ -461,19 +525,8 @@ anova(lm.tulip)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
+### Interpret the output and report results
 So we do appear to have a significant interaction between `Water` and `Shade` as expected.
-
-Let's check the assumptions:
-
-
-```r
-par(mfrow = c(2, 2))
-plot(lm.tulip)
-```
-
-<img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
-
-These are actually all OK. Point number 8 is messing with the homogeneity of variance assumption a little bit, but since it's only one point we won't worry about it. Our 2-way ANOVA analysis stands.
 
 </details>
 :::
