@@ -148,11 +148,11 @@ pearsons-product-moment-correlation-coefficient
 summarise-and-visualise-7
 implement-test-6
 interpret-output-and-report-results-6
-exercise-9
+exercise-state-data-pearson
 spearmans-rank-correlation-coefficient
 implement-test-7
 interpret-output-and-report-results-7
-exercise-10
+exercise-state-data-spearman
 key-points-4
 linear-regression
 objectives-8
@@ -160,10 +160,10 @@ purpose-and-aim-5
 section-commands-9
 data-and-hypotheses-8
 summarise-and-visualise-8
+assumptions-8
 implement-test-8
 interpret-output-and-report-results-8
-assumptions-8
-exercise-11
+exercise-9
 key-points-5
 cs4-intro
 objectives-9

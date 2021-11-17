@@ -1,7 +1,7 @@
 --- 
 title: "Core Statistics in R"
 author: "Matt Castle and Martin van Rongen"
-date: "2021-11-11"
+date: "2021-11-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

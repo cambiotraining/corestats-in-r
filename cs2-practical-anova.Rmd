@@ -233,7 +233,7 @@ aov_tukey <- aov(response ~ group, data = tukey)
 TukeyHSD(aov_tukey)
 ```
 
-The first argument repeats our ANOVA using a different function 'aov()'. We store the output of this function in an R object called `aov_tukey`.
+The first argument repeats our ANOVA using a different function `aov()`. We store the output of this function in an R object called `aov_tukey`.
 Note that the `TukeyHSD()` function takes the output of the `aov()` function as its argument and not the raw data.
 
 The bottom three lines contain the information that we want. The final column of each (entitled `p adj`) is the p-value that we’re looking for. The null hypothesis in each case is that there is no difference in the mean between the two groups. As we can see the first line shows that there isn’t a significant difference between `sample1` and `sample2` but the 2nd and 3rd lines show that there is a significant difference between `sample1` and `sample3`, as well as `sample2` and `sample3`. This matches with what we expected based on the boxplot.

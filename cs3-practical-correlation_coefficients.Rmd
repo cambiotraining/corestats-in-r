@@ -79,9 +79,9 @@ cor(USArrests, method = "pearson")
 
 The matrix gives the correlation coefficient between each pair of variables in the data frame. The matrix is symmetric (_why?_) and the diagonal values are all 1 (_why?_). The most correlated variables are `Murder` and `Assault` with an `r` value of 0.801. This appears to agree well with the set of scatter plots that we produced earlier.
 
-## Exercise
+## Exercise: State data (Pearson)
 :::exercise
-State data correlation
+Pearson's correlation for USA state data
 
 We will use the data from the file `data/raw/CS3-statedata.csv` dataset for this exercise. This rather more benign dataset contains information on more general properties of each US state, such as population (1975), per capita income (1974), illiteracy proportion (1970), life expectancy (1969), murder rate per 100,000 people (there's no getting away from it), percentage of the population who are high-school graduates, average number of days where the minimum temperature is below freezing between 1931 and 1960, and the state area in square miles. The dataset contains 50 rows and 8 columns, with column names: `Population`, `Income`, `Illiteracy`, `Life.Exp`, `Murder`, `HS.Grad`, `Frost` and `Area`.
 
@@ -156,7 +156,7 @@ cor(USArrests, method = "spearman")
 
 The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.
 
-## Exercise
+## Exercise: State data (Spearman)
 :::exercise
 Spearman's correlation for USA state data
 

@@ -53,20 +53,58 @@ plot(Murder ~ Assault, data = USArrests)
 
 There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.
 
-## Implement test
-Fit a straight line to the data:
+## Assumptions
+In order for a linear regression analysis to be valid 4 key assumptions need to be met:
+
+:::highlight
+1.	The data must be linear (it is entirely possible to calculate a straight line through data that is not straight - it doesn’t mean that you should though!)
+2.	The residuals must be normally distributed
+3.	The residuals must not be correlated with their fitted values
+4.	The fit should not depend overly much on a single point (no point should have high leverage).
+:::
+
+Whether these assumptions are met can easily be checked visually by producing four key diagnostic plots.
+
+First we need to define the linear model:
 
 ```{r}
 lm_1 <- lm(Murder ~ Assault, data = USArrests)
-
-# show the linear model
-lm_1
 ```
 
 *	The first argument to `lm` is a formula saying that `Murder` depends on `Assaults`. As we have seen before, the syntax is generally `dependent variable` ~ `independent variable`.
 *	The second argument specifies which dataset to use
 
-The function `lm` returns a linear model (lm) object which is essentially a list containing everything necessary to understand and analyse a linear model. However, if we just type it in (as we have on the 2nd line) then it just prints to the screen the actual coefficients of the model i.e. the intercept and the slope of the line.
+Next, we can create the diagnostic plots for the model:
+
+```{r cs3-lm-diagnostics}
+# create a 2 x 2 output window
+par(mfrow = c(2,2))
+
+# and create the diagnostic plots for our model
+plot(lm_1)
+```
+
+*	The top left graph plots the **residuals against the fitted values**. If the data are best explained by a straight line then there should be a uniform distribution of points above and below the horizontal grey dotted line (and if there are sufficient points then the red line, which is a moving average, should be on top of the grey dotted line). This plot is pretty good.
+*	The top right graph shows the **Q-Q plot** which allows a visual inspection of normality. If the residuals are normally distributed, then the points should lie on the diagonal dotted line. This isn’t too bad but there is some slight snaking towards the upper end and Georgia appears to be an outlier here.
+*	The bottom left **scale-location** graph allows us to investigate whether there is any correlation between the residuals and the fitted values and whether the variance of the residuals changes significantly. If not, then the red line should be horizontal. If there is any correlation or change in variance then the red line will not be horizontal. This plot is fine.
+*	The last graph shows the **Cook's distance** and tests if any one point has an unnecessarily large effect on the fit. The important aspect here is to see if any points lie beyond the red dashed contour line in the top right corner of this plot. If not, then no point has undue influence. This plot is good.
+
+:::note
+Formally, if there is any concern after looking at the diagnostic plots, then a linear regression is not valid. However, disappointingly, very few people ever check whether the linear regression assumptions have been met before quoting the results.
+
+Let's change this through leading by example!
+:::
+
+
+## Implement test
+We have already defined the linear model, so we can have a closer look at it:
+
+```{r}
+# show the linear model
+lm_1
+```
+
+The function `lm` returns a linear model (lm) object which is essentially a list containing everything necessary to understand and analyse a linear model. However, if we just type the model name (as we have above) then it just prints to the screen the actual coefficients of the model i.e. the intercept and the slope of the line.
 
 So here we have found that the line of best fit is given by:
 
@@ -116,37 +154,6 @@ abline(lm_1, col = "red")
 
 *	The first command creates a scatter plot of the data
 *	The second command uses the results of the linear model fitting (the object `lm_1`) to add the line of best fit to the plot (and colour it red).
-
-## Assumptions
-In order for a linear regression analysis to be valid 4 key assumptions need to be met:
-
-:::highlight
-1.	The data must be linear (it is entirely possible to calculate a straight line through data that is not straight - it doesn’t mean that you should though!)
-2.	The residuals must be normally distributed
-3.	The residuals must not be correlated with their fitted values
-4.	The fit should not depend overly much on a single point (no point should have high leverage).
-:::
-
-Whether these assumptions are met can easily be checked visually by producing four key diagnostic plots.
-
-```{r cs3-lm-diagnostics}
-# create a 2 x 2 output window
-par(mfrow = c(2,2))
-
-# and create the diagnostic plots for our model
-plot(lm_1)
-```
-
-*	The top left graph plots the **residuals against the fitted values**. If the data are best explained by a straight line then there should be a uniform distribution of points above and below the horizontal grey dotted line (and if there are sufficient points then the red line, which is a moving average, should be on top of the grey dotted line). This plot is pretty good.
-*	The top right graph shows the **Q-Q plot** which allows a visual inspection of normality. If the residuals are normally distributed, then the points should lie on the diagonal dotted line. This isn’t too bad but there is some slight snaking towards the upper end and Georgia appears to be an outlier here.
-*	The bottom left **scale-location** graph allows us to investigate whether there is any correlation between the residuals and the fitted values and whether the variance of the residuals changes significantly. If not, then the red line should be horizontal. If there is any correlation or change in variance then the red line will not be horizontal. This plot is fine.
-*	The last graph shows the **Cook's distance** and tests if any one point has an unnecessarily large effect on the fit. The important aspect here is to see if any points lie beyond the red dashed contour line in the top right corner of this plot. If not, then no point has undue influence. This plot is good.
-
-:::note
-Formally, if there is any concern after looking at the diagnostic plots, then a linear regression is not valid. However, disappointingly, very few people ever check whether the linear regression assumptions have been met before quoting the results.
-
-Let's change this through leading by example!
-:::
 
 ## Exercise
 :::exercise
