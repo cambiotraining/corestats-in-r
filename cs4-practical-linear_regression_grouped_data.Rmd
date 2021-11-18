@@ -203,24 +203,26 @@ For the coefficients belonging to the other line, R uses these first two coeffic
 So, how to decipher the above output?
 
 First, I need to work out which group has been used as the baseline.
+
 * It will be the group that comes first alphabetically, so it should be `Broadleaf`
 * The other way to check would be to look and see which group is not mentioned in the above table. `Conifer` is mentioned (in the `SpeciesConifer` heading) and so again the baseline group is `Broadleaf.`
+
 This means that the intercept value and `Depth` coefficient correspond to the `Broadleaf` group and as a result I know what the equation of one of my lines is:
 
 Broadleaf:
 
 \begin{equation}
-Light = 7962 + -262.2 * Depth
+Light = 7962 + -262.2 \cdot Depth
 \end{equation} 
 
 In this example we know that the gradient is the same for both lines (because we explicitly asked R not to include an interaction), so all I need to do is find the intercept value for the `Conifer` group. Unfortunately, the final value given underneath `SpeciesConifer` does not give me the intercept for `Conifer`, instead it tells me the difference between the `Conifer` group intercept and the baseline intercept i.e. the equation for the line of best fit for conifer woodland is given by:
 
 \begin{equation}
-Light = (7962 + -3113) + -262.2 * Depth
+Light = (7962 + -3113) + -262.2 \cdot Depth
 \end{equation} 
 
 \begin{equation}
-Light = 4829 + -262.2 * Depth
+Light = 4829 + -262.2 \cdot Depth
 \end{equation} 
 
 ### Adding multiple regression lines
@@ -336,7 +338,7 @@ As before the broadleaf line is used as the baseline regression and we can read 
 
 Broadleaf:
 \begin{equation}
-Light = 7798.57 + -221.13 * Depth
+Light = 7798.57 + -221.13 \cdot Depth
 \end{equation}
 
 Note that this is different from the previous section, by allowing for an interaction all fitted values will change.
@@ -345,11 +347,11 @@ For the conifer line we will have a different intercept value and a different gr
 
 Conifer:
 \begin{equation}
-Light = (7798.57 + -2784.58) + (-221.13 + -71.04) * Depth
+Light = (7798.57 + -2784.58) + (-221.13 + -71.04) \cdot Depth
 \end{equation}
 
 \begin{equation}
-Light = 5014 + -292.2 * Depth
+Light = 5014 + -292.2 \cdot Depth
 \end{equation}
 
 These also happen to be exactly the lines of best fit that you would get by calculating a linear regression on each group’s data separately.

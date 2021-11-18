@@ -462,7 +462,7 @@
 <span class="header-section-number">22.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Experiment</code> is a dataframe with three variables; <code>Weight</code>, <code>Gender</code> and <code>Exercise.</code> <code>Weight</code> is the continuous response variable, whereas <code>Gender</code> and <code>Exercise</code> are the categorical predictor variables.</p>
-<p>First,read in the data:</p>
+<p>First, read in the data:</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Experiment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-exercise.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then visualise:</p>
@@ -693,7 +693,7 @@ Answer
                  <span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672"></div>
-<p>We’re constructed both box plots and we’ve also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren’t parallel. Looking at the interaction plot with <code>concentration</code> on the x-axis, it appears that there is non difference between cell types when the concentration is <code>none</code>, but that there is a difference between cell types when the concentration is <code>low</code> or <code>high</code>.</p>
+<p>We’re constructed both box plots and we’ve also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren’t parallel. Looking at the interaction plot with <code>concentration</code> on the x-axis, it appears that there is non-difference between cell types when the concentration is <code>none</code>, but that there is a difference between cell types when the concentration is <code>low</code> or <code>high</code>.</p>
 </div>
 <div id="assumptions-10" class="section level3" number="22.9.3">
 <h3>
@@ -817,7 +817,7 @@ Answer
 <h3>
 <span class="header-section-number">22.10.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-4"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s carry out the two-way ANOVA and check the assumptions. It’s worth pointing out that the order in which we carry these out doesn’t really matter as we’ll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I’m fairly relaxed about the order you do these steps.</p>
+<p>Let’s carry out the two-way ANOVA.</p>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.tulip</span><span class="op">)</span></code></pre></div>

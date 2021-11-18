@@ -615,20 +615,24 @@ Unfortunately, R is parsimonious and doesn’t do that. Instead R gives you thre
 <p>The first two numbers that R returns (underneath <code>Intercept</code> and <code>Depth</code>) are the exact intercept and slope coefficients for one of the lines (in this case they correspond to the data for <code>Broadleaf</code> woodlands).</p>
 <p>For the coefficients belonging to the other line, R uses these first two coefficients as baseline values and expresses the other coefficients relative to these ones. R also doesn’t tell you explicitly which group it is using as its baseline reference group! (Did I mention that R can be very helpful at times 😉?)</p>
 <p>So, how to decipher the above output?</p>
-<p>First, I need to work out which group has been used as the baseline.
-* It will be the group that comes first alphabetically, so it should be <code>Broadleaf</code>
-* The other way to check would be to look and see which group is not mentioned in the above table. <code>Conifer</code> is mentioned (in the <code>SpeciesConifer</code> heading) and so again the baseline group is <code>Broadleaf.</code>
-This means that the intercept value and <code>Depth</code> coefficient correspond to the <code>Broadleaf</code> group and as a result I know what the equation of one of my lines is:</p>
+<p>First, I need to work out which group has been used as the baseline.</p>
+<ul>
+<li>It will be the group that comes first alphabetically, so it should be <code>Broadleaf</code>
+</li>
+<li>The other way to check would be to look and see which group is not mentioned in the above table. <code>Conifer</code> is mentioned (in the <code>SpeciesConifer</code> heading) and so again the baseline group is <code>Broadleaf.</code>
+</li>
+</ul>
+<p>This means that the intercept value and <code>Depth</code> coefficient correspond to the <code>Broadleaf</code> group and as a result I know what the equation of one of my lines is:</p>
 <p>Broadleaf:</p>
 <p><span class="math display">\[\begin{equation}
-Light = 7962 + -262.2 * Depth
+Light = 7962 + -262.2 \cdot Depth
 \end{equation}\]</span></p>
 <p>In this example we know that the gradient is the same for both lines (because we explicitly asked R not to include an interaction), so all I need to do is find the intercept value for the <code>Conifer</code> group. Unfortunately, the final value given underneath <code>SpeciesConifer</code> does not give me the intercept for <code>Conifer</code>, instead it tells me the difference between the <code>Conifer</code> group intercept and the baseline intercept i.e. the equation for the line of best fit for conifer woodland is given by:</p>
 <p><span class="math display">\[\begin{equation}
-Light = (7962 + -3113) + -262.2 * Depth
+Light = (7962 + -3113) + -262.2 \cdot Depth
 \end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
-Light = 4829 + -262.2 * Depth
+Light = 4829 + -262.2 \cdot Depth
 \end{equation}\]</span></p>
 </div>
 <div id="adding-multiple-regression-lines" class="section level3" number="23.7.2">
@@ -746,16 +750,16 @@ Either way this gives us the following output:</p>
 <p>As before the broadleaf line is used as the baseline regression and we can read off the values for its intercept and slope directly:</p>
 <p>Broadleaf:
 <span class="math display">\[\begin{equation}
-Light = 7798.57 + -221.13 * Depth
+Light = 7798.57 + -221.13 \cdot Depth
 \end{equation}\]</span></p>
 <p>Note that this is different from the previous section, by allowing for an interaction all fitted values will change.</p>
 <p>For the conifer line we will have a different intercept value and a different gradient value. As before the value underneath <code>SpeciesConifer</code> gives us the difference between the intercept of the conifer line and the broad leaf line. The new, additional term <code>Depth:SpeciesConifer</code> tells us how the coefficient of <code>Depth</code> varies for the conifer line i.e. how the gradient is different. Putting these two together gives us the following equation for the line of best fit conifer woodland:</p>
 <p>Conifer:
 <span class="math display">\[\begin{equation}
-Light = (7798.57 + -2784.58) + (-221.13 + -71.04) * Depth
+Light = (7798.57 + -2784.58) + (-221.13 + -71.04) \cdot Depth
 \end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
-Light = 5014 + -292.2 * Depth
+Light = 5014 + -292.2 \cdot Depth
 \end{equation}\]</span></p>
 <p>These also happen to be exactly the lines of best fit that you would get by calculating a linear regression on each group’s data separately.</p>
 </div>

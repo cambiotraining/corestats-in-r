@@ -46,7 +46,7 @@ We will recreate the example analysis used in the lecture. The data are stored a
 ## Summarise and visualise
 `Experiment` is a dataframe with three variables; `Weight`, `Gender` and `Exercise.` `Weight` is the continuous response variable, whereas `Gender` and `Exercise` are the categorical predictor variables.
 
-First,read in the data:
+First, read in the data:
 
 ```r
 Experiment <- read.csv("data/raw/CS4-exercise.csv")
@@ -355,7 +355,7 @@ interaction.plot(cells$cell_type,
 
 <img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-2.png" width="672" />
 
-We're constructed both box plots and we've also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from looks of different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren't parallel. Looking at the interaction plot with `concentration` on the x-axis, it appears that there is non difference between cell types when the concentration is `none`, but that there is a difference between cell types when the concentration is `low` or `high`.
+We're constructed both box plots and we've also constructed two interaction plots. We only needed to do one interaction plot but I find it can be quite useful to look at the data from different angles. Both interaction plots suggest that there is an interaction here as the lines in the plots aren't parallel. Looking at the interaction plot with `concentration` on the x-axis, it appears that there is non-difference between cell types when the concentration is `none`, but that there is a difference between cell types when the concentration is `low` or `high`.
 
 ### Assumptions
 First we need to define the model:
@@ -504,7 +504,7 @@ plot(lm.tulip)
 These are actually all OK. Point number 8 is messing with the homogeneity of variance assumption a little bit, but since it's only one point we won't worry about it. A two-way ANOVA analysis is still on the cards.
 
 ### Implement the test
-Let's carry out the two-way ANOVA and check the assumptions. It's worth pointing out that the order in which we carry these out doesn't really matter as we'll be making our decision about what to do once we have everything in place. Technically, we should check the assumptions first before doing the statistical test, but as long as you check them at all I'm fairly relaxed about the order you do these steps.
+Let's carry out the two-way ANOVA.
 
 
 ```r
