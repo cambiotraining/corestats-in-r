@@ -101,7 +101,8 @@ Performing a Wilcoxon signed-rank test:
 <details><summary>Answer</summary>
 
 **Hypotheses**
-$H_0$ : median = 45s
+
+$H_0$ : median $=$ 45s
 
 $H_1$ : median $\neq$ 45s
 
@@ -123,9 +124,11 @@ wilcox.test(dissolving , mu=45 , alternative = "two.sided")
 A one-sample Wilcoxon-signed rank test indicated that the median dissolving time of the drug is not significantly different from 45 s (V=22, n=8 , p=0.64)
 
 **Assumptions**
+
 From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.
 
 **Discussion**
+
 In terms of choosing between the two test we can see that both meet their respective assumptions and so both tests are valid. In this case both tests also agree in terms of their conclusions i.e. that the average dissolving time (either mean or median) doesn't differ significantly from the proposed value of 45 s.
 
 * So one answer would be that it doesn't matter which test you use.

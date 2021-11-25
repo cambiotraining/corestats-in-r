@@ -595,7 +595,7 @@ For a simple straight line such as the linear regression for the conifer dataset
 <p>And we can interpret this as meaning that the intercept of the line of best fit is 5014 and the coefficient of the depth variable (the number in front of it in the equation) is -292.2.</p>
 <p>So, the equation of the line of best fit is given by:</p>
 <p><span class="math display">\[\begin{equation}
-Light = 5014 + -292.2 * Depth
+Light = 5014 + -292.2 \cdot Depth
 \end{equation}\]</span></p>
 <p>This came from fitting a simple linear model using the conifer dataset, and has the meaning that for every extra 1 m of depth of forest canopy we lose 292.2 lux of light.</p>
 <p>When we looked at the full dataset, we found that interaction wasn’t important. This means that we will have a model with two distinct intercepts but only a single slope (that’s what you get for a linear regression without any interaction), so we need to ask R to calculate that specific combination. The command for that is simply:</p>

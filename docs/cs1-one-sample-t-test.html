@@ -657,8 +657,8 @@ There are three ways of checking for normality:</p>
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>Hypotheses</strong>
-<span class="math inline">\(H_0\)</span> : mean = 45s</p>
+</summary><p><strong>Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : mean <span class="math inline">\(=\)</span> 45s</p>
 <p><span class="math inline">\(H_1\)</span> : mean <span class="math inline">\(\neq\)</span> 45s</p>
 <p><strong>Create data, summarise and visualise</strong></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -693,8 +693,8 @@ Answer
 ## mean of x 
 ##   45.2125</code></pre>
 <p>A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),</p>
-<p><strong>Explore Assumptions</strong>
-Normality:</p>
+<p><strong>Explore Assumptions</strong></p>
+<p>Normality:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
 <pre><code>## 

@@ -232,7 +232,7 @@ And we can interpret this as meaning that the intercept of the line of best fit 
 So, the equation of the line of best fit is given by:
 
 \begin{equation}
-Light = 5014 + -292.2 * Depth
+Light = 5014 + -292.2 \cdot Depth
 \end{equation} 
 
 This came from fitting a simple linear model using the conifer dataset, and has the meaning that for every extra 1 m of depth of forest canopy we lose 292.2 lux of light.

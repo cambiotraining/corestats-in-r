@@ -259,7 +259,8 @@ Do these results provide any evidence to suggest that dissolving time for this d
 <details><summary>Answer</summary>
 
 **Hypotheses**
-$H_0$ : mean = 45s
+
+$H_0$ : mean $=$ 45s
 
 $H_1$ : mean $\neq$ 45s
 
@@ -317,6 +318,7 @@ t.test(dissolving , mu=45 , alternative = "two.sided")
 A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),
 
 **Explore Assumptions**
+
 Normality:
 
 

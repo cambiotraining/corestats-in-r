@@ -507,8 +507,8 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>Hypotheses</strong>
-<span class="math inline">\(H_0\)</span> : median = 45s</p>
+</summary><p><strong>Hypotheses</strong></p>
+<p><span class="math inline">\(H_0\)</span> : median <span class="math inline">\(=\)</span> 45s</p>
 <p><span class="math inline">\(H_1\)</span> : median <span class="math inline">\(\neq\)</span> 45s</p>
 <p><strong>Wilcoxon signed-rank test</strong></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -520,10 +520,10 @@ Answer
 ## V = 22, p-value = 0.6406
 ## alternative hypothesis: true location is not equal to 45</code></pre>
 <p>A one-sample Wilcoxon-signed rank test indicated that the median dissolving time of the drug is not significantly different from 45 s (V=22, n=8 , p=0.64)</p>
-<p><strong>Assumptions</strong>
-From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.</p>
-<p><strong>Discussion</strong>
-In terms of choosing between the two test we can see that both meet their respective assumptions and so both tests are valid. In this case both tests also agree in terms of their conclusions i.e. that the average dissolving time (either mean or median) doesn’t differ significantly from the proposed value of 45 s.</p>
+<p><strong>Assumptions</strong></p>
+<p>From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.</p>
+<p><strong>Discussion</strong></p>
+<p>In terms of choosing between the two test we can see that both meet their respective assumptions and so both tests are valid. In this case both tests also agree in terms of their conclusions i.e. that the average dissolving time (either mean or median) doesn’t differ significantly from the proposed value of 45 s.</p>
 <ul>
 <li>So one answer would be that it doesn’t matter which test you use.</li>
 <li>Another answer would be that you should pick the test that measures the quantity you’re interested in i.e. if you care about medians then use the Wilcoxon test, whereas if you care about means then use the t-test.</li>
