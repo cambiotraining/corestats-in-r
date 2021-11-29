@@ -457,7 +457,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 </h2>
 <p>The data are stored in <code>data/raw/CS4-treelight.csv</code>.</p>
 <p>Read in the data and inspect it:</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">treelight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-treelight.csv"</span><span class="op">)</span>
 
@@ -476,13 +476,13 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 <h2>
 <span class="header-section-number">21.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-10"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>,
      data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
 <p>This plots all of the points in the data set on the same window, but unfortunately there isn’t a way of easily distinguishing them, at least not using base R. We will need to extract the correct subset data from the <code>treelight</code> dataframe.</p>
 <p>Create subsets of the data frame and look at the raw data:</p>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># subset the conifers</span>
 <span class="va">conLight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">treelight</span>,
                    subset <span class="op">=</span> <span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"Conifer"</span><span class="op">)</span><span class="op">)</span>
@@ -500,7 +500,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 ## 4 4528.618  3.25 Conifer
 ## 5 3442.610  4.00 Conifer
 ## 6 4640.297  4.75 Conifer</code></pre>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">broLight</span><span class="op">)</span></code></pre></div>
 <pre><code>##    Light Depth   Species
 ## 14  7652 2.438 Broadleaf
@@ -513,7 +513,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 We can use these smaller data frames to distinguish between the points in the plot.</p>
 <p>Before we do that, we need to calculate the linear regression for each group, and add them to the plot:</p>
 <p>Type this in:</p>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># linear regression for Broadleaf</span>
 <span class="va">lm.Broadleaf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>,
                    data <span class="op">=</span> <span class="va">broLight</span><span class="op">)</span>
@@ -522,7 +522,7 @@ We can use these smaller data frames to distinguish between the points in the pl
 <span class="va">lm.Conifer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>,
                  data <span class="op">=</span> <span class="va">conLight</span><span class="op">)</span></code></pre></div>
 <p>Now type this in to create the plot with the data and the linear regressions:</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a new plot based on Light ~ Depth</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>, 
      data <span class="op">=</span> <span class="va">treelight</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
@@ -551,7 +551,7 @@ We can use these smaller data frames to distinguish between the points in the pl
 </h2>
 <p>In this case we’re going to implement the test before checking the assumptions (I know, let’s live a little!). You’ll find out why soon…</p>
 <p>We can test for a possible interaction more formally:</p>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">*</span> <span class="va">Species</span>,
          data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Remember that <code>Depth * Species</code> is a shorthand way of writing the full set of <code>Depth + Species + Depth:Species</code> terms in R <em>i.e.</em> both main effects and the interaction effect.</p>
@@ -580,7 +580,7 @@ We can use these smaller data frames to distinguish between the points in the pl
 </h3>
 <p>Unfortunately, R doesn’t make this obvious and easy for us and there is some deciphering required getting this right.
 For a simple straight line such as the linear regression for the conifer dataset by itself, the output is relatively straightforward.</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>,
    data <span class="op">=</span> <span class="va">conLight</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -597,7 +597,7 @@ Light = 5014 + -292.2 \cdot Depth
 \end{equation}\]</span></p>
 <p>This came from fitting a simple linear model using the conifer dataset, and has the meaning that for every extra 1 m of depth of forest canopy we lose 292.2 lux of light.</p>
 <p>When we looked at the full dataset, we found that interaction wasn’t important. This means that we will have a model with two distinct intercepts but only a single slope (that’s what you get for a linear regression without any interaction), so we need to ask R to calculate that specific combination. The command for that is simply:</p>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">+</span> <span class="va">Species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -639,7 +639,7 @@ Light = 4829 + -262.2 \cdot Depth
 </h3>
 <p>Unfortunately, base R doesn’t have a sensible way of automatically adding multiple regression lines to a plot and so if we want to do this, we will have to do it manually (this is easier to do in <code>ggplot</code> and this will be added to the materials later).</p>
 <p>First, we create the underlying plot containing the raw data values. We did this previously, so we can just copy/paste the code for the raw data.</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a new plot based on Light ~ Depth</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>, 
      data <span class="op">=</span> <span class="va">treelight</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
@@ -653,23 +653,23 @@ Light = 4829 + -262.2 \cdot Depth
      data <span class="op">=</span> <span class="va">conLight</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
 <p>Then we can add the linear regression without the interaction term.</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">+</span> <span class="va">Species</span>,
              data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <p>We first need to extract the relative coefficient values from the <code>lm</code> object and then combine them manually to create separate vectors containing the intercept and slope coefficients for each line. This next set of command is a bit annoying but stick with it; it’ll pay dividends (no, really it will – you always secretly wanted to be a computer programmer didn’t you? This medic/biologist/life scientist thing is just a passing phase that you’ll grow out of…)</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lm.add</span><span class="op">)</span>
 <span class="va">cf</span></code></pre></div>
 <pre><code>##    (Intercept)          Depth SpeciesConifer 
 ##      7962.0316      -262.1656     -3113.0265</code></pre>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cf.Broadleaf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">cf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
 <span class="va">cf.Conifer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cf</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">cf</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="va">cf</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">cf.Broadleaf</span></code></pre></div>
 <pre><code>## (Intercept)       Depth 
 ##   7962.0316   -262.1656</code></pre>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cf.Conifer</span></code></pre></div>
 <pre><code>## (Intercept)       Depth 
 ##   4849.0051   -262.1656</code></pre>
@@ -681,7 +681,7 @@ Light = 4829 + -262.2 \cdot Depth
 <li>The 5th and 6th lines just print these two vectors to the screen.</li>
 </ul>
 <p>We can now use these two vectors to add the appropriate regression lines to the existing plot. The final code then looks like this:</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a new plot based on Light ~ Depth</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span>, 
      data <span class="op">=</span> <span class="va">treelight</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
@@ -708,7 +708,7 @@ Light = 4829 + -262.2 \cdot Depth
 </h2>
 <p>In this case we first wanted to check if the interaction was significant, prior to checking the assumptions. If we would have checked the assumptions first, then we would have done that one the full model (with the interaction), then done the ANOVA if everything was OK. We would have then found out that the interaction was not significant, meaning we’d have to re-check the assumptions with the new model. In what order you do it is a bit less important here. The main thing is that you check the assumptions and report on it!</p>
 <p>Anyway, hopefully you’ve got the gist of checking assumptions for linear models by now: diagnostic plots!</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">+</span> <span class="va">Species</span>,
         data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -727,11 +727,11 @@ Light = 4829 + -262.2 \cdot Depth
 </h2>
 <p>If there <em>had been</em> a significant interaction between the two predictor variables (for example, if light intensity had dropped off significantly faster in conifer woods than in broad leaf woods, in addition to being lower overall, then we would again be looking for two equations for the linear regression, but this time the gradients vary as well.
 In this case interaction is important and so we need the output from a linear regression that explicitly includes the interaction term:</p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">+</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Depth</span><span class="op">:</span><span class="va">Species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <p>or written using the short-hand:</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Light</span> <span class="op">~</span> <span class="va">Depth</span> <span class="op">*</span> <span class="va">Species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <p>There really is absolutely no difference in the end result.
@@ -774,11 +774,11 @@ Light = 5014 + -292.2 \cdot Depth
 </ul>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clover</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-clover.csv"</span>,
                    stringsAsFactors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>This dataset has three variables; <code>Yield</code> (which is the response variable), <code>Yarrow</code> (which is a continuous predictor variable) and <code>Farm</code> (which is the categorical predictor variables). As always we’ll visualise the data first:</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Yield</span> <span class="op">~</span> <span class="va">Yarrow</span>,
      data <span class="op">=</span> <span class="va">clover</span>, col <span class="op">=</span> <span class="va">Farm</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
@@ -786,7 +786,7 @@ Answer
 <p>For our plot this means that farm <code>A</code> is black, farm <code>B</code> is red and farm <code>C</code> is green.</p>
 <p>This method is still rather clunky and <code>ggplot</code> does a much better job in this respect. We’ll see how that works in an updated version.</p>
 <p>More importantly, looking at this plot as it stands, it’s pretty clear that yarrow density has a significant effect on yield, but it’s pretty hard to see from the plot whether there is any effect of <code>Farm</code>, or whether there is any interaction. In order to work that out we’ll want to add the lines of best fit for each <code>Farm</code> separately.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Yield</span> <span class="op">~</span> <span class="va">Yarrow</span>,
      data <span class="op">=</span> <span class="va">clover</span>, col <span class="op">=</span> <span class="va">Farm</span><span class="op">)</span>
 
@@ -803,7 +803,7 @@ Answer
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lmC</span>, col <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
 <p>The lines of best fit are very close together, and it looks very much as if there isn’t any interaction, but also that there isn’t any effect of <code>Farm</code>. Let’s carry out the analysis:</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm.clover</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Yield</span> <span class="op">~</span> <span class="va">Yarrow</span> <span class="op">*</span> <span class="va">Farm</span>,
                 data <span class="op">=</span> <span class="va">clover</span><span class="op">)</span>
 
@@ -820,7 +820,7 @@ Answer
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>This confirms our suspicions from looking at the plot. There isn’t any interaction between <code>Yarrow</code> and <code>Farm.</code> <code>Yarrow</code> density has a statistically significant effect on <code>Yield</code> but there isn’t any difference between the different farms on the yields of clover.</p>
 <p>Let’s check the assumptions:</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.clover</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
@@ -843,7 +843,7 @@ Answer
 </li>
 </ol>
 <p>Let’s do a quick little transformation of the data, and repeat our analysis see if our assumptions are better met this time (just for the hell of it):</p>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Yield</span><span class="op">)</span> <span class="op">~</span> <span class="va">Yarrow</span>,
      data <span class="op">=</span> <span class="va">clover</span>, col <span class="op">=</span> <span class="va">Farm</span><span class="op">)</span>
 
@@ -857,7 +857,7 @@ Answer
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-25-1.png" width="672"></div>
 <p>Again, this looks plausible. There’s a noticeable outlier from Farm B (red point at the bottom of the plot) but otherwise we see that: there probably isn’t an interaction; there is likely to be an effect of <code>Yarrow</code> on <code><a href="https://rdrr.io/r/base/Log.html">log(Yield)</a></code>; and there probably isn’t any difference between the farms.</p>
 <p>Let’s do the analysis:</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm.log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Yield</span><span class="op">)</span> <span class="op">~</span> <span class="va">Yarrow</span> <span class="op">*</span> <span class="va">Farm</span>,
              data <span class="op">=</span> <span class="va">clover</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.log</span><span class="op">)</span></code></pre></div>
@@ -872,7 +872,7 @@ Answer
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Woop. All good so far. We have the same conclusions as before in terms of what is significant and what isn’t. Now we just need to check the assumptions:</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.log</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-27-1.png" width="672"></div>

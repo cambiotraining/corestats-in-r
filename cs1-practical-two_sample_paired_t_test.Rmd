@@ -47,6 +47,9 @@ boxplot(changeCor, ylab = "Change in cortisol (nmol/l)")
 
 The differences in cortisol levels appear to be very much less than zero, (meaning that the evening cortisol levels appear to be much lower than the morning ones). As such we would expect that the test would give a pretty significant result.
 
+## Assumptions
+You will do this in the exercise!
+
 ## Implement test
 Perform a two-sample, two-tailed, paired t-test:
 
@@ -69,10 +72,7 @@ From our perspective the value of interested is on the 3rd line (p-value = 5.288
 
 > A two-tailed, paired t-test indicated that the cortisol level in adult females differed significantly between the morning (313.5 nmol/l) and the evening (197.4 nmol/l) (t = -5.1833, df = 19, p = 5.3x10<sup>-5</sup>).
 
-## Assumptions
-You will do this in the exercise!
-
-## Exercise
+## Exercise: Assumptions
 :::exercise
 Checking assumptions
 

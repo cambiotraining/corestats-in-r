@@ -24,6 +24,9 @@ We use a two-tailed Wilcoxon signed-rank test to see if we can reject the null h
 ## Summarise and visualise
 Already implemented previously.
 
+## Assumptions
+These have been checked previously.
+
 ## Implement test
 Perform a two-tailed, Wilcoxon signed-rank test:
 
@@ -45,9 +48,6 @@ wilcox.test(cortisol$morning, cortisol$evening,
 The p value is given on the 3rd line (p-value = 0.0001678). Given that this is less than 0.05 we can still reject the null hypothesis.
 
 > A two-tailed, Wilcoxon signed-rank test indicated that the median cortisol level in adult females differed significantly between the morning (320.5 nmol/l) and the evening (188.9 nmol/l) (V = 197, p = 0.00017).
-
-## Assumptions
-These have been checked previously.
 
 ## Exercise
 :::exercise

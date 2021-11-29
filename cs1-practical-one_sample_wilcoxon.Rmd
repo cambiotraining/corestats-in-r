@@ -29,6 +29,32 @@ We will use a one-sample, two-tailed Wilcoxon signed-rank test to see if we shou
 ## Summarise and visualise
 We did this before in the previous section, nothing really should have changed between now and then (if it has then you’re not off to a good start on this practical!)
 
+## Assumptions
+In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:
+
+1.	The parent distribution from which the sample is symmetric
+2.	Each data point in the sample is independent of the others. This is the same as for the t-test and is a common feature of nearly all statistical tests. Lack of independence in your data is really tough to deal with (if not impossible) and a large part of proper experimental design is ensuring this.
+
+Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.
+
+Plot a histogram and a boxplot of the data:
+
+```{r cs1-one-sample-wilcoxon-assumptions1, eval=FALSE}
+hist(fishlength, breaks = 10)
+
+boxplot(fishlength)
+```
+
+You get the following plots:
+
+```{r cs1-one-sample-wilcoxon-assumptions2, echo=FALSE}
+par(mfrow=c(1,2))
+hist(fishlength, breaks = 10)
+boxplot(fishlength)
+```
+
+Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is _symmetric enough_ for us to be happy with the results of the test.
+
 ## Implement the test
 Perform a one-sample, two-tailed Wilcoxon signed-rank test:
 
@@ -63,32 +89,6 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 
 The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the median value of the group ($\mu$ = 18.8 mm), the test statistic (V = 67.5), the number of observations (n = 29), and the p-value (p = 0.0012).
 
-## Assumptions
-In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:
-
-1.	The parent distribution from which the sample is symmetric
-2.	Each data point in the sample is independent of the others. This is the same as for the t-test and is a common feature of nearly all statistical tests. Lack of independence in your data is really tough to deal with (if not impossible) and a large part of proper experimental design is ensuring this.
-
-Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.
-
-Plot a histogram and a boxplot of the data:
-
-```{r cs1-one-sample-wilcoxon-assumptions1, eval=FALSE}
-hist(fishlength, breaks = 10)
-
-boxplot(fishlength)
-```
-
-You get the following plots:
-
-```{r cs1-one-sample-wilcoxon-assumptions2, echo=FALSE}
-par(mfrow=c(1,2))
-hist(fishlength, breaks = 10)
-boxplot(fishlength)
-```
-
-Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is _symmetric enough_ for us to be happy with the results of the test.
-
 ## Exercise
 :::exercise
 Performing a Wilcoxon signed-rank test:
@@ -105,16 +105,16 @@ $H_0$ : median $=$ 45s
 
 $H_1$ : median $\neq$ 45s
 
+**Assumptions**
+
+From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.
+
 **Wilcoxon signed-rank test**
 ```{r}
 wilcox.test(dissolving , mu=45 , alternative = "two.sided")
 ```
 
 A one-sample Wilcoxon-signed rank test indicated that the median dissolving time of the drug is not significantly different from 45 s (V=22, n=8 , p=0.64)
-
-**Assumptions**
-
-From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.
 
 **Discussion**
 

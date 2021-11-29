@@ -427,12 +427,31 @@
 </h2>
 <p>We did this before in the previous section, nothing really should have changed between now and then (if it has then you’re not off to a good start on this practical!)</p>
 </div>
-<div id="implement-the-test-1" class="section level2" number="5.3">
+<div id="assumptions-1" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">5.3</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distribution from which the sample is symmetric</li>
+<li>Each data point in the sample is independent of the others. This is the same as for the t-test and is a common feature of nearly all statistical tests. Lack of independence in your data is really tough to deal with (if not impossible) and a large part of proper experimental design is ensuring this.</li>
+</ol>
+<p>Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.</p>
+<p>Plot a histogram and a boxplot of the data:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
+<p>You get the following plots:</p>
+<div class="inline-figure"><img src="cs1-practical-one_sample_wilcoxon_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
+<p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
+</div>
+<div id="implement-the-test-1" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">fishlength</span>, mu <span class="op">=</span> <span class="fl">20</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <p>The syntax is identical to the one-sample t-test we carried out earlier.</p>
 <ul>
@@ -442,9 +461,9 @@
 </li>
 </ul>
 </div>
-<div id="interpreting-the-output-and-report-results-1" class="section level2" number="5.4">
+<div id="interpreting-the-output-and-report-results-1" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.4</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window</p>
 <pre><code>## Warning in wilcox.test.default(fishlength, mu = 20, alternative = "two.sided"):
@@ -473,25 +492,6 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 </blockquote>
 <p>The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the median value of the group (<span class="math inline">\(\mu\)</span> = 18.8 mm), the test statistic (V = 67.5), the number of observations (n = 29), and the p-value (p = 0.0012).</p>
 </div>
-<div id="assumptions-1" class="section level2" number="5.5">
-<h2>
-<span class="header-section-number">5.5</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
-</h2>
-<p>In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
-<ol style="list-style-type: decimal">
-<li>The parent distribution from which the sample is symmetric</li>
-<li>Each data point in the sample is independent of the others. This is the same as for the t-test and is a common feature of nearly all statistical tests. Lack of independence in your data is really tough to deal with (if not impossible) and a large part of proper experimental design is ensuring this.</li>
-</ol>
-<p>Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.</p>
-<p>Plot a histogram and a boxplot of the data:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
-<p>You get the following plots:</p>
-<div class="inline-figure"><img src="cs1-practical-one_sample_wilcoxon_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
-<p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
-</div>
 <div id="exercise-1" class="section level2" number="5.6">
 <h2>
 <span class="header-section-number">5.6</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
@@ -508,6 +508,8 @@ Answer
 </summary><p><strong>Hypotheses</strong></p>
 <p><span class="math inline">\(H_0\)</span> : median <span class="math inline">\(=\)</span> 45s</p>
 <p><span class="math inline">\(H_1\)</span> : median <span class="math inline">\(\neq\)</span> 45s</p>
+<p><strong>Assumptions</strong></p>
+<p>From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.</p>
 <p><strong>Wilcoxon signed-rank test</strong></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu<span class="op">=</span><span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
@@ -518,8 +520,6 @@ Answer
 ## V = 22, p-value = 0.6406
 ## alternative hypothesis: true location is not equal to 45</code></pre>
 <p>A one-sample Wilcoxon-signed rank test indicated that the median dissolving time of the drug is not significantly different from 45 s (V=22, n=8 , p=0.64)</p>
-<p><strong>Assumptions</strong></p>
-<p>From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.</p>
 <p><strong>Discussion</strong></p>
 <p>In terms of choosing between the two test we can see that both meet their respective assumptions and so both tests are valid. In this case both tests also agree in terms of their conclusions i.e. that the average dissolving time (either mean or median) doesn’t differ significantly from the proposed value of 45 s.</p>
 <ul>
@@ -557,9 +557,9 @@ Answer
 <li><a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
 <li><a class="nav-link" href="#section-commands-1"><span class="header-section-number">5.1</span> Section commands</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-1"><span class="header-section-number">5.2</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">5.3</span> Implement the test</a></li>
-<li><a class="nav-link" href="#interpreting-the-output-and-report-results-1"><span class="header-section-number">5.4</span> Interpreting the output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">5.5</span> Assumptions</a></li>
+<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">5.3</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">5.4</span> Implement the test</a></li>
+<li><a class="nav-link" href="#interpreting-the-output-and-report-results-1"><span class="header-section-number">5.5</span> Interpreting the output and report results</a></li>
 <li><a class="nav-link" href="#exercise-1"><span class="header-section-number">5.6</span> Exercise</a></li>
 <li><a class="nav-link" href="#key-points"><span class="header-section-number">5.7</span> Key points</a></li>
 </ul>

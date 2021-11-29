@@ -18,6 +18,9 @@ We use a two-tailed Mann-Whitney U test to see if we can reject the null hypothe
 ## Summarise and visualise
 We did this in the [previous section](#cs1-students-sumvisual).
 
+## Assumptions
+We have checked these previously.
+
 ## Implement test
 Perform a two-tailed, Mann-Whitney U test:
 
@@ -58,9 +61,6 @@ Again, the p-value on the 3rd line is what we’re most interested in. Since the
 To put it more completely, we can state that:
 
 > A Mann-Whitney test indicated that the median body length of male guppies in the Guanapo river (18.8 mm) differs significantly from the median body length of male guppies in the Aripo river (20.1 mm) (W = 841, p = 0.0006).
-
-## Assumptions
-We have checked these previously.
 
 ## Exercise
 :::exercise

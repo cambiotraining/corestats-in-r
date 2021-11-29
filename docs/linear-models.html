@@ -449,10 +449,10 @@
 <span class="header-section-number">24.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-11"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s first load the data:</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS5-H2S.csv"</span><span class="op">)</span></code></pre></div>
 <p>Next, visualise the data:</p>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a plot canvas without data points</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
      data <span class="op">=</span> <span class="va">airpoll</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
@@ -475,7 +475,7 @@
 <span class="header-section-number">24.6</span> Implemention<a class="anchor" aria-label="anchor" href="#implemention"><i class="fas fa-link"></i></a>
 </h2>
 <p>Construct and analyse a full linear model.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model with all terms and interactions</span>
 <span class="va">lm.full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Plant</span><span class="op">:</span><span class="va">Temp</span>,
               data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
@@ -576,7 +576,7 @@ PlantB = 3.4742 + 0.12693 \cdot Temp
 <span class="header-section-number">24.7.1</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the additive linear model.</p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span>,
              data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
@@ -639,11 +639,11 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <span class="header-section-number">24.7.2</span> Revisiting ANOVA<a class="anchor" aria-label="anchor" href="#revisiting-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse only the effect of <code>Plant</code>:</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
         data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.Plant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
                data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
@@ -689,7 +689,7 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <span class="header-section-number">24.7.3</span> Revisiting regression<a class="anchor" aria-label="anchor" href="#revisiting-regression"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct a simple linear regression model:</p>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
               data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
@@ -698,7 +698,7 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>, data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
 <span class="co"># and add a line of best fit</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lm.Temp</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># view the model</span>
 <span class="va">lm.Temp</span>
 
@@ -740,14 +740,14 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <span class="header-section-number">24.7.4</span> The null model<a class="anchor" aria-label="anchor" href="#the-null-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the null model:</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the null model</span>
 <span class="va">lm.null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
 
 <span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">airpoll</span><span class="op">$</span><span class="va">H2S</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># view the model</span>
 <span class="va">lm.null</span></code></pre></div>
 <pre><code>## 
@@ -799,7 +799,7 @@ Answer
 <span class="header-section-number">24.8.1</span> Full model<a class="anchor" aria-label="anchor" href="#full-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">*</span> <span class="va">Girth</span>,
               data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -821,7 +821,7 @@ Answer
 <p>Volume = 45.81</p>
 <p>Here we note that the interaction term just requires us to multiple the three numbers together (we haven’t looked at continuous predictors before in the examples and this exercise was included as a check to see if this whole process was making sense).</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get:</p>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.full</span><span class="op">)</span></code></pre></div>
@@ -838,7 +838,7 @@ Answer
 <span class="header-section-number">24.8.2</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">Girth</span>,
              data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -859,7 +859,7 @@ Answer
 <p>Volume = -57.99 + 0.34 <span class="math inline">\(\cdot\)</span> 67 + 4.71 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 58.91</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.add</span><span class="op">)</span></code></pre></div>
@@ -877,7 +877,7 @@ Answer
 <span class="header-section-number">24.8.3</span> Height-only model<a class="anchor" aria-label="anchor" href="#height-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span>,
               data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -898,7 +898,7 @@ Answer
 <p>Volume = -87.12 + 1.54 <span class="math inline">\(\cdot\)</span> 67</p>
 <p>Volume = 16.28</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.height</span><span class="op">)</span></code></pre></div>
@@ -915,7 +915,7 @@ Answer
 <span class="header-section-number">24.8.4</span> Girth-only model<a class="anchor" aria-label="anchor" href="#girth-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.girth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span>,
                data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -936,7 +936,7 @@ Answer
 <p>Volume = -36.94 + 5.07 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 64.37</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.girth</span><span class="op">)</span></code></pre></div>

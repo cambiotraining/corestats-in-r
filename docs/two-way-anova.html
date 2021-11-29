@@ -461,20 +461,20 @@
 </h2>
 <p><code>Experiment</code> is a dataframe with three variables; <code>Weight</code>, <code>Gender</code> and <code>Exercise.</code> <code>Weight</code> is the continuous response variable, whereas <code>Gender</code> and <code>Exercise</code> are the categorical predictor variables.</p>
 <p>First, read in the data:</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Experiment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-exercise.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then visualise:</p>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span>, data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Exercise</span>, data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
 <p>These produce basic box plots showing the response variable (<code>Weight</code>) only in terms of one of the predictor variables. The values of the other predictor variable in each case aren’t taken into account. The argument <code>Weight ~ Gender</code> (or <code>Weight ~ Exercise</code>) is key here. It tells R to treat <code>Weight</code> as a function of <code>Gender</code> only (or as a function of <code>Exercise</code> only.)
 These are also very basic plots just showing the raw data and using default arguments.</p>
 <p>(Optional) Add titles, axis labels and any other information that you see fit to the plots to make them presentable.</p>
 <p>Visualise both predictor variables together:</p>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span>, data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <p>This produces box plots for all (four) combinations of the predictor variables. The key argument here is <code>Weight ~ Gender + Exercise</code>. This tells R to treat <code>Weight</code> as a function of both <code>Gender</code> and <code>Exercise.</code> The + symbol does not mean to add the numbers together, but that <code>Weight</code> should be treated as a function of <code>Gender</code> plus <code>Exercise.</code>
@@ -482,7 +482,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <p>(Optional) Add titles, axis labels and any other information that you see fit to the plot to make it presentable.</p>
 <p>In this example there are only four box plots and so it is relatively easy to compare them and look for any interactions between variables, but if there were more than two levels (groups) per categorical variable, it would become harder to spot what was going on. To compare categorical variables more easily we just plot the group means which aids our ability to look for interactions and the main effects of each predictor variable.</p>
 <p>Create an interaction plot:</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span><span class="op">)</span></code></pre></div>
@@ -494,7 +494,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 </ul>
 <p>It’s common to get the order of these arguments muddled up. Remember that it’s the <strong>third argument</strong> that defines the variable that goes on the vertical axis!</p>
 <p>The default settings aren’t too great for displaying interaction plots. Try the following for (in my opinion) a more user-friendly display.</p>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
@@ -505,7 +505,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>The choice of which categorical factor is plotted on the horizontal axis and which is plotted as different lines is completely arbitrary. Looking at the data both ways shouldn’t add anything but often you’ll find that you prefer one plot to another.</p>
 <p>Plot the interaction plot the other way round:</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">Experiment</span><span class="op">$</span><span class="va">Exercise</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Gender</span>,
                  <span class="va">Experiment</span><span class="op">$</span><span class="va">Weight</span>,
@@ -531,7 +531,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <span class="header-section-number">20.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before we can formally test these things we first need to define the model and check the underlying assumptions. We use the following code to define the model:</p>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.exercise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>,
                   data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span></code></pre></div>
@@ -544,7 +544,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <li>The fit should not depend overly much on a single point (no point should have high leverage).</li>
 </ol>
 <p>Again, we will check these assumptions visually by producing four key diagnostic plots.</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.exercise</span><span class="op">)</span></code></pre></div>
@@ -565,7 +565,7 @@ Again, this is a very basic plot that just shows the raw data and uses default a
 <p><code>Weight ~ Gender * Exercise</code></p>
 <p>Then R interprets it exactly the same way as writing all three terms.
 You can see this if you compare the output of the following two commands:</p>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">Exercise</span> <span class="op">+</span> <span class="va">Gender</span><span class="op">:</span><span class="va">Exercise</span>,
          data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -578,7 +578,7 @@ You can see this if you compare the output of the following two commands:</p>
 ## Residuals       16 225.34   14.08                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">*</span> <span class="va">Exercise</span>,
          data <span class="op">=</span> <span class="va">Experiment</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -598,7 +598,7 @@ You can see this if you compare the output of the following two commands:</p>
 <span class="header-section-number">20.7</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>The assumptions appear to be met well enough, meaning we can implement the ANOVA. We do this as follows (this is probably the easiest bit!):</p>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.exercise</span><span class="op">)</span></code></pre></div>
 </div>
@@ -652,7 +652,7 @@ Answer
 <h3>
 <span class="header-section-number">20.9.1</span> Load the data<a class="anchor" aria-label="anchor" href="#load-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
 
@@ -670,22 +670,22 @@ Answer
 <h3>
 <span class="header-section-number">20.9.2</span> Visualise the data<a class="anchor" aria-label="anchor" href="#visualise-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">concentration</span>,
         data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">cell_type</span>,
         data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-2.png" width="672"></div>
 <p>Let’s look at the interaction plots:</p>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by cell type</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">cell_number</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-17-1.png" width="672"></div>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by concentration</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">cells</span><span class="op">$</span><span class="va">cell_type</span>,
                  <span class="va">cells</span><span class="op">$</span><span class="va">concentration</span>,
@@ -698,12 +698,12 @@ Answer
 <span class="header-section-number">20.9.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-10"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we need to define the model:</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model, with interaction term</span>
 <span class="va">lm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">concentration</span> <span class="op">*</span> <span class="va">cell_type</span>,
           data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
 <p>Next, we check the assumptions:</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></code></pre></div>
@@ -717,7 +717,7 @@ Answer
 <span class="header-section-number">20.9.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s carry out a two-way ANOVA:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm1</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -757,7 +757,7 @@ Answer
 <h3>
 <span class="header-section-number">20.10.1</span> Load the data<a class="anchor" aria-label="anchor" href="#load-the-data-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-tulip.csv"</span><span class="op">)</span>
 
@@ -777,18 +777,18 @@ Answer
 <span class="header-section-number">20.10.2</span> Visualise the data<a class="anchor" aria-label="anchor" href="#visualise-the-data-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>As always we’ll visualise the data first:</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Water</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Shade</span>, data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-2.png" width="672"></div>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-22-3.png" width="672"></div>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">tulip</span><span class="op">$</span><span class="va">Shade</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Water</span>,
                  <span class="va">tulip</span><span class="op">$</span><span class="va">Blooms</span><span class="op">)</span></code></pre></div>
@@ -800,12 +800,12 @@ Answer
 <span class="header-section-number">20.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-11"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we need to define the model:</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Blooms</span> <span class="op">~</span> <span class="va">Water</span> <span class="op">*</span> <span class="va">Shade</span>,
                data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <p>Next, we check the assumptions:</p>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.tulip</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
@@ -816,7 +816,7 @@ Answer
 <span class="header-section-number">20.10.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s carry out the two-way ANOVA.</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm.tulip</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
