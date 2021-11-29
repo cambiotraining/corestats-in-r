@@ -28,26 +28,34 @@ We then read in the data and create a vector containing the data.
 
 
 ```r
+# load tidyverse
+library(tidyverse)
+
 # import the data
-fishlengthDF <- read.csv("data/raw/CS1-onesample.csv")
+fishlengthDF <- read_csv("data/raw/CS1-onesample.csv")
 
 # create a vector containing the data
-fishlength <- fishlengthDF$Guanapo
+fishlength <- fishlengthDF %>% pull()
 ```
 
-The first line reads the data into R and creates an object called a **data frame**. This data frame only contains a single column of numbers called "Guanapo" (the name of the river). In most situations, and for most statistical analyses, having our data stored in a data frame is exactly what we’d want. However, for one sample tests we actually need our data to be stored as a vector. So, the second line extracts the values that are in the Guanapo column of our `fishlengthDF` data frame and creates a simple vector of numbers that we have called `fishlength`. This step is only necessary for one-sample tests and when we look at more complex datasets, we won’t need to do this second step at all.
+The first line reads the data into R and creates an object called a **tibble**, which is a type of **data frame**. This data frame only contains a single column of numbers called "Guanapo" (the name of the river). In most situations, and for most statistical analyses, having our data stored in a data frame is exactly what we’d want. However, for one sample tests we actually need our data to be stored as a vector. So, the second line extracts the values that are in the Guanapo column of our `fishlengthDF` data frame and creates a simple vector of numbers that we have called `fishlength`. This step is only necessary for one-sample tests and when we look at more complex datasets, we won’t need to do this second step at all.
 
 ## Summarise and visualise
 Summarise the data and visualise it:
 
 
 ```r
-summary(fishlength)
+summary(fishlengthDF)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    11.2    17.5    18.8    18.3    19.7    23.3
+##     Guanapo    
+##  Min.   :11.2  
+##  1st Qu.:17.5  
+##  Median :18.8  
+##  Mean   :18.3  
+##  3rd Qu.:19.7  
+##  Max.   :23.3
 ```
 
 ```r
@@ -55,6 +63,10 @@ boxplot(fishlength, main = "Male guppies", ylab = "Length (mm)")
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-summary-1.png" width="672" />
+
+:::note
+Although we could have used `ggplot` to create this graph, it's best to be pragmatic. Some of the base R functionality is perfectly suitable for what we need - and indeed in some cases a lot easier to work with than the equivalent using `tidyverse`. So we choose what serves our analysis best, although within a given pipeline we'll stay consistent.
+:::
 
 The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant", although we may anticipate such a result.
 
@@ -107,7 +119,8 @@ Construct a Q-Q Plot of the quantiles of the data against the quantiles of a nor
 qqnorm(fishlength)
 
 # and add a comparison line
-qqline(fishlength)
+qqline(fishlength,
+       col = "red")
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-t-test-qqplot-1.png" width="672" />
@@ -304,7 +317,7 @@ There are only 8 data points, so the default histogram looks a bit rubbish / uni
 **Carry out t-test**
 
 ```r
-t.test(dissolving , mu=45 , alternative = "two.sided")
+t.test(dissolving , mu = 45 , alternative = "two.sided")
 ```
 
 ```
@@ -340,6 +353,7 @@ shapiro.test(dissolving)
 ## W = 0.98023, p-value = 0.9641
 ```
 
+
 ```r
 qqnorm(dissolving)
 qqline(dissolving)
@@ -348,7 +362,7 @@ qqline(dissolving)
 <img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 * The Shapiro test  has a p-value of 0.964 which (given that it is bigger than 0.05) suggests that the data are normal enough.
-* The qq-plot isn't perfect, with some deviation of the points away from the line but since the points aren't accelerating away from the line and, since we only have 8 points, we can claim, with some slight reservations, that the assumption of normality appears to be adequately well met.
+* The Q-Q plot isn't perfect, with some deviation of the points away from the line but since the points aren't accelerating away from the line and, since we only have 8 points, we can claim, with some slight reservations, that the assumption of normality appears to be adequately well met.
 
 Overall, we are somewhat confident that the assumption of normality is well-enough met for the t-test to be an appropriate method for analysing the data. Note the ridiculous number of caveats here and the slightly political/slippery language I'm using. This is intentional and reflects the ambiguous nature of assumption checking. This is an important approach to doing statistics that you need to embrace.
 
