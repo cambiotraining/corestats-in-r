@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 26 Linear models | Core Statistics in R</title>
+<title>Chapter 24 Linear models | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="26.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
+<meta name="description" content="24.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 26 Linear models | Core Statistics in R">
+<meta property="og:title" content="Chapter 24 Linear models | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="26.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
+<meta property="og:description" content="24.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 26 Linear models | Core Statistics in R">
-<meta name="twitter:description" content="26.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
+<meta name="twitter:title" content="Chapter 24 Linear models | Core Statistics in R">
+<meta name="twitter:description" content="24.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -345,44 +345,42 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">18</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
-<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">19</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">20</span> Two-way ANOVA</a></li>
+<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">21</span> Linear regression with grouped data</a></li>
 <li class="book-part">CoreStats 5: Multiple predictor variables</li>
-<li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
+<li><a class="" href="cs5-intro.html"><span class="header-section-number">22</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
-<li><a class="active" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
-<li><a class="" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
+<li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
+<li><a class="active" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
+<li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
 <li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">28</span> Introduction</a></li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
 <li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">29</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">30</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">31</span> Statistical reporting</a></li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -390,13 +388,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-models" class="section level1" number="26">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-models" class="section level1" number="24">
 <h1>
-<span class="header-section-number">26</span> Linear models<a class="anchor" aria-label="anchor" href="#linear-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24</span> Linear models<a class="anchor" aria-label="anchor" href="#linear-models"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-13" class="section level2" number="26.1">
+<div id="objectives-11" class="section level2" number="24.1">
 <h2>
-<span class="header-section-number">26.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-13"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-11"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -411,15 +409,15 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-10" class="section level2" number="26.2">
+<div id="purpose-and-aim-8" class="section level2" number="24.2">
 <h2>
-<span class="header-section-number">26.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>Revisiting the linear model framework and expanding to systems with three predictor variables.</p>
 </div>
-<div id="section-commands-12" class="section level2" number="26.3">
+<div id="section-commands-12" class="section level2" number="24.3">
 <h2>
-<span class="header-section-number">26.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-12"><i class="fas fa-link"></i></a>
 </h2>
 <p>Commands used in this section</p>
 <div class="inline-table"><table class="table table-sm">
@@ -439,22 +437,22 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-11" class="section level2" number="26.4">
+<div id="data-and-hypotheses-11" class="section level2" number="24.4">
 <h2>
-<span class="header-section-number">26.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-11"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-11"><i class="fas fa-link"></i></a>
 </h2>
 <p>The first section uses the following dataset:
 <code>data/raw/CS5-H2S.csv</code>. This is a dataset comprising 16 observations of three variables (one dependent and two predictor). This records the air pollution caused by H<sub>2</sub>S produced by two types of waste treatment plants. For both types of plant, we obtain eight measurements each of H<sub>2</sub>S production (ppm). We also obtain information on the daily temperature (C). The data are stacked.</p>
 </div>
-<div id="summarise-and-visualise-11" class="section level2" number="26.5">
+<div id="summarise-and-visualise-11" class="section level2" number="24.5">
 <h2>
-<span class="header-section-number">26.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-11"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-11"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s first load the data:</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS5-H2S.csv"</span><span class="op">)</span></code></pre></div>
 <p>Next, visualise the data:</p>
-<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a plot canvas without data points</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
      data <span class="op">=</span> <span class="va">airpoll</span>, type <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span>
@@ -472,12 +470,12 @@
 </ul>
 <p>It looks as though the variable <code>Plant</code> has an effect on H<sub>2</sub>S emissions (as one cloud of points is higher than the other). there is also a suggestion that temperature might affect emissions (both data sets look like the gradient of the line of best fit through their respective cloud might not be zero) and it also appears that there might be an interaction between <code>Plant</code> and <code>Temperature</code> (the gradient of the two lines of best fit don’t look like they’ll be that similar).</p>
 </div>
-<div id="implemention" class="section level2" number="26.6">
+<div id="implemention" class="section level2" number="24.6">
 <h2>
-<span class="header-section-number">26.6</span> Implemention<a class="anchor" aria-label="anchor" href="#implemention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.6</span> Implemention<a class="anchor" aria-label="anchor" href="#implemention"><i class="fas fa-link"></i></a>
 </h2>
 <p>Construct and analyse a full linear model.</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model with all terms and interactions</span>
 <span class="va">lm.full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span> <span class="op">+</span> <span class="va">Plant</span><span class="op">:</span><span class="va">Temp</span>,
               data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
@@ -540,9 +538,9 @@ PlantB = 3.4742 + 0.12693 \cdot Temp
 <p>Finally, plotting the <code>lm.full</code> model shows us the diagnostic plots:</p>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 </div>
-<div id="exploring-models" class="section level2" number="26.7">
+<div id="exploring-models" class="section level2" number="24.7">
 <h2>
-<span class="header-section-number">26.7</span> Exploring models<a class="anchor" aria-label="anchor" href="#exploring-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.7</span> Exploring models<a class="anchor" aria-label="anchor" href="#exploring-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>Rather than stop here however, we will use the concept of the linear model to its full potential and show that we can construct and analyse any possible combination of predictor variables for this dataset. Namely we will consider the following four extra models:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -573,12 +571,12 @@ PlantB = 3.4742 + 0.12693 \cdot Temp
 </tr>
 </tbody>
 </table></div>
-<div id="additive-model" class="section level3" number="26.7.1">
+<div id="additive-model" class="section level3" number="24.7.1">
 <h3>
-<span class="header-section-number">26.7.1</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.7.1</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the additive linear model.</p>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span> <span class="op">+</span> <span class="va">Temp</span>,
              data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
@@ -633,19 +631,19 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Here we can see that the temperature term is not significant, whereas the <code>Plant</code> term is very significant indeed.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 26.1  </strong></span>Check the assumptions of this additive model. Do they differ significantly from the full model?</p>
+<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 24.1  </strong></span>Check the assumptions of this additive model. Do they differ significantly from the full model?</p>
 </div>
 </div>
-<div id="revisiting-anova" class="section level3" number="26.7.2">
+<div id="revisiting-anova" class="section level3" number="24.7.2">
 <h3>
-<span class="header-section-number">26.7.2</span> Revisiting ANOVA<a class="anchor" aria-label="anchor" href="#revisiting-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.7.2</span> Revisiting ANOVA<a class="anchor" aria-label="anchor" href="#revisiting-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse only the effect of <code>Plant</code>:</p>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
         data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.Plant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Plant</span>,
                data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
@@ -683,15 +681,15 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 26.2  </strong></span>Check the assumptions of this plant only model. Do they differ significantly from the previous models?</p>
+<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 24.2  </strong></span>Check the assumptions of this plant only model. Do they differ significantly from the previous models?</p>
 </div>
 </div>
-<div id="revisiting-regression" class="section level3" number="26.7.3">
+<div id="revisiting-regression" class="section level3" number="24.7.3">
 <h3>
-<span class="header-section-number">26.7.3</span> Revisiting regression<a class="anchor" aria-label="anchor" href="#revisiting-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.7.3</span> Revisiting regression<a class="anchor" aria-label="anchor" href="#revisiting-regression"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct a simple linear regression model:</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>,
               data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
@@ -700,7 +698,7 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="va">Temp</span>, data<span class="op">=</span><span class="va">airpoll</span><span class="op">)</span>
 <span class="co"># and add a line of best fit</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">lm.Temp</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># view the model</span>
 <span class="va">lm.Temp</span>
 
@@ -734,22 +732,22 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 ## Residuals 14 17.8779  1.2770</code></pre>
 <p>Temperature clearly does not have a significant effect.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 26.3  </strong></span>Again, check the assumptions of this temperature only model. Do they differ significantly from the previous models?</p>
+<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 24.3  </strong></span>Again, check the assumptions of this temperature only model. Do they differ significantly from the previous models?</p>
 </div>
 </div>
-<div id="the-null-model" class="section level3" number="26.7.4">
+<div id="the-null-model" class="section level3" number="24.7.4">
 <h3>
-<span class="header-section-number">26.7.4</span> The null model<a class="anchor" aria-label="anchor" href="#the-null-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.7.4</span> The null model<a class="anchor" aria-label="anchor" href="#the-null-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the null model:</p>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the null model</span>
 <span class="va">lm.null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">H2S</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
 
 <span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">airpoll</span><span class="op">$</span><span class="va">H2S</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># view the model</span>
 <span class="va">lm.null</span></code></pre></div>
 <pre><code>## 
@@ -767,12 +765,12 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <p>The null model by itself is rarely analysed for its own sake but is instead used a reference point for more sophisticated model selection techniques.</p>
 </div>
 </div>
-<div id="exercise-trees" class="section level2" number="26.8">
+<div id="exercise-trees" class="section level2" number="24.8">
 <h2>
-<span class="header-section-number">26.8</span> Exercise: trees<a class="anchor" aria-label="anchor" href="#exercise-trees"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.8</span> Exercise: trees<a class="anchor" aria-label="anchor" href="#exercise-trees"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 26.4  </strong></span>Trees: an example with only continuous variables</p>
+<p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 24.4  </strong></span>Trees: an example with only continuous variables</p>
 <p>Use the internal dataset trees. This is a data frame with 31 observations of 3 continuous variables. The variables are the height <code>Height</code>, diameter <code>Girth</code> and timber volume <code>Volume</code> of 31 felled black cherry trees.</p>
 <p>Investigate the relationship between <code>Volume</code> (as a dependent variable) and <code>Height</code> and <code>Girth</code> (as predictor variables).</p>
 <ul>
@@ -796,12 +794,12 @@ H_2S_{PlantB} = 5.7 + 0.036 \cdot Temp
 <details><summary>
 Answer
 </summary><p>Let’s construct the four linear models in turn.</p>
-<div id="full-model" class="section level3" number="26.8.1">
+<div id="full-model" class="section level3" number="24.8.1">
 <h3>
-<span class="header-section-number">26.8.1</span> Full model<a class="anchor" aria-label="anchor" href="#full-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.8.1</span> Full model<a class="anchor" aria-label="anchor" href="#full-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">*</span> <span class="va">Girth</span>,
               data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -823,7 +821,7 @@ Answer
 <p>Volume = 45.81</p>
 <p>Here we note that the interaction term just requires us to multiple the three numbers together (we haven’t looked at continuous predictors before in the examples and this exercise was included as a check to see if this whole process was making sense).</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get:</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.full</span><span class="op">)</span></code></pre></div>
@@ -835,12 +833,12 @@ Answer
 <li>There are no highly influential points</li>
 </ul>
 </div>
-<div id="additive-model-1" class="section level3" number="26.8.2">
+<div id="additive-model-1" class="section level3" number="24.8.2">
 <h3>
-<span class="header-section-number">26.8.2</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.8.2</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">Girth</span>,
              data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -861,7 +859,7 @@ Answer
 <p>Volume = -57.99 + 0.34 <span class="math inline">\(\cdot\)</span> 67 + 4.71 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 58.91</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.add</span><span class="op">)</span></code></pre></div>
@@ -874,12 +872,12 @@ Answer
 <li>Point 31 is influential and if there weren’t issues with the linearity of the model I would remove this point and repeat the analysis. As it stands there isn’t much point.</li>
 </ul>
 </div>
-<div id="height-only-model" class="section level3" number="26.8.3">
+<div id="height-only-model" class="section level3" number="24.8.3">
 <h3>
-<span class="header-section-number">26.8.3</span> Height-only model<a class="anchor" aria-label="anchor" href="#height-only-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.8.3</span> Height-only model<a class="anchor" aria-label="anchor" href="#height-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span>,
               data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -900,7 +898,7 @@ Answer
 <p>Volume = -87.12 + 1.54 <span class="math inline">\(\cdot\)</span> 67</p>
 <p>Volume = 16.28</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.height</span><span class="op">)</span></code></pre></div>
@@ -912,12 +910,12 @@ Answer
 <li>And there aren’t any hugely influential points in this model</li>
 </ul>
 </div>
-<div id="girth-only-model" class="section level3" number="26.8.4">
+<div id="girth-only-model" class="section level3" number="24.8.4">
 <h3>
-<span class="header-section-number">26.8.4</span> Girth-only model<a class="anchor" aria-label="anchor" href="#girth-only-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.8.4</span> Girth-only model<a class="anchor" aria-label="anchor" href="#girth-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.girth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span>,
                data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -938,7 +936,7 @@ Answer
 <p>Volume = -36.94 + 5.07 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 64.37</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm.girth</span><span class="op">)</span></code></pre></div>
@@ -949,9 +947,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-8" class="section level2" number="26.9">
+<div id="key-points-8" class="section level2" number="24.9">
 <h2>
-<span class="header-section-number">26.9</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">24.9</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-8"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -964,35 +962,35 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></div>
-<div class="next"><a href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></div>
+<div class="prev"><a href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></div>
+<div class="next"><a href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#linear-models"><span class="header-section-number">26</span> Linear models</a></li>
-<li><a class="nav-link" href="#objectives-13"><span class="header-section-number">26.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-10"><span class="header-section-number">26.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-12"><span class="header-section-number">26.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-11"><span class="header-section-number">26.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-11"><span class="header-section-number">26.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implemention"><span class="header-section-number">26.6</span> Implemention</a></li>
+<li><a class="nav-link" href="#linear-models"><span class="header-section-number">24</span> Linear models</a></li>
+<li><a class="nav-link" href="#objectives-11"><span class="header-section-number">24.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-8"><span class="header-section-number">24.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-12"><span class="header-section-number">24.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-11"><span class="header-section-number">24.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-11"><span class="header-section-number">24.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implemention"><span class="header-section-number">24.6</span> Implemention</a></li>
 <li>
-<a class="nav-link" href="#exploring-models"><span class="header-section-number">26.7</span> Exploring models</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#additive-model"><span class="header-section-number">26.7.1</span> Additive model</a></li>
-<li><a class="nav-link" href="#revisiting-anova"><span class="header-section-number">26.7.2</span> Revisiting ANOVA</a></li>
-<li><a class="nav-link" href="#revisiting-regression"><span class="header-section-number">26.7.3</span> Revisiting regression</a></li>
-<li><a class="nav-link" href="#the-null-model"><span class="header-section-number">26.7.4</span> The null model</a></li>
+<a class="nav-link" href="#exploring-models"><span class="header-section-number">24.7</span> Exploring models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#additive-model"><span class="header-section-number">24.7.1</span> Additive model</a></li>
+<li><a class="nav-link" href="#revisiting-anova"><span class="header-section-number">24.7.2</span> Revisiting ANOVA</a></li>
+<li><a class="nav-link" href="#revisiting-regression"><span class="header-section-number">24.7.3</span> Revisiting regression</a></li>
+<li><a class="nav-link" href="#the-null-model"><span class="header-section-number">24.7.4</span> The null model</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#exercise-trees"><span class="header-section-number">26.8</span> Exercise: trees</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#full-model"><span class="header-section-number">26.8.1</span> Full model</a></li>
-<li><a class="nav-link" href="#additive-model-1"><span class="header-section-number">26.8.2</span> Additive model</a></li>
-<li><a class="nav-link" href="#height-only-model"><span class="header-section-number">26.8.3</span> Height-only model</a></li>
-<li><a class="nav-link" href="#girth-only-model"><span class="header-section-number">26.8.4</span> Girth-only model</a></li>
+<a class="nav-link" href="#exercise-trees"><span class="header-section-number">24.8</span> Exercise: trees</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#full-model"><span class="header-section-number">24.8.1</span> Full model</a></li>
+<li><a class="nav-link" href="#additive-model-1"><span class="header-section-number">24.8.2</span> Additive model</a></li>
+<li><a class="nav-link" href="#height-only-model"><span class="header-section-number">24.8.3</span> Height-only model</a></li>
+<li><a class="nav-link" href="#girth-only-model"><span class="header-section-number">24.8.4</span> Girth-only model</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points-8"><span class="header-section-number">26.9</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points-8"><span class="header-section-number">24.9</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

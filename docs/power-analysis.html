@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 30 Power analysis | Core Statistics in R</title>
+<title>Chapter 28 Power analysis | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
+<meta name="description" content="28.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 30 Power analysis | Core Statistics in R">
+<meta property="og:title" content="Chapter 28 Power analysis | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
+<meta property="og:description" content="28.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 30 Power analysis | Core Statistics in R">
-<meta name="twitter:description" content="30.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
+<meta name="twitter:title" content="Chapter 28 Power analysis | Core Statistics in R">
+<meta name="twitter:description" content="28.1 Objectives  Questions What is power analysis? How can I use power analysis to design better experiments? Objectives Be able to perform power analysis in R Understand the importance of effect...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -345,44 +345,42 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">18</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
-<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">19</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">20</span> Two-way ANOVA</a></li>
+<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">21</span> Linear regression with grouped data</a></li>
 <li class="book-part">CoreStats 5: Multiple predictor variables</li>
-<li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
+<li><a class="" href="cs5-intro.html"><span class="header-section-number">22</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
-<li><a class="" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
-<li><a class="" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
+<li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
+<li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
+<li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
 <li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">28</span> Introduction</a></li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
 <li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">29</span> Introduction</a></li>
-<li><a class="active" href="power-analysis.html"><span class="header-section-number">30</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">31</span> Statistical reporting</a></li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="active" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -390,13 +388,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="power-analysis" class="section level1" number="30">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="power-analysis" class="section level1" number="28">
 <h1>
-<span class="header-section-number">30</span> Power analysis<a class="anchor" aria-label="anchor" href="#power-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28</span> Power analysis<a class="anchor" aria-label="anchor" href="#power-analysis"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-16" class="section level2" number="30.1">
+<div id="objectives-14" class="section level2" number="28.1">
 <h2>
-<span class="header-section-number">30.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-16"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-14"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -412,9 +410,9 @@
 </ul>
 </div>
 </div>
-<div id="background-6" class="section level2" number="30.2">
+<div id="background-6" class="section level2" number="28.2">
 <h2>
-<span class="header-section-number">30.2</span> Background<a class="anchor" aria-label="anchor" href="#background-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.2</span> Background<a class="anchor" aria-label="anchor" href="#background-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>All hypothesis tests can be wrong in two ways:</p>
 <ul>
@@ -438,9 +436,9 @@
 </ul>
 <p>we can calculate the amount of data that we need to collect in our experiments. (Woohoo! it looks as if statistics will actually give us an answer at last rather than these perpetual shades-of-grey “maybes”).</p>
 <p>The reality is that most of the easily usable power analysis functions all operate under the assumption that the data that you will collect will meet all of the assumptions of your chosen statistical test perfectly. So, for example, if you want to design an experiment investigating the effectiveness of a single drug compared to a placebo (so a simple t-test) and you want to know how many patients to have in each group in order for the test to work, then the standard power analysis techniques will still assume that all of the data that you end up collecting will meet the assumptions of the t-test that you have to carry out (Sorry to have raised your hopes ever so slightly 😉).</p>
-<div id="effect-size" class="section level3" number="30.2.1">
+<div id="effect-size" class="section level3" number="28.2.1">
 <h3>
-<span class="header-section-number">30.2.1</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.2.1</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>As we shall see the commands for carrying out power analyses are very simple to implement apart from the concept of effect size. This is a tricky issue for most people to get to grips with for two reasons:</p>
 <ol style="list-style-type: decimal">
@@ -508,23 +506,23 @@
 <p>We will look at how to carry out power analyses and estimate effect sizes in this section.</p>
 </div>
 </div>
-<div id="packages" class="section level2" number="30.3">
+<div id="packages" class="section level2" number="28.3">
 <h2>
-<span class="header-section-number">30.3</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.3</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will be using the <code>pwr</code> and <code>powerAnalysis</code> packages during this section. Please install those now.</p>
 <p>You can do this by running the following code in your console:</p>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pwr"</span>, <span class="st">"powerAnalysis"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Next, load them by running:</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">powerAnalysis</span><span class="op">)</span></code></pre></div>
 <p>These packages have a lot of overlap but unfortunately neither one of them quite has all the functionality I’d like. <code>powerAnalysis</code> has more functions for explicitly calculating effect sizes from previous studies but has a smaller range of power calculation functions. <code>pwr</code> has more power functions but fewer effect size functions. However, together they do the job.</p>
 </div>
-<div id="section-commands-14" class="section level2" number="30.4">
+<div id="section-commands-14" class="section level2" number="28.4">
 <h2>
-<span class="header-section-number">30.4</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-14"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-14"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -560,18 +558,18 @@
 </tbody>
 </table></div>
 </div>
-<div id="t-tests" class="section level2" number="30.5">
+<div id="t-tests" class="section level2" number="28.5">
 <h2>
-<span class="header-section-number">30.5</span> t-tests<a class="anchor" aria-label="anchor" href="#t-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5</span> t-tests<a class="anchor" aria-label="anchor" href="#t-tests"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s assume that we want to design an experiment to determine whether there is a difference in the mean price of what male and female students pay at a cafe. How many male and female students would we need to observe in order to detect a “medium” effect size with 80% power and a significance level of 0.05?</p>
 <p>We first need to think about which test we would use to analyse the data. Here we would have two groups of continuous response. Clearly a t-test.</p>
-<div id="get-the-effect-size" class="section level3" number="30.5.1">
+<div id="get-the-effect-size" class="section level3" number="28.5.1">
 <h3>
-<span class="header-section-number">30.5.1</span> Get the effect size<a class="anchor" aria-label="anchor" href="#get-the-effect-size"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5.1</span> Get the effect size<a class="anchor" aria-label="anchor" href="#get-the-effect-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now we need to work out what a “medium” effect size would be. In the absence of any other information we appeal to Cohen’s conventional values:</p>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"t"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
@@ -594,12 +592,12 @@
 <p>The bit we want is on the bottom line; we apparently want an effect size of 0.5.
 For this sort of study effect size is measured in terms of Cohen’s d statistic. This is simply a measure of how different the means of the two groups are expressed in terms of the number of standard deviations they are apart from each other. So, in this case we’re looking to detect two means that are 0.5 standard deviations away from each other. In a minute we’ll look at what this means for real data.</p>
 </div>
-<div id="carry-out-a-power-analysis" class="section level3" number="30.5.2">
+<div id="carry-out-a-power-analysis" class="section level3" number="28.5.2">
 <h3>
-<span class="header-section-number">30.5.2</span> Carry out a power analysis<a class="anchor" aria-label="anchor" href="#carry-out-a-power-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5.2</span> Carry out a power analysis<a class="anchor" aria-label="anchor" href="#carry-out-a-power-analysis"><i class="fas fa-link"></i></a>
 </h3>
 <p>We do this as follows:</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -633,7 +631,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>If I know in advance that I can only observe 30 students per group, what is the effect size that I should be able to observe with 80% power at a 5% significance level?</p>
 </blockquote>
 <p>Let’s see how we do this:</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -649,7 +647,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>This time we want to see what the effect size is so we look at the second line and we can see that an experiment with this many people would only be expected to detect a difference in means of <code>d = 0.74</code> standard deviations. Is this good or bad? Well, it depends on the natural variation of your data; if your data is really noisy then it will have a large variation and a large standard deviation which will mean that 0.74 standard deviations might actually be quite a big difference between your groups. If on the other hand your data doesn’t vary very much, then 0.74 standard deviations might actually be a really small number and this test could pick up even quite small differences in mean.</p>
 <p>In both of the previous two examples we were a little bit context-free in terms of effect size. Let’s look at how we can use a pilot study with real data to calculate effect sizes and perform a power analysis to inform a future study.</p>
 <p>Let’s look again at the <code>fishlength</code> data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as <code>data/raw/CS6-fishlength.csv</code>.</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-fishlength.csv"</span><span class="op">)</span>
 
@@ -662,12 +660,12 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 ##  Mean   :19.46                     
 ##  3rd Qu.:20.93                     
 ##  Max.   :26.40</code></pre>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
         data <span class="op">=</span> <span class="va">fishlength</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform a t-test, assuming equal variance</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
        data <span class="op">=</span> <span class="va">fishlength</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -685,7 +683,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>From the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> command we can see that there are 39 observations for the Aripo river and only 29 observations for the Guanapo river. From the box plot we see that the groups appear to have different means and from the t-test analysis we can see that this difference is significant.</p>
 <p>Can we use this information to design a more efficient experiment? One that we would be confident was powerful enough to pick up a difference in means as big as was observed in this study but with fewer observations?</p>
 <p>Let’s first work out exactly what the effect size of this previous study really was by estimating Cohen’s d using this data.</p>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.two.html">ES.t.two</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">3.8433</span>, n1 <span class="op">=</span> <span class="fl">39</span>, n2 <span class="op">=</span> <span class="fl">29</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of independent two-sample t test 
@@ -703,7 +701,7 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <li>The rest of the output is just padding and reminds us of the conventional values of effect sizes for reference only.</li>
 </ul>
 <p>We can know actually answer our question and see how many fish we really need to catch in the future:</p>
-<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.94</span>, power <span class="op">=</span> <span class="fl">0.8</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,
            type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -720,12 +718,12 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>This approach can also be used when the pilot study showed a smaller effect size that wasn’t observed to be significant (indeed arguably, a pilot study shouldn’t really concern itself with significance but should only really be used as a way of assessing potential effect sizes which can then be used in a follow-up study).</p>
 </div>
 </div>
-<div id="exercise-one-sample" class="section level2" number="30.6">
+<div id="exercise-one-sample" class="section level2" number="28.6">
 <h2>
-<span class="header-section-number">30.6</span> Exercise: one-sample<a class="anchor" aria-label="anchor" href="#exercise-one-sample"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6</span> Exercise: one-sample<a class="anchor" aria-label="anchor" href="#exercise-one-sample"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-21" class="exercise"><strong>Exercise 30.1  </strong></span>Performing a power analysis on a one-sample data set</p>
+<p><span id="exr:unlabeled-div-21" class="exercise"><strong>Exercise 28.1  </strong></span>Performing a power analysis on a one-sample data set</p>
 <p>Load in <code>data/raw/CS6-onesample.csv</code> (this is the same data we looked at in the earlier practical containing information on fish lengths from a single river).</p>
 <ol style="list-style-type: lower-alpha">
 <li>Assume this was a pilot study and analyse the data using a one-sample t-test to see if there is any evidence that the mean length of fish differs from 19 cm.</li>
@@ -736,10 +734,10 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <details><summary>
 Answer
 </summary><p>First, read in the data:</p>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exOne</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-onesample.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s run the one-sample t-test as we did before:</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exOne</span><span class="op">$</span><span class="va">Guanapo</span>, mu <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -754,7 +752,7 @@ Answer
 ##  18.29655</code></pre>
 <p>OK, there doesn’t appear to be a statistically significant result here; the mean length of the fish doesn’t appear to be different from 19cm. From the output though we do see that the mean length of our sample of fish is 18.30 (2dp), so the sample is a little bit smaller than 19 cm.</p>
 <p>Let’s calculate the effect size using the t-statistic and the degrees of freedom from the t-test output above. This gives us the following value for the effect size in terms of the Cohen’s d metric.</p>
-<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.one.html">ES.t.one</a></span><span class="op">(</span>t <span class="op">=</span> <span class="op">-</span><span class="fl">1.4657</span>, df <span class="op">=</span> <span class="fl">28</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of one-sample t test 
@@ -768,7 +766,7 @@ Answer
 ## large effect size:  d = 0.8</code></pre>
 <p>Our effect size is 0.277 which is somewhere between a small and medium effect size. This means that this would be hard to detect with a small sample size and it’s likely that we would need more than just 29 observations to detect an effect this big.</p>
 <p>Now, let’s do the power analysis to actually calculate the sample size required:</p>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -780,7 +778,7 @@ Answer
 ##           power = 0.8
 ##     alternative = two.sided</code></pre>
 <p>We would need 105 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let’s see what would happen if we wanted to be even more stringent:</p>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2769913</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.9</span>,
            type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -795,12 +793,12 @@ Answer
 </details>
 </div>
 </div>
-<div id="exercise-two-sample-paired" class="section level2" number="30.7">
+<div id="exercise-two-sample-paired" class="section level2" number="28.7">
 <h2>
-<span class="header-section-number">30.7</span> Exercise: two-sample paired<a class="anchor" aria-label="anchor" href="#exercise-two-sample-paired"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.7</span> Exercise: two-sample paired<a class="anchor" aria-label="anchor" href="#exercise-two-sample-paired"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-22" class="exercise"><strong>Exercise 30.2  </strong></span>Power analysis on a paired two-sample data set</p>
+<p><span id="exr:unlabeled-div-22" class="exercise"><strong>Exercise 28.2  </strong></span>Power analysis on a paired two-sample data set</p>
 <p>Load in <code>data/raw/CS6-twopaired.csv</code> (again this is the same data that we used in an earlier practical and relates to cortisol levels measured on 20 participants in the morning and evening).</p>
 <ol style="list-style-type: lower-alpha">
 <li>first carry out a power analysis to work out how big of an effect size this experiment should be able to detect at a power of 0.8 and significance level of 0.05. Don’t look at the data just yet!</li>
@@ -810,10 +808,10 @@ Answer
 <details><summary>
 Answer
 </summary><p>First, read in the data:</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exTwo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-twopaired.csv"</span><span class="op">)</span></code></pre></div>
 <p>We have a paired dataset with 20 pairs of observations, what sort of effect size could we detect at a significance level of 0.05 and power of 0.8?</p>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -828,7 +826,7 @@ Answer
 ## NOTE: n is number of *pairs*</code></pre>
 <p>Remember that we get effect size measured in Cohen’s d metric. So here this experimental design would be able to detect a d value of 0.66 (2dp) which is a medium to large effect size.</p>
 <p>Now let’s look at the actual data and work out what the effect size actually is:</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">exTwo</span><span class="op">$</span><span class="va">morning</span>, <span class="va">exTwo</span><span class="op">$</span><span class="va">evening</span>, paired<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -842,7 +840,7 @@ Answer
 ## mean of the differences 
 ##                 116.085</code></pre>
 <p>Use the t-statistic to calculate the effect size:</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/powerAnalysis/man/ES.t.paired.html">ES.t.paired</a></span><span class="op">(</span>t <span class="op">=</span> <span class="fl">5.1833</span>, df <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      effect size (Cohen's d) of paired two-sample t test 
@@ -855,7 +853,7 @@ Answer
 ## medium effect size: d = 0.5
 ## large effect size:  d = 0.8</code></pre>
 <p>This (1.19) is a massive effect size. It’s quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">1.189131</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
            type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -872,15 +870,15 @@ Answer
 </details>
 </div>
 </div>
-<div id="linear-model-power-calculations" class="section level2" number="30.8">
+<div id="linear-model-power-calculations" class="section level2" number="28.8">
 <h2>
-<span class="header-section-number">30.8</span> Linear model power calculations<a class="anchor" aria-label="anchor" href="#linear-model-power-calculations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.8</span> Linear model power calculations<a class="anchor" aria-label="anchor" href="#linear-model-power-calculations"><i class="fas fa-link"></i></a>
 </h2>
 <p>Thankfully the ideas we’re already covered in the t-test section should see us in good stead going forward and I can stop writing everything out in such excruciating detail (I do have other things to do you know).</p>
 <p>For linear models we’ll just use <code><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test()</a></code> to do the power calculation and we won’t need a function for effect sizes (because it’s just based on R<sup>2</sup> and we should just be able to read that off the screen).</p>
 <p>Read in <code>data/raw/CS6-lobsters.csv</code>. This dataset was used in an earlier practical and describes the effect on lobster weight of three different food sources.</p>
 <p>Type this in:</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-lobsters.csv"</span><span class="op">)</span>
 
@@ -889,7 +887,7 @@ Answer
 
 <span class="co"># visualise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm.lob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>
 
@@ -911,7 +909,7 @@ Answer
 f^2 = \frac{R^2}{1-R^2}
 \end{equation}\]</span></p>
 <p>We find R<sup>2</sup> by looking at the <code>lm.lob</code> object:</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm.lob</span><span class="op">)</span></code></pre></div>
 <p>This should give you the following:</p>
 <pre><code>## 
@@ -955,7 +953,7 @@ Using R as a calculator we can work out the Cohen’s f<sup>2</sup> value and we
 <li>
 <code>f2</code> to represent Cohen’s f<sup>2</sup> effect size value</li>
 </ul>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">2</span>, f2 <span class="op">=</span> <span class="fl">0.219</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1020,27 +1018,27 @@ There are two questions you might now ask (if you’re still following all of th
 </tbody>
 </table></div>
 </div>
-<div id="exercise-mussel-muscles" class="section level2" number="30.9">
+<div id="exercise-mussel-muscles" class="section level2" number="28.9">
 <h2>
-<span class="header-section-number">30.9</span> Exercise: Mussel muscles<a class="anchor" aria-label="anchor" href="#exercise-mussel-muscles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.9</span> Exercise: Mussel muscles<a class="anchor" aria-label="anchor" href="#exercise-mussel-muscles"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-23" class="exercise"><strong>Exercise 30.3  </strong></span>Calculating effect size</p>
+<p><span id="exr:unlabeled-div-23" class="exercise"><strong>Exercise 28.3  </strong></span>Calculating effect size</p>
 <p>The file <code>data/raw/CS6-shelllength.csv</code> contains information from a pilot study looking at whether the standardised length of the anterior adductor muscle scar in the mussel <em>Mytilus trossulus</em> differs across five locations around the world (well it might be of interest to someone…).</p>
 <p>Find the effect size from this study and perform a power calculation (at 0.8 and 0.05 significance level) to determine how many mussel muscles need to be recorded in order to be confident that an effect really exists.</p>
 <details><summary>
 Answer
 </summary><p>Let’s load in the data:</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">musseldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-shelllength.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,
         data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
 <p>So we are effectively looking at a one-way ANOVA with five groups. This will be useful to know later.</p>
 <p>Now we fit a linear model:</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,
                 data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span>
@@ -1069,12 +1067,12 @@ Answer
 ## Multiple R-squared:  0.4559, Adjusted R-squared:  0.3918 
 ## F-statistic: 7.121 on 4 and 34 DF,  p-value: 0.0002812</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.4559 and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.4559</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.4559</span><span class="op">)</span>
 <span class="va">f2</span></code></pre></div>
 <pre><code>## [1] 0.8378974</code></pre>
 <p>Now, our model has 5 parameters (because we have 5 groups) and so the numerator degrees of freedom will be 4 <span class="math inline">\((5 - 1 = 4)\)</span>. This means that we can now carry our our power analysis:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">4</span>, f2 <span class="op">=</span> <span class="fl">0.8378974</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1089,12 +1087,12 @@ Answer
 </details>
 </div>
 </div>
-<div id="exercise-epilepsy" class="section level2" number="30.10">
+<div id="exercise-epilepsy" class="section level2" number="28.10">
 <h2>
-<span class="header-section-number">30.10</span> Exercise: epilepsy<a class="anchor" aria-label="anchor" href="#exercise-epilepsy"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.10</span> Exercise: epilepsy<a class="anchor" aria-label="anchor" href="#exercise-epilepsy"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-24" class="exercise"><strong>Exercise 30.4  </strong></span>Power and effect</p>
+<p><span id="exr:unlabeled-div-24" class="exercise"><strong>Exercise 28.4  </strong></span>Power and effect</p>
 <p>The file <code>/data/raw/CS6-epilepsy1.csv</code> contains information on the ages and rates of seizures of 236 patients undertaking a clinical trial.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Analyse the data using a linear model and calculate the effect size.</li>
@@ -1103,16 +1101,16 @@ Answer
 <details><summary>
 Answer
 </summary><p>Let’s load in the data:</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epilepsydat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS6-epilepsy1.csv"</span><span class="op">)</span></code></pre></div>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,
      data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-29-1.png" width="672"></div>
 <p>So we are effectively looking at a simple linear regression here.</p>
 <p>Now we fit a linear model:</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm.epilepsy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,
                   data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span>
@@ -1138,13 +1136,13 @@ Answer
 ## Multiple R-squared:  0.0009134,  Adjusted R-squared:  -0.003356 
 ## F-statistic: 0.2139 on 1 and 234 DF,  p-value: 0.6441</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.0009134 (which is tiny!) and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.0009134</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.0009134</span><span class="op">)</span>
 <span class="va">f2</span></code></pre></div>
 <pre><code>## [1] 0.0009142351</code></pre>
 <p>This effect size is absolutely tiny. If we really wanted to design an experiment to pick up an effect size this small then we would expect that we’ll need 1000s of participants.</p>
 <p>Now, our model has 2 parameters (an intercept and a slope) and so the numerator degrees of freedom (<code>u</code>) will be 1 (2 - 1 = 1!). This means that we can now carry our our power analysis:</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">1</span>, f2 <span class="op">=</span> <span class="fl">0.0009142351</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1159,12 +1157,12 @@ Answer
 </details>
 </div>
 </div>
-<div id="exercise-drug-versus-placebo" class="section level2" number="30.11">
+<div id="exercise-drug-versus-placebo" class="section level2" number="28.11">
 <h2>
-<span class="header-section-number">30.11</span> Exercise: drug versus placebo<a class="anchor" aria-label="anchor" href="#exercise-drug-versus-placebo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.11</span> Exercise: drug versus placebo<a class="anchor" aria-label="anchor" href="#exercise-drug-versus-placebo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-25" class="exercise"><strong>Exercise 30.5  </strong></span>Study size</p>
+<p><span id="exr:unlabeled-div-25" class="exercise"><strong>Exercise 28.5  </strong></span>Study size</p>
 <p>We wish to test the effectiveness of a new drug against a placebo. It is thought that the gender and the age of the patients may have an effect on their response.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Write down a linear model equation that might describe the relationship between these variables including all possible two-way interactions.</li>
@@ -1182,7 +1180,7 @@ Answer
 <li>The <strong>numerator degrees of freedom</strong>. This is the tricky bit. We can do this by adding up the degrees of freedom for each term separately.</li>
 </ol>
 <p>The effect size is easy to get:</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"f2"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
@@ -1209,7 +1207,7 @@ Answer
 </ul>
 <p>Rather boring that all of them were 1 to be honest. Anyway, given that the denominator degrees of freedom is just the sum of all of these, we can see that <span class="math inline">\(u = 6\)</span>.</p>
 <p>We now have all of the information to carry out the power analysis:</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">6</span>, f2 <span class="op">=</span> <span class="fl">0.15</span>,
             sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1224,9 +1222,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-10" class="section level2" number="30.12">
+<div id="key-points-10" class="section level2" number="28.12">
 <h2>
-<span class="header-section-number">30.12</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.12</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-10"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -1245,31 +1243,31 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction-5.html"><span class="header-section-number">29</span> Introduction</a></div>
-<div class="next"><a href="statistical-reporting.html"><span class="header-section-number">31</span> Statistical reporting</a></div>
+<div class="prev"><a href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></div>
+<div class="next"><a href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#power-analysis"><span class="header-section-number">30</span> Power analysis</a></li>
-<li><a class="nav-link" href="#objectives-16"><span class="header-section-number">30.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#power-analysis"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="nav-link" href="#objectives-14"><span class="header-section-number">28.1</span> Objectives</a></li>
 <li>
-<a class="nav-link" href="#background-6"><span class="header-section-number">30.2</span> Background</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#effect-size"><span class="header-section-number">30.2.1</span> Effect size</a></li></ul>
+<a class="nav-link" href="#background-6"><span class="header-section-number">28.2</span> Background</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#effect-size"><span class="header-section-number">28.2.1</span> Effect size</a></li></ul>
 </li>
-<li><a class="nav-link" href="#packages"><span class="header-section-number">30.3</span> Packages</a></li>
-<li><a class="nav-link" href="#section-commands-14"><span class="header-section-number">30.4</span> Section commands</a></li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">28.3</span> Packages</a></li>
+<li><a class="nav-link" href="#section-commands-14"><span class="header-section-number">28.4</span> Section commands</a></li>
 <li>
-<a class="nav-link" href="#t-tests"><span class="header-section-number">30.5</span> t-tests</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#get-the-effect-size"><span class="header-section-number">30.5.1</span> Get the effect size</a></li>
-<li><a class="nav-link" href="#carry-out-a-power-analysis"><span class="header-section-number">30.5.2</span> Carry out a power analysis</a></li>
+<a class="nav-link" href="#t-tests"><span class="header-section-number">28.5</span> t-tests</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#get-the-effect-size"><span class="header-section-number">28.5.1</span> Get the effect size</a></li>
+<li><a class="nav-link" href="#carry-out-a-power-analysis"><span class="header-section-number">28.5.2</span> Carry out a power analysis</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#exercise-one-sample"><span class="header-section-number">30.6</span> Exercise: one-sample</a></li>
-<li><a class="nav-link" href="#exercise-two-sample-paired"><span class="header-section-number">30.7</span> Exercise: two-sample paired</a></li>
-<li><a class="nav-link" href="#linear-model-power-calculations"><span class="header-section-number">30.8</span> Linear model power calculations</a></li>
-<li><a class="nav-link" href="#exercise-mussel-muscles"><span class="header-section-number">30.9</span> Exercise: Mussel muscles</a></li>
-<li><a class="nav-link" href="#exercise-epilepsy"><span class="header-section-number">30.10</span> Exercise: epilepsy</a></li>
-<li><a class="nav-link" href="#exercise-drug-versus-placebo"><span class="header-section-number">30.11</span> Exercise: drug versus placebo</a></li>
-<li><a class="nav-link" href="#key-points-10"><span class="header-section-number">30.12</span> Key points</a></li>
+<li><a class="nav-link" href="#exercise-one-sample"><span class="header-section-number">28.6</span> Exercise: one-sample</a></li>
+<li><a class="nav-link" href="#exercise-two-sample-paired"><span class="header-section-number">28.7</span> Exercise: two-sample paired</a></li>
+<li><a class="nav-link" href="#linear-model-power-calculations"><span class="header-section-number">28.8</span> Linear model power calculations</a></li>
+<li><a class="nav-link" href="#exercise-mussel-muscles"><span class="header-section-number">28.9</span> Exercise: Mussel muscles</a></li>
+<li><a class="nav-link" href="#exercise-epilepsy"><span class="header-section-number">28.10</span> Exercise: epilepsy</a></li>
+<li><a class="nav-link" href="#exercise-drug-versus-placebo"><span class="header-section-number">28.11</span> Exercise: drug versus placebo</a></li>
+<li><a class="nav-link" href="#key-points-10"><span class="header-section-number">28.12</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

@@ -22,7 +22,7 @@ We will use a one-sample, two-tailed t-test to see if we should reject the null 
 -	We use a **two-tailed** t-test because we want to know if our data suggest that the true (population) mean is different from 20 mm in either direction rather than just to see if it is greater than or less than 20 mm (in which case we would use a one-tailed test).
 -	We’re using a **t-test** because we don’t know any better yet and because I’m telling you to. We’ll look at what the precise assumptions/requirements need to be in a moment.
 
-Make sure you have downloaded the data (see: [Datasets](#cs1-datasets)) and placed it in the `data/raw` folder within your working directory.
+Make sure you have downloaded the data (see: [Datasets](#index-datasets)) and placed it in the `data/raw` folder within your working directory.
 
 We then read in the data and create a vector containing the data.
 
@@ -58,78 +58,13 @@ boxplot(fishlength, main = "Male guppies", ylab = "Length (mm)")
 
 The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant", although we may anticipate such a result.
 
-## Implement the test
-Perform a one-sample, two-tailed t-test:
-
-
-```r
-t.test(fishlength, mu = 20, alternative = "two.sided")
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  fishlength
-## t = -3.5492, df = 28, p-value = 0.001387
-## alternative hypothesis: true mean is not equal to 20
-## 95 percent confidence interval:
-##  17.31341 19.27969
-## sample estimates:
-## mean of x 
-##  18.29655
-```
-
--	The first argument must be a numerical vector of data values.
--	The second argument must be a number and is the mean to be tested under the null hypothesis.
--	The third argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less.` 
-
-## Interpreting the output and report results
-This is the output that you should now see in the console window:
-
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  fishlength
-## t = -3.5492, df = 28, p-value = 0.001387
-## alternative hypothesis: true mean is not equal to 20
-## 95 percent confidence interval:
-##  17.31341 19.27969
-## sample estimates:
-## mean of x 
-##  18.29655
-```
-
--	The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called
--	The 3rd line contains the three key outputs from the test:
-    *	The calculated t-value is -3.5492 (we’ll need this for reporting)
-    *	There are 28 degrees of freedom (again we’ll need this for reporting)
-    * The p-value is 0.001387. 
--	The 4th line simply states the alternative hypothesis
--	The 5th and 6th lines give the 95th confidence interval (we don’t need to know this)
--	The 7th, 8th and 9th lines give the sample mean again (18.29655).
-
-The p-value on the 3rd line is what we’re most interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.
-
-So:
-
--	a high p-value means that there is a high probability of observing a sample such as ours and the null hypothesis is probably true whereas
--	a low p-value means that there is a low probability of observing a sample such as ours and the null hypothesis is probably not true.
-
-It is important to realise that the p-value is just an indication and there is no absolute certainty here in this interpretation.
-
-People, however like more definite answers and so we pick an artificial probability threshold (called a significance level) in order to be able to say something more decisive. The standard significance level is 0.05 and since our p-value is smaller than this we choose to say that "it is very unlikely that we would have this particular sample if the null hypothesis were true". Consequently, we can reject our null hypothesis and state that:
-
-> A one-sample t-test indicated that the mean body length of male guppies ($\mu$ = 18.29mm) differs significantly from 20 mm (t = -3.55, df = 28, p = 0.0014).
-
-The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the actual mean value of our group($\mu$ = 18.29mm), the test statistic (t = -3.55), the degrees of freedom (df = 28), and the p-value (p = 0.0014). In some journals you are only required to report whether the p-value is less than the critical value (e.g. p < 0.05) but I would always recommend reporting the actual p-value obtained.
-
-Please feel free to ask a demonstrator if any aspect of this section is unclear as this does form the core of classical hypothesis testing and the logic here applies to all of the rest of the tests.
-
 ## Assumptions
-In order to use a t-test for this analysis (and for the results to be strictly valid) we have to make two assumptions:
+When it comes to one-sample tests, we have two options:
+
+a. t-test
+b. Wilcoxon signed-rank test
+
+For us to use a t-test for this analysis (and for the results to be valid) we have to make two assumptions:
 
 1.	The parent distribution from which the sample is taken is normally distributed (and as such the sample data are normally distributed themselves).
 
@@ -239,7 +174,78 @@ In terms of assessing the assumptions of a test it is always worth considering s
 
 In the `fishlength` example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be...
 
-In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the [one-sample Wilcoxon signed rank test](#cs1-onesample-wilcoxon-signed-rank).
+In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the [one-sample Wilcoxon signed-rank test](#cs1-onesample-wilcoxon-signed-rank).
+
+
+## Implement the test
+Perform a one-sample, two-tailed t-test:
+
+
+```r
+t.test(fishlength, mu = 20, alternative = "two.sided")
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  fishlength
+## t = -3.5492, df = 28, p-value = 0.001387
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  17.31341 19.27969
+## sample estimates:
+## mean of x 
+##  18.29655
+```
+
+-	The first argument must be a numerical vector of data values.
+-	The second argument must be a number and is the mean to be tested under the null hypothesis.
+-	The third argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less`. We have no prior assumptions on whether the alternative fish length would be greater or less than 20, so we choose `two.sided`.
+
+## Interpreting the output and report results
+This is the output that you should now see in the console window:
+
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  fishlength
+## t = -3.5492, df = 28, p-value = 0.001387
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  17.31341 19.27969
+## sample estimates:
+## mean of x 
+##  18.29655
+```
+
+-	The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called
+-	The 3rd line contains the three key outputs from the test:
+    *	The calculated t-value is -3.5492 (we’ll need this for reporting)
+    *	There are 28 degrees of freedom (again we’ll need this for reporting)
+    * The p-value is 0.001387. 
+-	The 4th line simply states the alternative hypothesis
+-	The 5th and 6th lines give the 95th confidence interval (we don’t need to know this)
+-	The 7th, 8th and 9th lines give the sample mean again (18.29655).
+
+The p-value on the 3rd line is what we’re most interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.
+
+So:
+
+-	a high p-value means that there is a high probability of observing a sample such as ours and the null hypothesis is probably true whereas
+-	a low p-value means that there is a low probability of observing a sample such as ours and the null hypothesis is probably not true.
+
+It is important to realise that the p-value is just an indication and there is no absolute certainty here in this interpretation.
+
+People, however like more definite answers and so we pick an artificial probability threshold (called a significance level) in order to be able to say something more decisive. The standard significance level is 0.05 and since our p-value is smaller than this we choose to say that "it is very unlikely that we would have this particular sample if the null hypothesis were true". Consequently, we can reject our null hypothesis and state that:
+
+> A one-sample t-test indicated that the mean body length of male guppies ($\mu$ = 18.29mm) differs significantly from 20 mm (t = -3.55, df = 28, p = 0.0014).
+
+The above sentence is an adequate concluding statement for this test and is what we would write in any paper or report. Note that we have included (in brackets) information on the actual mean value of our group($\mu$ = 18.29mm), the test statistic (t = -3.55), the degrees of freedom (df = 28), and the p-value (p = 0.0014). In some journals you are only required to report whether the p-value is less than the critical value (e.g. p < 0.05) but I would always recommend reporting the actual p-value obtained.
+
+Please feel free to ask a demonstrator if any aspect of this section is unclear as this does form the core of classical hypothesis testing and the logic here applies to all of the rest of the tests.
 
 ## Exercise
 :::exercise
@@ -346,7 +352,7 @@ qqline(dissolving)
 
 Overall, we are somewhat confident that the assumption of normality is well-enough met for the t-test to be an appropriate method for analysing the data. Note the ridiculous number of caveats here and the slightly political/slippery language I'm using. This is intentional and reflects the ambiguous nature of assumption checking. This is an important approach to doing statistics that you need to embrace.
 
-In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon-signed Rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don't know about the Wilcoxon test yet as you haven't done that section of the handout. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn't matter how well an assumption has been met , I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don't know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.
+In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon signed-rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don't know about the Wilcoxon test yet as you haven't done that section of the handout. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn't matter how well an assumption has been met , I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don't know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.
 
 </details>
 :::

@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 15 Kruskal-Wallis test | Core Statistics in R</title>
+<title>Chapter 13 Kruskal-Wallis test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
+<meta name="description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 15 Kruskal-Wallis test | Core Statistics in R">
+<meta property="og:title" content="Chapter 13 Kruskal-Wallis test | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
+<meta property="og:description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 15 Kruskal-Wallis test | Core Statistics in R">
-<meta name="twitter:description" content="15.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
+<meta name="twitter:title" content="Chapter 13 Kruskal-Wallis test | Core Statistics in R">
+<meta name="twitter:description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -345,44 +345,42 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="active" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
+<li><a class="active" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">18</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
-<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">19</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">20</span> Two-way ANOVA</a></li>
+<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">21</span> Linear regression with grouped data</a></li>
 <li class="book-part">CoreStats 5: Multiple predictor variables</li>
-<li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
+<li><a class="" href="cs5-intro.html"><span class="header-section-number">22</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
-<li><a class="" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
-<li><a class="" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
+<li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
+<li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
+<li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
 <li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">28</span> Introduction</a></li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
 <li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">29</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">30</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">31</span> Statistical reporting</a></li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -390,13 +388,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="kruskal-wallis-test" class="section level1" number="15">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="kruskal-wallis-test" class="section level1" number="13">
 <h1>
-<span class="header-section-number">15</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-5" class="section level2" number="15.1">
+<div id="objectives-3" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">15.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-3"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -413,15 +411,15 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-5" class="section level2" number="15.2">
+<div id="purpose-and-aim-3" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">15.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used when the assumption of normality cannot be met. In this way it is an extension of the Mann-Whitney test for two groups.</p>
 </div>
-<div id="section-commands-7" class="section level2" number="15.3">
+<div id="section-commands-7" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">15.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -441,9 +439,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-6" class="section level2" number="15.4">
+<div id="data-and-hypotheses-6" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">15.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>For example, suppose a behavioural ecologist records the rate at which <a href="https://en.wikipedia.org/wiki/Spider_monkey">spider monkeys</a> behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as <code>high</code>, <code>low</code> or <code>none.</code> We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -455,14 +453,14 @@
 <p>We will use a Kruskal-Wallis test to check this.</p>
 <p>The data are stored in the file <code>data/raw/CS2-spidermonkey.csv</code>.</p>
 <p>First we read the data in:</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-spidermonkey.csv"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="summarise-and-visualise-6" class="section level2" number="15.5">
+<div id="summarise-and-visualise-6" class="section level2" number="13.5">
 <h2>
-<span class="header-section-number">15.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-6"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># look at the data format</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <pre><code>##   aggression familiarity
@@ -472,7 +470,7 @@
 ## 4        0.8        high
 ## 5        0.3        high
 ## 6        0.5        high</code></pre>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># summarise the data</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
 <pre><code>##   familiarity aggression.Min. aggression.1st Qu. aggression.Median
@@ -483,18 +481,18 @@
 ## 1       0.3571429          0.4500000       0.8000000
 ## 2       0.6285714          0.7500000       1.2000000
 ## 3       1.2571429          1.4000000       1.6000000</code></pre>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create boxplot</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672"></div>
 <p>The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.</p>
 </div>
-<div id="implement-test-5" class="section level2" number="15.6">
+<div id="implement-test-5" class="section level2" number="13.6">
 <h2>
-<span class="header-section-number">15.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>The first argument must be in the formula format: <code>variable ~ category</code>
@@ -502,9 +500,9 @@
 <li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-5" class="section level2" number="15.7">
+<div id="interpret-output-and-report-results-5" class="section level2" number="13.7">
 <h2>
-<span class="header-section-number">15.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## 
@@ -518,9 +516,9 @@
 <p>A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).</p>
 </blockquote>
 </div>
-<div id="assumptions-7" class="section level2" number="15.8">
+<div id="assumptions-7" class="section level2" number="13.8">
 <h2>
-<span class="header-section-number">15.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>To use the Kruskal-Wallis test we have to make three assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -533,12 +531,12 @@
 <p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
 <p>Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
 <p>To install the <code>car</code> package, run the following command in your console:</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
 <p>Remember to load the library with <code><a href="https://r-forge.r-project.org/projects/car/">library(car)</a></code>.</p>
 <p>Perform Levene’s test on the data:</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 ## factor.</code></pre>
@@ -549,19 +547,19 @@
 <p>The relevant p-value is given on the 3rd line (<code>Pr(&gt;F) = 0.893</code>). As it is quite large we see that each group do appear to have the same variance.</p>
 <p>There is also a warning about <code>group coerced to factor</code>. There is no need to worry about this - Levene’s test needs to compare different groups and because <code>aggression</code> is encoded as a numeric value, it converts it to a categorical one before running the test.</p>
 </div>
-<div id="post-hoc-testing-1" class="section level2" number="15.9">
+<div id="post-hoc-testing-1" class="section level2" number="13.9">
 <h2>
-<span class="header-section-number">15.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.
 Dunn’s test is also not included in the default R packages and may require the installation of an additional package called <code>dunn.test</code>.</p>
 <p>To install the <code>dunn.test</code> package, run the following command in your console:</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dunn.test"</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>dunn.test</code> and press <kbd>Install</kbd></p>
 <p>Remember to load the library with <code><a href="https://rdrr.io/r/base/library.html">library(dunn.test)</a></code>.</p>
 <p>Test for a significant difference in group medians:</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">$</span><span class="va">aggression</span>, <span class="va">spidermonkey</span><span class="op">$</span><span class="va">familiarity</span><span class="op">)</span></code></pre></div>
 <p>Note that Dunn’s test requires us to enter two arguments, the first is the vector of values and the second is the vector containing the category labels (i.e. the factor).</p>
 <p>This will give the following output:</p>
@@ -587,12 +585,12 @@ Dunn’s test is also not included in the default R packages and may require the
 <p>You can see that the <code>dunn.test()</code> function also performs a Kruskal-Wallis test on the data, and these results are reported initially.</p>
 <p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
 </div>
-<div id="exercise-8" class="section level2" number="15.10">
+<div id="exercise-5" class="section level2" number="13.10">
 <h2>
-<span class="header-section-number">15.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-5"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 15.1  </strong></span>Kruskal-Wallis and Dunn’s test on lobster data</p>
+<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 13.1  </strong></span>Kruskal-Wallis and Dunn’s test on lobster data</p>
 <p>Perform a Kruskal-Wallis test and do a post-hoc test on the <code>lobster</code> data set.</p>
 <details><summary>
 Answer
@@ -607,7 +605,7 @@ Answer
 <p>All done previously.</p>
 <p><strong>3. Assumptions</strong></p>
 <p>From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene’s test</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## Levene's Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
@@ -615,7 +613,7 @@ Answer
 ##       15</code></pre>
 <p>Given that the p-value is so high, this again agrees with our previous assessment that the equality of variance assumption is well met. Rock on.</p>
 <p><strong>4. Kruskal-Wallis test</strong></p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
@@ -627,7 +625,7 @@ Answer
 </blockquote>
 <p><strong>5. Dunn’s test</strong></p>
 <p>Although rather unneccessary, since we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">lobsters</span><span class="op">$</span><span class="va">weight</span>, <span class="va">lobsters</span><span class="op">$</span><span class="va">diet</span>, altp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Kruskal-Wallis rank sum test
 ## 
@@ -653,9 +651,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-3" class="section level2" number="15.11">
+<div id="key-points-3" class="section level2" number="13.11">
 <h2>
-<span class="header-section-number">15.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-3"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -676,23 +674,23 @@ Answer
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></div>
-<div class="next"><a href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></div>
+<div class="prev"><a href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></div>
+<div class="next"><a href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#kruskal-wallis-test"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
-<li><a class="nav-link" href="#objectives-5"><span class="header-section-number">15.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">15.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">15.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">15.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-6"><span class="header-section-number">15.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-5"><span class="header-section-number">15.6</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">15.7</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-7"><span class="header-section-number">15.8</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing-1"><span class="header-section-number">15.9</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-8"><span class="header-section-number">15.10</span> Exercise</a></li>
-<li><a class="nav-link" href="#key-points-3"><span class="header-section-number">15.11</span> Key points</a></li>
+<li><a class="nav-link" href="#kruskal-wallis-test"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
+<li><a class="nav-link" href="#objectives-3"><span class="header-section-number">13.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-3"><span class="header-section-number">13.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">13.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-6"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test-5"><span class="header-section-number">13.6</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">13.7</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#assumptions-7"><span class="header-section-number">13.8</span> Assumptions</a></li>
+<li><a class="nav-link" href="#post-hoc-testing-1"><span class="header-section-number">13.9</span> Post-hoc testing</a></li>
+<li><a class="nav-link" href="#exercise-5"><span class="header-section-number">13.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-3"><span class="header-section-number">13.11</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
