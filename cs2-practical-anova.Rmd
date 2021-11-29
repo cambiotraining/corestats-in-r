@@ -64,45 +64,6 @@ boxplot(feeding ~ site, data = oystercatcher)
 
 Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.
 
-## Implement test
-Perform an ANOVA test on the data:
-
-```{r cs2-anova-oystercatcher, results='hide'}
-lm_oystercatcher <- lm(feeding ~ site, data = oystercatcher)
-
-anova(lm_oystercatcher)
-```
-
-The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called `lm_oystercatchers`, but which you can call what you like). The second line actually carries out the ANOVA analysis.
-
--	The first argument must be in the formula format: `response ~ predictor`
--	If the data are stored in stacked format, then the second argument must be the name of the data frame
--	The `anova()` command takes a linear model object as its main argument
-
-## Interpret output and report results
-This is the output that you should now see in the console window:
-
-```{r cs2-anova-oystercatcher-results, echo=FALSE}
-anova(lm_oystercatcher)
-```
-
--	The 1st line just tells you the that this is an ANOVA test
--	The 2nd line tells you what the response variable is (in this case feeding)
--	The 3rd, 4th and 5th lines are an ANOVA table which contain some useful values:
-    - The `Df` column contains the degrees of freedom values on each row, 2 and 12 (which we’ll need for the reporting)
-    - The `F` value column contains the F statistic, 21.508 (which again we’ll need for reporting).
-    - The p-value is 0.0001077 and is the number directly under the `Pr(>F)` on the 4th line.
-    - The other values in the table (in the `Sum Sq` and `Mean Sq`) columns are used to calculate the F statistic itself and we don’t need to know these.
--	The 6th line has some symbolic codes to represent how big (small) the p-value is; so, a p-value smaller than 0.001 would have a *** symbol next to it (which ours does). Whereas if the p-value was between 0.01 and 0.05 then there would simply be a * character next to it, etc. Thankfully we can all cope with actual numbers and don’t need a short-hand code to determine the reporting of our experiments (please tell me that’s true…!)
-
-Again, the p-value is what we’re most interested in here and shows us the probability of getting samples such as ours if the null hypothesis were actually true.
-
-Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say "that it is very unlikely that these three samples came from the same parent distribution" and as such we can reject our null hypothesis and state that:
-
-> A one-way ANOVA showed that the mean feeding rate of oystercatchers differed significantly between locations (F = 21.51, df = 2, 12, p = 0.00011).
-
-Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).
-
 ## Assumptions
 To use an ANOVA test, we have to make three assumptions:
 
@@ -112,7 +73,7 @@ To use an ANOVA test, we have to make three assumptions:
 
 In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).
 
-**1. Normality**
+### Normality
 
 Unstack the data and perform a Shapiro-Wilk test on each group separately.
 
@@ -138,15 +99,19 @@ For ANOVA however, considering each group in turn is often considered quite exce
 
 Extract the residuals from the data and check their normality:
 
-
 ```{r}
+# define the model
+lm_oystercatcher <- lm(feeding ~ site, data = oystercatcher)
+
+# extract the residuals
 resid_oyster <- residuals(lm_oystercatcher)
 
+# perform Shapiro-Wilk test on residuals
 shapiro.test(resid_oyster)
 ```
 Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)
 
-**2. Equality of Variance**
+### Equality of Variance
 
 We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).
 
@@ -158,7 +123,7 @@ bartlett.test(feeding ~ site, data = oystercatcher)
 
 Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.
 
-**3. Graphical Interpretation and Diagnostic Plots**
+### Graphical Interpretation and Diagnostic Plots
 
 R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the `lm` object we have created, then we can see some of these _diagnostic plots_.
 
@@ -197,7 +162,44 @@ At this stage, I should point out that I nearly always stick with the graphical 
 Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.
 :::
 
-## Post-hoc testing
+## Implement test
+Perform an ANOVA test on the data:
+
+```{r cs2-anova-oystercatcher, results='hide'}
+anova(lm_oystercatcher)
+```
+
+The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called `lm_oystercatchers`, but which you can call what you like). The second line actually carries out the ANOVA analysis.
+
+-	The first argument must be in the formula format: `response ~ predictor`
+-	If the data are stored in stacked format, then the second argument must be the name of the data frame
+-	The `anova()` command takes a linear model object as its main argument
+
+## Interpret output and report results
+This is the output that you should now see in the console window:
+
+```{r cs2-anova-oystercatcher-results, echo=FALSE}
+anova(lm_oystercatcher)
+```
+
+-	The 1st line just tells you the that this is an ANOVA test
+-	The 2nd line tells you what the response variable is (in this case feeding)
+-	The 3rd, 4th and 5th lines are an ANOVA table which contain some useful values:
+    - The `Df` column contains the degrees of freedom values on each row, 2 and 12 (which we’ll need for the reporting)
+    - The `F` value column contains the F statistic, 21.508 (which again we’ll need for reporting).
+    - The p-value is 0.0001077 and is the number directly under the `Pr(>F)` on the 4th line.
+    - The other values in the table (in the `Sum Sq` and `Mean Sq`) columns are used to calculate the F statistic itself and we don’t need to know these.
+-	The 6th line has some symbolic codes to represent how big (small) the p-value is; so, a p-value smaller than 0.001 would have a *** symbol next to it (which ours does). Whereas if the p-value was between 0.01 and 0.05 then there would simply be a * character next to it, etc. Thankfully we can all cope with actual numbers and don’t need a short-hand code to determine the reporting of our experiments (please tell me that’s true…!)
+
+Again, the p-value is what we’re most interested in here and shows us the probability of getting samples such as ours if the null hypothesis were actually true.
+
+Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say "that it is very unlikely that these three samples came from the same parent distribution" and as such we can reject our null hypothesis and state that:
+
+> A one-way ANOVA showed that the mean feeding rate of oystercatchers differed significantly between locations (F = 21.51, df = 2, 12, p = 0.00011).
+
+Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).
+
+## Post-hoc testing (Tukey's rank test)
 One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.
 
 ```{r cs2-tukey-example, echo=FALSE}
@@ -256,7 +258,7 @@ Tukey’s range test, when we decide to use it, requires the same three assumpti
 3.	Independence of observations
 
 
-## Exercise
+## Exercise: Lobster weight
 :::exercise
 Juvenile lobster weight
 

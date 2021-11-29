@@ -487,12 +487,43 @@
 <div class="inline-figure"><img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672"></div>
 <p>The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.</p>
 </div>
-<div id="implement-test-5" class="section level2" number="13.6">
+<div id="assumptions-7" class="section level2" number="13.6">
 <h2>
-<span class="header-section-number">13.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>To use the Kruskal-Wallis test we have to make three assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distributions from which the samples are drawn have the same shape (if they’re normal then we should use a one-way ANOVA)</li>
+<li>Each data point in the samples is independent of the others</li>
+<li>The parent distributions should have the same variance</li>
+</ol>
+<p>Independence we’ll ignore as usual. Similar shape is best assessed from the earlier visualisation of the data. That means that we only need to check equality of variance.</p>
+<p><strong>Equality of variance</strong></p>
+<p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
+<p>Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
+<p>To install the <code>car</code> package, run the following command in your console:</p>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
+<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
+<p>Remember to load the library with <code><a href="https://r-forge.r-project.org/projects/car/">library(car)</a></code>.</p>
+<p>Perform Levene’s test on the data:</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+## factor.</code></pre>
+<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  2  0.1139  0.893
+##       18</code></pre>
+<p>The relevant p-value is given on the 3rd line (<code>Pr(&gt;F) = 0.893</code>). As it is quite large we see that each group do appear to have the same variance.</p>
+<p>There is also a warning about <code>group coerced to factor</code>. There is no need to worry about this - Levene’s test needs to compare different groups and because <code>aggression</code> is encoded as a numeric value, it converts it to a categorical one before running the test.</p>
+</div>
+<div id="implement-test-5" class="section level2" number="13.7">
+<h2>
+<span class="header-section-number">13.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>The first argument must be in the formula format: <code>variable ~ category</code>
@@ -500,9 +531,9 @@
 <li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-5" class="section level2" number="13.7">
+<div id="interpret-output-and-report-results-5" class="section level2" number="13.8">
 <h2>
-<span class="header-section-number">13.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## 
@@ -516,40 +547,9 @@
 <p>A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).</p>
 </blockquote>
 </div>
-<div id="assumptions-7" class="section level2" number="13.8">
+<div id="post-hoc-testing-dunns-test" class="section level2" number="13.9">
 <h2>
-<span class="header-section-number">13.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-7"><i class="fas fa-link"></i></a>
-</h2>
-<p>To use the Kruskal-Wallis test we have to make three assumptions:</p>
-<ol style="list-style-type: decimal">
-<li>The parent distributions from which the samples are drawn have the same shape (if they’re normal then we should use a one-way ANOVA)</li>
-<li>Each data point in the samples is independent of the others</li>
-<li>The parent distributions should have the same variance</li>
-</ol>
-<p>Independence we’ll ignore as usual. Similar shape is best assessed from the earlier visualisation of the data. That means that we only need to check equality of variance.</p>
-<p><strong>Equality of variance</strong></p>
-<p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
-<p>Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
-<p>To install the <code>car</code> package, run the following command in your console:</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
-<p>Remember to load the library with <code><a href="https://r-forge.r-project.org/projects/car/">library(car)</a></code>.</p>
-<p>Perform Levene’s test on the data:</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
-<pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-## factor.</code></pre>
-<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  2  0.1139  0.893
-##       18</code></pre>
-<p>The relevant p-value is given on the 3rd line (<code>Pr(&gt;F) = 0.893</code>). As it is quite large we see that each group do appear to have the same variance.</p>
-<p>There is also a warning about <code>group coerced to factor</code>. There is no need to worry about this - Levene’s test needs to compare different groups and because <code>aggression</code> is encoded as a numeric value, it converts it to a categorical one before running the test.</p>
-</div>
-<div id="post-hoc-testing-1" class="section level2" number="13.9">
-<h2>
-<span class="header-section-number">13.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)<a class="anchor" aria-label="anchor" href="#post-hoc-testing-dunns-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.
 Dunn’s test is also not included in the default R packages and may require the installation of an additional package called <code>dunn.test</code>.</p>
@@ -560,7 +560,8 @@ Dunn’s test is also not included in the default R packages and may require the
 <p>Remember to load the library with <code><a href="https://rdrr.io/r/base/library.html">library(dunn.test)</a></code>.</p>
 <p>Test for a significant difference in group medians:</p>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">$</span><span class="va">aggression</span>, <span class="va">spidermonkey</span><span class="op">$</span><span class="va">familiarity</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">$</span><span class="va">aggression</span>, <span class="va">spidermonkey</span><span class="op">$</span><span class="va">familiarity</span>,
+          altp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Note that Dunn’s test requires us to enter two arguments, the first is the vector of values and the second is the vector containing the category labels (i.e. the factor).</p>
 <p>This will give the following output:</p>
 <pre><code>##   Kruskal-Wallis rank sum test
@@ -575,19 +576,19 @@ Dunn’s test is also not included in the default R packages and may require the
 ## Row Mean |       high        low
 ## ---------+----------------------
 ##      low |  -1.405820
-##          |     0.0799
+##          |     0.1598
 ##          |
 ##     none |  -3.655132  -2.249312
-##          |    0.0001*    0.0122*
+##          |    0.0003*    0.0245*
 ## 
 ## alpha = 0.05
-## Reject Ho if p &lt;= alpha/2</code></pre>
+## Reject Ho if p &lt;= alpha</code></pre>
 <p>You can see that the <code>dunn.test()</code> function also performs a Kruskal-Wallis test on the data, and these results are reported initially.</p>
-<p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
+<p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
 </div>
-<div id="exercise-5" class="section level2" number="13.10">
+<div id="exercise-lobster-weight-1" class="section level2" number="13.10">
 <h2>
-<span class="header-section-number">13.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.10</span> Exercise: Lobster weight<a class="anchor" aria-label="anchor" href="#exercise-lobster-weight-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 13.1  </strong></span>Kruskal-Wallis and Dunn’s test on lobster data</p>
@@ -685,11 +686,11 @@ Answer
 <li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">13.3</span> Section commands</a></li>
 <li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-6"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-5"><span class="header-section-number">13.6</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">13.7</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-7"><span class="header-section-number">13.8</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing-1"><span class="header-section-number">13.9</span> Post-hoc testing</a></li>
-<li><a class="nav-link" href="#exercise-5"><span class="header-section-number">13.10</span> Exercise</a></li>
+<li><a class="nav-link" href="#assumptions-7"><span class="header-section-number">13.6</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-test-5"><span class="header-section-number">13.7</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">13.8</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#post-hoc-testing-dunns-test"><span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)</a></li>
+<li><a class="nav-link" href="#exercise-lobster-weight-1"><span class="header-section-number">13.10</span> Exercise: Lobster weight</a></li>
 <li><a class="nav-link" href="#key-points-3"><span class="header-section-number">13.11</span> Key points</a></li>
 </ul>
 

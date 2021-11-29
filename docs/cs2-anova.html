@@ -491,15 +491,119 @@
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
 </div>
-<div id="implement-test-4" class="section level2" number="12.6">
+<div id="assumptions-6" class="section level2" number="12.6">
 <h2>
-<span class="header-section-number">12.6</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>To use an ANOVA test, we have to make three assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The parent distributions from which the samples are taken are normally distributed</li>
+<li>Each data point in the samples is independent of the others</li>
+<li>The parent distributions should have the same variance</li>
+</ol>
+<p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
+<div id="normality" class="section level3" number="12.6.1">
+<h3>
+<span class="header-section-number">12.6.1</span> Normality<a class="anchor" aria-label="anchor" href="#normality"><i class="fas fa-link"></i></a>
+</h3>
+<p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Partial</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Sheltered</span><span class="op">)</span></code></pre></div>
+<p>This is the output that you should now see in the console window:</p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Exposed
+## W = 0.9151, p-value = 0.4988</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Partial
+## W = 0.96913, p-value = 0.8697</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  uns_oyster$Sheltered
+## W = 0.88532, p-value = 0.3341</code></pre>
+<p>We can see that all three groups appear to be normally distributed which is good.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
+<p>Extract the residuals from the data and check their normality:</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># define the model</span>
+<span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
+
+<span class="co"># extract the residuals</span>
+<span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
+
+<span class="co"># perform Shapiro-Wilk test on residuals</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid_oyster
+## W = 0.93592, p-value = 0.3338</code></pre>
+<p>Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)</p>
+</div>
+<div id="equality-of-variance-1" class="section level3" number="12.6.2">
+<h3>
+<span class="header-section-number">12.6.2</span> Equality of Variance<a class="anchor" aria-label="anchor" href="#equality-of-variance-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
+<p>Perform Bartlett’s test on the data:</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  feeding by site
+## Bartlett's K-squared = 0.90632, df = 2, p-value = 0.6356</code></pre>
+<p>Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.</p>
+</div>
+<div id="graphical-interpretation-and-diagnostic-plots" class="section level3" number="12.6.3">
+<h3>
+<span class="header-section-number">12.6.3</span> Graphical Interpretation and Diagnostic Plots<a class="anchor" aria-label="anchor" href="#graphical-interpretation-and-diagnostic-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
+<p>Create the standard set diagnostic plots:</p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># create the diagnostic plots</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># and return the window back to normal</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## hat values (leverages) are all = 0.2
+##  and there are no factor predictors; no plot no. 5</code></pre>
+<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672"></div>
+<p>The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).</p>
+<ul>
+<li>In this example, two of the plots (top-left and bottom-left) show effectively the same thing: what the distribution of data between each group look like. These allow an informal check on the equality of variance assumption.
+<ul>
+<li>For the top-left graph we want all data to be symmetric about the 0 horizontal line and for the spread to be the same (please ignore the red line; it is an unhelpful addition to these graphs).</li>
+<li>For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.</li>
+</ul>
+</li>
+<li>The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).</li>
+</ul>
+<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is alright.</p>
+<div class="note">
+<p>At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.</p>
+<p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
+</div>
+</div>
+</div>
+<div id="implement-test-4" class="section level2" number="12.7">
+<h2>
+<span class="header-section-number">12.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform an ANOVA test on the data:</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
 <p>The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
 <ul>
 <li>The first argument must be in the formula format: <code>response ~ predictor</code>
@@ -508,9 +612,9 @@
 <li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-4" class="section level2" number="12.7">
+<div id="interpret-output-and-report-results-4" class="section level2" number="12.8">
 <h2>
-<span class="header-section-number">12.7</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window:</p>
 <pre><code>## Analysis of Variance Table
@@ -541,98 +645,9 @@
 </blockquote>
 <p>Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).</p>
 </div>
-<div id="assumptions-6" class="section level2" number="12.8">
+<div id="post-hoc-testing-tukeys-rank-test" class="section level2" number="12.9">
 <h2>
-<span class="header-section-number">12.8</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-6"><i class="fas fa-link"></i></a>
-</h2>
-<p>To use an ANOVA test, we have to make three assumptions:</p>
-<ol style="list-style-type: decimal">
-<li>The parent distributions from which the samples are taken are normally distributed</li>
-<li>Each data point in the samples is independent of the others</li>
-<li>The parent distributions should have the same variance</li>
-</ol>
-<p>In a similar way to the two-sample tests we will consider the normality and equality of variance assumptions both using tests and by graphical inspection (and ignore the independence assumption).</p>
-<p><strong>1. Normality</strong></p>
-<p>Unstack the data and perform a Shapiro-Wilk test on each group separately.</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uns_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">oystercatcher</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Exposed</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Partial</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_oyster</span><span class="op">$</span><span class="va">Sheltered</span><span class="op">)</span></code></pre></div>
-<p>This is the output that you should now see in the console window:</p>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Exposed
-## W = 0.9151, p-value = 0.4988</code></pre>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Partial
-## W = 0.96913, p-value = 0.8697</code></pre>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Sheltered
-## W = 0.88532, p-value = 0.3341</code></pre>
-<p>We can see that all three groups appear to be normally distributed which is good.</p>
-<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.</p>
-<p>Extract the residuals from the data and check their normality:</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">resid_oyster</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  resid_oyster
-## W = 0.93592, p-value = 0.3338</code></pre>
-<p>Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)</p>
-<p><strong>2. Equality of Variance</strong></p>
-<p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
-<p>Perform Bartlett’s test on the data:</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>, data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Bartlett test of homogeneity of variances
-## 
-## data:  feeding by site
-## Bartlett's K-squared = 0.90632, df = 2, p-value = 0.6356</code></pre>
-<p>Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.</p>
-<p><strong>3. Graphical Interpretation and Diagnostic Plots</strong></p>
-<p>R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the <code>lm</code> object we have created, then we can see some of these <em>diagnostic plots</em>.</p>
-<p>Create the standard set diagnostic plots:</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># create the diagnostic plots</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># and return the window back to normal</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## hat values (leverages) are all = 0.2
-##  and there are no factor predictors; no plot no. 5</code></pre>
-<div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672"></div>
-<p>The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).</p>
-<ul>
-<li>In this example, two of the plots (top-left and bottom-left) show effectively the same thing: what the distribution of data between each group look like. These allow an informal check on the equality of variance assumption.
-<ul>
-<li>For the top-left graph we want all data to be symmetric about the 0 horizontal line and for the spread to be the same (please ignore the red line; it is an unhelpful addition to these graphs).</li>
-<li>For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.</li>
-</ul>
-</li>
-<li>The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).</li>
-</ul>
-<p>We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is alright.</p>
-<div class="note">
-<p>At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.</p>
-<p>Whilst the formal statistical tests (like Shapiro) are technically fine, they can often create a false sense of things being absolutely right or wrong in spite of the fact that they themselves are still probabilistic statistical tests. In these exercises we are using both approaches whilst you gain confidence and experience in interpreting the graphical output and whilst it is absolutely fine to use both in the future I would strongly recommend that you don’t rely solely on the statistical tests in isolation.</p>
-</div>
-</div>
-<div id="post-hoc-testing" class="section level2" number="12.9">
-<h2>
-<span class="header-section-number">12.9</span> Post-hoc testing<a class="anchor" aria-label="anchor" href="#post-hoc-testing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.9</span> Post-hoc testing (Tukey’s rank test)<a class="anchor" aria-label="anchor" href="#post-hoc-testing-tukeys-rank-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.</p>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672"></div>
@@ -689,9 +704,9 @@ Note that the <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</
 <li>Independence of observations</li>
 </ol>
 </div>
-<div id="exercise-4" class="section level2" number="12.10">
+<div id="exercise-lobster-weight" class="section level2" number="12.10">
 <h2>
-<span class="header-section-number">12.10</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.10</span> Exercise: Lobster weight<a class="anchor" aria-label="anchor" href="#exercise-lobster-weight"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 12.1  </strong></span>Juvenile lobster weight</p>
@@ -1024,12 +1039,18 @@ Answer
 <li><a class="nav-link" href="#section-commands-6"><span class="header-section-number">12.3</span> Section commands</a></li>
 <li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">12.4</span> Data and hypotheses</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-5"><span class="header-section-number">12.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">12.6</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">12.7</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#assumptions-6"><span class="header-section-number">12.8</span> Assumptions</a></li>
-<li><a class="nav-link" href="#post-hoc-testing"><span class="header-section-number">12.9</span> Post-hoc testing</a></li>
 <li>
-<a class="nav-link" href="#exercise-4"><span class="header-section-number">12.10</span> Exercise</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#assumptions-6"><span class="header-section-number">12.6</span> Assumptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#normality"><span class="header-section-number">12.6.1</span> Normality</a></li>
+<li><a class="nav-link" href="#equality-of-variance-1"><span class="header-section-number">12.6.2</span> Equality of Variance</a></li>
+<li><a class="nav-link" href="#graphical-interpretation-and-diagnostic-plots"><span class="header-section-number">12.6.3</span> Graphical Interpretation and Diagnostic Plots</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">12.7</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-4"><span class="header-section-number">12.8</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#post-hoc-testing-tukeys-rank-test"><span class="header-section-number">12.9</span> Post-hoc testing (Tukey’s rank test)</a></li>
+<li>
+<a class="nav-link" href="#exercise-lobster-weight"><span class="header-section-number">12.10</span> Exercise: Lobster weight</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#hypotheses"><span class="header-section-number">12.10.1</span> Hypotheses</a></li>
 <li><a class="nav-link" href="#import-data-summarise-and-visualise"><span class="header-section-number">12.10.2</span> Import Data, summarise and visualise</a></li>
 <li><a class="nav-link" href="#explore-assumptions"><span class="header-section-number">12.10.3</span> Explore Assumptions</a></li>
