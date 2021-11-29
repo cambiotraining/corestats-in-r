@@ -88,35 +88,6 @@ boxplot(aggression ~ familiarity, data = spidermonkey)
 
 The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.
 
-## Implement test
-Perform a Kruskal-Wallis test on the data:
-
-
-```r
-kruskal.test(aggression ~ familiarity, data = spidermonkey)
-```
-
--	The first argument must be in the formula format: `variable ~ category`
--	If the data are stored in stacked format, then the second argument must be the name of the data frame
-
-## Interpret output and report results
-This is the output that you should now see in the console window:
-
-
-```
-## 
-## 	Kruskal-Wallis rank sum test
-## 
-## data:  aggression by familiarity
-## Kruskal-Wallis chi-squared = 13.597, df = 2, p-value = 0.001115
-```
-
-The p-value is given in the 3rd line. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.
-
-Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say "that it is very unlikely that these three samples came from the same parent distribution and as such we can reject our null hypothesis" and state that:
-
-> A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).
-
 ## Assumptions
 To use the Kruskal-Wallis test we have to make three assumptions:
 
@@ -166,7 +137,36 @@ The relevant p-value is given on the 3rd line (`Pr(>F) = 0.893`). As it is quite
 
 There is also a warning about `group coerced to factor`. There is no need to worry about this - Levene's test needs to compare different groups and because `aggression` is encoded as a numeric value, it converts it to a categorical one before running the test.
 
-## Post-hoc testing
+## Implement test
+Perform a Kruskal-Wallis test on the data:
+
+
+```r
+kruskal.test(aggression ~ familiarity, data = spidermonkey)
+```
+
+-	The first argument must be in the formula format: `variable ~ category`
+-	If the data are stored in stacked format, then the second argument must be the name of the data frame
+
+## Interpret output and report results
+This is the output that you should now see in the console window:
+
+
+```
+## 
+## 	Kruskal-Wallis rank sum test
+## 
+## data:  aggression by familiarity
+## Kruskal-Wallis chi-squared = 13.597, df = 2, p-value = 0.001115
+```
+
+The p-value is given in the 3rd line. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.
+
+Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say "that it is very unlikely that these three samples came from the same parent distribution and as such we can reject our null hypothesis" and state that:
+
+> A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).
+
+## Post-hoc testing (Dunn's test)
 The equivalent of Tukey’s range test for non-normal data is **Dunn’s test**.
 Dunn’s test is also not included in the default R packages and may require the installation of an additional package called `dunn.test`.
 
@@ -185,7 +185,8 @@ Test for a significant difference in group medians:
 
 
 ```r
-dunn.test(spidermonkey$aggression, spidermonkey$familiarity)
+dunn.test(spidermonkey$aggression, spidermonkey$familiarity,
+          altp = TRUE)
 ```
 
 Note that Dunn’s test requires us to enter two arguments, the first is the vector of values and the second is the vector containing the category labels (i.e. the factor).
@@ -206,20 +207,20 @@ This will give the following output:
 ## Row Mean |       high        low
 ## ---------+----------------------
 ##      low |  -1.405820
-##          |     0.0799
+##          |     0.1598
 ##          |
 ##     none |  -3.655132  -2.249312
-##          |    0.0001*    0.0122*
+##          |    0.0003*    0.0245*
 ## 
 ## alpha = 0.05
-## Reject Ho if p <= alpha/2
+## Reject Ho if p <= alpha
 ```
 
 You can see that the `dunn.test()` function also performs a Kruskal-Wallis test on the data, and these results are reported initially.
 
-The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.0799) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.
+The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.
 
-## Exercise
+## Exercise: Lobster weight
 :::exercise
 Kruskal-Wallis and Dunn's test on lobster data
 
