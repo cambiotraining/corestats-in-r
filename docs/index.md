@@ -43,6 +43,30 @@ To know what to do when presented with an arbitrary dataset e.g.
 5. [Multiple predictor variables](#cs5-intro) 
 6. [Power analysis](#cs6-intro)
 
+## Practicals
+
+Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to achieve.
+There may be a list of commands relevant to that section which will be displayed in boxes like this:
+
+:::note
+**Conditional  operators**
+
+To set filtering conditions, use the following _relational operators_:
+
+- `>` is greater than
+- `>=` is greater than or equal to
+- `<` is less than
+- `<=` is less than or equal to
+- `==` is equal to
+- `!=` is different from
+- `%in%` is contained in
+ 
+To combine conditions, use the following _logical operators_:
+ 
+- `&` AND
+- `|` OR
+:::
+
 ## Datasets {#index-datasets}
 
 This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder [here](data.zip) by right-clicking on the link and <kbd>Save as...</kbd>. Next unzip the file and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/raw`.

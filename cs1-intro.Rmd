@@ -18,7 +18,7 @@ By the end of this section and practical participants should be able to achieve 
 The tests covered in this practical are:
 
 1. [One-sample tests](#cs1-one-sample-tests)
-    -	[One sample t-test](#cs1-onesample-t-test)
+    -	[One sample t-test](#cs1-one-sample-t-test)
     -	[One-sample Wilcoxon signed-rank test](#cs1-onesample-wilcoxon-signed-rank)
 2. [Two-sample tests](#cs1-two-sample)
     -	[Student’s t-test](#cs1-students-t-test)
