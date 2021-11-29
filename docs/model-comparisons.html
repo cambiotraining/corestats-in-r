@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 27 Model comparisons | Core Statistics in R</title>
+<title>Chapter 25 Model comparisons | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
+<meta name="description" content="25.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 27 Model comparisons | Core Statistics in R">
+<meta property="og:title" content="Chapter 25 Model comparisons | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
+<meta property="og:description" content="25.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 27 Model comparisons | Core Statistics in R">
-<meta name="twitter:description" content="27.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
+<meta name="twitter:title" content="Chapter 25 Model comparisons | Core Statistics in R">
+<meta name="twitter:description" content="25.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -345,44 +345,42 @@
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-tests.html"><span class="header-section-number">4</span> One-sample tests</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">5</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">6</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-two-sample.html"><span class="header-section-number">7</span> Two-sample tests</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">8</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">9</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">10</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">11</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 <li class="book-part">CoreStats 2: Categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">12</span> Introduction</a></li>
+<li><a class="" href="cs2-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
 <li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">14</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">15</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">16</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">17</span> Introduction</a></li>
-<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">18</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">19</span> Linear regression</a></li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
 <li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">20</span> Introduction</a></li>
+<li><a class="" href="cs4-intro.html"><span class="header-section-number">18</span> Introduction</a></li>
 <li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">21</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">22</span> Two-way ANOVA</a></li>
-<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">23</span> Linear regression with grouped data</a></li>
+<li><a class="" href="introduction-3.html"><span class="header-section-number">19</span> Introduction</a></li>
+<li><a class="" href="two-way-anova.html"><span class="header-section-number">20</span> Two-way ANOVA</a></li>
+<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">21</span> Linear regression with grouped data</a></li>
 <li class="book-part">CoreStats 5: Multiple predictor variables</li>
-<li><a class="" href="cs5-intro.html"><span class="header-section-number">24</span> Introduction</a></li>
+<li><a class="" href="cs5-intro.html"><span class="header-section-number">22</span> Introduction</a></li>
 <li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">25</span> Introduction</a></li>
-<li><a class="" href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></li>
-<li><a class="active" href="model-comparisons.html"><span class="header-section-number">27</span> Model comparisons</a></li>
+<li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
+<li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
+<li><a class="active" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
 <li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">28</span> Introduction</a></li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
 <li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">29</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">30</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">31</span> Statistical reporting</a></li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -390,13 +388,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-comparisons" class="section level1" number="27">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-comparisons" class="section level1" number="25">
 <h1>
-<span class="header-section-number">27</span> Model comparisons<a class="anchor" aria-label="anchor" href="#model-comparisons"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25</span> Model comparisons<a class="anchor" aria-label="anchor" href="#model-comparisons"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-14" class="section level2" number="27.1">
+<div id="objectives-12" class="section level2" number="25.1">
 <h2>
-<span class="header-section-number">27.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-14"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-12"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -411,16 +409,16 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-9" class="section level2" number="27.2">
+<div id="purpose-and-aim-9" class="section level2" number="25.2">
 <h2>
-<span class="header-section-number">27.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous example we used a single dataset and fitted five linear models to it depending on which predictor variables we used. Whilst this was fun (seriously, what else would you be doing right now?) it seems that there should be a “better way.” Well, thankfully there is! In fact there a several methods that can be used to compare different models in order to help identify “the best” model. More specifically, we can determine if a full model (which uses all available predictor variables and interactions) is necessary to appropriately describe the dependent variable, or whether we can throw away some of the terms (e.g. an interaction term) because they don’t offer any useful predictive power.</p>
 <p>Here we will use the <strong>Akaike Information Criterion</strong> in order to compare different models.</p>
 </div>
-<div id="section-commands-13" class="section level2" number="27.3">
+<div id="section-commands-13" class="section level2" number="25.3">
 <h2>
-<span class="header-section-number">27.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-13"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-13"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -440,15 +438,15 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-12" class="section level2" number="27.4">
+<div id="data-and-hypotheses-12" class="section level2" number="25.4">
 <h2>
-<span class="header-section-number">27.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-12"><i class="fas fa-link"></i></a>
 </h2>
 <p>This section uses the <code>data/raw/CS5-Ladybird.csv</code> data set. This data set comprises of 20 observations of three variables (one dependent and two predictor). This records the clutch size (<code>Eggs</code>) in a species of ladybird alongside two potential predictor variables; the mass of the female (<code>Weight</code>), and the colour of the male (<code>Male</code>) which is a categorical variable.</p>
 </div>
-<div id="backwards-stepwise-elimination" class="section level2" number="27.5">
+<div id="backwards-stepwise-elimination" class="section level2" number="25.5">
 <h2>
-<span class="header-section-number">27.5</span> Backwards Stepwise Elimination<a class="anchor" aria-label="anchor" href="#backwards-stepwise-elimination"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.5</span> Backwards Stepwise Elimination<a class="anchor" aria-label="anchor" href="#backwards-stepwise-elimination"><i class="fas fa-link"></i></a>
 </h2>
 <p>First, load the data and store it in an object called <code>ladybird</code>. Then visualise the data.</p>
 <div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
@@ -474,9 +472,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">Eggs</span> <span class="op">~</span> <span class="va">Weight</span>,
        data <span class="op">=</span> <span class="va">Melanic</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-model_comparison_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
-<div id="comparing-models-with-aic-step-1" class="section level3" number="27.5.1">
+<div id="comparing-models-with-aic-step-1" class="section level3" number="25.5.1">
 <h3>
-<span class="header-section-number">27.5.1</span> Comparing models with AIC (step 1)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.5.1</span> Comparing models with AIC (step 1)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>First, we construct the full linear model:</p>
 <div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
@@ -509,9 +507,9 @@
 </ul>
 <p>This choice of language (supported vs significant) is deliberate and there are areas of statistics where AIC scores are used differently from the way we are going to use them here (ask if you want a bit of philosophical ramble from me). However, in this situation we will use the AIC scores to decide whether our reduced model is at least as good as the full model. Here since the difference in AIC scores is less than 2, we can say that dropping the interaction term has left us with a model that is both simpler (fewer terms) and as least as good (AIC score) as the full model. As such our reduced model <code>Eggs ~ Weight + Male</code> is designated our current <em>working minimal model</em>.</p>
 </div>
-<div id="comparing-models-with-aic-step-2" class="section level3" number="27.5.2">
+<div id="comparing-models-with-aic-step-2" class="section level3" number="25.5.2">
 <h3>
-<span class="header-section-number">27.5.2</span> Comparing models with AIC (step 2)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.5.2</span> Comparing models with AIC (step 2)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Next, we see which of the remaining terms can be dropped. We will look at the models where we have dropped both <code>Male</code> and <code>Weight</code> (i.e. <code>Eggs ~ Weight</code> and <code>Eggs ~ Male</code>) and compare their AIC values with the AIC of our current minimal model (<code>Eggs ~ Weight + Male</code>). If the AIC values of at least one of our new reduced models is lower (or at least no more than 2 greater) than the AIC of our current minimal model, then we can drop the relevant term and get ourselves a new minimal model. If we find ourselves in a situation where we can drop more than one term we will drop the term that gives us the model with the lowest AIC.</p>
 <p>Drop the variable <code>Weight</code> and examine the AIC:</p>
@@ -535,9 +533,9 @@
 <p>Considering both outputs together and comparing with the AIC of our current minimal model (40.4) we can see that dropping <code>Male</code> has decreased the AIC further to 38.8, whereas dropping <code>Weight</code> has actually increased the AIC to 60.0 and thus worsened the model quality.</p>
 <p>Hence we can drop <code>Male</code> and our new minimal model is <code>Eggs ~ Weight</code>.</p>
 </div>
-<div id="comparing-models-with-aic-step-3" class="section level3" number="27.5.3">
+<div id="comparing-models-with-aic-step-3" class="section level3" number="25.5.3">
 <h3>
-<span class="header-section-number">27.5.3</span> Comparing models with AIC (step 3)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.5.3</span> Comparing models with AIC (step 3)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>Our final comparison is to drop the variable <code>Weight</code> and compare this simple model with a null model (<code>Eggs ~ 1</code>), which assumes that the brood size is constant across all parameters.</p>
 <p>Drop the variable <code>Weight</code> and see if that has an effect:</p>
@@ -557,9 +555,9 @@
 <p>At this stage we can analyse the minimal linear (<code>lm.weight</code>) model using the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function, and we should consider the diagnostic plots by using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot(lm.weight)</a></code> command.</p>
 </div>
 </div>
-<div id="notes-on-backwards-stepwise-elimination" class="section level2" number="27.6">
+<div id="notes-on-backwards-stepwise-elimination" class="section level2" number="25.6">
 <h2>
-<span class="header-section-number">27.6</span> Notes on Backwards Stepwise Elimination<a class="anchor" aria-label="anchor" href="#notes-on-backwards-stepwise-elimination"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.6</span> Notes on Backwards Stepwise Elimination<a class="anchor" aria-label="anchor" href="#notes-on-backwards-stepwise-elimination"><i class="fas fa-link"></i></a>
 </h2>
 <p>This method of finding a minimal model by starting with a full model and removing variables is called backward stepwise elimination. Although regularly practised in data analysis, there is increasing criticism of this approach, with calls for it to be avoided entirely.</p>
 <p>Why have we made you work through this procedure then? Given their prevalence in academic papers, it is very useful to be aware of these procedures and to know that there are issues with them. In other situations, using AIC for model comparisons are justified and you will come across them regularly. Additionally, there may be situations where you feel there are good reasons to drop a parameter from your model – using this technique you can justify that this doesn’t affect the model fit. Taken together, using backwards stepwise elimination for model comparison is still a useful technique.</p>
@@ -597,12 +595,12 @@
 <p>Yes, I could have told you this earlier, but where’s the fun in that? (it is also useful for you to understand the steps behind the technique I suppose…)</p>
 </div>
 </div>
-<div id="exercise-bse" class="section level2" number="27.7">
+<div id="exercise-bse" class="section level2" number="25.7">
 <h2>
-<span class="header-section-number">27.7</span> Exercise: BSE<a class="anchor" aria-label="anchor" href="#exercise-bse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.7</span> Exercise: BSE<a class="anchor" aria-label="anchor" href="#exercise-bse"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-20" class="exercise"><strong>Exercise 27.1  </strong></span>BSE on <code>trees</code> and <code>airpoll</code></p>
+<p><span id="exr:unlabeled-div-20" class="exercise"><strong>Exercise 25.1  </strong></span>BSE on <code>trees</code> and <code>airpoll</code></p>
 <p>Use the internal dataset <code>trees</code> and the <code>airpoll</code> dataset from earlier.</p>
 <ul>
 <li>Perform a backwards stepwise elimination on both of these datasets and discover the minimal model using AIC.</li>
@@ -615,9 +613,9 @@
 Answer
 </summary><p>This is relatively straightforward using the <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> function.</p>
 <p>We need to first construct the full linear model and then simply pass this linear model object to the step function and R does the rest.</p>
-<div id="trees-dataset" class="section level3" number="27.7.1">
+<div id="trees-dataset" class="section level3" number="25.7.1">
 <h3>
-<span class="header-section-number">27.7.1</span> <code>trees</code> dataset<a class="anchor" aria-label="anchor" href="#trees-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.7.1</span> <code>trees</code> dataset<a class="anchor" aria-label="anchor" href="#trees-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <p>We construct a full linear model with both <code>Height</code>, <code>Girth</code> and the interaction between them and then we run the <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> function:</p>
 <div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
@@ -642,9 +640,9 @@ Answer
 ##      69.3963       -5.8558       -1.2971        0.1347</code></pre>
 <p>This BSE approach only gets as far as the first step (trying to drop the interaction term). We see immediately that dropping the interaction term makes the model worse and so the process stops. On the next line (underneath <code>Call:</code>) we see that the best model is still the full model and then we get to see the coefficients for each term.</p>
 </div>
-<div id="airpoll-dataset" class="section level3" number="27.7.2">
+<div id="airpoll-dataset" class="section level3" number="25.7.2">
 <h3>
-<span class="header-section-number">27.7.2</span> <code>airpoll</code> dataset<a class="anchor" aria-label="anchor" href="#airpoll-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.7.2</span> <code>airpoll</code> dataset<a class="anchor" aria-label="anchor" href="#airpoll-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <p>We construct a full linear model with both <code>Plant</code>, <code>Temp</code> and the interaction between them and then we run the step function:</p>
 <div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
@@ -669,9 +667,9 @@ Answer
 ##     6.20495     -2.73075     -0.05448      0.18141</code></pre>
 <p>Again, this BSE approach only gets as far as the first step (trying to drop the interaction term). We see immediately that dropping the interaction term makes the model worse and so the process stops. On the next line (underneath <code>Call:</code>) we see that the best model is still the full model and then we get to see the coefficients for each term.</p>
 </div>
-<div id="co2-dataset" class="section level3" number="27.7.3">
+<div id="co2-dataset" class="section level3" number="25.7.3">
 <h3>
-<span class="header-section-number">27.7.3</span> <code>CO2</code> dataset<a class="anchor" aria-label="anchor" href="#co2-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.7.3</span> <code>CO2</code> dataset<a class="anchor" aria-label="anchor" href="#co2-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model, ignore the Plant variable</span>
@@ -723,9 +721,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-9" class="section level2" number="27.8">
+<div id="key-points-9" class="section level2" number="25.8">
 <h2>
-<span class="header-section-number">27.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-9"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -741,32 +739,32 @@ Answer
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="linear-models.html"><span class="header-section-number">26</span> Linear models</a></div>
-<div class="next"><a href="cs6-intro.html"><span class="header-section-number">28</span> Introduction</a></div>
+<div class="prev"><a href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></div>
+<div class="next"><a href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#model-comparisons"><span class="header-section-number">27</span> Model comparisons</a></li>
-<li><a class="nav-link" href="#objectives-14"><span class="header-section-number">27.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-9"><span class="header-section-number">27.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-13"><span class="header-section-number">27.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-12"><span class="header-section-number">27.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#model-comparisons"><span class="header-section-number">25</span> Model comparisons</a></li>
+<li><a class="nav-link" href="#objectives-12"><span class="header-section-number">25.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim-9"><span class="header-section-number">25.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands-13"><span class="header-section-number">25.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-12"><span class="header-section-number">25.4</span> Data and hypotheses</a></li>
 <li>
-<a class="nav-link" href="#backwards-stepwise-elimination"><span class="header-section-number">27.5</span> Backwards Stepwise Elimination</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#comparing-models-with-aic-step-1"><span class="header-section-number">27.5.1</span> Comparing models with AIC (step 1)</a></li>
-<li><a class="nav-link" href="#comparing-models-with-aic-step-2"><span class="header-section-number">27.5.2</span> Comparing models with AIC (step 2)</a></li>
-<li><a class="nav-link" href="#comparing-models-with-aic-step-3"><span class="header-section-number">27.5.3</span> Comparing models with AIC (step 3)</a></li>
+<a class="nav-link" href="#backwards-stepwise-elimination"><span class="header-section-number">25.5</span> Backwards Stepwise Elimination</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#comparing-models-with-aic-step-1"><span class="header-section-number">25.5.1</span> Comparing models with AIC (step 1)</a></li>
+<li><a class="nav-link" href="#comparing-models-with-aic-step-2"><span class="header-section-number">25.5.2</span> Comparing models with AIC (step 2)</a></li>
+<li><a class="nav-link" href="#comparing-models-with-aic-step-3"><span class="header-section-number">25.5.3</span> Comparing models with AIC (step 3)</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#notes-on-backwards-stepwise-elimination"><span class="header-section-number">27.6</span> Notes on Backwards Stepwise Elimination</a></li>
+<li><a class="nav-link" href="#notes-on-backwards-stepwise-elimination"><span class="header-section-number">25.6</span> Notes on Backwards Stepwise Elimination</a></li>
 <li>
-<a class="nav-link" href="#exercise-bse"><span class="header-section-number">27.7</span> Exercise: BSE</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#trees-dataset"><span class="header-section-number">27.7.1</span> trees dataset</a></li>
-<li><a class="nav-link" href="#airpoll-dataset"><span class="header-section-number">27.7.2</span> airpoll dataset</a></li>
-<li><a class="nav-link" href="#co2-dataset"><span class="header-section-number">27.7.3</span> CO2 dataset</a></li>
+<a class="nav-link" href="#exercise-bse"><span class="header-section-number">25.7</span> Exercise: BSE</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#trees-dataset"><span class="header-section-number">25.7.1</span> trees dataset</a></li>
+<li><a class="nav-link" href="#airpoll-dataset"><span class="header-section-number">25.7.2</span> airpoll dataset</a></li>
+<li><a class="nav-link" href="#co2-dataset"><span class="header-section-number">25.7.3</span> CO2 dataset</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#key-points-9"><span class="header-section-number">27.8</span> Key points</a></li>
+<li><a class="nav-link" href="#key-points-9"><span class="header-section-number">25.8</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

@@ -1,7 +1,7 @@
 --- 
 title: "Core Statistics in R"
 author: "Matt Castle and Martin van Rongen"
-date: "2021-11-25"
+date: "2021-11-29"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -42,6 +42,30 @@ To know what to do when presented with an arbitrary dataset e.g.
 4. [Two predictor variables](#cs4-intro)
 5. [Multiple predictor variables](#cs5-intro) 
 6. [Power analysis](#cs6-intro)
+
+## Practicals
+
+Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to achieve.
+There may be a list of commands relevant to that section which will be displayed in boxes like this:
+
+:::note
+**Conditional  operators**
+
+To set filtering conditions, use the following _relational operators_:
+
+- `>` is greater than
+- `>=` is greater than or equal to
+- `<` is less than
+- `<=` is less than or equal to
+- `==` is equal to
+- `!=` is different from
+- `%in%` is contained in
+ 
+To combine conditions, use the following _logical operators_:
+ 
+- `&` AND
+- `|` OR
+:::
 
 ## Datasets {#index-datasets}
 
