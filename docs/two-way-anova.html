@@ -633,7 +633,7 @@ You can see this if you compare the output of the following two commands:</p>
 </h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-13" class="exercise"><strong>Exercise 20.1  </strong></span>Cell growth</p>
-<p>These <code>data/examples/cs4-cells.csv</code> data are from a fictional experiment that involves looking at the effect of different concentrations of a substance on the growth rate of two different cell types (all annoyingly vague I know – suggestions for context are welcome here!). There are two cell types and three concentrations.</p>
+<p>These <code>data/raw/CS4-cells.csv</code> data are from a fictional experiment that involves looking at the effect of different concentrations of a substance on the growth rate of two different cell types (all annoyingly vague I know – suggestions for context are welcome here!). There are two cell types and three concentrations.</p>
 <p>For each cell type we have a <em>control</em> experiment in which no substance is added (i.e. concentration is <code>none</code>); a <code>low</code> concentration of substance and a <code>high</code> concentration of substance. The cells are called <code>A</code> and <code>B</code>.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.</p>
 <p>For each cell type we have a <em>control</em> experiment in which no substance is added (i.e. concentration is <code>none</code>); a <code>low</code> concentration of substance and a <code>high</code> concentration of substance. The cells are called <code>A</code> and <code>B</code>.
@@ -654,7 +654,7 @@ Answer
 </h3>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs4-cells.csv"</span><span class="op">)</span>
+<span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS4-cells.csv"</span><span class="op">)</span>
 
 <span class="co"># let's have a peek at the data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></code></pre></div>

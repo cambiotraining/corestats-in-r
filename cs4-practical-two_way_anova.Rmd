@@ -221,7 +221,7 @@ We would report this as follows:
 :::exercise
 Cell growth
 
-These `data/examples/cs4-cells.csv` data are from a fictional experiment that involves looking at the effect of different concentrations of a substance on the growth rate of two different cell types (all annoyingly vague I know – suggestions for context are welcome here!). There are two cell types and three concentrations.
+These `data/raw/CS4-cells.csv` data are from a fictional experiment that involves looking at the effect of different concentrations of a substance on the growth rate of two different cell types (all annoyingly vague I know – suggestions for context are welcome here!). There are two cell types and three concentrations.
 
 For each cell type we have a _control_ experiment in which no substance is added (i.e. concentration is `none`); a `low` concentration of substance and a `high` concentration of substance. The cells are called `A` and `B`.
 For each combination of cell type and substance concentration we add the substance to an individual cell in a petri dish and after 8 hours, we count the number of cells in the dish (Again this may well be biologically weird/impossible – suggestions are welcome). Each experiment is repeated three times.
@@ -243,7 +243,7 @@ Questions to answer:
 
 ```{r, warning=FALSE, message=FALSE}
 # read in the data
-cells <- read.csv("data/examples/cs4-cells.csv")
+cells <- read.csv("data/raw/CS4-cells.csv")
 
 # let's have a peek at the data
 head(cells)

@@ -644,7 +644,7 @@ The diagnostic plots here look rather similar to the ones we generated for the a
 ## Key points
 
 :::keypoints
-- Point 1
-- Point 2
-- Point 3
+* We can define a linear model with `lm()`, adding extra variables
+* Using the coefficients of the model we can construct the linear model equation
+* The underlying assumptions of a linear model with three predictor variables are the same as those of a two-way ANOVA
 :::
