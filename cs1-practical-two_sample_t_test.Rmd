@@ -35,23 +35,24 @@ The data are stored in stacked format in the file `data/raw/CS1-twosample.csv`.
 
 Read this into R:
 
-```{r cs1-twosample-data}
-rivers <- read.csv("data/raw/CS1-twosample.csv")
+```{r cs1-twosample-data, message=FALSE, warning=FALSE}
+rivers <- read_csv("data/raw/CS1-twosample.csv")
 ```
 
 ## Summarise and visualise {#cs1-students-sumvisual}
 Let's summarise the data...
 
 ```{r cs1-twosample-rivers-summary}
-aggregate(length ~ river, data = rivers, summary)
+rivers %>% 
+  summary()
 ```
 
 and visualise it:
 
 ```{r cs1-twosample-rivers-boxplot}
-boxplot(length ~ river, data = rivers,
-        main = "Male guppies",
-        ylab = "Length (mm)")
+rivers %>% 
+  ggplot(aes(x = river, y = length)) +
+  geom_boxplot()
 ```
 
 The boxplot does appear to suggest that the two samples have different means, and moreover that the guppies in Guanapo may be smaller than the guppies in Aripo. It isn’t immediately obvious that the two populations don’t have equal variances though, so we plough on.
@@ -70,22 +71,14 @@ The second point we can do nothing about unless we know how the data were collec
 The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
 This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.
 
-So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately. Before we can do that, we need to convert the data to an unstacked format:
+So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately. Before we can do that, we need to do a little bit of data wrangling.
+
+* we load the `broom` package (comes installed with `tidyverse`) to access the `tidy()` function. This is a very handy function that converts the output of different types of objects into a tidy format.
 
 ```{r cs1-twosample-unstack, results='hide'}
-# create a new object that contains the unstacked data
-uns_rivers <- unstack(rivers)
-
-# have a look at the data
-uns_rivers
-```
-
-Now we can perform the Shapiro-Wilk test:
-
-```{r cs1-twosample-shapiro}
-shapiro.test(uns_rivers$Aripo)
-
-shapiro.test(uns_rivers$Guanapo)
+rivers %>% 
+  group_by(river) %>% 
+  shapiro_test(length)
 ```
 
 We can see that whilst the Guanapo data is probably normally distributed (p = 0.1764 > 0.05), the Aripo data is unlikely to be normally distributed (p = 0.02802 < 0.05). Remember that the p-value gives the probability of observing each sample if the parent population is actually normally distributed.
@@ -101,12 +94,13 @@ Create the Q-Q plots for the two samples and discuss with your neighbour what yo
 <details><summary>Answer</summary>
 
 ```{r cs1-twosample-qqplot}
-par(mfrow=c(1,2))
-qqnorm(uns_rivers$Aripo, main = "Aripo")
-qqline(uns_rivers$Aripo, col = "red")
 
-qqnorm(uns_rivers$Guanapo, main = "Guanapo")
-qqline(uns_rivers$Guanapo, col = "red")
+rivers %>% 
+  group_by(river) %>%
+  ggplot(aes(sample = length)) +
+  stat_qq() +
+  stat_qq_line(colour = "red") +
+  facet_wrap(facets = vars(river))
 ```
 
 The Q-Q plots mirror what we found with the Shapiro-Wilk tests: the data for Aripo are pretty normally distributed, whereas the assumption of normality for the Guanapo data is less certain.

@@ -1,10 +1,13 @@
+```{r, echo=FALSE}
+source(file = "setup.R")
+```
 
 ```{r, echo=FALSE}
 # required data from t-test section
-fishlengthDF <- read.csv("data/raw/CS1-onesample.csv")
+fishlengthDF <- read_csv("data/raw/CS1-onesample.csv")
 
 # create a vector containing the data
-fishlength <- fishlengthDF$Guanapo
+fishlength <- fishlengthDF %>% pull()
 
 dissolving<-c(42.7 , 43.4 , 44.6 , 45.1 , 45.6 , 45.9 , 46.8 , 47.6)
 ```

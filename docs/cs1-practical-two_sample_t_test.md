@@ -35,7 +35,7 @@ Read this into R:
 
 
 ```r
-rivers <- read.csv("data/raw/CS1-twosample.csv")
+rivers <- read_csv("data/raw/CS1-twosample.csv")
 ```
 
 ## Summarise and visualise {#cs1-students-sumvisual}
@@ -43,25 +43,27 @@ Let's summarise the data...
 
 
 ```r
-aggregate(length ~ river, data = rivers, summary)
+rivers %>% 
+  summary()
 ```
 
 ```
-##     river length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
-## 1   Aripo    17.50000       19.10000      20.10000    20.33077       21.30000
-## 2 Guanapo    11.20000       17.50000      18.80000    18.29655       19.70000
-##   length.Max.
-## 1    26.40000
-## 2    23.30000
+##      length         river          
+##  Min.   :11.20   Length:68         
+##  1st Qu.:18.40   Class :character  
+##  Median :19.30   Mode  :character  
+##  Mean   :19.46                     
+##  3rd Qu.:20.93                     
+##  Max.   :26.40
 ```
 
 and visualise it:
 
 
 ```r
-boxplot(length ~ river, data = rivers,
-        main = "Male guppies",
-        ylab = "Length (mm)")
+rivers %>% 
+  ggplot(aes(x = river, y = length)) +
+  geom_boxplot()
 ```
 
 <img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-rivers-boxplot-1.png" width="672" />
@@ -82,42 +84,15 @@ The second point we can do nothing about unless we know how the data were collec
 The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
 This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.
 
-So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately. Before we can do that, we need to convert the data to an unstacked format:
+So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately. Before we can do that, we need to do a little bit of data wrangling.
+
+* we load the `broom` package (comes installed with `tidyverse`) to access the `tidy()` function. This is a very handy function that converts the output of different types of objects into a tidy format.
 
 
 ```r
-# create a new object that contains the unstacked data
-uns_rivers <- unstack(rivers)
-
-# have a look at the data
-uns_rivers
-```
-
-Now we can perform the Shapiro-Wilk test:
-
-
-```r
-shapiro.test(uns_rivers$Aripo)
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  uns_rivers$Aripo
-## W = 0.93596, p-value = 0.02802
-```
-
-```r
-shapiro.test(uns_rivers$Guanapo)
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  uns_rivers$Guanapo
-## W = 0.94938, p-value = 0.1764
+rivers %>% 
+  group_by(river) %>% 
+  shapiro_test(length)
 ```
 
 We can see that whilst the Guanapo data is probably normally distributed (p = 0.1764 > 0.05), the Aripo data is unlikely to be normally distributed (p = 0.02802 < 0.05). Remember that the p-value gives the probability of observing each sample if the parent population is actually normally distributed.
@@ -134,12 +109,12 @@ Create the Q-Q plots for the two samples and discuss with your neighbour what yo
 
 
 ```r
-par(mfrow=c(1,2))
-qqnorm(uns_rivers$Aripo, main = "Aripo")
-qqline(uns_rivers$Aripo, col = "red")
-
-qqnorm(uns_rivers$Guanapo, main = "Guanapo")
-qqline(uns_rivers$Guanapo, col = "red")
+rivers %>% 
+  group_by(river) %>%
+  ggplot(aes(sample = length)) +
+  stat_qq() +
+  stat_qq_line(colour = "red") +
+  facet_wrap(facets = vars(river))
 ```
 
 <img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-1.png" width="672" />

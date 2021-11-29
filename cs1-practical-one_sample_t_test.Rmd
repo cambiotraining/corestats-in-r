@@ -1,3 +1,7 @@
+```{r, echo=FALSE}
+source(file = "setup.R")
+```
+
 # One-sample t-test {#cs1-one-sample-t-test}
 
 ## Section commands
@@ -24,20 +28,24 @@ We will use a one-sample, two-tailed t-test to see if we should reject the null 
 
 Make sure you have downloaded the data (see: [Datasets](#index-datasets)) and placed it in the `data/raw` folder within your working directory.
 
+First we load the relevant libraries:
+
+```{r warning=FALSE, message=FALSE}
+# load tidyverse
+library(tidyverse)
+library(rstatix)
+```
+
 We then read in the data and create a vector containing the data.
 
 ```{r cs1-one-sample-read-data, message=FALSE, warning=FALSE}
-# load tidyverse
-library(tidyverse)
-
 # import the data
-fishlengthDF <- read_csv("data/raw/CS1-onesample.csv")
+fishlengthDF <- read_csv("data/tidy/CS1-onesample.csv")
 
-# create a vector containing the data
-fishlength <- fishlengthDF %>% pull()
+fishlengthDF
 ```
 
-The first line reads the data into R and creates an object called a **tibble**, which is a type of **data frame**. This data frame only contains a single column of numbers called "Guanapo" (the name of the river). In most situations, and for most statistical analyses, having our data stored in a data frame is exactly what we’d want. However, for one sample tests we actually need our data to be stored as a vector. So, the second line extracts the values that are in the Guanapo column of our `fishlengthDF` data frame and creates a simple vector of numbers that we have called `fishlength`. This step is only necessary for one-sample tests and when we look at more complex datasets, we won’t need to do this second step at all.
+The first line reads the data into R and creates an object called a **tibble**, which is a type of **data frame**. This data frame contains 3 columns: a unique `id`, `river` encoding the river and `length` with the measured guppy length.
 
 ## Summarise and visualise
 Summarise the data and visualise it:
@@ -45,14 +53,12 @@ Summarise the data and visualise it:
 ```{r cs1-one-sample-summary}
 summary(fishlengthDF)
 
-boxplot(fishlength, main = "Male guppies", ylab = "Length (mm)")
+fishlengthDF %>% 
+  ggplot(aes(x = river, y = length)) +
+  geom_boxplot()
 ```
 
-:::note
-Although we could have used `ggplot` to create this graph, it's best to be pragmatic. Some of the base R functionality is perfectly suitable for what we need - and indeed in some cases a lot easier to work with than the equivalent using `tidyverse`. So we choose what serves our analysis best, although within a given pipeline we'll stay consistent.
-:::
-
-The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (`r round(mean(fishlength), digits = 1)` and `r round(median(fishlength), digits = 1)` respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant", although we may anticipate such a result.
+The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (`r fishlengthDF %>% summarise(mean = mean(length)) %>% pull() %>% round(digits = 1)` and `r fishlengthDF %>% summarise(median = median(length)) %>% pull() %>% round(digits = 1)` respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be "statistically significant", although we may anticipate such a result.
 
 ## Assumptions
 When it comes to one-sample tests, we have two options:
@@ -82,7 +88,9 @@ In increasing order of rigour, we have
 Plot a histogram of the data, which gives:
 
 ```{r cs1-one-sample-t-test-histogram}
-hist(fishlength, breaks = 15)
+fishlengthDF %>% 
+  ggplot(aes(x = length)) +
+  geom_histogram(bins = 15)
 ```
 
 The distribution appears to be uni-modal and symmetric, and so it isn’t obviously non-normal. However, there are a lot of distributions that have these simple properties but which aren’t normal, so this isn’t exactly rigorous. Thankfully there are other, more rigorous tests.
@@ -95,12 +103,12 @@ Q-Q plot is the short for quantile-quantile plot. This **diagnostic** plot (as i
 Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:
 
 ```{r cs1-one-sample-t-test-qqplot}
-# plot the Q-Q plot
-qqnorm(fishlength)
-
-# and add a comparison line
-qqline(fishlength,
-       col = "red")
+# pipe the data to ggplot()
+# then construct a Q-Q plot
+fishlengthDF %>%
+  ggplot(aes(sample = length)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
 What is important to know is that if the data were normally distributed then all of the points should lie on (or close to) the diagonal line in this graph.
@@ -162,13 +170,13 @@ This is one of a number of formal statistical test that assess whether a given s
 Perform a Shapiro-Wilk test on the data:
 
 ```{r cs1-one-sample-shapiro-test}
-shapiro.test(fishlength)
+fishlengthDF %>% 
+  shapiro_test(length)
 ```
 
--	The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called
--	The 3rd line contains the two key outputs from the test:
-    -	The calculated w-value is 0.9494 (we don’t need to know this)
-    -	The p-value is 0.1764 
+*	`variable` indicated the variable that was used to perform the test on
+* `statistic` gives the calculated W-value (`r fishlengthDF %>% shapiro_test(length) %>% select(statistic) %>% pull()`)
+* `p` gives the calculated p-value (`r fishlengthDF %>% shapiro_test(length) %>% select(p) %>% pull()`)
 
 As the p-value is bigger than 0.05 (say) then we can say that there is insufficient evidence to reject the null hypothesis that the sample came from a normal distribution.
 
@@ -179,7 +187,7 @@ It is important to recognise that the Shapiro-Wilk test is not without limitatio
 In terms of assessing the assumptions of a test it is always worth considering several methods, both graphical and analytic, and not just relying on a single method.
 :::
 
-In the `fishlength` example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be...
+In the `fishlengthDF` example, the graphical Q-Q plot analysis was not especially conclusive as there was some suggestion of snaking in the plots, but the Shapiro-Wilk test gave a non-significant p-value (0.1764). Putting these two together, along with the original histogram and the recognition that there were only 30 data points in the dataset I personally would be happy that the assumptions of the t-test were met well enough to trust the result of the t-test, but you may not be...
 
 In which case we would consider an alternative test that has less stringent assumptions (but is less powerful): the [one-sample Wilcoxon signed-rank test](#cs1-onesample-wilcoxon-signed-rank).
 
@@ -187,31 +195,34 @@ In which case we would consider an alternative test that has less stringent assu
 ## Implement the test
 Perform a one-sample, two-tailed t-test:
 
-```{r cs1-one-sample-t-test}
-t.test(fishlength, mu = 20, alternative = "two.sided")
+```{r cs1-one-sample-t-test, results='hide'}
+fishlengthDF %>% 
+  t_test(length ~ 1,
+         mu = 20,
+         alternative = "two.sided")
 ```
 
--	The first argument must be a numerical vector of data values.
--	The second argument must be a number and is the mean to be tested under the null hypothesis.
--	The third argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less`. We have no prior assumptions on whether the alternative fish length would be greater or less than 20, so we choose `two.sided`.
+The `t_test()` function requires three arguments:
+
+1. the `formula`, here we give it `length ~ 1` to indicate it is a one-sample test on `length`
+2. the `mu` is the mean to be tested under the null hypothesis, here it is 20
+3. the `alternative` argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less`. We have no prior assumptions on whether the alternative fish length would be greater or less than 20, so we choose `two.sided`.
 
 ## Interpreting the output and report results
 This is the output that you should now see in the console window:
 
 ```{r cs1-one-sample-t-test-result, echo=FALSE}
-t.test(fishlength, mu = 20, alternative = "two.sided")
+fishlengthDF %>% 
+  t_test(length ~ 1,
+         mu = 20,
+         alternative = "two.sided")
 ```
 
--	The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called
--	The 3rd line contains the three key outputs from the test:
-    *	The calculated t-value is -3.5492 (we’ll need this for reporting)
-    *	There are 28 degrees of freedom (again we’ll need this for reporting)
-    * The p-value is 0.001387. 
--	The 4th line simply states the alternative hypothesis
--	The 5th and 6th lines give the 95th confidence interval (we don’t need to know this)
--	The 7th, 8th and 9th lines give the sample mean again (18.29655).
+* the `statistic` column gives us the t-statistic of -3.5492 (we’ll need this for reporting)
+* the `df` column tells us there are 28 degrees of freedom (again we’ll need this for reporting)
+* the `p` column gives us the p-value of 0.00139
 
-The p-value on the 3rd line is what we’re most interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.
+The p-value is what we're mostly interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.
 
 So:
 
