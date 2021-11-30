@@ -7,10 +7,10 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`t.test()`| Performs a one-sample t-test, Student's t-test and Welch's t-test in later sections.|
-|`qqnorm()`| Plots a Q-Q plot for comparison with a normal distribution.|
-|`qqline()`| Adds a comparison line to the Q-Q plot.|
-|`shapiro.test()`| Performs a Shapiro-Wilk test for normality.|
+|`t_test()`| Performs a one-sample t-test, Student's t-test and Welch's t-test in later sections.|
+|`stat_qq()`| Plots a Q-Q plot for comparison with a normal distribution.|
+|`stat_qqline()`| Adds a comparison line to the Q-Q plot.|
+|`shapiro_test()`| Performs a Shapiro-Wilk test for normality.|
 
 ## Data and hypotheses
 For example, suppose we measure the body lengths of male guppies (in mm) collected from the Guanapo River in Trinidad. We want to test whether the data support the hypothesis that the mean body is actually 20 mm. We form the following null and alternative hypotheses:
@@ -32,6 +32,8 @@ First we load the relevant libraries:
 ```r
 # load tidyverse
 library(tidyverse)
+
+# load rstatix, a tidyverse-friendly stats package
 library(rstatix)
 ```
 
@@ -271,104 +273,145 @@ The following data are the dissolving times (in seconds) of a drug in agitated g
 
 Do these results provide any evidence to suggest that dissolving time for this drug is different from 45 seconds?
 
-1. Write down the null and alternative hypotheses.
-2. Summarise and visualise the data and perform an appropriate one-sample t-test.
+1. Create a [tidy](#cs1-tidy-data) data frame and save it in `.csv` format
+2. Write down the null and alternative hypotheses.
+3. Summarise and visualise the data and perform an appropriate one-sample t-test.
     - What can you say about the dissolving time? (what sentence would you use to report this)
-3. Check the assumptions for the test.
+4. Check the assumptions for the test.
     - Was the test valid?
 
 <details><summary>Answer</summary>
 
-**Hypotheses**
+### Hypotheses
 
 $H_0$ : mean $=$ 45s
 
 $H_1$ : mean $\neq$ 45s
 
-**Create data, summarise and visualise**
+### Data, summarise & visualise
+
+We can create a data frame in Excel and save it as an `.csv` file, for example as `CS1-gastric_juices.csv`. It contains two columns, an `id` column and a `dissolving_time` column with the measured values.
+
 
 ```r
-dissolving<-c(42.7 , 43.4 , 44.6 , 45.1 , 45.6 , 45.9 , 46.8 , 47.6)
+# load the data
+dissolving <- read_csv("data/tidy/CS1-gastric_juices.csv")
+
+# have a look at the data
+dissolving
+```
+
+```
+## # A tibble: 8 × 2
+##      id dissolving_time
+##   <dbl>           <dbl>
+## 1     1            42.7
+## 2     2            43.4
+## 3     3            44.6
+## 4     4            45.1
+## 5     5            45.6
+## 6     6            45.9
+## 7     7            46.8
+## 8     8            47.6
+```
+
+```r
+# summarise the data
 summary(dissolving)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   42.70   44.30   45.35   45.21   46.12   47.60
+##        id       dissolving_time
+##  Min.   :1.00   Min.   :42.70  
+##  1st Qu.:2.75   1st Qu.:44.30  
+##  Median :4.50   Median :45.35  
+##  Mean   :4.50   Mean   :45.21  
+##  3rd Qu.:6.25   3rd Qu.:46.12  
+##  Max.   :8.00   Max.   :47.60
 ```
+We can look at the histogram and boxplot of the data:
 
 
 ```r
-hist(dissolving)
+# create a histogram
+dissolving %>% 
+  ggplot(aes(x = dissolving_time)) +
+  geom_histogram(bins = 4)
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ```r
-boxplot(dissolving)
+# create a boxplot
+dissolving %>% 
+  ggplot(aes(y = dissolving_time)) +
+  geom_boxplot()
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-4-2.png" width="672" />
 
-There are only 8 data points, so the default histogram looks a bit rubbish / uninformative. Thankfully the box-plot is a bit more useful here. We can see:
+There are only 8 data points, so the histogram is rather uninformative. We even had to reduce the number of bins to get any meaningful visualisation. Thankfully the boxplot is a bit more useful here. We can see:
 
 1. There don't appear to be any major errors in data entry and there aren't any huge outliers
 2. The median value in the box-plot (the thick black line) is pretty close to 45 and so I wouldn't be surprised if the mean of the data isn't significantly different from 45. We can confirm that by looking at the mean and median values that we calculated using the summary command from earlier.
 3. The data appear to be symmetric, and so whilst we can't tell if they're normal they're a least not massively skewed.
 
-**Carry out t-test**
-
-```r
-t.test(dissolving , mu = 45 , alternative = "two.sided")
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  dissolving
-## t = 0.36647, df = 7, p-value = 0.7248
-## alternative hypothesis: true mean is not equal to 45
-## 95 percent confidence interval:
-##  43.84137 46.58363
-## sample estimates:
-## mean of x 
-##   45.2125
-```
-
-A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),
-
-**Explore Assumptions**
+### Assumptions
 
 Normality:
 
 
 ```r
-shapiro.test(dissolving)
+# perform Shapiro-Wilk test
+dissolving %>% 
+  shapiro_test(dissolving_time)
 ```
 
 ```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  dissolving
-## W = 0.98023, p-value = 0.9641
+## # A tibble: 1 × 3
+##   variable        statistic     p
+##   <chr>               <dbl> <dbl>
+## 1 dissolving_time     0.980 0.964
 ```
 
 
 ```r
-qqnorm(dissolving)
-qqline(dissolving)
+# create a Q-Q plot
+dissolving %>% 
+  ggplot(aes(sample = dissolving_time)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
-<img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 * The Shapiro test  has a p-value of 0.964 which (given that it is bigger than 0.05) suggests that the data are normal enough.
 * The Q-Q plot isn't perfect, with some deviation of the points away from the line but since the points aren't accelerating away from the line and, since we only have 8 points, we can claim, with some slight reservations, that the assumption of normality appears to be adequately well met.
 
 Overall, we are somewhat confident that the assumption of normality is well-enough met for the t-test to be an appropriate method for analysing the data. Note the ridiculous number of caveats here and the slightly political/slippery language I'm using. This is intentional and reflects the ambiguous nature of assumption checking. This is an important approach to doing statistics that you need to embrace.
 
-In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon signed-rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don't know about the Wilcoxon test yet as you haven't done that section of the handout. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn't matter how well an assumption has been met , I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don't know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.
+In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon signed-rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don't know about the Wilcoxon test yet as you haven't done that section of the materials. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn't matter how well an assumption has been met, I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don't know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.
 
+### Implement test
+
+
+```r
+# perform one-sample t-test
+dissolving %>% 
+  t_test(dissolving_time ~ 1,
+         mu = 45,
+         alternative = "two.sided")
+```
+
+```
+## # A tibble: 1 × 7
+##   .y.             group1 group2         n statistic    df     p
+## * <chr>           <chr>  <chr>      <int>     <dbl> <dbl> <dbl>
+## 1 dissolving_time 1      null model     8     0.366     7 0.725
+```
+
+> A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725)
+
+And that, is that.
 </details>
 :::

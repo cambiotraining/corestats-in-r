@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 4 One-sample t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="4.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<meta name="description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 4 One-sample t-test | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="4.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<meta property="og:description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 One-sample t-test | Core Statistics in R">
-<meta name="twitter:description" content="4.1 Section commands New commands used in this section: Function Description t.test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. qqnorm() Plots a Q-Q plot...">
+<meta name="twitter:description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -347,10 +346,6 @@
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="active" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
 <li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 </ul>
 
         <div class="book-extra">
@@ -378,19 +373,19 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code></td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code></td>
 <td align="left">Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections.</td>
 </tr>
 <tr class="even">
-<td align="left"><code><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm()</a></code></td>
+<td align="left"><code>stat_qq()</code></td>
 <td align="left">Plots a Q-Q plot for comparison with a normal distribution.</td>
 </tr>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/qqnorm.html">qqline()</a></code></td>
+<td align="left"><code>stat_qqline()</code></td>
 <td align="left">Adds a comparison line to the Q-Q plot.</td>
 </tr>
 <tr class="even">
-<td align="left"><code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code></td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test()</a></code></td>
 <td align="left">Performs a Shapiro-Wilk test for normality.</td>
 </tr>
 </tbody>
@@ -418,6 +413,8 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load tidyverse</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="co"># load rstatix, a tidyverse-friendly stats package</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></code></pre></div>
 <p>We then read in the data and create a vector containing the data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -621,6 +618,7 @@ There are three ways of checking for normality:</p>
 <p><code>42.7, 43.4, 44.6, 45.1, 45.6, 45.9, 46.8, 47.6</code></p>
 <p>Do these results provide any evidence to suggest that dissolving time for this drug is different from 45 seconds?</p>
 <ol style="list-style-type: decimal">
+<li>Create a <a href="introduction.html#cs1-tidy-data">tidy</a> data frame and save it in <code>.csv</code> format</li>
 <li>Write down the null and alternative hypotheses.</li>
 <li>Summarise and visualise the data and perform an appropriate one-sample t-test.
 <ul>
@@ -635,71 +633,115 @@ There are three ways of checking for normality:</p>
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>Hypotheses</strong></p>
+</summary><div id="hypotheses" class="section level3" number="4.7.1">
+<h3>
+<span class="header-section-number">4.7.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses"><i class="fas fa-link"></i></a>
+</h3>
 <p><span class="math inline">\(H_0\)</span> : mean <span class="math inline">\(=\)</span> 45s</p>
 <p><span class="math inline">\(H_1\)</span> : mean <span class="math inline">\(\neq\)</span> 45s</p>
-<p><strong>Create data, summarise and visualise</strong></p>
+</div>
+<div id="data-summarise-visualise" class="section level3" number="4.7.2">
+<h3>
+<span class="header-section-number">4.7.2</span> Data, summarise &amp; visualise<a class="anchor" aria-label="anchor" href="#data-summarise-visualise"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can create a data frame in Excel and save it as an <code>.csv</code> file, for example as <code>CS1-gastric_juices.csv</code>. It contains two columns, an <code>id</code> column and a <code>dissolving_time</code> column with the measured values.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dissolving</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42.7</span> , <span class="fl">43.4</span> , <span class="fl">44.6</span> , <span class="fl">45.1</span> , <span class="fl">45.6</span> , <span class="fl">45.9</span> , <span class="fl">46.8</span> , <span class="fl">47.6</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   42.70   44.30   45.35   45.21   46.12   47.60</code></pre>
+<code class="sourceCode R"><span class="co"># load the data</span>
+<span class="va">dissolving</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-gastric_juices.csv"</span><span class="op">)</span>
+
+<span class="co"># have a look at the data</span>
+<span class="va">dissolving</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 2
+##      id dissolving_time
+##   &lt;dbl&gt;           &lt;dbl&gt;
+## 1     1            42.7
+## 2     2            43.4
+## 3     3            44.6
+## 4     4            45.1
+## 5     5            45.6
+## 6     6            45.9
+## 7     7            46.8
+## 8     8            47.6</code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># summarise the data</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<pre><code>##        id       dissolving_time
+##  Min.   :1.00   Min.   :42.70  
+##  1st Qu.:2.75   1st Qu.:44.30  
+##  Median :4.50   Median :45.35  
+##  Mean   :4.50   Mean   :45.21  
+##  3rd Qu.:6.25   3rd Qu.:46.12  
+##  Max.   :8.00   Max.   :47.60</code></pre>
+<p>We can look at the histogram and boxplot of the data:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a histogram</span>
+<span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">dissolving_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a boxplot</span>
+<span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">dissolving_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
-<p>There are only 8 data points, so the default histogram looks a bit rubbish / uninformative. Thankfully the box-plot is a bit more useful here. We can see:</p>
+<p>There are only 8 data points, so the histogram is rather uninformative. We even had to reduce the number of bins to get any meaningful visualisation. Thankfully the boxplot is a bit more useful here. We can see:</p>
 <ol style="list-style-type: decimal">
 <li>There don’t appear to be any major errors in data entry and there aren’t any huge outliers</li>
 <li>The median value in the box-plot (the thick black line) is pretty close to 45 and so I wouldn’t be surprised if the mean of the data isn’t significantly different from 45. We can confirm that by looking at the mean and median values that we calculated using the summary command from earlier.</li>
 <li>The data appear to be symmetric, and so whilst we can’t tell if they’re normal they’re a least not massively skewed.</li>
 </ol>
-<p><strong>Carry out t-test</strong></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu <span class="op">=</span> <span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  dissolving
-## t = 0.36647, df = 7, p-value = 0.7248
-## alternative hypothesis: true mean is not equal to 45
-## 95 percent confidence interval:
-##  43.84137 46.58363
-## sample estimates:
-## mean of x 
-##   45.2125</code></pre>
-<p>A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725),</p>
-<p><strong>Explore Assumptions</strong></p>
+</div>
+<div id="assumptions-1" class="section level3" number="4.7.3">
+<h3>
+<span class="header-section-number">4.7.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>Normality:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  dissolving
-## W = 0.98023, p-value = 0.9641</code></pre>
+<code class="sourceCode R"><span class="co"># perform Shapiro-Wilk test</span>
+<span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">dissolving_time</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   variable        statistic     p
+##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1 dissolving_time     0.980 0.964</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">dissolving</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<code class="sourceCode R"><span class="co"># create a Q-Q plot</span>
+<span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">dissolving_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <ul>
 <li>The Shapiro test has a p-value of 0.964 which (given that it is bigger than 0.05) suggests that the data are normal enough.</li>
 <li>The Q-Q plot isn’t perfect, with some deviation of the points away from the line but since the points aren’t accelerating away from the line and, since we only have 8 points, we can claim, with some slight reservations, that the assumption of normality appears to be adequately well met.</li>
 </ul>
 <p>Overall, we are somewhat confident that the assumption of normality is well-enough met for the t-test to be an appropriate method for analysing the data. Note the ridiculous number of caveats here and the slightly political/slippery language I’m using. This is intentional and reflects the ambiguous nature of assumption checking. This is an important approach to doing statistics that you need to embrace.</p>
-<p>In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon signed-rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don’t know about the Wilcoxon test yet as you haven’t done that section of the handout. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn’t matter how well an assumption has been met , I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don’t know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.</p>
+<p>In reality, if I found myself in this situation I would also try doing a non-parametric test on the data (Wilcoxon signed-rank test) and see whether I get the same conclusion about whether the median dissolving time differs from 45s. Technically, you don’t know about the Wilcoxon test yet as you haven’t done that section of the materials. Anyway, if I get the same conclusion then my confidence in the result of the test goes up considerably; it doesn’t matter how well an assumption has been met, I get the same result. If on the other hand I get a completely different conclusion from carrying out the non-parametric test then all bets are off; I now have very little confidence in my test result as I don’t know which one to believe (in the case that the assumptions of the test are a bit unclear). In this example a Wilcoxon test also gives us a non-significant result and so all is good.</p>
+</div>
+<div id="implement-test" class="section level3" number="4.7.4">
+<h3>
+<span class="header-section-number">4.7.4</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># perform one-sample t-test</span>
+<span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>,
+         mu <span class="op">=</span> <span class="fl">45</span>,
+         alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##   .y.             group1 group2         n statistic    df     p
+## * &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 dissolving_time 1      null model     8     0.366     7 0.725</code></pre>
+<blockquote>
+<p>A one-sample t-test indicated that the mean dissolving time of the drug is not significantly different from 45s (t=0.366 , df=7 , p=0.725)</p>
+</blockquote>
+And that, is that.
+
+</div>
 </details>
 </div>
 
-<pre><code>## Rows: 29 Columns: 1</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: ","
-## dbl (1): Guanapo</code></pre>
-<pre><code>## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
   <div class="chapter-nav">
@@ -722,7 +764,14 @@ Answer
 </li>
 <li><a class="nav-link" href="#implement-the-test"><span class="header-section-number">4.5</span> Implement the test</a></li>
 <li><a class="nav-link" href="#interpreting-the-output-and-report-results"><span class="header-section-number">4.6</span> Interpreting the output and report results</a></li>
-<li><a class="nav-link" href="#exercise"><span class="header-section-number">4.7</span> Exercise</a></li>
+<li>
+<a class="nav-link" href="#exercise"><span class="header-section-number">4.7</span> Exercise</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses"><span class="header-section-number">4.7.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#data-summarise-visualise"><span class="header-section-number">4.7.2</span> Data, summarise &amp; visualise</a></li>
+<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">4.7.3</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-test"><span class="header-section-number">4.7.4</span> Implement test</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

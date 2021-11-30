@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -347,10 +346,6 @@
 <li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
 <li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
 <li><a class="active" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 </ul>
 
         <div class="book-extra">
@@ -369,20 +364,16 @@
 </h2>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="50%">
-<col width="50%">
-</colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
 <th align="left">Description</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code></td>
-<td align="left">Performs a one-sample wilcoxon signed-rank test, Wilcoxon test and Mann-Whitney test in later sections.</td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test()</a></code></td>
+<td align="left">Performs one and two sample Wilcoxon tests.</td>
 </tr></tbody>
 </table></div>
-<p>Again, we use the <code>fishlength</code> dataset. The one-sample Wilcoxon signed-rank test allows to see if the <em>median</em> body length is different from a specified value. Here we want to test whether the data support the hypothesis that the median body is actually 20 mm. The following null and alternative hypotheses are very similar to those used for the one sample t-test:</p>
+<p>Again, we use the <code>fishlengthDF</code> dataset. The one-sample Wilcoxon signed-rank test allows to see if the <em>median</em> body length is different from a specified value. Here we want to test whether the data support the hypothesis that the median body is actually 20 mm. The following null and alternative hypotheses are very similar to those used for the one sample t-test:</p>
 <ul>
 <li>
 <span class="math inline">\(H_0\)</span>: The median body length is equal to 20 mm (<span class="math inline">\(\mu =\)</span> 20).</li>
@@ -397,9 +388,9 @@
 </h2>
 <p>We did this before in the previous section, nothing really should have changed between now and then (if it has then you’re not off to a good start on this practical!)</p>
 </div>
-<div id="assumptions-1" class="section level2" number="5.3">
+<div id="assumptions-2" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">5.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>In order to use a one-sample Wilcoxon rank-sum test for this analysis (and for the results to be strictly valid) we have to make two assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -408,11 +399,17 @@
 </ol>
 <p>Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.</p>
 <p>Plot a histogram and a boxplot of the data:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">fishlength</span>, breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a histogram</span>
+<span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fishlength</span><span class="op">)</span></code></pre></div>
-<p>You get the following plots:</p>
+<span class="co"># create boxplot</span>
+<span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>You get the following plots (we’ll learn how to create panels like this later!):</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_wilcoxon_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
 <p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
 </div>
@@ -421,39 +418,32 @@
 <span class="header-section-number">5.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">fishlength</span>, mu <span class="op">=</span> <span class="fl">20</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,
+              mu <span class="op">=</span> <span class="fl">20</span>,
+              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
 <p>The syntax is identical to the one-sample t-test we carried out earlier.</p>
-<ul>
-<li>The first argument must be a numerical vector of data values.</li>
-<li>The second argument must be a number and is the median to be tested under the null hypothesis.</li>
-<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less.</code>
+<ol style="list-style-type: decimal">
+<li>the <code>formula</code>, here we give it <code>length ~ 1</code> to indicate it is a one-sample test on <code>length</code>
 </li>
-</ul>
+<li>the <code>mu</code> is the median to be tested under the null hypothesis, here it is 20</li>
+<li>the <code>alternative</code> argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>. We have no prior assumptions on whether the alternative median fish length would be greater or less than 20, so we choose <code>two.sided</code>.</li>
+</ol>
 </div>
 <div id="interpreting-the-output-and-report-results-1" class="section level2" number="5.5">
 <h2>
 <span class="header-section-number">5.5</span> Interpreting the output and report results<a class="anchor" aria-label="anchor" href="#interpreting-the-output-and-report-results-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window</p>
-<pre><code>## Warning in wilcox.test.default(fishlength, mu = 20, alternative = "two.sided"):
-## cannot compute exact p-value with ties</code></pre>
-<pre><code>## 
-##  Wilcoxon signed rank test with continuity correction
-## 
-## data:  fishlength
-## V = 67.5, p-value = 0.001222
-## alternative hypothesis: true location is not equal to 20</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   .y.    group1 group2         n statistic       p
+## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 length 1      null model    29      67.5 0.00122</code></pre>
 <ul>
-<li>The first two lines give a warning (not an error) message regarding the implementation of this test. This can be safely ignored in this case as the p-value is so small, but essentially, it’s letting you know that some of the data values are identical to each other. This is not supposed to happen as we should be dealing with continuous data for this test, but in practice it’s not something that we need to worry ourselves with.</li>
-<li>The 3rd line gives the name of the test and the 4th line reminds you what the dataset was called</li>
-<li>The 5th line contains the two key outputs from the test:
-<ul>
-<li>The calculated statistic is 67.5 (we’ll need this for reporting)</li>
-<li>The p-value is 0.001222.</li>
-</ul>
-</li>
-<li>The 6th line simply states the alternative hypothesis</li>
+<li>the <code>statistic</code> column gives us the t-statistic of 67.5 (we’ll need this for reporting)</li>
+<li>the <code>n</code> column gives us the sample size of 29</li>
+<li>the <code>p</code> column gives us the p-value of 0.00122</li>
 </ul>
 <p>Again, the p-value is what we’re most interested in. It gives the probability of us getting a sample such as ours if the null hypothesis were actually true.
 So, in this case since our p-value is less than 0.05 we can reject our null hypothesis and state that:</p>
@@ -475,28 +465,48 @@ So, in this case since our p-value is less than 0.05 we can reject our null hypo
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>Hypotheses</strong></p>
+</summary><div id="hypotheses-1" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-1"><i class="fas fa-link"></i></a>
+</h3>
 <p><span class="math inline">\(H_0\)</span> : median <span class="math inline">\(=\)</span> 45s</p>
 <p><span class="math inline">\(H_1\)</span> : median <span class="math inline">\(\neq\)</span> 45s</p>
-<p><strong>Assumptions</strong></p>
+</div>
+<div id="assumptions-3" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-3"><i class="fas fa-link"></i></a>
+</h3>
 <p>From the box-plot from the previous exercise we already know that the data are symmetric enough for the test to be valid.</p>
-<p><strong>Wilcoxon signed-rank test</strong></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">dissolving</span> , mu<span class="op">=</span><span class="fl">45</span> , alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Wilcoxon signed rank exact test
-## 
-## data:  dissolving
-## V = 22, p-value = 0.6406
-## alternative hypothesis: true location is not equal to 45</code></pre>
+</div>
+<div id="wilcoxon-signed-rank-test" class="section level3" number="5.6.3">
+<h3>
+<span class="header-section-number">5.6.3</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#wilcoxon-signed-rank-test"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>,
+              mu <span class="op">=</span> <span class="fl">45</span>,
+              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 6
+##   .y.             group1 group2         n statistic     p
+## * &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 dissolving_time 1      null model     8        22 0.641</code></pre>
+<blockquote>
 <p>A one-sample Wilcoxon-signed rank test indicated that the median dissolving time of the drug is not significantly different from 45 s (V=22, n=8 , p=0.64)</p>
-<p><strong>Discussion</strong></p>
+</blockquote>
+</div>
+<div id="discussion" class="section level3" number="5.6.4">
+<h3>
+<span class="header-section-number">5.6.4</span> Discussion<a class="anchor" aria-label="anchor" href="#discussion"><i class="fas fa-link"></i></a>
+</h3>
 <p>In terms of choosing between the two test we can see that both meet their respective assumptions and so both tests are valid. In this case both tests also agree in terms of their conclusions i.e. that the average dissolving time (either mean or median) doesn’t differ significantly from the proposed value of 45 s.</p>
 <ul>
 <li>So one answer would be that it doesn’t matter which test you use.</li>
-<li>Another answer would be that you should pick the test that measures the quantity you’re interested in i.e. if you care about medians then use the Wilcoxon test, whereas if you care about means then use the t-test.</li>
+<li>Another answer would be that you should pick the test that measures the quantity you’re interested in <em>i.e.</em> if you care about medians then use the Wilcoxon test, whereas if you care about means then use the t-test.</li>
 <li>A final answer would be that, since both test are valid we would prefer to use the test with greater <strong>power</strong>. t-tests always have more power than Wilcoxon tests (as long as they’re valid) and so we could report that one. (We’ll talk about this in the last session but power is effectively the capacity of a test to detect a significant difference - so more power is better).</li>
-</ul></details>
+</ul>
+</div>
+</details>
 </div>
 </div>
 <div id="key-points" class="section level2" number="5.7">
@@ -506,12 +516,12 @@ Answer
 <div class="keypoints">
 <ul>
 <li>One-sample tests are used when you have a single sample of continuous data</li>
-<li>We can summarise the data using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and visualise with <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code>
+<li>We can summarise the data using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and visualise with <code>geom_boxplot()</code>
 </li>
 <li>The t-test assumes that the data are normally distributed and independent of each other</li>
 <li>The Wilcoxon signed-rank test does not assume a normal distribution, but does require independent samples</li>
-<li>The <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> compares if the <em>mean</em> of the parent distribution differs from a hypothesised value, whereas <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> compares the <em>median</em>.</li>
-<li>A good way of assessing assumptions is to visually check by looking at the distribution with <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> and quantile-quantile plots with <code><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm()</a></code> and <code><a href="https://rdrr.io/r/stats/qqnorm.html">qqline()</a></code>
+<li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> compares if the <em>mean</em> of the parent distribution differs from a hypothesised value, whereas <code><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test()</a></code> compares the <em>median</em>.</li>
+<li>A good way of assessing assumptions is to visually check by looking at the distribution with <code>geom_histogram()</code> and quantile-quantile plots with <code>stat_qq()</code> and <code>stat_qqline()</code>
 </li>
 </ul>
 </div>
@@ -520,17 +530,24 @@ Answer
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></div>
-<div class="next"><a href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cs1-onesample-wilcoxon-signed-rank"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
 <li><a class="nav-link" href="#section-commands-1"><span class="header-section-number">5.1</span> Section commands</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-1"><span class="header-section-number">5.2</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-1"><span class="header-section-number">5.3</span> Assumptions</a></li>
+<li><a class="nav-link" href="#assumptions-2"><span class="header-section-number">5.3</span> Assumptions</a></li>
 <li><a class="nav-link" href="#implement-the-test-1"><span class="header-section-number">5.4</span> Implement the test</a></li>
 <li><a class="nav-link" href="#interpreting-the-output-and-report-results-1"><span class="header-section-number">5.5</span> Interpreting the output and report results</a></li>
-<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">5.6</span> Exercise</a></li>
+<li>
+<a class="nav-link" href="#exercise-1"><span class="header-section-number">5.6</span> Exercise</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-1"><span class="header-section-number">5.6.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#assumptions-3"><span class="header-section-number">5.6.2</span> Assumptions</a></li>
+<li><a class="nav-link" href="#wilcoxon-signed-rank-test"><span class="header-section-number">5.6.3</span> Wilcoxon signed-rank test</a></li>
+<li><a class="nav-link" href="#discussion"><span class="header-section-number">5.6.4</span> Discussion</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#key-points"><span class="header-section-number">5.7</span> Key points</a></li>
 </ul>
 

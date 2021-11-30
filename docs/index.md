@@ -1,7 +1,7 @@
 --- 
 title: "Core Statistics in R"
 author: "Matt Castle and Martin van Rongen"
-date: "2021-11-29"
+date: "2021-11-30"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -69,4 +69,4 @@ To combine conditions, use the following _logical operators_:
 
 ## Datasets {#index-datasets}
 
-This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder [here](data.zip) by right-clicking on the link and <kbd>Save as...</kbd>. Next unzip the file and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/raw`.
+This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the `data` folder [here](data.zip) by right-clicking on the link and <kbd>Save as...</kbd>. Next unzip the file and copy it into your working directory. Your data should then be accessible via `<working-directory-name>/data/tidy`.

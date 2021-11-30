@@ -100,7 +100,7 @@ There are two sets of tests to consider depending on your answers to questions 1
 4.	There are a couple of tests (Bartlett’s test and Levene’s test) that can be used to see if two samples come from distributions with the same variance. These will be covered in a later section.
 5.	Resampling techniques aren’t covered in this course and require a mixture of statistical understanding and programming skill. Ask a demonstrator (or Google it 😉) if you want to know more.
 
-## Tidy data
+## Tidy data {#cs1-tidy-data}
 For two samples the data can be stored in one of three formats in R:
 
 1.	as two separate vectors,
