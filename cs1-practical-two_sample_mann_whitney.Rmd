@@ -4,8 +4,8 @@ source(file = "setup.R")
 
 ```{r, echo=FALSE}
 # data needed for this section
-rivers <- read.csv("data/raw/CS1-twosample.csv")
-turtle <- read.csv("data/examples/cs1-turtle.csv")
+rivers <- read.csv("data/tidy/CS1-twosample.csv")
+turtle <- read.csv("data/tidy/cs1-turtle.csv")
 ```
 # Mann-Whitney U test {#cs1-mannwhitney-u-test}
 This test also compares two samples, however for this test (in contrast to Student’s t-test) we don’t have to assume that the parent distributions are normally distributed. In order to compare the medians of the two groups we do still need the parent distributions (and consequently the samples) to both have the same shape and variance. In this test we look to see if the medians of the two parent distributions differ significantly from each other.

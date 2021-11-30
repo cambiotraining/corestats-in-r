@@ -14,10 +14,10 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`aggregate()`| Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form |
-|`unstack()`| Converts a stacked data frame into an unstacked data frame (or a list if the lengths of the samples are different) |
+|`split()`| Divides data into groups |
+|`map()`| Applies a function to each element of a list or vector|
 |`bartlett.test()`| Perform Bartlett's test for equality of variance (normally distributed data) |
-|`leveneTest()`| Perform Levene's test for equality of variance (non-normally distributed data) |
+|`levene_test()`| Perform Levene's test for equality of variance (non-normally distributed data) |
 
 ## Data and hypotheses
 For example, suppose we now measure the body lengths of male guppies (in mm) collected from two rivers in Trinidad; the Aripo and the Guanapo. We want to test whether the mean body length differs between samples. We form the following null and alternative hypotheses:
@@ -31,20 +31,25 @@ We use a two-sample, two-tailed t-test to see if we can reject the null hypothes
 -	We use a two-tailed t-test because we want to know if our data suggest that the true (population) means are different from one another rather than that one mean is specifically bigger or smaller than the other.
 -	We’re using Student’s t-test because the sample sizes are big and because we’re assuming that the parent populations have equal variance (We can check this later).
 
-The data are stored in stacked format in the file `data/raw/CS1-twosample.csv`.
+The data are stored in the file `data/tidy/CS1-twosample.csv`.
 
 Read this into R:
 
 ```{r cs1-twosample-data, message=FALSE, warning=FALSE}
-rivers <- read_csv("data/raw/CS1-twosample.csv")
+rivers <- read_csv("data/tidy/CS1-twosample.csv")
 ```
 
 ## Summarise and visualise {#cs1-students-sumvisual}
 Let's summarise the data...
 
 ```{r cs1-twosample-rivers-summary}
+# here we load the data,
+# split the data by river into two groups,
+# and apply the summary() function to each group
+# using the map() function
 rivers %>% 
-  summary()
+  split(.$river) %>% 
+  map(summary)
 ```
 
 and visualise it:
@@ -71,11 +76,10 @@ The second point we can do nothing about unless we know how the data were collec
 The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
 This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.
 
-So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately. Before we can do that, we need to do a little bit of data wrangling.
+So we perform a [Shapiro-Wilk test](#shapiro-wilk-test) on both samples separately.
 
-* we load the `broom` package (comes installed with `tidyverse`) to access the `tidy()` function. This is a very handy function that converts the output of different types of objects into a tidy format.
-
-```{r cs1-twosample-unstack, results='hide'}
+```{r cs1-twosample-shapiro-river}
+# group data by river and perform test
 rivers %>% 
   group_by(river) %>% 
   shapiro_test(length)
@@ -94,7 +98,9 @@ Create the Q-Q plots for the two samples and discuss with your neighbour what yo
 <details><summary>Answer</summary>
 
 ```{r cs1-twosample-qqplot}
-
+# we group the data by river
+# then create a panel per river
+# containing the Q-Q plot for that river
 rivers %>% 
   group_by(river) %>%
   ggplot(aes(sample = length)) +
@@ -117,26 +123,12 @@ Remember that statistical tests do not provide answers, they merely suggest patt
 
 The Shapiro-Wilk test has shown that the data are not normal _enough_ and so in order to test for equality of variance we will use Levene’s test.
 
-### Levene's test
-Levene’s test is not included in the default R packages and may require the installation of an additional package called `car` (Companion to Applied Regression).
-
-To install the `car` package, run the following command in your console:
-
-```{r cs1-two-sample-car, eval=FALSE}
-install.packages("car")
-```
-
-Alternatively, go to <kbd>Tools</kbd> > <kbd>Install packages...</kbd> > <kbd>Packages</kbd>, type in `car` and press <kbd>Install</kbd>
-
-We can now perform Levene's test:
-
 ```{r cs1-twosample-levene, warning=FALSE}
-leveneTest(length ~ river, data = rivers)
+rivers %>% 
+  levene_test(length ~ river)
 ```
 
-Ignore any warning you might get about coercion to factors (the test needs to create grouped variables to work and R versions from 4.x onwards do not read in the data as factors).
-
-The key bit of information is the 3rd line under the text `Pr(>F)`. This is the p-value (0.1876) for this test. And this tells us the probability of observing these two samples if they come from distributions with the same variance. As this probability is greater than our arbitrary significance level of 0.05 then we can be somewhat confident that the necessary assumptions for carrying out Student’s t-test on these two samples was valid. (Once again woohoo!)
+The key bit of information is the `p` column. This is the p-value (0.1876) for this test. And this tells us the probability of observing these two samples if they come from distributions with the same variance. As this probability is greater than our arbitrary significance level of 0.05 then we can be somewhat confident that the necessary assumptions for carrying out Student’s t-test on these two samples was valid. (Once again woohoo!)
 
 ### Bartlett's test
 If we had wanted to carry out Bartlett’s test (i.e. if the data _had_ been sufficiently normally distributed) then the command would have been:
@@ -147,43 +139,60 @@ bartlett.test(length ~ river, data = rivers)
 
 The relevant p-value is given on the 3rd line.
 
+:::note
+Here we use `bartlett.test()` from base R. Surprisingly, the `rstatix` package does not have a built-in equivalent.
+
+If we wanted to get the output of the Bartlett test into a tidy format, we could do the following, where we take the `rivers` data set and pipe it to the `bartlett.test()` function. Note that we need to define the data using a dot (`.`), because the first input into `bartlett.test()` is not the data. We then pipe the output to the `tidy()` function, which is part of the `broom` library, which kindly converts the output into a tidy format. Handy!
+
+```{r}
+# load the broom package
+library(broom)
+
+# perform Bartlett's test on the data and tidy
+rivers %>% 
+  bartlett.test(length ~ river,
+                data = .) %>% 
+  tidy()
+```
+:::
+
 ## Implement test
 In this case we're ignoring the fact that the data are not normal enough, according to the Shapiro-Wilk test. However, because the sample sizes are pretty large and the t-test is also pretty robust in this case, we can perform a t-test. Remember, this is only allowed because the variances of the two groups (Aripo and Guanapo) are equal.
 
 Perform a two-sample, two-tailed, t-test:
 
 ```{r cs1-twosample-ttest, results='hide'}
-t.test(length ~ river, data = rivers,
-       alternative = "two.sided",
-       var.equal = TRUE)
+# two-sample, two-tailed t-test
+rivers %>% 
+  t_test(length ~ river,
+         alternative = "two.sided",
+         var.equal = TRUE)
 ```
 
-In this case, with the data in stacked format:
+Here we do the following:
 
--	The first argument must be in the formula format: `variables ~ category`
--	The second argument must be the name of the data frame
--	The third argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less` 
--	The fourth argument says whether the variance of the two samples can be assumed to be equal (Student's t-test) or unequal (Welch's t-test)
+* We take the data set and pipe it to the `t_test()` function
+* The `t_test()` function takes the formula in the format `variable ~ category`
+* Again the alternative is `two.sided` because we have no prior knowledge about whether the alternative should be `greater` or `less`
+* The last argument says whether the variance of the two samples can be assumed to be equal (Student's t-test) or unequal (Welch's t-test)
 
 ## Interpret output and report results
 Let's look at the results of the t-test that we performed on the original (stacked) data frame:
 
 ```{r cs1-twosample-ttest-results, echo=FALSE}
-t.test(length ~ river, data = rivers,
-       alternative = "two.sided",
-       var.equal = TRUE)
+# two-sample, two-tailed t-test
+rivers %>% 
+  t_test(length ~ river,
+         alternative = "two.sided",
+         var.equal = TRUE)
 ```
 
--	The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called, and what variables were used.
--	The 3rd line contains the three key outputs from the test:
-    - The calculated t-value is 3.8433 (we need this for reporting)
-    - There are 66 degrees of freedom (we need this for reporting)
-    - The p-value is 0.0002754. 
--	The 4th line simply states the alternative hypothesis in terms of the difference between the two sample means (testing if the two sample means are different is equivalent to testing whether the difference in the means is equal to zero).
--	The 5th and 6th lines give the 95th confidence interval (we don’t need to know this here).
--	The 7th, 8th and 9th lines give the sample means for each group (20.33077 in Aripo and 18.29655 in Guanapo) which we found earlier.
+*	The first 5 columns give you information on the variable (`.y.`), groups and sample size of each group
+* The `statistic` column gives the t-value of 3.8433 (we need this for reporting)
+* The `df` column tell us there are 66 degrees of freedom (we need this for reporting)
+* The `p` column gives us a p-value of 0.0002754
 
-Again, the p-value on the 3rd line is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say "that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis" and state that:
+Again, the p-value is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say "that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis" and state that:
 
 > A Student’s t-test indicated that the mean body length of male guppies in the Guanapo river (18.29 mm) differs significantly from the mean body length of male guppies in the Aripo river (20.33 mm) (t = 3.8433, df = 66, p = 0.0003).
 
@@ -205,8 +214,8 @@ read_csv("data/examples/cs1-turtle_example.csv") %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "center")
 ```
 
-1. Write down the null and alternative hypotheses
-2. Choose a representation for the data (stacked or unstacked) and create a `csv` file
+1. Create a tidy data frame and save as a `.csv` file
+2. Write down the null and alternative hypotheses
 3. Import the data into R
 4. Summarise and visualise the data
 5. Check your assumptions (normality and variance) using appropriate tests and plots
@@ -215,32 +224,47 @@ read_csv("data/examples/cs1-turtle_example.csv") %>%
 
 <details><summary>Answer</summary>
 
-**1. Hypotheses**
+### Data
+Here the data is in a tidy format, with each variable in its own column, each row an observation (and a unique identifier for each observation).
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+turtle <- read_csv("data/tidy/CS1-turtle.csv")
+```
+
+
+### Hypotheses
 
 $H_0$ : male mean $=$ female mean
 
 $H_1$ : male mean $\neq$ female mean
 
-**2-4. Import Data, Summarise and visualise**
+### Load, summarise and visualise data
 
 I'd always recommend storing data in tidy, stacked format (in fact I can't think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:
 
-```{r cs1-twosample-read-turtle-data}
-turtle <- read.csv("data/examples/cs1-turtle.csv")
+```{r cs1-twosample-read-turtle-data, message=FALSE, warning=FALSE}
+# load the data
+turtle <- read_csv("data/tidy/CS1-turtle.csv")
 
+# and have a look
 turtle
 ```
 
-Let's summarise the data...
+Let's summarise the data (although a visualisation is probably much easier to work with):
 
 ```{r cs1-twosample-turtle-summary}
-aggregate(serum ~ sex , data = turtle, summary)
+# create summary table for each group
+turtle %>% 
+  split(.$sex) %>% 
+  map(summary)
 ```
 
 and visualise the data:
 
 ```{r cs1-twosample-turtle-boxplot}
-boxplot(serum ~ sex , data = turtle)
+# visualise the data
+turtle %>% 
+  ggplot(aes(x = sex, y = serum)) +
+  geom_boxplot()
 ```
 
 As always we use the plot and summary to assess three things:
@@ -250,20 +274,21 @@ As always we use the plot and summary to assess three things:
 2.  Do we think that there is a difference between the two groups?
     * We need the result of the formal test to make sense given the data, so it's important to develop a sense of what we think is going to happen here. Whilst the ranges of the two groups suggests that the Female serum levels might be higher than the males when we look at things more closely we realise that isn't the case. The boxplot shows that the median values of the two groups is virtually identical and this is backed up by the summary statistics we calculated: the medians are both about 224.1, and the means are fairly close too (225.7 vs 224.2). Based on this, and the fact that there are only 13 observations in total I would be very surprised if any test came back showing that there was a difference between the groups.
 3. What do we think about assumptions?
-    * Normality looks a bit worrying: whilst the Male group appears nice and symmetric (and so might be normal), the Female group appears to be quite skewed (since the median is much closer to the bottom than the top). We'll have to look carefully at the more formal checks to decided whether we think the data are normal enough for us to use a t-test.
+    * Normality looks a bit worrying: whilst the `Male` group appears nice and symmetric (and so might be normal), the `Female` group appears to be quite skewed (since the median is much closer to the bottom than the top). We'll have to look carefully at the more formal checks to decided whether we think the data are normal enough for us to use a t-test.
     * Homogeneity of variance. At this stage the spread of the data within each group looks similar, but because of the potential skew in the Female group we'll again want to check the assumptions carefully.
 
 
-**5. Check Assumptions**
+### Assumptions
 
 **Normality**
 
 Let's look at the normality of each of the groups separately. There are several ways of getting at the `serum` values for Males and Females separately. We'll use the unstacking method, then use Shapiro-Wilk followed by qqplots.
 
 ```{r}
-uns_turtle <- unstack(turtle, serum ~ sex)
-shapiro.test(uns_turtle$Male)
-shapiro.test(uns_turtle$Female)
+# perform Shapiro-Wilk test on each group
+turtle %>% 
+  group_by(sex) %>% 
+  shapiro_test(serum)
 ```
 
 The p-values for both Shapiro-Wilk tests are non-significant which suggests that the data are normal enough. This is a bit surprising given what we saw in the boxplot but there are two bits of information that we can use to reassure us.
@@ -272,11 +297,12 @@ The p-values for both Shapiro-Wilk tests are non-significant which suggests that
 2. The Shapiro-Wilk test is generally quite relaxed about normality for small sample sizes (and notoriously strict for very large sample sizes). For a group with only 6 data points in it, the data would actually have to have a really, really skewed distribution. Given that the Female group only has 6 data points in it, it's not too surprising that the Shapiro-Wilk test came back saying everything is OK.
 
 ```{r cs1-twosample-turtle-qqplot}
-par(mfrow=c(1,2))
-qqnorm(uns_turtle$Male, main = "Male")
-qqline(uns_turtle$Male, col = "red")
-qqnorm(uns_turtle$Female, main = "Female")
-qqline(uns_turtle$Female, col = "red")
+# create Q-Q plots for both groups
+turtle %>% 
+  ggplot(aes(sample = serum)) +
+  stat_qq() +
+  stat_qq_line(colour = "red") +
+  facet_wrap(facets = vars(sex))
 ```
 
 The results from the Q-Q plots echo what we've already seen from the Shapiro-Wilk analyses. The Male group doesn't look too bad whereas the Female group looks somewhat dodgy.
@@ -290,37 +316,40 @@ It's not clear whether the data are normal or not, so it isn't clear which test 
 Bartlett's test gives us:
 
 ```{r}
-bartlett.test(serum ~ sex, turtle)
+# perform Bartlett's test
+bartlett.test(serum ~ sex,
+              data = turtle)
 ```
 
 and Levene's test gives us:
 
 ```{r, warning=FALSE}
-# load if needed
-# library(car)
-
-leveneTest(serum ~ sex, turtle)
+# perform Levene's test
+turtle %>% 
+  levene_test(serum ~ sex)
 ```
 
 The good news is that both Levene and Bartlett agree that there is homogeneity of variance between the two groups (thank goodness!).
 
 Overall, what this means is that we're not too sure about normality, but that homogeneity of variance is pretty good.
 
-**6. Carry out a two-sample t-test**
+### Implement two-sample t-test
 
 Because of the result of the Bartlett test I know that I can carry out a two-sample Student's t-test (as opposed to a two-sample Welch's t-test, if you're confused, see Figure \@ref(fig:fig-cs1-diagram-which-test))
 
 ```{r}
-t.test(serum ~ sex , turtle,
-       alternative="two.sided",
-       var.equal=TRUE)
+# perform two-sample t-test
+turtle %>% 
+  t_test(serum ~ sex,
+         alternative = "two.sided",
+         var.equal = TRUE)
 ```
 
 With a p-value of 0.544, this test tells me that there is insufficient evidence to suggest that the means of the two groups are different. A suitable summary sentence would be:
 
 > A Student's two-sample t-test indicated that the mean serum cholesterol level did not differ significantly between Male and Female turtles (t = 0.627, df = 11, p = 0.544).
 
-**Discussion**
+### Discussion
 
 In reality, because of the ambiguous normality assumption assessment, for this dataset I would actually carry out two different tests; the two-sample t-test with equal variance and the Mann-Whitney U test. If both of them agreed then it wouldn't matter too much which one I reported (I'd personally report both with a short sentence to say that I'm doing that because it wasn't clear whether the assumption of normality had or had not been met), but it would be acceptable to report just one. 
 

@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 8 Wilcoxon signed-rank test | Core Statistics in R</title>
+<title>Chapter 9 Wilcoxon signed-rank test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Wilcoxon signed-rank test | Core Statistics in R">
+<meta property="og:title" content="Chapter 9 Wilcoxon signed-rank test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Wilcoxon signed-rank test | Core Statistics in R">
+<meta name="twitter:title" content="Chapter 9 Wilcoxon signed-rank test | Core Statistics in R">
 <meta name="twitter:description" content="A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
@@ -343,12 +343,14 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">3</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">4</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">5</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">6</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">7</span> Paired two-sample t-test</a></li>
-<li><a class="active" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">8</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="active" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 </ul>
 
         <div class="book-extra">
@@ -356,20 +358,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-twosample-wilcoxon-signed-rank" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-twosample-wilcoxon-signed-rank" class="section level1" number="9">
 <h1>
-<span class="header-section-number">8</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-twosample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#cs1-twosample-wilcoxon-signed-rank"><i class="fas fa-link"></i></a>
 </h1>
 <p>A Wilcoxon signed-rank test is an alternative to a paired t-test. It does not require that the data are drawn from normal distributions, but it does require that the distribution of the differences is symmetric. We’re effectively testing to see if the median of the differences between the two samples differs significantly from zero.</p>
-<div id="section-commands-5" class="section level2" number="8.1">
+<div id="section-commands-5" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">8.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are no new commands in this section.</p>
 </div>
-<div id="data-and-hypotheses-4" class="section level2" number="8.2">
+<div id="data-and-hypotheses-4" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">8.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using the <code>cortisol</code> dataset from before we form the following null and alternative hypotheses:</p>
 <ul>
@@ -382,21 +384,21 @@
 </ul>
 <p>We use a two-tailed Wilcoxon signed-rank test to see if we can reject the null hypothesis.</p>
 </div>
-<div id="summarise-and-visualise-4" class="section level2" number="8.3">
+<div id="summarise-and-visualise-4" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">8.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Already implemented previously.</p>
 </div>
-<div id="assumptions-5" class="section level2" number="8.4">
+<div id="assumptions-8" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">8.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>These have been checked previously.</p>
 </div>
-<div id="implement-test-3" class="section level2" number="8.5">
+<div id="implement-test-4" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">8.5</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a two-tailed, Wilcoxon signed-rank test:</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
@@ -409,9 +411,9 @@
 <li>The third argument indicates that the test is paired</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-3" class="section level2" number="8.6">
+<div id="interpret-output-and-report-results-3" class="section level2" number="9.6">
 <h2>
-<span class="header-section-number">8.6</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-3"><i class="fas fa-link"></i></a>
 </h2>
 <pre><code>## 
 ##  Wilcoxon signed rank exact test
@@ -424,12 +426,12 @@
 <p>A two-tailed, Wilcoxon signed-rank test indicated that the median cortisol level in adult females differed significantly between the morning (320.5 nmol/l) and the evening (188.9 nmol/l) (V = 197, p = 0.00017).</p>
 </blockquote>
 </div>
-<div id="exercise-3" class="section level2" number="8.7">
+<div id="exercise-3" class="section level2" number="9.7">
 <h2>
-<span class="header-section-number">8.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 8.1  </strong></span>Deer legs</p>
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 9.1  </strong></span>Deer legs</p>
 <p>Using the following data, test the null hypothesis that the fore and hind legs of deer are the same length.</p>
 <pre><code>## # A tibble: 10 × 2
 ##    hindleg foreleg
@@ -568,9 +570,9 @@ Answer
 </details>
 </div>
 </div>
-<div id="key-points-1" class="section level2" number="8.8">
+<div id="key-points-1" class="section level2" number="9.8">
 <h2>
-<span class="header-section-number">8.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.8</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
@@ -581,7 +583,7 @@ Answer
 <li>Parametric tests are used if the data are normally distributed or the sample size is large</li>
 <li>Non-parametric tests are used if the data are not normally distributed <em>and</em> the sample size is small</li>
 <li>Equality of variance then determines which test is appropriate</li>
-<li>You <a href="#two-sample-choosing-a-test">can ask yourself</a> 3 questions to determine the test:
+<li>You <a href="introduction.html#two-sample-choosing-a-test">can ask yourself</a> 3 questions to determine the test:
 <ol style="list-style-type: decimal">
 <li>is my data paired?</li>
 <li>do I need a parametric or non-parametric test</li>
@@ -594,20 +596,20 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">7</span> Paired two-sample t-test</a></div>
+<div class="prev"><a href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-twosample-wilcoxon-signed-rank"><span class="header-section-number">8</span> Wilcoxon signed-rank test</a></li>
-<li><a class="nav-link" href="#section-commands-5"><span class="header-section-number">8.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-4"><span class="header-section-number">8.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-4"><span class="header-section-number">8.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-5"><span class="header-section-number">8.4</span> Assumptions</a></li>
-<li><a class="nav-link" href="#implement-test-3"><span class="header-section-number">8.5</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-3"><span class="header-section-number">8.6</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-3"><span class="header-section-number">8.7</span> Exercise</a></li>
-<li><a class="nav-link" href="#key-points-1"><span class="header-section-number">8.8</span> Key points</a></li>
+<li><a class="nav-link" href="#cs1-twosample-wilcoxon-signed-rank"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
+<li><a class="nav-link" href="#section-commands-5"><span class="header-section-number">9.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-4"><span class="header-section-number">9.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-4"><span class="header-section-number">9.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-8"><span class="header-section-number">9.4</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">9.5</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-3"><span class="header-section-number">9.6</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-3"><span class="header-section-number">9.7</span> Exercise</a></li>
+<li><a class="nav-link" href="#key-points-1"><span class="header-section-number">9.8</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">

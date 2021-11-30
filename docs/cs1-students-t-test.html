@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 5 Student’s t-test | Core Statistics in R</title>
+<title>Chapter 6 Student’s t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 5 Student’s t-test | Core Statistics in R">
+<meta property="og:title" content="Chapter 6 Student’s t-test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 Student’s t-test | Core Statistics in R">
+<meta name="twitter:title" content="Chapter 6 Student’s t-test | Core Statistics in R">
 <meta name="twitter:description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
@@ -343,12 +343,14 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">3</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">4</span> Wilcoxon signed-rank test</a></li>
-<li><a class="active" href="cs1-students-t-test.html"><span class="header-section-number">5</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">6</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">7</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">8</span> Wilcoxon signed-rank test</a></li>
+<li class="book-part">CoreStats 1 (Practicals)</li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
+<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
+<li><a class="active" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
+<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
+<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
 </ul>
 
         <div class="book-extra">
@@ -356,17 +358,17 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-students-t-test" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cs1-students-t-test" class="section level1" number="6">
 <h1>
-<span class="header-section-number">5</span> Student’s t-test<a class="anchor" aria-label="anchor" href="#cs1-students-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Student’s t-test<a class="anchor" aria-label="anchor" href="#cs1-students-t-test"><i class="fas fa-link"></i></a>
 </h1>
 <p>For this test we assume that both sample data sets are <strong>normally distributed</strong> and have <strong>equal variance</strong>. We test to see if the means of the two samples differ significantly from each other.</p>
 <div class="note">
-<p>The language used in this section is slightly different to that used in section <a href="#cs1-one-sample-tests"><strong>??</strong></a>. Although the language used in section <a href="#cs1-one-sample-tests"><strong>??</strong></a> was technically more correct, the sentences are somewhat more onerous to read. Here I’ve opted for an easier reading style at the expense of technical accuracy. Please feel free to re-write this section (at your own leisure).</p>
+<p>The language used in this section is slightly different to that used in section <a href="introduction.html#cs1-one-sample-tests">3.1</a>. Although the language used in section <a href="introduction.html#cs1-one-sample-tests">3.1</a> was technically more correct, the sentences are somewhat more onerous to read. Here I’ve opted for an easier reading style at the expense of technical accuracy. Please feel free to re-write this section (at your own leisure).</p>
 </div>
-<div id="section-commands-2" class="section level2" number="5.1">
+<div id="section-commands-2" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">5.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -380,27 +382,27 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a></code></td>
-<td align="left">Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/split.html">split()</a></code></td>
+<td align="left">Divides data into groups</td>
 </tr>
 <tr class="even">
-<td align="left"><code><a href="https://rdrr.io/r/utils/stack.html">unstack()</a></code></td>
-<td align="left">Converts a stacked data frame into an unstacked data frame (or a list if the lengths of the samples are different)</td>
+<td align="left"><code>map()</code></td>
+<td align="left">Applies a function to each element of a list or vector</td>
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code></td>
 <td align="left">Perform Bartlett’s test for equality of variance (normally distributed data)</td>
 </tr>
 <tr class="even">
-<td align="left"><code>leveneTest()</code></td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test()</a></code></td>
 <td align="left">Perform Levene’s test for equality of variance (non-normally distributed data)</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-1" class="section level2" number="5.2">
+<div id="data-and-hypotheses-1" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">5.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>For example, suppose we now measure the body lengths of male guppies (in mm) collected from two rivers in Trinidad; the Aripo and the Guanapo. We want to test whether the mean body length differs between samples. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -417,26 +419,41 @@
 <li>We use a two-tailed t-test because we want to know if our data suggest that the true (population) means are different from one another rather than that one mean is specifically bigger or smaller than the other.</li>
 <li>We’re using Student’s t-test because the sample sizes are big and because we’re assuming that the parent populations have equal variance (We can check this later).</li>
 </ul>
-<p>The data are stored in stacked format in the file <code>data/raw/CS1-twosample.csv</code>.</p>
+<p>The data are stored in the file <code>data/tidy/CS1-twosample.csv</code>.</p>
 <p>Read this into R:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/raw/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="cs1-students-sumvisual" class="section level2" number="5.3">
+<div id="cs1-students-sumvisual" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">5.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#cs1-students-sumvisual"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#cs1-students-sumvisual"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s summarise the data…</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##      length         river          
-##  Min.   :11.20   Length:68         
-##  1st Qu.:18.40   Class :character  
-##  Median :19.30   Mode  :character  
-##  Mean   :19.46                     
-##  3rd Qu.:20.93                     
-##  Max.   :26.40</code></pre>
+<code class="sourceCode R"><span class="co"># here we load the data,</span>
+<span class="co"># split the data by river into two groups,</span>
+<span class="co"># and apply the summary() function to each group</span>
+<span class="co"># using the map() function</span>
+<span class="va">rivers</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">map</span><span class="op">(</span><span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>## $Aripo
+##        id          river               length     
+##  Min.   :30.0   Length:39          Min.   :17.50  
+##  1st Qu.:39.5   Class :character   1st Qu.:19.10  
+##  Median :49.0   Mode  :character   Median :20.10  
+##  Mean   :49.0                      Mean   :20.33  
+##  3rd Qu.:58.5                      3rd Qu.:21.30  
+##  Max.   :68.0                      Max.   :26.40  
+## 
+## $Guanapo
+##        id        river               length    
+##  Min.   : 1   Length:29          Min.   :11.2  
+##  1st Qu.: 8   Class :character   1st Qu.:17.5  
+##  Median :15   Mode  :character   Median :18.8  
+##  Mean   :15                      Mean   :18.3  
+##  3rd Qu.:22                      3rd Qu.:19.7  
+##  Max.   :29                      Max.   :23.3</code></pre>
 <p>and visualise it:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
@@ -445,9 +462,9 @@
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-rivers-boxplot-1.png" width="672"></div>
 <p>The boxplot does appear to suggest that the two samples have different means, and moreover that the guppies in Guanapo may be smaller than the guppies in Aripo. It isn’t immediately obvious that the two populations don’t have equal variances though, so we plough on.</p>
 </div>
-<div id="assumptions-2" class="section level2" number="5.4">
+<div id="assumptions-4" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">5.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>In order to use a Student’s t-test (and for the results to be strictly valid) we have to make three assumptions:</p>
 <ol style="list-style-type: decimal">
@@ -459,28 +476,34 @@
 <p>The second point we can do nothing about unless we know how the data were collected, so again we ignore it.</p>
 <p>The third point regarding equality of variance can be tested using either Bartlett’s test (if the samples are normally distributed) or Levene’s test (if the samples are not normally distributed).
 This is where it gets a bit trickier. Although we don’t care if the samples are normally distributed for the t-test to be valid (because the sample size is big enough to compensate), we do need to know if they are normally distributed in order to decide which variance test to use.</p>
-<p>So we perform a <a href="cs1-one-sample-t-test.html#shapiro-wilk-test">Shapiro-Wilk test</a> on both samples separately. Before we can do that, we need to do a little bit of data wrangling.</p>
-<ul>
-<li>we load the <code>broom</code> package (comes installed with <code>tidyverse</code>) to access the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function. This is a very handy function that converts the output of different types of objects into a tidy format.</li>
-</ul>
+<p>So we perform a <a href="cs1-one-sample-t-test.html#shapiro-wilk-test">Shapiro-Wilk test</a> on both samples separately.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="co"># group data by river and perform test</span>
+<span class="va">rivers</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##   river   variable statistic      p
+##   &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Aripo   length       0.936 0.0280
+## 2 Guanapo length       0.949 0.176</code></pre>
 <p>We can see that whilst the Guanapo data is probably normally distributed (p = 0.1764 &gt; 0.05), the Aripo data is unlikely to be normally distributed (p = 0.02802 &lt; 0.05). Remember that the p-value gives the probability of observing each sample if the parent population is actually normally distributed.</p>
 <p>The Shapiro-Wilk test is quite sensitive to sample size. This means that if you have a large sample then even small deviations from normality will cause the sample to fail the test, whereas smaller samples are allowed to pass with much larger deviations. Here the Aripo data has nearly 40 points in it compared with the Guanapo data and so it is much easier for the Aripo sample to fail compared with the Guanapo data.</p>
 </div>
-<div id="exercise-q-q-plots-rivers" class="section level2" number="5.5">
+<div id="exercise-q-q-plots-rivers" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">5.5</span> Exercise: Q-Q plots rivers<a class="anchor" aria-label="anchor" href="#exercise-q-q-plots-rivers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> Exercise: Q-Q plots rivers<a class="anchor" aria-label="anchor" href="#exercise-q-q-plots-rivers"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 5.1  </strong></span>Q-Q plots for <code>rivers</code> data</p>
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 6.1  </strong></span>Q-Q plots for <code>rivers</code> data</p>
 <p>Create the Q-Q plots for the two samples and discuss with your neighbour what you see in light of the results from the above Shapiro-Wilk test.</p>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
+</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># we group the data by river</span>
+<span class="co"># then create a panel per river</span>
+<span class="co"># containing the Q-Q plot for that river</span>
+<span class="va">rivers</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -492,36 +515,25 @@ Answer
 </div>
 <p><br></p>
 </div>
-<div id="equality-of-variance" class="section level2" number="5.6">
+<div id="equality-of-variance" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">5.6</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance"><i class="fas fa-link"></i></a>
 </h2>
 <div class="highlight">
 <p>Remember that statistical tests do not provide answers, they merely suggest patterns. Human interpretation is still a crucial aspect to what we do.</p>
 </div>
 <p>The Shapiro-Wilk test has shown that the data are not normal <em>enough</em> and so in order to test for equality of variance we will use Levene’s test.</p>
-<div id="levenes-test" class="section level3" number="5.6.1">
-<h3>
-<span class="header-section-number">5.6.1</span> Levene’s test<a class="anchor" aria-label="anchor" href="#levenes-test"><i class="fas fa-link"></i></a>
-</h3>
-<p>Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
-<p>To install the <code>car</code> package, run the following command in your console:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
-<p>We can now perform Levene’s test:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
-<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  1  1.7732 0.1876
-##       66</code></pre>
-<p>Ignore any warning you might get about coercion to factors (the test needs to create grouped variables to work and R versions from 4.x onwards do not read in the data as factors).</p>
-<p>The key bit of information is the 3rd line under the text <code>Pr(&gt;F)</code>. This is the p-value (0.1876) for this test. And this tells us the probability of observing these two samples if they come from distributions with the same variance. As this probability is greater than our arbitrary significance level of 0.05 then we can be somewhat confident that the necessary assumptions for carrying out Student’s t-test on these two samples was valid. (Once again woohoo!)</p>
-</div>
-<div id="bartletts-test" class="section level3" number="5.6.2">
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    66      1.77 0.188</code></pre>
+<p>The key bit of information is the <code>p</code> column. This is the p-value (0.1876) for this test. And this tells us the probability of observing these two samples if they come from distributions with the same variance. As this probability is greater than our arbitrary significance level of 0.05 then we can be somewhat confident that the necessary assumptions for carrying out Student’s t-test on these two samples was valid. (Once again woohoo!)</p>
+<div id="bartletts-test" class="section level3" number="6.6.1">
 <h3>
-<span class="header-section-number">5.6.2</span> Bartlett’s test<a class="anchor" aria-label="anchor" href="#bartletts-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6.1</span> Bartlett’s test<a class="anchor" aria-label="anchor" href="#bartletts-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we had wanted to carry out Bartlett’s test (i.e. if the data <em>had</em> been sufficiently normally distributed) then the command would have been:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
@@ -532,69 +544,74 @@ Answer
 ## data:  length by river
 ## Bartlett's K-squared = 4.4734, df = 1, p-value = 0.03443</code></pre>
 <p>The relevant p-value is given on the 3rd line.</p>
+<div class="note">
+<p>Here we use <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> from base R. Surprisingly, the <code>rstatix</code> package does not have a built-in equivalent.</p>
+<p>If we wanted to get the output of the Bartlett test into a tidy format, we could do the following, where we take the <code>rivers</code> data set and pipe it to the <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> function. Note that we need to define the data using a dot (<code>.</code>), because the first input into <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> is not the data. We then pipe the output to the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function, which is part of the <code>broom</code> library, which kindly converts the output into a tidy format. Handy!</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load the broom package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
+
+<span class="co"># perform Bartlett's test on the data and tidy</span>
+<span class="va">rivers</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
+                data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   statistic p.value parameter method                                   
+##       &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                    
+## 1      4.47  0.0344         1 Bartlett test of homogeneity of variances</code></pre>
 </div>
 </div>
-<div id="implement-test" class="section level2" number="5.7">
+</div>
+<div id="implement-test-1" class="section level2" number="6.7">
 <h2>
-<span class="header-section-number">5.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this case we’re ignoring the fact that the data are not normal enough, according to the Shapiro-Wilk test. However, because the sample sizes are pretty large and the t-test is also pretty robust in this case, we can perform a t-test. Remember, this is only allowed because the variances of the two groups (Aripo and Guanapo) are equal.</p>
 <p>Perform a two-sample, two-tailed, t-test:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span>,
-       alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
-       var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>In this case, with the data in stacked format:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># two-sample, two-tailed t-test</span>
+<span class="va">rivers</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
+         alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+         var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Here we do the following:</p>
 <ul>
-<li>The first argument must be in the formula format: <code>variables ~ category</code>
+<li>We take the data set and pipe it to the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> function</li>
+<li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> function takes the formula in the format <code>variable ~ category</code>
 </li>
-<li>The second argument must be the name of the data frame</li>
-<li>The third argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
+<li>Again the alternative is <code>two.sided</code> because we have no prior knowledge about whether the alternative should be <code>greater</code> or <code>less</code>
 </li>
-<li>The fourth argument says whether the variance of the two samples can be assumed to be equal (Student’s t-test) or unequal (Welch’s t-test)</li>
+<li>The last argument says whether the variance of the two samples can be assumed to be equal (Student’s t-test) or unequal (Welch’s t-test)</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results" class="section level2" number="5.8">
+<div id="interpret-output-and-report-results" class="section level2" number="6.8">
 <h2>
-<span class="header-section-number">5.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s look at the results of the t-test that we performed on the original (stacked) data frame:</p>
-<pre><code>## 
-##  Two Sample t-test
-## 
-## data:  length by river
-## t = 3.8433, df = 66, p-value = 0.0002754
-## alternative hypothesis: true difference in means between group Aripo and group Guanapo is not equal to 0
-## 95 percent confidence interval:
-##  0.9774482 3.0909868
-## sample estimates:
-##   mean in group Aripo mean in group Guanapo 
-##              20.33077              18.29655</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   .y.    group1 group2     n1    n2 statistic    df        p
+## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 length Aripo  Guanapo    39    29      3.84    66 0.000275</code></pre>
 <ul>
-<li>The 1st line gives the name of the test and the 2nd line reminds you what the dataset was called, and what variables were used.</li>
-<li>The 3rd line contains the three key outputs from the test:
-<ul>
-<li>The calculated t-value is 3.8433 (we need this for reporting)</li>
-<li>There are 66 degrees of freedom (we need this for reporting)</li>
-<li>The p-value is 0.0002754.</li>
+<li>The first 5 columns give you information on the variable (<code>.y.</code>), groups and sample size of each group</li>
+<li>The <code>statistic</code> column gives the t-value of 3.8433 (we need this for reporting)</li>
+<li>The <code>df</code> column tell us there are 66 degrees of freedom (we need this for reporting)</li>
+<li>The <code>p</code> column gives us a p-value of 0.0002754</li>
 </ul>
-</li>
-<li>The 4th line simply states the alternative hypothesis in terms of the difference between the two sample means (testing if the two sample means are different is equivalent to testing whether the difference in the means is equal to zero).</li>
-<li>The 5th and 6th lines give the 95th confidence interval (we don’t need to know this here).</li>
-<li>The 7th, 8th and 9th lines give the sample means for each group (20.33077 in Aripo and 18.29655 in Guanapo) which we found earlier.</li>
-</ul>
-<p>Again, the p-value on the 3rd line is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say “that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis” and state that:</p>
+<p>Again, the p-value is what we’re most interested in. Since the p-value is very small (much smaller than the standard significance level) we choose to say “that it is very unlikely that these two samples came from the same parent distribution and as such we can reject our null hypothesis” and state that:</p>
 <blockquote>
 <p>A Student’s t-test indicated that the mean body length of male guppies in the Guanapo river (18.29 mm) differs significantly from the mean body length of male guppies in the Aripo river (20.33 mm) (t = 3.8433, df = 66, p = 0.0003).</p>
 </blockquote>
 <p>Now there’s a conversation starter.</p>
 </div>
-<div id="exercise-turtles" class="section level2" number="5.9">
+<div id="exercise-turtles" class="section level2" number="6.9">
 <h2>
-<span class="header-section-number">5.9</span> Exercise: Turtles<a class="anchor" aria-label="anchor" href="#exercise-turtles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.9</span> Exercise: Turtles<a class="anchor" aria-label="anchor" href="#exercise-turtles"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 5.2  </strong></span>Serum cholesterol concentrations in turtles</p>
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 6.2  </strong></span>Serum cholesterol concentrations in turtles</p>
 <p>Using the following data, test the null hypothesis that male and female turtles have the same mean serum cholesterol concentrations.</p>
 <div class="inline-table"><table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -665,8 +682,8 @@ NA
 </tbody>
 </table></div>
 <ol style="list-style-type: decimal">
+<li>Create a tidy data frame and save as a <code>.csv</code> file</li>
 <li>Write down the null and alternative hypotheses</li>
-<li>Choose a representation for the data (stacked or unstacked) and create a <code>csv</code> file</li>
 <li>Import the data into R</li>
 <li>Summarise and visualise the data</li>
 <li>Check your assumptions (normality and variance) using appropriate tests and plots</li>
@@ -675,41 +692,75 @@ NA
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>1. Hypotheses</strong></p>
+</summary><div id="data" class="section level3" number="6.9.1">
+<h3>
+<span class="header-section-number">6.9.1</span> Data<a class="anchor" aria-label="anchor" href="#data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here the data is in a tidy format, with each variable in its own column, each row an observation (and a unique identifier for each observation).</p>
+</div>
+<div id="hypotheses-2" class="section level3" number="6.9.2">
+<h3>
+<span class="header-section-number">6.9.2</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-2"><i class="fas fa-link"></i></a>
+</h3>
 <p><span class="math inline">\(H_0\)</span> : male mean <span class="math inline">\(=\)</span> female mean</p>
 <p><span class="math inline">\(H_1\)</span> : male mean <span class="math inline">\(\neq\)</span> female mean</p>
-<p><strong>2-4. Import Data, Summarise and visualise</strong></p>
+</div>
+<div id="load-summarise-and-visualise-data" class="section level3" number="6.9.3">
+<h3>
+<span class="header-section-number">6.9.3</span> Load, summarise and visualise data<a class="anchor" aria-label="anchor" href="#load-summarise-and-visualise-data"><i class="fas fa-link"></i></a>
+</h3>
 <p>I’d always recommend storing data in tidy, stacked format (in fact I can’t think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-turtle.csv"</span><span class="op">)</span>
-
-<span class="va">turtle</span></code></pre></div>
-<pre><code>##    serum    sex
-## 1  220.1   Male
-## 2  218.6   Male
-## 3  229.6   Male
-## 4  228.8   Male
-## 5  222.0   Male
-## 6  224.1   Male
-## 7  226.5   Male
-## 8  223.4 Female
-## 9  221.5 Female
-## 10 230.2 Female
-## 11 224.3 Female
-## 12 223.8 Female
-## 13 230.8 Female</code></pre>
-<p>Let’s summarise the data…</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , data <span class="op">=</span> <span class="va">turtle</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
-<pre><code>##      sex serum.Min. serum.1st Qu. serum.Median serum.Mean serum.3rd Qu.
-## 1 Female   221.5000      223.5000     224.0500   225.6667      228.7250
-## 2   Male   218.6000      221.0500     224.1000   224.2429      227.6500
-##   serum.Max.
-## 1   230.8000
-## 2   229.6000</code></pre>
-<p>and visualise the data:</p>
+<code class="sourceCode R"><span class="co"># load the data</span>
+<span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-turtle.csv"</span><span class="op">)</span>
+
+<span class="co"># and have a look</span>
+<span class="va">turtle</span></code></pre></div>
+<pre><code>## # A tibble: 13 × 3
+##       id serum sex   
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+##  1     1  220. Male  
+##  2     2  219. Male  
+##  3     3  230. Male  
+##  4     4  229. Male  
+##  5     5  222  Male  
+##  6     6  224. Male  
+##  7     7  226. Male  
+##  8     8  223. Female
+##  9     9  222. Female
+## 10    10  230. Female
+## 11    11  224. Female
+## 12    12  224. Female
+## 13    13  231. Female</code></pre>
+<p>Let’s summarise the data (although a visualisation is probably much easier to work with):</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , data <span class="op">=</span> <span class="va">turtle</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># create summary table for each group</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">map</span><span class="op">(</span><span class="va">summary</span><span class="op">)</span></code></pre></div>
+<pre><code>## $Female
+##        id            serum           sex           
+##  Min.   : 8.00   Min.   :221.5   Length:6          
+##  1st Qu.: 9.25   1st Qu.:223.5   Class :character  
+##  Median :10.50   Median :224.1   Mode  :character  
+##  Mean   :10.50   Mean   :225.7                     
+##  3rd Qu.:11.75   3rd Qu.:228.7                     
+##  Max.   :13.00   Max.   :230.8                     
+## 
+## $Male
+##        id          serum           sex           
+##  Min.   :1.0   Min.   :218.6   Length:7          
+##  1st Qu.:2.5   1st Qu.:221.1   Class :character  
+##  Median :4.0   Median :224.1   Mode  :character  
+##  Mean   :4.0   Mean   :224.2                     
+##  3rd Qu.:5.5   3rd Qu.:227.7                     
+##  Max.   :7.0   Max.   :229.6</code></pre>
+<p>and visualise the data:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visualise the data</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, y <span class="op">=</span> <span class="va">serum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-boxplot-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
 <ol style="list-style-type: decimal">
@@ -725,40 +776,40 @@ Answer
 </li>
 <li>What do we think about assumptions?
 <ul>
-<li>Normality looks a bit worrying: whilst the Male group appears nice and symmetric (and so might be normal), the Female group appears to be quite skewed (since the median is much closer to the bottom than the top). We’ll have to look carefully at the more formal checks to decided whether we think the data are normal enough for us to use a t-test.</li>
+<li>Normality looks a bit worrying: whilst the <code>Male</code> group appears nice and symmetric (and so might be normal), the <code>Female</code> group appears to be quite skewed (since the median is much closer to the bottom than the top). We’ll have to look carefully at the more formal checks to decided whether we think the data are normal enough for us to use a t-test.</li>
 <li>Homogeneity of variance. At this stage the spread of the data within each group looks similar, but because of the potential skew in the Female group we’ll again want to check the assumptions carefully.</li>
 </ul>
 </li>
 </ol>
-<p><strong>5. Check Assumptions</strong></p>
+</div>
+<div id="assumptions-5" class="section level3" number="6.9.4">
+<h3>
+<span class="header-section-number">6.9.4</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-5"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Normality</strong></p>
 <p>Let’s look at the normality of each of the groups separately. There are several ways of getting at the <code>serum</code> values for Males and Females separately. We’ll use the unstacking method, then use Shapiro-Wilk followed by qqplots.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uns_turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">turtle</span>, <span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  uns_turtle$Male
-## W = 0.94392, p-value = 0.6743</code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  uns_turtle$Female
-## W = 0.84178, p-value = 0.1349</code></pre>
+<code class="sourceCode R"><span class="co"># perform Shapiro-Wilk test on each group</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">serum</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##   sex    variable statistic     p
+##   &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
+## 1 Female serum        0.842 0.135
+## 2 Male   serum        0.944 0.674</code></pre>
 <p>The p-values for both Shapiro-Wilk tests are non-significant which suggests that the data are normal enough. This is a bit surprising given what we saw in the boxplot but there are two bits of information that we can use to reassure us.</p>
 <ol style="list-style-type: decimal">
 <li>The p-value for the Female group is smaller than for the Male group (suggesting that the Female group is closer to being non-normal than the Male group) which makes sense.</li>
 <li>The Shapiro-Wilk test is generally quite relaxed about normality for small sample sizes (and notoriously strict for very large sample sizes). For a group with only 6 data points in it, the data would actually have to have a really, really skewed distribution. Given that the Female group only has 6 data points in it, it’s not too surprising that the Shapiro-Wilk test came back saying everything is OK.</li>
 </ol>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, main <span class="op">=</span> <span class="st">"Male"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Male</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span>, main <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">uns_turtle</span><span class="op">$</span><span class="va">Female</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># create Q-Q plots for both groups</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">serum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">facet_wrap</span><span class="op">(</span>facets <span class="op">=</span> <span class="fu">vars</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-1.png" width="672"></div>
 <p>The results from the Q-Q plots echo what we’ve already seen from the Shapiro-Wilk analyses. The Male group doesn’t look too bad whereas the Female group looks somewhat dodgy.</p>
 <p>Overall, the assumption of normality of the data doesn’t appear to be very well met at all, but we do have to bear in mind that there are only a few data points in each group and we might just be seeing this pattern in the data due to random chance rather than because the underlying populations are actually not normally distributed. Personally, though I’d edge towards non-normal here.</p>
@@ -766,7 +817,9 @@ Answer
 <p>It’s not clear whether the data are normal or not, so it isn’t clear which test to use here. The sensible approach is to do both and hope that they agree (fingers crossed!)</p>
 <p>Bartlett’s test gives us:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, <span class="va">turtle</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># perform Bartlett's test</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,
+              data <span class="op">=</span> <span class="va">turtle</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
 ## 
@@ -774,65 +827,75 @@ Answer
 ## Bartlett's K-squared = 0.045377, df = 1, p-value = 0.8313</code></pre>
 <p>and Levene’s test gives us:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load if needed</span>
-<span class="co"># library(car)</span>
-
-<span class="fu">leveneTest</span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>, <span class="va">turtle</span><span class="op">)</span></code></pre></div>
-<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  1  0.2434 0.6315
-##       11</code></pre>
+<code class="sourceCode R"><span class="co"># perform Levene's test</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    11     0.243 0.631</code></pre>
 <p>The good news is that both Levene and Bartlett agree that there is homogeneity of variance between the two groups (thank goodness!).</p>
 <p>Overall, what this means is that we’re not too sure about normality, but that homogeneity of variance is pretty good.</p>
-<p><strong>6. Carry out a two-sample t-test</strong></p>
-<p>Because of the result of the Bartlett test I know that I can carry out a two-sample Student’s t-test (as opposed to a two-sample Welch’s t-test, if you’re confused, see Figure <a href="#fig:fig-cs1-diagram-which-test"><strong>??</strong></a>)</p>
+</div>
+<div id="implement-two-sample-t-test" class="section level3" number="6.9.5">
+<h3>
+<span class="header-section-number">6.9.5</span> Implement two-sample t-test<a class="anchor" aria-label="anchor" href="#implement-two-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Because of the result of the Bartlett test I know that I can carry out a two-sample Student’s t-test (as opposed to a two-sample Welch’s t-test, if you’re confused, see Figure <a href="introduction.html#fig:fig-cs1-diagram-which-test">3.2</a>)</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span> , <span class="va">turtle</span>,
-       alternative<span class="op">=</span><span class="st">"two.sided"</span>,
-       var.equal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Two Sample t-test
-## 
-## data:  serum by sex
-## t = 0.62681, df = 11, p-value = 0.5436
-## alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
-## 95 percent confidence interval:
-##  -3.575759  6.423378
-## sample estimates:
-## mean in group Female   mean in group Male 
-##             225.6667             224.2429</code></pre>
+<code class="sourceCode R"><span class="co"># perform two-sample t-test</span>
+<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,
+         alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+         var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   .y.   group1 group2    n1    n2 statistic    df     p
+## * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 serum Female Male       6     7     0.627    11 0.544</code></pre>
 <p>With a p-value of 0.544, this test tells me that there is insufficient evidence to suggest that the means of the two groups are different. A suitable summary sentence would be:</p>
 <blockquote>
 <p>A Student’s two-sample t-test indicated that the mean serum cholesterol level did not differ significantly between Male and Female turtles (t = 0.627, df = 11, p = 0.544).</p>
 </blockquote>
-<p><strong>Discussion</strong></p>
+</div>
+<div id="discussion-1" class="section level3" number="6.9.6">
+<h3>
+<span class="header-section-number">6.9.6</span> Discussion<a class="anchor" aria-label="anchor" href="#discussion-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>In reality, because of the ambiguous normality assumption assessment, for this dataset I would actually carry out two different tests; the two-sample t-test with equal variance and the Mann-Whitney U test. If both of them agreed then it wouldn’t matter too much which one I reported (I’d personally report both with a short sentence to say that I’m doing that because it wasn’t clear whether the assumption of normality had or had not been met), but it would be acceptable to report just one.</p>
+
+</div>
 </details>
 </div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">4</span> Wilcoxon signed-rank test</a></div>
-<div class="next"><a href="cs1-mannwhitney-u-test.html"><span class="header-section-number">6</span> Mann-Whitney U test</a></div>
+<div class="prev"><a href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></div>
+<div class="next"><a href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cs1-students-t-test"><span class="header-section-number">5</span> Student’s t-test</a></li>
-<li><a class="nav-link" href="#section-commands-2"><span class="header-section-number">5.1</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-1"><span class="header-section-number">5.2</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#cs1-students-sumvisual"><span class="header-section-number">5.3</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-2"><span class="header-section-number">5.4</span> Assumptions</a></li>
-<li><a class="nav-link" href="#exercise-q-q-plots-rivers"><span class="header-section-number">5.5</span> Exercise: Q-Q plots rivers</a></li>
+<li><a class="nav-link" href="#cs1-students-t-test"><span class="header-section-number">6</span> Student’s t-test</a></li>
+<li><a class="nav-link" href="#section-commands-2"><span class="header-section-number">6.1</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-1"><span class="header-section-number">6.2</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#cs1-students-sumvisual"><span class="header-section-number">6.3</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-4"><span class="header-section-number">6.4</span> Assumptions</a></li>
+<li><a class="nav-link" href="#exercise-q-q-plots-rivers"><span class="header-section-number">6.5</span> Exercise: Q-Q plots rivers</a></li>
 <li>
-<a class="nav-link" href="#equality-of-variance"><span class="header-section-number">5.6</span> Equality of variance</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#levenes-test"><span class="header-section-number">5.6.1</span> Levene’s test</a></li>
-<li><a class="nav-link" href="#bartletts-test"><span class="header-section-number">5.6.2</span> Bartlett’s test</a></li>
+<a class="nav-link" href="#equality-of-variance"><span class="header-section-number">6.6</span> Equality of variance</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#bartletts-test"><span class="header-section-number">6.6.1</span> Bartlett’s test</a></li></ul>
+</li>
+<li><a class="nav-link" href="#implement-test-1"><span class="header-section-number">6.7</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results"><span class="header-section-number">6.8</span> Interpret output and report results</a></li>
+<li>
+<a class="nav-link" href="#exercise-turtles"><span class="header-section-number">6.9</span> Exercise: Turtles</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data"><span class="header-section-number">6.9.1</span> Data</a></li>
+<li><a class="nav-link" href="#hypotheses-2"><span class="header-section-number">6.9.2</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#load-summarise-and-visualise-data"><span class="header-section-number">6.9.3</span> Load, summarise and visualise data</a></li>
+<li><a class="nav-link" href="#assumptions-5"><span class="header-section-number">6.9.4</span> Assumptions</a></li>
+<li><a class="nav-link" href="#implement-two-sample-t-test"><span class="header-section-number">6.9.5</span> Implement two-sample t-test</a></li>
+<li><a class="nav-link" href="#discussion-1"><span class="header-section-number">6.9.6</span> Discussion</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#implement-test"><span class="header-section-number">5.7</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results"><span class="header-section-number">5.8</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-turtles"><span class="header-section-number">5.9</span> Exercise: Turtles</a></li>
 </ul>
 
       <div class="book-extra">
