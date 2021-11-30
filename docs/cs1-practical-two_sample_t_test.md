@@ -12,8 +12,7 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`split()`| Divides data into groups |
-|`map()`| Applies a function to each element of a list or vector|
+|`get_summary_stats()`| Computes summary statistics |
 |`bartlett.test()`| Perform Bartlett's test for equality of variance (normally distributed data) |
 |`levene_test()`| Perform Levene's test for equality of variance (non-normally distributed data) |
 
@@ -43,33 +42,19 @@ Let's summarise the data...
 
 
 ```r
-# here we load the data,
-# split the data by river into two groups,
-# and apply the summary() function to each group
-# using the map() function
+# get common summary stats for the length column
 rivers %>% 
-  split(.$river) %>% 
-  map(summary)
+  select(-id) %>% 
+  group_by(river) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-## $Aripo
-##        id          river               length     
-##  Min.   :30.0   Length:39          Min.   :17.50  
-##  1st Qu.:39.5   Class :character   1st Qu.:19.10  
-##  Median :49.0   Mode  :character   Median :20.10  
-##  Mean   :49.0                      Mean   :20.33  
-##  3rd Qu.:58.5                      3rd Qu.:21.30  
-##  Max.   :68.0                      Max.   :26.40  
-## 
-## $Guanapo
-##        id        river               length    
-##  Min.   : 1   Length:29          Min.   :11.2  
-##  1st Qu.: 8   Class :character   1st Qu.:17.5  
-##  Median :15   Mode  :character   Median :18.8  
-##  Mean   :15                      Mean   :18.3  
-##  3rd Qu.:22                      3rd Qu.:19.7  
-##  Max.   :29                      Max.   :23.3
+## # A tibble: 2 × 11
+##   river   variable     n   min   max median   iqr  mean    sd    se    ci
+##   <chr>   <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 Aripo   length      39  17.5  26.4   20.1   2.2  20.3  1.78 0.285 0.577
+## 2 Guanapo length      29  11.2  23.3   18.8   2.2  18.3  2.58 0.48  0.983
 ```
 
 and visualise it:
@@ -361,30 +346,19 @@ Let's summarise the data (although a visualisation is probably much easier to wo
 
 
 ```r
-# create summary table for each group
+# create summary statistics for each group
 turtle %>% 
-  split(.$sex) %>% 
-  map(summary)
+  select(-id) %>% 
+  group_by(sex) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-## $Female
-##        id            serum           sex           
-##  Min.   : 8.00   Min.   :221.5   Length:6          
-##  1st Qu.: 9.25   1st Qu.:223.5   Class :character  
-##  Median :10.50   Median :224.1   Mode  :character  
-##  Mean   :10.50   Mean   :225.7                     
-##  3rd Qu.:11.75   3rd Qu.:228.7                     
-##  Max.   :13.00   Max.   :230.8                     
-## 
-## $Male
-##        id          serum           sex           
-##  Min.   :1.0   Min.   :218.6   Length:7          
-##  1st Qu.:2.5   1st Qu.:221.1   Class :character  
-##  Median :4.0   Median :224.1   Mode  :character  
-##  Mean   :4.0   Mean   :224.2                     
-##  3rd Qu.:5.5   3rd Qu.:227.7                     
-##  Max.   :7.0   Max.   :229.6
+## # A tibble: 2 × 11
+##   sex    variable     n   min   max median   iqr  mean    sd    se    ci
+##   <chr>  <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 Female serum        6  222.  231.   224.  5.22  226.  3.87  1.58  4.06
+## 2 Male   serum        7  219.  230.   224.  6.6   224.  4.26  1.61  3.94
 ```
 
 and visualise the data:

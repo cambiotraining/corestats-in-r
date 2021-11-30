@@ -14,8 +14,7 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`split()`| Divides data into groups |
-|`map()`| Applies a function to each element of a list or vector|
+|`get_summary_stats()`| Computes summary statistics |
 |`bartlett.test()`| Perform Bartlett's test for equality of variance (normally distributed data) |
 |`levene_test()`| Perform Levene's test for equality of variance (non-normally distributed data) |
 
@@ -43,13 +42,11 @@ rivers <- read_csv("data/tidy/CS1-twosample.csv")
 Let's summarise the data...
 
 ```{r cs1-twosample-rivers-summary}
-# here we load the data,
-# split the data by river into two groups,
-# and apply the summary() function to each group
-# using the map() function
+# get common summary stats for the length column
 rivers %>% 
-  split(.$river) %>% 
-  map(summary)
+  select(-id) %>% 
+  group_by(river) %>% 
+  get_summary_stats(type = "common")
 ```
 
 and visualise it:
@@ -252,10 +249,11 @@ turtle
 Let's summarise the data (although a visualisation is probably much easier to work with):
 
 ```{r cs1-twosample-turtle-summary}
-# create summary table for each group
+# create summary statistics for each group
 turtle %>% 
-  split(.$sex) %>% 
-  map(summary)
+  select(-id) %>% 
+  group_by(sex) %>% 
+  get_summary_stats(type = "common")
 ```
 
 and visualise the data:
