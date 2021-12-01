@@ -405,11 +405,11 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test()</a></code></td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code></td>
 <td align="left">Performs the Kruskal-Wallis test</td>
 </tr>
 <tr class="even">
-<td align="left"><code>dunn.test()</code></td>
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code></td>
 <td align="left">Performs Dunn’s test</td>
 </tr>
 </tbody>
@@ -430,36 +430,46 @@
 <p>The data are stored in the file <code>data/raw/CS2-spidermonkey.csv</code>.</p>
 <p>First we read the data in:</p>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS2-spidermonkey.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS2-spidermonkey.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="summarise-and-visualise-7" class="section level2" number="13.5">
 <h2>
 <span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># look at the data format</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
-<pre><code>##   aggression familiarity
-## 1        0.2        high
-## 2        0.1        high
-## 3        0.4        high
-## 4        0.8        high
-## 5        0.3        high
-## 6        0.5        high</code></pre>
+<code class="sourceCode R"><span class="co"># look at the data</span>
+<span class="va">spidermonkey</span></code></pre></div>
+<pre><code>## # A tibble: 21 × 3
+##       id aggression familiarity
+##    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      
+##  1     1        0.2 high       
+##  2     2        0.1 high       
+##  3     3        0.4 high       
+##  4     4        0.8 high       
+##  5     5        0.3 high       
+##  6     6        0.5 high       
+##  7     7        0.2 high       
+##  8     8        0.5 low        
+##  9     9        0.4 low        
+## 10    10        0.3 low        
+## # … with 11 more rows</code></pre>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># summarise the data</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
-<pre><code>##   familiarity aggression.Min. aggression.1st Qu. aggression.Median
-## 1        high       0.1000000          0.2000000         0.3000000
-## 2         low       0.3000000          0.4500000         0.5000000
-## 3        none       0.9000000          1.1500000         1.2000000
-##   aggression.Mean aggression.3rd Qu. aggression.Max.
-## 1       0.3571429          0.4500000       0.8000000
-## 2       0.6285714          0.7500000       1.2000000
-## 3       1.2571429          1.4000000       1.6000000</code></pre>
+<span class="va">spidermonkey</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">familiarity</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 11
+##   familiarity variable       n   min   max median   iqr  mean    sd    se    ci
+##   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 high        aggression     7   0.1   0.8    0.3  0.25 0.357 0.237 0.09  0.219
+## 2 low         aggression     7   0.3   1.2    0.5  0.3  0.629 0.315 0.119 0.291
+## 3 none        aggression     7   0.9   1.6    1.2  0.25 1.26  0.23  0.087 0.213</code></pre>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create boxplot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
+<span class="va">spidermonkey</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">familiarity</span>, y <span class="op">=</span> <span class="va">aggression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672"></div>
 <p>The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.</p>
 </div>
@@ -474,37 +484,39 @@
 <li>The parent distributions should have the same variance</li>
 </ol>
 <p>Independence we’ll ignore as usual. Similar shape is best assessed from the earlier visualisation of the data. That means that we only need to check equality of variance.</p>
-<p><strong>Equality of variance</strong></p>
+<div id="equality-of-variance-2" class="section level3" number="13.6.1">
+<h3>
+<span class="header-section-number">13.6.1</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance-2"><i class="fas fa-link"></i></a>
+</h3>
 <p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
-<p>Levene’s test is not included in the default R packages and may require the installation of an additional package called <code>car</code> (Companion to Applied Regression).</p>
-<p>To install the <code>car</code> package, run the following command in your console:</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"car"</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>car</code> and press <kbd>Install</kbd></p>
-<p>Remember to load the library with <code><a href="https://r-forge.r-project.org/projects/car/">library(car)</a></code>.</p>
-<p>Perform Levene’s test on the data:</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># perform Levene's test</span>
+<span class="va">spidermonkey</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 ## factor.</code></pre>
-<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  2  0.1139  0.893
-##       18</code></pre>
-<p>The relevant p-value is given on the 3rd line (<code>Pr(&gt;F) = 0.893</code>). As it is quite large we see that each group do appear to have the same variance.</p>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     2    18     0.114 0.893</code></pre>
+<p>The relevant p-value is given in the <code>p</code> column (0.893). As it is quite large we see that each group do appear to have the same variance.</p>
 <p>There is also a warning about <code>group coerced to factor</code>. There is no need to worry about this - Levene’s test needs to compare different groups and because <code>aggression</code> is encoded as a numeric value, it converts it to a categorical one before running the test.</p>
+</div>
 </div>
 <div id="implement-test-6" class="section level2" number="13.7">
 <h2>
 <span class="header-section-number">13.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
+<span class="va">spidermonkey</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>The first argument must be in the formula format: <code>variable ~ category</code>
+<li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code> takes the formula in the following format: <code>variable ~ category</code>
 </li>
-<li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
 </ul>
 </div>
 <div id="interpret-output-and-report-results-5" class="section level2" number="13.8">
@@ -512,55 +524,42 @@
 <span class="header-section-number">13.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is the output that you should now see in the console window:</p>
+<pre><code>## # A tibble: 1 × 6
+##   .y.            n statistic    df       p method        
+## * &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;         
+## 1 aggression    21      13.6     2 0.00112 Kruskal-Wallis</code></pre>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  aggression by familiarity
 ## Kruskal-Wallis chi-squared = 13.597, df = 2, p-value = 0.001115</code></pre>
-<p>The p-value is given in the 3rd line. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.</p>
+<p>The p-value is given in the <code>p</code> column. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.</p>
 <p>Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say “that it is very unlikely that these three samples came from the same parent distribution and as such we can reject our null hypothesis” and state that:</p>
 <blockquote>
 <p>A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).</p>
 </blockquote>
+<p><br></p>
 </div>
 <div id="post-hoc-testing-dunns-test" class="section level2" number="13.9">
 <h2>
 <span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)<a class="anchor" aria-label="anchor" href="#post-hoc-testing-dunns-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.
-Dunn’s test is also not included in the default R packages and may require the installation of an additional package called <code>dunn.test</code>.</p>
-<p>To install the <code>dunn.test</code> package, run the following command in your console:</p>
+<p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.</p>
+<p>Dunn’s test is used to check for significant differences in group medians:</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dunn.test"</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, go to <kbd>Tools</kbd> &gt; <kbd>Install packages…</kbd> &gt; <kbd>Packages</kbd>, type in <code>dunn.test</code> and press <kbd>Install</kbd></p>
-<p>Remember to load the library with <code><a href="https://rdrr.io/r/base/library.html">library(dunn.test)</a></code>.</p>
-<p>Test for a significant difference in group medians:</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">spidermonkey</span><span class="op">$</span><span class="va">aggression</span>, <span class="va">spidermonkey</span><span class="op">$</span><span class="va">familiarity</span>,
-          altp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Note that Dunn’s test requires us to enter two arguments, the first is the vector of values and the second is the vector containing the category labels (i.e. the factor).</p>
+<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
+<span class="va">spidermonkey</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
 <p>This will give the following output:</p>
-<pre><code>##   Kruskal-Wallis rank sum test
-## 
-## data: x and group
-## Kruskal-Wallis chi-squared = 13.5972, df = 2, p-value = 0
-## 
-## 
-##                            Comparison of x by group                            
-##                                 (No adjustment)                                
-## Col Mean-|
-## Row Mean |       high        low
-## ---------+----------------------
-##      low |  -1.405820
-##          |     0.1598
-##          |
-##     none |  -3.655132  -2.249312
-##          |    0.0003*    0.0245*
-## 
-## alpha = 0.05
-## Reject Ho if p &lt;= alpha</code></pre>
-<p>You can see that the <code>dunn.test()</code> function also performs a Kruskal-Wallis test on the data, and these results are reported initially.</p>
-<p>The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
+<pre><code>## # A tibble: 3 × 9
+##   .y.        group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
+## * &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
+## 1 aggression high   low        7     7      1.41 0.160    0.160    ns          
+## 2 aggression high   none       7     7      3.66 0.000257 0.000771 ***         
+## 3 aggression low    none       7     7      2.25 0.0245   0.0490   *</code></pre>
+<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function performs a Kruskal-Wallis test on the data, followed by a post-hoc pairwise multiple comparison.</p>
+<p>The comparison between the pairs of groups is reported in the table at the bottom. Each row contains a single comparison. We are interested in the <code>p</code> and <code>p.adj</code> columns, which contain the the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
+<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="#cs6-intro">Power analysis</a>.</p>
 </div>
 <div id="exercise-lobster-weight-1" class="section level2" number="13.10">
 <h2>
@@ -571,60 +570,72 @@ Dunn’s test is also not included in the default R packages and may require the
 <p>Perform a Kruskal-Wallis test and do a post-hoc test on the <code>lobster</code> data set.</p>
 <details><summary>
 Answer
-</summary><p><strong>1. Hypotheses</strong></p>
+</summary><div id="hypotheses-6" class="section level3" number="13.10.1">
+<h3>
+<span class="header-section-number">13.10.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-6"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>
 <span class="math inline">\(H_0\)</span> : all medians are equal</li>
 <li>
 <span class="math inline">\(H_1\)</span> : not all medians are equal</li>
 </ul>
-<p><strong>2. Import data, summarise and visualise</strong></p>
+</div>
+<div id="import-data-summarise-and-visualise-2" class="section level3" number="13.10.2">
+<h3>
+<span class="header-section-number">13.10.2</span> Import data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise-2"><i class="fas fa-link"></i></a>
+</h3>
 <p>All done previously.</p>
-<p><strong>3. Assumptions</strong></p>
+</div>
+<div id="assumptions-14" class="section level3" number="13.10.3">
+<h3>
+<span class="header-section-number">13.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-14"><i class="fas fa-link"></i></a>
+</h3>
 <p>From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene’s test</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">leveneTest</span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
-<pre><code>## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  2  0.0028 0.9972
-##       15</code></pre>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lobsters</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     2    15   0.00280 0.997</code></pre>
 <p>Given that the p-value is so high, this again agrees with our previous assessment that the equality of variance assumption is well met. Rock on.</p>
-<p><strong>4. Kruskal-Wallis test</strong></p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>, data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Kruskal-Wallis rank sum test
-## 
-## data:  weight by diet
-## Kruskal-Wallis chi-squared = 3.2565, df = 2, p-value = 0.1963</code></pre>
+</div>
+<div id="kruskal-wallis-test-1" class="section level3" number="13.10.4">
+<h3>
+<span class="header-section-number">13.10.4</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
+<span class="va">lobsters</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 6
+##   .y.        n statistic    df     p method        
+## * &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
+## 1 weight    18      3.26     2 0.196 Kruskal-Wallis</code></pre>
 <blockquote>
 <p>A Kruskal-Wallis test indicated that the median weight of juvenile lobsters did not differ significantly between diets (KW = 3.26, df = 2, p = 0.20).</p>
 </blockquote>
-<p><strong>5. Dunn’s test</strong></p>
-<p>Although rather unneccessary, since we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dunn.test</span><span class="op">(</span><span class="va">lobsters</span><span class="op">$</span><span class="va">weight</span>, <span class="va">lobsters</span><span class="op">$</span><span class="va">diet</span>, altp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Kruskal-Wallis rank sum test
-## 
-## data: x and group
-## Kruskal-Wallis chi-squared = 3.2565, df = 2, p-value = 0.2
-## 
-## 
-##                            Comparison of x by group                            
-##                                 (No adjustment)                                
-## Col Mean-|
-## Row Mean |     Flakes    Mussels
-## ---------+----------------------
-##  Mussels |  -1.787664
-##          |     0.0738
-##          |
-##  Pellets |  -0.670245   1.005415
-##          |     0.5027     0.3147
-## 
-## alpha = 0.05
-## Reject Ho if p &lt;= alpha</code></pre>
-<p>Here, I’ve used an optional argument called <code>altp</code> in the <code>dunn.test()</code> call. The default option reports all p-values divided by 2. And assessment of significance requires you to compare each p-value to 0.025 rather than 0.05. Using the argument <code>altp = TRUE</code> means that Dunn’s test reports actual p-values.</p>
-<p>Either way, here we can see that none of the comparisons are significant (as before).</p>
+<p><br></p>
+</div>
+<div id="post-hoc-dunns-test" class="section level3" number="13.10.5">
+<h3>
+<span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test<a class="anchor" aria-label="anchor" href="#post-hoc-dunns-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Although rather unnecessary (and likely unwanted, since we don’t want to be p-hacking), because we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
+<span class="va">lobsters</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 9
+##   .y.    group1  group2     n1    n2 statistic      p p.adj p.adj.signif
+## * &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+## 1 weight Flakes  Mussels     6     7     1.79  0.0738 0.221 ns          
+## 2 weight Flakes  Pellets     6     5     0.670 0.503  0.629 ns          
+## 3 weight Mussels Pellets     7     5    -1.01  0.315  0.629 ns</code></pre>
+<p>We can see that none of the comparisons are significant, either based on the uncorrected p-values (<code>p</code>) or the p-values adjusted for multiple comparisons (<code>p.adj</code>). This is consistent with what we found previously.</p>
+
+</div>
 </details>
 </div>
 </div>
@@ -637,11 +648,13 @@ Answer
 <li>We use Kruskal-Wallis test to see if there is a difference in medians between multiple continuous variables</li>
 <li>In R we first define a linear model with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, using the format <code>response ~ predictor</code>
 </li>
-<li>Next, we perform a Kruskal-Wallis test on the linear model with <code><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test()</a></code>
+<li>Next, we perform a Kruskal-Wallis test on the linear model with <code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code>
 </li>
 <li>We assume parent distributions have the same shape; each data point is independent and the parent distributions have the same variance</li>
-<li>We test for equality of variance using <code>LeveneTest()</code> from the <code>car</code> package</li>
-<li>Post-hoc testing to check for significant differences in the group medians is done with <code>dunn.test()</code> from the <code>dunn.test</code> package</li>
+<li>We test for equality of variance using <code><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test()</a></code>
+</li>
+<li>Post-hoc testing to check for significant differences in the group medians is done with <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code>
+</li>
 </ul>
 </div>
 
@@ -659,11 +672,21 @@ Answer
 <li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">13.3</span> Section commands</a></li>
 <li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
 <li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-13"><span class="header-section-number">13.6</span> Assumptions</a></li>
+<li>
+<a class="nav-link" href="#assumptions-13"><span class="header-section-number">13.6</span> Assumptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#equality-of-variance-2"><span class="header-section-number">13.6.1</span> Equality of variance</a></li></ul>
+</li>
 <li><a class="nav-link" href="#implement-test-6"><span class="header-section-number">13.7</span> Implement test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">13.8</span> Interpret output and report results</a></li>
 <li><a class="nav-link" href="#post-hoc-testing-dunns-test"><span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)</a></li>
-<li><a class="nav-link" href="#exercise-lobster-weight-1"><span class="header-section-number">13.10</span> Exercise: Lobster weight</a></li>
+<li>
+<a class="nav-link" href="#exercise-lobster-weight-1"><span class="header-section-number">13.10</span> Exercise: Lobster weight</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-6"><span class="header-section-number">13.10.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#import-data-summarise-and-visualise-2"><span class="header-section-number">13.10.2</span> Import data, summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-14"><span class="header-section-number">13.10.3</span> Assumptions</a></li>
+<li><a class="nav-link" href="#kruskal-wallis-test-1"><span class="header-section-number">13.10.4</span> Kruskal-Wallis test</a></li>
+<li><a class="nav-link" href="#post-hoc-dunns-test"><span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#key-points-3"><span class="header-section-number">13.11</span> Key points</a></li>
 </ul>
 

@@ -25,8 +25,8 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
-|`kruskal.test()`| Performs the Kruskal-Wallis test |
-|`dunn.test()`| Performs Dunn's test |
+|`kruskal_test()`| Performs the Kruskal-Wallis test |
+|`dunn_test()`| Performs Dunn's test |
 
 ## Data and hypotheses
 For example, suppose a behavioural ecologist records the rate at which [spider monkeys](https://en.wikipedia.org/wiki/Spider_monkey) behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as `high`, `low` or `none.` We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:
@@ -42,46 +42,56 @@ First we read the data in:
 
 
 ```r
-spidermonkey <- read.csv("data/raw/CS2-spidermonkey.csv")
+spidermonkey <- read_csv("data/tidy/CS2-spidermonkey.csv")
 ```
 
 ## Summarise and visualise
 
 
 ```r
-# look at the data format
-head(spidermonkey)
+# look at the data
+spidermonkey
 ```
 
 ```
-##   aggression familiarity
-## 1        0.2        high
-## 2        0.1        high
-## 3        0.4        high
-## 4        0.8        high
-## 5        0.3        high
-## 6        0.5        high
+## # A tibble: 21 × 3
+##       id aggression familiarity
+##    <dbl>      <dbl> <chr>      
+##  1     1        0.2 high       
+##  2     2        0.1 high       
+##  3     3        0.4 high       
+##  4     4        0.8 high       
+##  5     5        0.3 high       
+##  6     6        0.5 high       
+##  7     7        0.2 high       
+##  8     8        0.5 low        
+##  9     9        0.4 low        
+## 10    10        0.3 low        
+## # … with 11 more rows
 ```
 
 ```r
 # summarise the data
-aggregate(aggression ~ familiarity, data = spidermonkey, summary)
+spidermonkey %>% 
+  select(-id) %>% 
+  group_by(familiarity) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-##   familiarity aggression.Min. aggression.1st Qu. aggression.Median
-## 1        high       0.1000000          0.2000000         0.3000000
-## 2         low       0.3000000          0.4500000         0.5000000
-## 3        none       0.9000000          1.1500000         1.2000000
-##   aggression.Mean aggression.3rd Qu. aggression.Max.
-## 1       0.3571429          0.4500000       0.8000000
-## 2       0.6285714          0.7500000       1.2000000
-## 3       1.2571429          1.4000000       1.6000000
+## # A tibble: 3 × 11
+##   familiarity variable       n   min   max median   iqr  mean    sd    se    ci
+##   <chr>       <chr>      <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 high        aggression     7   0.1   0.8    0.3  0.25 0.357 0.237 0.09  0.219
+## 2 low         aggression     7   0.3   1.2    0.5  0.3  0.629 0.315 0.119 0.291
+## 3 none        aggression     7   0.9   1.6    1.2  0.25 1.26  0.23  0.087 0.213
 ```
 
 ```r
 # create boxplot
-boxplot(aggression ~ familiarity, data = spidermonkey)
+spidermonkey %>% 
+  ggplot(aes(x = familiarity, y = aggression)) +
+  geom_boxplot()
 ```
 
 <img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672" />
@@ -97,28 +107,15 @@ To use the Kruskal-Wallis test we have to make three assumptions:
 
 Independence we’ll ignore as usual. Similar shape is best assessed from the earlier visualisation of the data. That means that we only need to check equality of variance.
 
-**Equality of variance**
+### Equality of variance
 
 We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).
 
-Levene’s test is not included in the default R packages and may require the installation of an additional package called `car` (Companion to Applied Regression).
-
-To install the `car` package, run the following command in your console:
-
 
 ```r
-install.packages("car")
-```
-
-Alternatively, go to <kbd>Tools</kbd> > <kbd>Install packages...</kbd> > <kbd>Packages</kbd>, type in `car` and press <kbd>Install</kbd>
-
-Remember to load the library with `library(car)`.
-
-Perform Levene's test on the data:
-
-
-```r
-leveneTest(aggression ~ familiarity, data = spidermonkey)
+# perform Levene's test
+spidermonkey %>% 
+  levene_test(aggression ~ familiarity)
 ```
 
 ```
@@ -127,13 +124,13 @@ leveneTest(aggression ~ familiarity, data = spidermonkey)
 ```
 
 ```
-## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(>F)
-## group  2  0.1139  0.893
-##       18
+## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   <int> <int>     <dbl> <dbl>
+## 1     2    18     0.114 0.893
 ```
 
-The relevant p-value is given on the 3rd line (`Pr(>F) = 0.893`). As it is quite large we see that each group do appear to have the same variance.
+The relevant p-value is given in the `p` column (0.893). As it is quite large we see that each group do appear to have the same variance.
 
 There is also a warning about `group coerced to factor`. There is no need to worry about this - Levene's test needs to compare different groups and because `aggression` is encoded as a numeric value, it converts it to a categorical one before running the test.
 
@@ -142,15 +139,25 @@ Perform a Kruskal-Wallis test on the data:
 
 
 ```r
+# implement Kruskal-Wallis test
+spidermonkey %>% 
+  kruskal_test(aggression ~ familiarity)
+
 kruskal.test(aggression ~ familiarity, data = spidermonkey)
 ```
 
--	The first argument must be in the formula format: `variable ~ category`
--	If the data are stored in stacked format, then the second argument must be the name of the data frame
+-	The `kruskal_test()` takes the formula in the following format: `variable ~ category`
 
 ## Interpret output and report results
 This is the output that you should now see in the console window:
 
+
+```
+## # A tibble: 1 × 6
+##   .y.            n statistic    df       p method        
+## * <chr>      <int>     <dbl> <int>   <dbl> <chr>         
+## 1 aggression    21      13.6     2 0.00112 Kruskal-Wallis
+```
 
 ```
 ## 
@@ -160,65 +167,43 @@ This is the output that you should now see in the console window:
 ## Kruskal-Wallis chi-squared = 13.597, df = 2, p-value = 0.001115
 ```
 
-The p-value is given in the 3rd line. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.
+The p-value is given in the `p` column. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.
 
 Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say "that it is very unlikely that these three samples came from the same parent distribution and as such we can reject our null hypothesis" and state that:
 
 > A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).
 
+<br />
+
 ## Post-hoc testing (Dunn's test)
 The equivalent of Tukey’s range test for non-normal data is **Dunn’s test**.
-Dunn’s test is also not included in the default R packages and may require the installation of an additional package called `dunn.test`.
 
-To install the `dunn.test` package, run the following command in your console:
-
-
-```r
-install.packages("dunn.test")
-```
-
-Alternatively, go to <kbd>Tools</kbd> > <kbd>Install packages...</kbd> > <kbd>Packages</kbd>, type in `dunn.test` and press <kbd>Install</kbd>
-
-Remember to load the library with `library(dunn.test)`.
-
-Test for a significant difference in group medians:
+Dunn's test is used to check for significant differences in group medians:
 
 
 ```r
-dunn.test(spidermonkey$aggression, spidermonkey$familiarity,
-          altp = TRUE)
+# perform Dunn's test
+spidermonkey %>% 
+  dunn_test(aggression ~ familiarity)
 ```
-
-Note that Dunn’s test requires us to enter two arguments, the first is the vector of values and the second is the vector containing the category labels (i.e. the factor).
 
 This will give the following output:
 
 
 ```
-##   Kruskal-Wallis rank sum test
-## 
-## data: x and group
-## Kruskal-Wallis chi-squared = 13.5972, df = 2, p-value = 0
-## 
-## 
-##                            Comparison of x by group                            
-##                                 (No adjustment)                                
-## Col Mean-|
-## Row Mean |       high        low
-## ---------+----------------------
-##      low |  -1.405820
-##          |     0.1598
-##          |
-##     none |  -3.655132  -2.249312
-##          |    0.0003*    0.0245*
-## 
-## alpha = 0.05
-## Reject Ho if p <= alpha
+## # A tibble: 3 × 9
+##   .y.        group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
+## * <chr>      <chr>  <chr>  <int> <int>     <dbl>    <dbl>    <dbl> <chr>       
+## 1 aggression high   low        7     7      1.41 0.160    0.160    ns          
+## 2 aggression high   none       7     7      3.66 0.000257 0.000771 ***         
+## 3 aggression low    none       7     7      2.25 0.0245   0.0490   *
 ```
 
-You can see that the `dunn.test()` function also performs a Kruskal-Wallis test on the data, and these results are reported initially.
+The `dunn_test()` function performs a Kruskal-Wallis test on the data, followed by a post-hoc pairwise multiple comparison.
 
-The comparison between the pairs of groups is reported in the table at the bottom. Each cell in the table has two rows. The bottom row contains the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.
+The comparison between the pairs of groups is reported in the table at the bottom. Each row contains a single comparison. We are interested in the `p` and `p.adj` columns, which contain the the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.
+
+The `dunn_test()` function has several arguments, of which the `p.adjust.method` is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is `"holm"`. We'll cover more about this in the chapter on [Power analysis](#cs6-intro).
 
 ## Exercise: Lobster weight
 :::exercise
@@ -228,85 +213,76 @@ Perform a Kruskal-Wallis test and do a post-hoc test on the `lobster` data set.
 
 <details><summary>Answer</summary>
 
-**1. Hypotheses**
+### Hypotheses
 
 - $H_0$ : all medians are equal
 - $H_1$ : not all medians are equal
 
-**2. Import data, summarise and visualise**
+### Import data, summarise and visualise
 
 
 All done previously.
 
-**3. Assumptions**
+### Assumptions
 
 From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene's test
 
 
 ```r
-leveneTest(weight ~ diet, data = lobsters)
+lobsters %>% 
+  levene_test(weight ~ diet)
 ```
 
 ```
-## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(>F)
-## group  2  0.0028 0.9972
-##       15
+## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   <int> <int>     <dbl> <dbl>
+## 1     2    15   0.00280 0.997
 ```
 
 Given that the p-value is so high, this again agrees with our previous assessment that the equality of variance assumption is well met. Rock on.
 
-**4. Kruskal-Wallis test**
+### Kruskal-Wallis test
 
 
 ```r
-kruskal.test(weight ~ diet, data = lobsters)
+# implement Kruskal-Wallis test
+lobsters %>% 
+  kruskal_test(weight ~ diet)
 ```
 
 ```
-## 
-## 	Kruskal-Wallis rank sum test
-## 
-## data:  weight by diet
-## Kruskal-Wallis chi-squared = 3.2565, df = 2, p-value = 0.1963
+## # A tibble: 1 × 6
+##   .y.        n statistic    df     p method        
+## * <chr>  <int>     <dbl> <int> <dbl> <chr>         
+## 1 weight    18      3.26     2 0.196 Kruskal-Wallis
 ```
 
 > A Kruskal-Wallis test indicated that the median weight of juvenile lobsters did not differ significantly between diets (KW = 3.26, df = 2, p = 0.20).
 
-**5. Dunn's test**
+<br />
 
-Although rather unneccessary, since we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey's range test: Dunn's test.
+### Post-hoc Dunn's test
+
+Although rather unnecessary (and likely unwanted, since we don't want to be p-hacking), because we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey's range test: Dunn's test.
 
 
 ```r
-dunn.test(lobsters$weight, lobsters$diet, altp = TRUE)
+# perform Dunn's test
+lobsters %>% 
+  dunn_test(weight ~ diet)
 ```
 
 ```
-##   Kruskal-Wallis rank sum test
-## 
-## data: x and group
-## Kruskal-Wallis chi-squared = 3.2565, df = 2, p-value = 0.2
-## 
-## 
-##                            Comparison of x by group                            
-##                                 (No adjustment)                                
-## Col Mean-|
-## Row Mean |     Flakes    Mussels
-## ---------+----------------------
-##  Mussels |  -1.787664
-##          |     0.0738
-##          |
-##  Pellets |  -0.670245   1.005415
-##          |     0.5027     0.3147
-## 
-## alpha = 0.05
-## Reject Ho if p <= alpha
+## # A tibble: 3 × 9
+##   .y.    group1  group2     n1    n2 statistic      p p.adj p.adj.signif
+## * <chr>  <chr>   <chr>   <int> <int>     <dbl>  <dbl> <dbl> <chr>       
+## 1 weight Flakes  Mussels     6     7     1.79  0.0738 0.221 ns          
+## 2 weight Flakes  Pellets     6     5     0.670 0.503  0.629 ns          
+## 3 weight Mussels Pellets     7     5    -1.01  0.315  0.629 ns
 ```
 
-Here, I've used an optional argument called `altp` in the `dunn.test()` call. The default option reports all p-values divided by 2. And assessment of significance requires you to compare each p-value to 0.025 rather than 0.05. Using the argument `altp = TRUE` means that Dunn's test reports actual p-values.
-
-Either way, here we can see that none of the comparisons are significant (as before).
+We can see that none of the comparisons are significant, either based on the uncorrected p-values (`p`) or the p-values adjusted for multiple comparisons (`p.adj`). This is consistent with what we found previously.
 
 </details>
 :::
@@ -316,8 +292,8 @@ Either way, here we can see that none of the comparisons are significant (as bef
 :::keypoints
 - We use Kruskal-Wallis test to see if there is a difference in medians between multiple continuous variables
 - In R we first define a linear model with `lm()`, using the format `response ~ predictor`
-- Next, we perform a Kruskal-Wallis test on the linear model with `kruskal.test()`
+- Next, we perform a Kruskal-Wallis test on the linear model with `kruskal_test()`
 - We assume parent distributions have the same shape; each data point is independent and the parent distributions have the same variance
-- We test for equality of variance using `LeveneTest()` from the `car` package
-- Post-hoc testing to check for significant differences in the group medians is done with `dunn.test()` from the `dunn.test` package
+- We test for equality of variance using `levene_test()`
+- Post-hoc testing to check for significant differences in the group medians is done with `dunn_test()`
 :::

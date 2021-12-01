@@ -142,8 +142,14 @@ section-commands-7
 data-and-hypotheses-6
 summarise-and-visualise-7
 assumptions-13
+equality-of-variance-2
 implement-test-6
 interpret-output-and-report-results-5
 post-hoc-testing-dunns-test
 exercise-lobster-weight-1
+hypotheses-6
+import-data-summarise-and-visualise-2
+assumptions-14
+kruskal-wallis-test-1
+post-hoc-dunns-test
 key-points-3

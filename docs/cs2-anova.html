@@ -1036,8 +1036,7 @@ Answer
 </h3>
 <p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>,
-         data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: weight
@@ -1052,6 +1051,7 @@ Answer
 <blockquote>
 <p>A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).</p>
 </blockquote>
+<p><br></p>
 </div>
 <div id="post-hoc-testing-with-tukey" class="section level3" number="12.10.6">
 <h3>

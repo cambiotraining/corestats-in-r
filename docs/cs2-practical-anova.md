@@ -689,8 +689,7 @@ With our assumptions of normality and equality of variance met we can be confide
 
 
 ```r
-anova(lm(weight ~ diet,
-         data = lobsters))
+anova(lm_lobsters)
 ```
 
 ```
@@ -706,6 +705,8 @@ anova(lm(weight ~ diet,
 ### Result
 
 > A one-way ANOVA test indicated that the mean weight of juvenile lobsters did not differ significantly between diets (F = 1.64, df = 2,15, p = 0.23).
+
+<br />
 
 ### Post-hoc testing with Tukey
 
