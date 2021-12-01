@@ -27,34 +27,30 @@ Perform a two-tailed, Wilcoxon signed-rank test:
 
 
 ```r
-# perform the test
-cortisol %>% 
-  wilcox_test(cortisol ~ time,
-              alternative = "two.sided",
-              paired = TRUE)
+wilcox.test(cortisol$morning, cortisol$evening,
+            alternative = "two.sided", paired = TRUE)
 ```
 
--	The first argument gives the formula
--	The second argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less` 
--	The third argument says that the data are paired
-
+-	The first two arguments must be the two samples in numerical vector format
+-	The second argument gives the type of alternative hypothesis and must be one of `two.sided`, `greater` or `less`
+-	The third argument indicates that the test is paired
 
 ## Interpret output and report results
 
 ```
-## # A tibble: 1 × 7
-##   .y.      group1  group2     n1    n2 statistic        p
-## * <chr>    <chr>   <chr>   <int> <int>     <dbl>    <dbl>
-## 1 cortisol evening morning    20    20        13 0.000168
+## 
+## 	Wilcoxon signed rank exact test
+## 
+## data:  cortisol$morning and cortisol$evening
+## V = 197, p-value = 0.0001678
+## alternative hypothesis: true location shift is not equal to 0
 ```
 
-The p-value is given in the `p` column (p-value = 0.000168). Given that this is less than 0.05 we can still reject the null hypothesis.
+The p value is given on the 3rd line (p-value = 0.0001678). Given that this is less than 0.05 we can still reject the null hypothesis.
 
 > A two-tailed, Wilcoxon signed-rank test indicated that the median cortisol level in adult females differed significantly between the morning (320.5 nmol/l) and the evening (188.9 nmol/l) (V = 197, p = 0.00017).
 
-<br />
-
-## Exercise: Deer legs
+## Exercise
 :::exercise
 Deer legs
 
@@ -80,34 +76,32 @@ Using the following data, test the null hypothesis that the fore and hind legs o
 Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?
 
 1. Write down the null and alternative hypotheses
-2. Choose a tidy representation for the data and create a csv file (I'll stop asking you to do this from now on...)
+2. Choose a representation for the data (stacked or unstacked) and create a csv file
 3. Import the data into R
 4. Summarise and visualise the data
-5. Check your assumptions (normality and variance) using appropriate tests
-6. Discuss with your (virtual) neighbour which test is most appropriate?
-7. Perform the test
-8. Write down a sentence that summarises the results that you have found
+5. Perform a two-sample paired t-test
+6. Perform a Wilcoxon signed-rank test
+7. Now check your assumptions (normality and variance) using appropriate tests
+8. Discuss with your (virtual) neighbour which test is most appropriate?
+9. Write down a sentence that summarise the results that you have found
 
 <details><summary>Answer</summary>
 
-### Hypotheses
+**1. Hypotheses**
 
 $H_0$ : foreleg average (mean or median) $=$ hindleg average (mean or median)
 
 $H_1$ : foreleg average $\neq$ hindleg average
 
-### Import data, summarise and visualise
+**2-4. Import Data, Summarise and visualise**
 
-First of all, we need to get the data into a tidy format (every variable is a column, each observation is a row). Doing this in Excel, and adding a ID gives us:
+I always recommend storing data in stacked format even in this example, even though in this case it might seem easier to store your data in unstacked format (this is pretty much the only time where this is even a sensible option).  So for this example I manually input the data into excel in the following layout:
 
 
 ```r
-# load the data
-deer <- read_csv("data/examples/cs1-deer.csv")
-
-# have a look
-deer
+deer <- read.csv("data/examples/cs1-deer.csv")
 ```
+
 
 ```
 ## # A tibble: 20 × 3
@@ -141,113 +135,121 @@ Let's look at the data and see what we can see.
 
 
 ```r
-# summarise the data
-deer %>% 
-  select(-id) %>% 
-  get_summary_stats(type = "common")
+aggregate(length ~ leg, data = deer, summary)
 ```
 
 ```
-## # A tibble: 1 × 10
-##   variable     n   min   max median   iqr  mean    sd    se    ci
-##   <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 length      20   136   150    143  5.25  143.  4.01 0.896  1.88
+##       leg length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
+## 1 foreleg      136.00         138.25        142.00      141.40         144.50
+## 2 hindleg      140.00         142.00        144.00      144.70         147.50
+##   length.Max.
+## 1      147.00
+## 2      150.00
 ```
+
+```r
+boxplot(length ~ leg, data = deer)
+```
+
+<img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have _paired_ data. What we really need to look at is the difference in leg length for each deer:
 
 
 ```r
-# or even summarise by leg type
-deer %>% 
-  select(-id) %>% 
-  group_by(leg) %>% 
-  get_summary_stats(type = "common")
+uns_deer <- unstack(deer, length ~ leg)
+deerDiff <- uns_deer$hindleg - uns_deer$foreleg
+summary(deerDiff)
 ```
 
 ```
-## # A tibble: 2 × 11
-##   leg     variable     n   min   max median   iqr  mean    sd    se    ci
-##   <chr>   <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 foreleg length      10   136   147    142  6.25  141.  4.03  1.27  2.88
-## 2 hindleg length      10   140   150    144  5.5   145.  3.40  1.08  2.43
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    -3.0     2.5     4.5     3.3     5.0     6.0
 ```
-
 
 ```r
-# we can also visualise the data
-deer %>% 
-  ggplot(aes(x = leg, y = length)) +
-  geom_boxplot()
+boxplot(deerDiff)
 ```
 
 <img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
-All of this suggests that there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have _paired_ data. What we really need to look at is the difference in leg length for each deer and the data by observation:
+This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).
+
+**5. Perform a two-sample t-test**
 
 
 ```r
-# create a data set that contains the difference in leg length
-leg_diff <- deer %>% 
-  pivot_wider(names_from = leg, values_from = length) %>% 
-  mutate(leg_diff = hindleg - foreleg)
+t.test(length ~ leg, data = deer, paired = TRUE)
 ```
+
+```
+## 
+## 	Paired t-test
+## 
+## data:  length by leg
+## t = -3.4138, df = 9, p-value = 0.007703
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.486752 -1.113248
+## sample estimates:
+## mean of the differences 
+##                    -3.3
+```
+
+The paired t-test here assumes that the data is stored exactly as we have entered it (i.e. that the first hindleg row matches the first foreleg row). Here we apparently see a significant difference.
+
+**6. Perform a paired Wilcoxon test**
 
 
 ```r
-# plot the difference in leg length
-leg_diff %>% 
-  ggplot(aes(y = leg_diff)) +
-  geom_boxplot()
+wilcox.test(length ~ leg, data = deer, paired = TRUE)
 ```
 
-<img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-Additionally, we can also plot the data by observation:
-
-
-```r
-# plot the data by observation
-deer %>% 
-  ggplot(aes(x = leg, y = length, group = id)) +
-  geom_point() +
-  geom_line()
+```
+## Warning in wilcox.test.default(x = c(138L, 136L, 147L, 139L, 143L, 141L, :
+## cannot compute exact p-value with ties
 ```
 
-<img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+```
+## 
+## 	Wilcoxon signed rank test with continuity correction
+## 
+## data:  length by leg
+## V = 4, p-value = 0.01859
+## alternative hypothesis: true location shift is not equal to 0
+```
 
-This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed in the boxplot).
+The paired Wilcoxon test makes the same assumptions about the order of the data as the paired t-test. Here again we have a significant difference.
 
-### Assumptions
+**7. Check assumptions**
 
 We need to consider the distribution of the _difference_ in leg lengths rather than the individual distributions.
 
 
 ```r
-# perform Shapiro-Wilk test on leg differences
-leg_diff %>% 
-  shapiro_test(leg_diff)
+shapiro.test(deerDiff)
 ```
 
 ```
-## # A tibble: 1 × 3
-##   variable statistic      p
-##   <chr>        <dbl>  <dbl>
-## 1 leg_diff     0.814 0.0212
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  deerDiff
+## W = 0.81366, p-value = 0.02123
 ```
 
 ```r
-# and create a Q-Q plot
-leg_diff %>% 
-  ggplot(aes(sample = leg_diff)) +
-  stat_qq() +
-  stat_qq_line(colour = "red")
+qqnorm(deerDiff)
+qqline(deerDiff, col = "red")
 ```
 
-<img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 Both our Shapiro-Wilk test and our Q-Q plot suggest that the difference data aren't normally distributed, which rules out a paired t-test. We should therefore consider a paired Wilcoxon test next. Remember that this test requires that the distribution of differences be symmetric, whereas our box-plot from before suggested that the data were very much skewed.
 
-### Conclusions
-So, frustratingly, neither of our tests are appropriate for this dataset. The differences in foreleg and hindleg lengths are neither normal enough for a paired t-test nor are they symmetric enough for a Wilcoxon test and we don't have enough data to just use the t-test (we'd need more than 30 points or so). So what do we do in this situation? Well the answer is that there aren't actually any traditional statistical tests that are valid for this dataset as it stands!
+**8. Conclusions**
+
+So, frustratingly, neither of our tests are appropriate for this dataset. The differences in fore- and hind leg lengths are neither normal enough for a paired t-test nor are they symmetric enough for a Wilcoxon test and we don't have enough data to just use the t-test (we'd need more than 30 points or so). So what do we do in this situation? Well the answer is that there aren't actually any traditional statistical tests that are valid for this dataset as it stands!
 
 There are two options available to someone:
 
@@ -260,7 +262,6 @@ As Jeremy Clarkson [would put it](https://www.quotes.net/mquote/941330):
 
 > And on that bombshell, it's time to end. Goodnight!
 
-<br />
 </details>
 :::
 

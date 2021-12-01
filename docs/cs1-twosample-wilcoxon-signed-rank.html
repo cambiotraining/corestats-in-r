@@ -402,33 +402,35 @@
 </h2>
 <p>Perform a two-tailed, Wilcoxon signed-rank test:</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">cortisol</span><span class="op">$</span><span class="va">morning</span>, <span class="va">cortisol</span><span class="op">$</span><span class="va">evening</span>,
-            alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># perform the test</span>
+<span class="va">cortisol</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">cortisol</span> <span class="op">~</span> <span class="va">time</span>,
+              alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+              paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>The first two arguments must be the two samples in numerical vector format</li>
+<li>The first argument gives the formula</li>
 <li>The second argument gives the type of alternative hypothesis and must be one of <code>two.sided</code>, <code>greater</code> or <code>less</code>
 </li>
-<li>The third argument indicates that the test is paired</li>
+<li>The third argument says that the data are paired</li>
 </ul>
 </div>
 <div id="interpret-output-and-report-results-3" class="section level2" number="9.6">
 <h2>
 <span class="header-section-number">9.6</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-3"><i class="fas fa-link"></i></a>
 </h2>
-<pre><code>## 
-##  Wilcoxon signed rank exact test
-## 
-## data:  cortisol$morning and cortisol$evening
-## V = 197, p-value = 0.0001678
-## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<p>The p value is given on the 3rd line (p-value = 0.0001678). Given that this is less than 0.05 we can still reject the null hypothesis.</p>
+<pre><code>## # A tibble: 1 × 7
+##   .y.      group1  group2     n1    n2 statistic        p
+## * &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 cortisol evening morning    20    20        13 0.000168</code></pre>
+<p>The p-value is given in the <code>p</code> column (p-value = 0.000168). Given that this is less than 0.05 we can still reject the null hypothesis.</p>
 <blockquote>
 <p>A two-tailed, Wilcoxon signed-rank test indicated that the median cortisol level in adult females differed significantly between the morning (320.5 nmol/l) and the evening (188.9 nmol/l) (V = 197, p = 0.00017).</p>
 </blockquote>
+<p><br></p>
 </div>
-<div id="exercise-3" class="section level2" number="9.7">
+<div id="exercise-deer-legs" class="section level2" number="9.7">
 <h2>
-<span class="header-section-number">9.7</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.7</span> Exercise: Deer legs<a class="anchor" aria-label="anchor" href="#exercise-deer-legs"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 9.1  </strong></span>Deer legs</p>
@@ -449,24 +451,34 @@
 <p>Do these results provide any evidence to suggest that fore- and hind-leg length differ in deer?</p>
 <ol style="list-style-type: decimal">
 <li>Write down the null and alternative hypotheses</li>
-<li>Choose a representation for the data (stacked or unstacked) and create a csv file</li>
+<li>Choose a tidy representation for the data and create a csv file (I’ll stop asking you to do this from now on…)</li>
 <li>Import the data into R</li>
 <li>Summarise and visualise the data</li>
-<li>Perform a two-sample paired t-test</li>
-<li>Perform a Wilcoxon signed-rank test</li>
-<li>Now check your assumptions (normality and variance) using appropriate tests</li>
+<li>Check your assumptions (normality and variance) using appropriate tests</li>
 <li>Discuss with your (virtual) neighbour which test is most appropriate?</li>
-<li>Write down a sentence that summarise the results that you have found</li>
+<li>Perform the test</li>
+<li>Write down a sentence that summarises the results that you have found</li>
 </ol>
 <details><summary>
 Answer
-</summary><p><strong>1. Hypotheses</strong></p>
+</summary><div id="hypotheses-4" class="section level3" number="9.7.1">
+<h3>
+<span class="header-section-number">9.7.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-4"><i class="fas fa-link"></i></a>
+</h3>
 <p><span class="math inline">\(H_0\)</span> : foreleg average (mean or median) <span class="math inline">\(=\)</span> hindleg average (mean or median)</p>
 <p><span class="math inline">\(H_1\)</span> : foreleg average <span class="math inline">\(\neq\)</span> hindleg average</p>
-<p><strong>2-4. Import Data, Summarise and visualise</strong></p>
-<p>I always recommend storing data in stacked format even in this example, even though in this case it might seem easier to store your data in unstacked format (this is pretty much the only time where this is even a sensible option). So for this example I manually input the data into excel in the following layout:</p>
+</div>
+<div id="import-data-summarise-and-visualise" class="section level3" number="9.7.2">
+<h3>
+<span class="header-section-number">9.7.2</span> Import data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise"><i class="fas fa-link"></i></a>
+</h3>
+<p>First of all, we need to get the data into a tidy format (every variable is a column, each observation is a row). Doing this in Excel, and adding a ID gives us:</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/examples/cs1-deer.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># load the data</span>
+<span class="va">deer</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/examples/cs1-deer.csv"</span><span class="op">)</span>
+
+<span class="co"># have a look</span>
+<span class="va">deer</span></code></pre></div>
 <pre><code>## # A tibble: 20 × 3
 ##       id leg     length
 ##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -493,70 +505,80 @@ Answer
 <p>The ordering of the data is important here; the first hindleg row corresponds to the first foreleg row, the second to the second and so on. To indicate this we use an <code>id</code> column, where each observation has a unique ID.</p>
 <p>Let’s look at the data and see what we can see.</p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, <span class="va">summary</span><span class="op">)</span></code></pre></div>
-<pre><code>##       leg length.Min. length.1st Qu. length.Median length.Mean length.3rd Qu.
-## 1 foreleg      136.00         138.25        142.00      141.40         144.50
-## 2 hindleg      140.00         142.00        144.00      144.70         147.50
-##   length.Max.
-## 1      147.00
-## 2      150.00</code></pre>
+<code class="sourceCode R"><span class="co"># summarise the data</span>
+<span class="va">deer</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 10
+##   variable     n   min   max median   iqr  mean    sd    se    ci
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 length      20   136   150    143  5.25  143.  4.01 0.896  1.88</code></pre>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<p>It looks as though there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have <em>paired</em> data. What we really need to look at is the difference in leg length for each deer:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">uns_deer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/stack.html">unstack</a></span><span class="op">(</span><span class="va">deer</span>, <span class="va">length</span> <span class="op">~</span> <span class="va">leg</span><span class="op">)</span>
-<span class="va">deerDiff</span> <span class="op">&lt;-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">hindleg</span> <span class="op">-</span> <span class="va">uns_deer</span><span class="op">$</span><span class="va">foreleg</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    -3.0     2.5     4.5     3.3     5.0     6.0</code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># or even summarise by leg type</span>
+<span class="va">deer</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">leg</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 11
+##   leg     variable     n   min   max median   iqr  mean    sd    se    ci
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 foreleg length      10   136   147    142  6.25  141.  4.03  1.27  2.88
+## 2 hindleg length      10   140   150    144  5.5   145.  3.40  1.08  2.43</code></pre>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># we can also visualise the data</span>
+<span class="va">deer</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">leg</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
-<p>This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed).</p>
-<p><strong>5. Perform a two-sample t-test</strong></p>
+<p>All of this suggests that there might be a difference between the legs, with hindlegs being longer than forelegs. However, this representation obscures the fact that we have <em>paired</em> data. What we really need to look at is the difference in leg length for each deer and the data by observation:</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a data set that contains the difference in leg length</span>
+<span class="va">leg_diff</span> <span class="op">&lt;-</span> <span class="va">deer</span> <span class="op">%&gt;%</span> 
+  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">leg</span>, values_from <span class="op">=</span> <span class="va">length</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>leg_diff <span class="op">=</span> <span class="va">hindleg</span> <span class="op">-</span> <span class="va">foreleg</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Paired t-test
-## 
-## data:  length by leg
-## t = -3.4138, df = 9, p-value = 0.007703
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -5.486752 -1.113248
-## sample estimates:
-## mean of the differences 
-##                    -3.3</code></pre>
-<p>The paired t-test here assumes that the data is stored exactly as we have entered it (i.e. that the first hindleg row matches the first foreleg row). Here we apparently see a significant difference.</p>
-<p><strong>6. Perform a paired Wilcoxon test</strong></p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">leg</span>, data <span class="op">=</span> <span class="va">deer</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Warning in wilcox.test.default(x = c(138L, 136L, 147L, 139L, 143L, 141L, :
-## cannot compute exact p-value with ties</code></pre>
-<pre><code>## 
-##  Wilcoxon signed rank test with continuity correction
-## 
-## data:  length by leg
-## V = 4, p-value = 0.01859
-## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<p>The paired Wilcoxon test makes the same assumptions about the order of the data as the paired t-test. Here again we have a significant difference.</p>
-<p><strong>7. Check assumptions</strong></p>
-<p>We need to consider the distribution of the <em>difference</em> in leg lengths rather than the individual distributions.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  deerDiff
-## W = 0.81366, p-value = 0.02123</code></pre>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">deerDiff</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">deerDiff</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># plot the difference in leg length</span>
+<span class="va">leg_diff</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">leg_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<p>Additionally, we can also plot the data by observation:</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot the data by observation</span>
+<span class="va">deer</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">leg</span>, y <span class="op">=</span> <span class="va">length</span>, group <span class="op">=</span> <span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<p>This gives us a much clearer picture. It looks as though the hindlegs are about 4 cm longer than the forelegs, on average. It also suggests that our leg differences might not be normally distributed (the data look a bit skewed in the boxplot).</p>
+</div>
+<div id="assumptions-10" class="section level3" number="9.7.3">
+<h3>
+<span class="header-section-number">9.7.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-10"><i class="fas fa-link"></i></a>
+</h3>
+<p>We need to consider the distribution of the <em>difference</em> in leg lengths rather than the individual distributions.</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># perform Shapiro-Wilk test on leg differences</span>
+<span class="va">leg_diff</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">leg_diff</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   variable statistic      p
+##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 leg_diff     0.814 0.0212</code></pre>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># and create a Q-Q plot</span>
+<span class="va">leg_diff</span> <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">leg_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
 <p>Both our Shapiro-Wilk test and our Q-Q plot suggest that the difference data aren’t normally distributed, which rules out a paired t-test. We should therefore consider a paired Wilcoxon test next. Remember that this test requires that the distribution of differences be symmetric, whereas our box-plot from before suggested that the data were very much skewed.</p>
-<p><strong>8. Conclusions</strong></p>
-<p>So, frustratingly, neither of our tests are appropriate for this dataset. The differences in fore- and hind leg lengths are neither normal enough for a paired t-test nor are they symmetric enough for a Wilcoxon test and we don’t have enough data to just use the t-test (we’d need more than 30 points or so). So what do we do in this situation? Well the answer is that there aren’t actually any traditional statistical tests that are valid for this dataset as it stands!</p>
+</div>
+<div id="conclusions" class="section level3" number="9.7.4">
+<h3>
+<span class="header-section-number">9.7.4</span> Conclusions<a class="anchor" aria-label="anchor" href="#conclusions"><i class="fas fa-link"></i></a>
+</h3>
+<p>So, frustratingly, neither of our tests are appropriate for this dataset. The differences in foreleg and hindleg lengths are neither normal enough for a paired t-test nor are they symmetric enough for a Wilcoxon test and we don’t have enough data to just use the t-test (we’d need more than 30 points or so). So what do we do in this situation? Well the answer is that there aren’t actually any traditional statistical tests that are valid for this dataset as it stands!</p>
 <p>There are two options available to someone:</p>
 <ol style="list-style-type: decimal">
 <li>try transforming the raw data (take logs, square root, reciprocals) and hope that one of them leads to a modified dataset that satisfies the assumptions of one of the tests we’ve covered, or</li>
@@ -567,6 +589,8 @@ Answer
 <blockquote>
 <p>And on that bombshell, it’s time to end. Goodnight!</p>
 </blockquote>
+<br>
+</div>
 </details>
 </div>
 </div>
@@ -608,7 +632,14 @@ Answer
 <li><a class="nav-link" href="#assumptions-9"><span class="header-section-number">9.4</span> Assumptions</a></li>
 <li><a class="nav-link" href="#implement-test-4"><span class="header-section-number">9.5</span> Implement test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-report-results-3"><span class="header-section-number">9.6</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-3"><span class="header-section-number">9.7</span> Exercise</a></li>
+<li>
+<a class="nav-link" href="#exercise-deer-legs"><span class="header-section-number">9.7</span> Exercise: Deer legs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-4"><span class="header-section-number">9.7.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#import-data-summarise-and-visualise"><span class="header-section-number">9.7.2</span> Import data, summarise and visualise</a></li>
+<li><a class="nav-link" href="#assumptions-10"><span class="header-section-number">9.7.3</span> Assumptions</a></li>
+<li><a class="nav-link" href="#conclusions"><span class="header-section-number">9.7.4</span> Conclusions</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#key-points-1"><span class="header-section-number">9.8</span> Key points</a></li>
 </ul>
 

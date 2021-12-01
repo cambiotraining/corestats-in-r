@@ -97,5 +97,9 @@ summarise-and-visualise-5
 assumptions-9
 implement-test-4
 interpret-output-and-report-results-3
-exercise-3
+exercise-deer-legs
+hypotheses-4
+import-data-summarise-and-visualise
+assumptions-10
+conclusions
 key-points-1
