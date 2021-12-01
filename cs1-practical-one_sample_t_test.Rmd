@@ -30,7 +30,7 @@ Make sure you have downloaded the data (see: [Datasets](#index-datasets)) and pl
 
 First we load the relevant libraries:
 
-```{r warning=FALSE, message=FALSE}
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
 # load tidyverse
 library(tidyverse)
 

@@ -15,10 +15,10 @@ rmd_files: [
   "cs1-practical-two_sample_paired_t_test.Rmd",
   "cs1-practical-two_sample_wilcoxon.Rmd",
 
-  #"cs2-intro.Rmd",
-  #"cs2-practical-introduction.Rmd",
-  #"cs2-practical-anova.Rmd",
-  #"cs2-practical-kruskal.Rmd",
+  "cs2-intro.Rmd",
+  "cs2-practical-introduction.Rmd",
+  "cs2-practical-anova.Rmd",
+  "cs2-practical-kruskal.Rmd",
 
   #"cs3-intro.Rmd",
   #"cs3-practical-introduction.Rmd",

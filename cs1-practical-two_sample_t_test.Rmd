@@ -86,7 +86,7 @@ We can see that whilst the Guanapo data is probably normally distributed (p = 0.
 
 The Shapiro-Wilk test is quite sensitive to sample size. This means that if you have a large sample then even small deviations from normality will cause the sample to fail the test, whereas smaller samples are allowed to pass with much larger deviations. Here the Aripo data has nearly 40 points in it compared with the Guanapo data and so it is much easier for the Aripo sample to fail compared with the Guanapo data.
 
-## Exercise: Q-Q plots rivers
+## Exercise: Q-Q plots rivers {#exercise-qq-rivers}
 :::exercise
 Q-Q plots for `rivers` data
 

@@ -27,6 +27,16 @@ New commands used in this section.
 |:- |:- |
 |`lm()`| Fits a linear model |
 |`anova()`| Carries out an ANOVA on a linear model |
+|`resid_panel()`| Creates diagnostic plots|
+
+We also use functionality from a new library, `ggResidPanel`:
+
+
+```r
+# load ggResidPanel, for ggplot-friendly diagnostics plots
+library(ggResidpanel)
+```
+
 
 ## Data and hypotheses
 For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called `exposed` (E), `partially sheltered` (P) and `sheltered` (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:
@@ -46,48 +56,71 @@ First we read in the data.
 
 
 ```r
-oystercatcher <- read.csv("data/raw/CS2-oystercatcher.csv")
+# load data
+oystercatcher <- read_csv("data/tidy/CS2-oystercatcher.csv")
+
+# and have a look
+oystercatcher
 ```
 
-Next we summarise the data and visualise them. We have a quick peek at the first few rows of our data with `head()` so we can see how the data are organised.
+```
+## # A tibble: 15 × 3
+##       id feeding site     
+##    <dbl>   <dbl> <chr>    
+##  1     1    14.2 Exposed  
+##  2     2    16.5 Exposed  
+##  3     3     9.3 Exposed  
+##  4     4    15.1 Exposed  
+##  5     5    13.4 Exposed  
+##  6     6    18.4 Partial  
+##  7     7    13   Partial  
+##  8     8    17.4 Partial  
+##  9     9    20.4 Partial  
+## 10    10    16.5 Partial  
+## 11    11    24.1 Sheltered
+## 12    12    22.2 Sheltered
+## 13    13    25.3 Sheltered
+## 14    14    25.1 Sheltered
+## 15    15    21.5 Sheltered
+```
 
-The data are in stacked format. The first column contains information on feeding rates and is called `feeding.` The second column has categorical data on the type of site and is called `site`.
+The `oystercatcher` data set contains three columns:
+
+1. a unique ID column `id`
+2. a `feeding` column containing feeding rates
+3. a `site` column with information on the amount of shelter of the feeding location
+
+First, we get some basic descriptive statistics:
 
 
 ```r
-head(oystercatcher)
+# get some basic descriptive statistics
+oystercatcher %>% 
+  select(-id) %>% 
+  group_by(site) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-##   feeding    site
-## 1    14.2 Exposed
-## 2    16.5 Exposed
-## 3     9.3 Exposed
-## 4    15.1 Exposed
-## 5    13.4 Exposed
-## 6    18.4 Partial
+## # A tibble: 3 × 11
+##   site      variable     n   min   max median   iqr  mean    sd    se    ci
+##   <chr>     <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 Exposed   feeding      5   9.3  16.5   14.2   1.7  13.7  2.72 1.21   3.37
+## 2 Partial   feeding      5  13    20.4   17.4   1.9  17.1  2.73 1.22   3.39
+## 3 Sheltered feeding      5  21.5  25.3   24.1   2.9  23.6  1.71 0.767  2.13
 ```
 
-```r
-aggregate(feeding ~ site, data = oystercatcher, summary)
-```
+Next, we plot the data by `site`:
 
-```
-##        site feeding.Min. feeding.1st Qu. feeding.Median feeding.Mean
-## 1   Exposed         9.30           13.40          14.20        13.70
-## 2   Partial        13.00           16.50          17.40        17.14
-## 3 Sheltered        21.50           22.20          24.10        23.64
-##   feeding.3rd Qu. feeding.Max.
-## 1           15.10        16.50
-## 2           18.40        20.40
-## 3           25.10        25.30
-```
 
 ```r
-boxplot(feeding ~ site, data = oystercatcher)
+# plot the data
+oystercatcher %>% 
+  ggplot(aes(x = site, y = feeding)) +
+  geom_boxplot()
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.
 
@@ -102,68 +135,42 @@ In a similar way to the two-sample tests we will consider the normality and equa
 
 ### Normality
 
-Unstack the data and perform a Shapiro-Wilk test on each group separately.
+First we perform a Shapiro-Wilk test on each site separately.
 
 
 ```r
-uns_oyster <- unstack(oystercatcher)
-
-shapiro.test(uns_oyster$Exposed)
-shapiro.test(uns_oyster$Partial)
-shapiro.test(uns_oyster$Sheltered)
-```
-
-This is the output that you should now see in the console window:
-
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Exposed
-## W = 0.9151, p-value = 0.4988
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Partial
-## W = 0.96913, p-value = 0.8697
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  uns_oyster$Sheltered
-## W = 0.88532, p-value = 0.3341
+# Shapiro-Wilk test on each site
+oystercatcher %>% 
+  select(-id) %>% 
+  group_by(site) %>% 
+  shapiro_test(feeding)
 ```
 
 We can see that all three groups appear to be normally distributed which is good.
 
-For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of _residuals_ from the data. We’ll explain residuals properly in the [next session](#cs3-intro) but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from the linear model we fitted earlier.
+For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of _residuals_ from the data. We’ll explain residuals properly in the [next session](#cs3-intro) but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from a linear model fitted to the data.
 
-Extract the residuals from the data and check their normality:
+So, we create a linear model, extract the residuals and check their normality:
 
 
 ```r
 # define the model
-lm_oystercatcher <- lm(feeding ~ site, data = oystercatcher)
+lm_oystercatcher <- lm(feeding ~ site,
+                       data = oystercatcher)
 
 # extract the residuals
 resid_oyster <- residuals(lm_oystercatcher)
 
 # perform Shapiro-Wilk test on residuals
-shapiro.test(resid_oyster)
+resid_oyster %>% 
+  shapiro_test()
 ```
 
 ```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  resid_oyster
-## W = 0.93592, p-value = 0.3338
+## # A tibble: 1 × 3
+##   variable statistic p.value
+##   <chr>        <dbl>   <dbl>
+## 1 .            0.936   0.334
 ```
 Again, we can see that the combined residuals from all three groups appear to be normally distributed (which is as we would have expected given that they were all normally distributed individually!)
 
@@ -175,7 +182,9 @@ Perform Bartlett’s test on the data:
 
 
 ```r
-bartlett.test(feeding ~ site, data = oystercatcher)
+# check equality of variance
+bartlett.test(feeding ~ site,
+              data = oystercatcher)
 ```
 
 ```
@@ -188,11 +197,43 @@ bartlett.test(feeding ~ site, data = oystercatcher)
 
 Where the relevant p-value is given on the 3rd line. Here we see that each group do appear to have the same variance.
 
-### Graphical Interpretation and Diagnostic Plots
+### Graphical interpretation and diagnostic Plots
 
 R provides a convenient set of graphs that allow us to assess these assumptions graphically. If we simply ask R to plot the `lm` object we have created, then we can see some of these _diagnostic plots_.
 
-Create the standard set diagnostic plots:
+:::note
+There are a variety of ways that we can create diagnostic plots. There is no right or wrong - just preference.
+
+The functionality of **base R** is really helpful, and it's easy to create diagnostic plots with the built-in functionality. For example, you can create a set of basic diagnostic plots using:
+
+```
+# create a neat 2x2 window
+par(mfrow = c(2,2))
+# create the diagnostic plots
+plot(model_name)
+# and return the window back to normal
+par(mfrow = c(1,1))
+```
+
+In the first session we already created diagnostic Q-Q plots directly from our data, using `stat_qq()` and `stat_qq_line()`. For more specific plots this becomes a bit cumbersome. There is an option to create ggplot-friendly diagnostic plots, using the `ggResidPanel` package. For consistency with the `tidyverse` syntax used, we will use this from now on, but it is equally valid to use the base R functions.
+:::
+
+Create the standard set diagnostic plots using `ggResidPanel`:
+
+
+```r
+lm_oystercatcher %>% 
+  resid_panel()
+```
+
+<img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-1.png" width="672" />
+
+* **Residual Plot**: creates a plot of the residuals versus the predicted values. We want the points to be spread symmetrically around the blue line.
+* **Q-Q Plot**: creates a normal quantile plot of residuals
+* **Index Plot**: creates a plot of the residuals versus the observation numbers. A solid blue horizontal line through 0 is included for reference. This plot can be used to look for patterns in the data
+* **Histogram**: creates a histogram of the residuals, using `bins = 30` as default
+
+The default equivalent in base R is as follows:
 
 
 ```r
@@ -202,18 +243,17 @@ par(mfrow = c(2,2))
 plot(lm_oystercatcher)
 ```
 
-```r
-# and return the window back to normal
-par(mfrow = c(1,1))
-```
-
-
 ```
 ## hat values (leverages) are all = 0.2
 ##  and there are no factor predictors; no plot no. 5
 ```
 
 <img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672" />
+
+```r
+# and return the window back to normal
+par(mfrow = c(1,1))
+```
 
 The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).
 
@@ -222,7 +262,7 @@ The second line creates the three diagnostic plots (it actually tries to create 
     - For the bottom-left graph, we will look at the red line as we want it to be approximately horizontal.
 - The top-right graph is a familiar Q-Q plot that we used previously to assess normality, and this looks at the combined residuals from all of the groups (in much the same way as we looked at the Shapiro-Wilk test on the combined residuals).
 
-We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the QQ-plot isn’t perfect, it appears that the assumption of normality is alright.
+We can see that these graphs are very much in line with what we’ve just looked at using the test, which is reassuring. The groups all appear to have the same spread of data, and whilst the Q-Q plot isn’t perfect, it appears that the assumption of normality is alright.
 
 :::note
 At this stage, I should point out that I nearly always stick with the graphical method for assessing the assumptions of a test. Assumptions are rarely either completely met or not met and there is always some degree of personal assessment.
@@ -279,24 +319,57 @@ Note that we have included (in brackets) information on the test statistic (F = 
 ## Post-hoc testing (Tukey's rank test)
 One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.
 
-<img src="cs2-practical-anova_files/figure-html/cs2-tukey-example-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.
 
-**1. Read in the data and plot**
+### Read in the data and plot
 
 
 ```r
-tukey <- read.csv("data/raw/CS2-tukey.csv")
-boxplot(response ~ group, data = tukey)
+# load the data
+tukey <- read_csv("data/tidy/CS2-tukey.csv")
+
+# have a look at the data
+tukey
 ```
 
-**2. Test for a significant difference in group means**
+```
+## # A tibble: 60 × 3
+##       id response group  
+##    <dbl>    <dbl> <chr>  
+##  1     1    1.58  sample1
+##  2     2    0.380 sample1
+##  3     3   -0.997 sample1
+##  4     4   -0.771 sample1
+##  5     5    0.169 sample1
+##  6     6   -0.698 sample1
+##  7     7   -0.167 sample1
+##  8     8    1.38  sample1
+##  9     9   -0.839 sample1
+## 10    10   -1.05  sample1
+## # … with 50 more rows
+```
 
 
 ```r
-lm_tukey <- lm(response ~ group, data = tukey)
+# plot the data
+tukey %>% 
+  ggplot(aes(x = group, y = response)) +
+  geom_boxplot()
+```
 
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
+### Test for a significant difference in group means
+
+
+```r
+# create a linear model
+lm_tukey <- lm(response ~ group,
+               data = tukey)
+
+# perform an ANOVA
 anova(lm_tukey)
 ```
 
@@ -310,38 +383,33 @@ anova(lm_tukey)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-Here we have a p-value of 2.39x10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.
+
+Here we have a p-value of 2.39 $\cdot$ 10<sup>-7</sup> and so the test has very conclusively rejected the hypothesis that all means are equal.
 
 However, this was not due to all of the sample means being different, but rather just because one of the groups is very different from the others. In order to drill down and investigate this further we use a new test called **Tukey’s range test** (or **Tukey’s honest significant difference test** – this always makes me think of some terrible cowboy/western dialogue). This will compare all of the groups in a pairwise fashion and reports on whether a significant difference exists.
 
-**3. Performing Tukey’s test on these data**
+### Performing Tukey’s test
 
 
 ```r
-aov_tukey <- aov(response ~ group, data = tukey)
-
-TukeyHSD(aov_tukey)
+# perform Tukey's range test on linear model
+lm_tukey %>% 
+  tukey_hsd()
 ```
 
 ```
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = response ~ group, data = tukey)
-## 
-## $group
-##                      diff        lwr      upr     p adj
-## sample2-sample1 0.3037563 -0.3934982 1.001011 0.5498005
-## sample3-sample1 1.7233591  1.0261047 2.420614 0.0000005
-## sample3-sample2 1.4196028  0.7223484 2.116857 0.0000246
+## # A tibble: 3 × 9
+##   term  group1  group2  null.value estimate conf.low conf.high       p.adj
+## * <chr> <chr>   <chr>        <dbl>    <dbl>    <dbl>     <dbl>       <dbl>
+## 1 group sample1 sample2          0    0.304   -0.393      1.00 0.55       
+## 2 group sample1 sample3          0    1.72     1.03       2.42 0.000000522
+## 3 group sample2 sample3          0    1.42     0.722      2.12 0.0000246  
+## # … with 1 more variable: p.adj.signif <chr>
 ```
 
-The first argument repeats our ANOVA using a different function `aov()`. We store the output of this function in an R object called `aov_tukey`.
-Note that the `TukeyHSD()` function takes the output of the `aov()` function as its argument and not the raw data.
+The `tukey_hsd()` function takes our linear model (`lm_tukey`) as its input. The output is a pair-by-pair comparison between the different groups (samples 1 to 3). We are interested in the `p.adj` column, which gives us the adjusted p-value. The null hypothesis in each case is that there is no difference in the mean between the two groups. As we can see the first row shows that there isn’t a significant difference between `sample1` and `sample2` but the 2nd and 3rd rows show that there is a significant difference between `sample1` and `sample3`, as well as `sample2` and `sample3`. This matches with what we expected based on the boxplot.
 
-The bottom three lines contain the information that we want. The final column of each (entitled `p adj`) is the p-value that we’re looking for. The null hypothesis in each case is that there is no difference in the mean between the two groups. As we can see the first line shows that there isn’t a significant difference between `sample1` and `sample2` but the 2nd and 3rd lines show that there is a significant difference between `sample1` and `sample3`, as well as `sample2` and `sample3`. This matches with what we expected based on the boxplot.
-
-**4. Assumptions**
+### Assumptions
 
 When to use Tukey’s range test is a matter of debate (strangely enough a lot of statistical analysis techniques are currently matters of opinion rather than mathematical fact – it does explain a little why this whole field appears so bloody confusing!)
 
@@ -416,7 +484,7 @@ Is there any evidence that diet affects the growth rate of lobsters?
 
 1.	Write down the null and alternative hypotheses
 2.	Import the data into R
-    - The data are stored in the file `data/raw/CS2-lobsters.csv`
+    - The data are stored in a tidy format in `data/tidy/CS2-lobsters.csv`
 3. Summarise and visualise the data
 4. Check the assumptions using appropriate tests and graphical analyses
 5. Perform an ANOVA test
@@ -433,59 +501,70 @@ $H_1$ : not all means are equal
 
 ### Import Data, summarise and visualise
 
-The data are stored in a `.csv` file in stacked format with columns called `weight` and `diet`.
+The data are stored in a `.csv` file with columns called `id`, `weight` and `diet`.
 
 
 ```r
-lobsters <- read.csv("data/raw/CS2-lobsters.csv")
+# load the data
+lobsters <- read_csv("data/tidy/CS2-lobsters.csv")
+
+# look at the data
+lobsters
 ```
 
-Let's look at the data and see what we can see.
-
-
 ```
-##    weight    diet
-## 1   151.6 Mussels
-## 2   132.1 Mussels
-## 3   104.2 Mussels
-## 4   153.5 Mussels
-## 5   132.0 Mussels
-## 6   119.0 Mussels
-## 7   161.9 Mussels
-## 8   117.7 Pellets
-## 9   110.8 Pellets
-## 10  128.6 Pellets
-## 11  110.1 Pellets
-## 12  175.2 Pellets
-## 13  101.8  Flakes
-## 14  102.9  Flakes
-## 15   90.4  Flakes
-## 16  132.8  Flakes
-## 17  129.3  Flakes
-## 18  129.4  Flakes
+## # A tibble: 18 × 3
+##       id weight diet   
+##    <dbl>  <dbl> <chr>  
+##  1     1  152.  Mussels
+##  2     2  132.  Mussels
+##  3     3  104.  Mussels
+##  4     4  154.  Mussels
+##  5     5  132   Mussels
+##  6     6  119   Mussels
+##  7     7  162.  Mussels
+##  8     8  118.  Pellets
+##  9     9  111.  Pellets
+## 10    10  129.  Pellets
+## 11    11  110.  Pellets
+## 12    12  175.  Pellets
+## 13    13  102.  Flakes 
+## 14    14  103.  Flakes 
+## 15    15   90.4 Flakes 
+## 16    16  133.  Flakes 
+## 17    17  129.  Flakes 
+## 18    18  129.  Flakes
 ```
 
 
 ```r
-aggregate(weight ~ diet, data = lobsters, summary)
+# create some summary statistics
+lobsters %>% 
+  select(-id) %>% 
+  group_by(diet) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-##      diet weight.Min. weight.1st Qu. weight.Median weight.Mean weight.3rd Qu.
-## 1  Flakes     90.4000       102.0750      116.1000    114.4333       129.3750
-## 2 Mussels    104.2000       125.5000      132.1000    136.3286       152.5500
-## 3 Pellets    110.1000       110.8000      117.7000    128.4800       128.6000
-##   weight.Max.
-## 1    132.8000
-## 2    161.9000
-## 3    175.2000
+## # A tibble: 3 × 11
+##   diet    variable     n   min   max median   iqr  mean    sd    se    ci
+##   <chr>   <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 Flakes  weight       6  90.4  133.   116.  27.3  114.  18.2  7.42  19.1
+## 2 Mussels weight       7 104.   162.   132.  27.0  136.  20.6  7.79  19.1
+## 3 Pellets weight       5 110.   175.   118.  17.8  128.  27.2 12.1   33.7
 ```
+
+Next, we visualise the data:
+
 
 ```r
-boxplot(weight ~ diet, data = lobsters)
+lobsters %>% 
+  ggplot(aes(x = diet, y = weight)) +
+  geom_boxplot()
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
 
 As always we use the plot and summary to assess three things:
 
@@ -502,44 +581,23 @@ As always we use the plot and summary to assess three things:
 
 We'll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we'll only use the Q-Q plot.
 
-We'll need to unstack the data to use the Shapiro-Wilk test on the individual groups:
+First, we perform the Shapiro-Wilk test on the individual groups:
 
 
 ```r
-lobst_uns <- unstack(lobsters, weight ~ diet)
-shapiro.test(lobst_uns$Flakes)
+# Shapiro-Wilk on lobster groups
+lobsters %>% 
+  group_by(diet) %>% 
+  shapiro_test(weight)
 ```
 
 ```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  lobst_uns$Flakes
-## W = 0.84368, p-value = 0.1398
-```
-
-```r
-shapiro.test(lobst_uns$Mussels)
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  lobst_uns$Mussels
-## W = 0.94784, p-value = 0.71
-```
-
-```r
-shapiro.test(lobst_uns$Pellets)
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  lobst_uns$Pellets
-## W = 0.76706, p-value = 0.0425
+## # A tibble: 3 × 4
+##   diet    variable statistic      p
+##   <chr>   <chr>        <dbl>  <dbl>
+## 1 Flakes  weight       0.844 0.140 
+## 2 Mussels weight       0.948 0.710 
+## 3 Pellets weight       0.767 0.0425
 ```
 
 `Flakes` and `Mussels` are fine, but, as we suspected from earlier, `Pellets` appears to have a marginally significant Normality test result.
@@ -548,29 +606,37 @@ Let's look at the Shapiro-Wilk test for all of the data together:
 
 
 ```r
-resid_lobst <- residuals(lm(weight ~ diet, data = lobsters))
-shapiro.test(resid_lobst)
+# create a linear model
+lm_lobsters <- lm(weight ~ diet,
+                  data = lobsters)
+
+# extract the residuals
+resid_lobsters <- residuals(lm_lobsters)
+
+# and perform the Shapiro-Wilk test on the residuals
+resid_lobsters %>% 
+  shapiro_test()
 ```
 
 ```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  resid_lobst
-## W = 0.94779, p-value = 0.3914
+## # A tibble: 1 × 3
+##   variable statistic p.value
+##   <chr>        <dbl>   <dbl>
+## 1 .            0.948   0.391
 ```
 
-This on the other hand says that everything is fine. Let's look at the Q-Q-plot:
+This on the other hand says that everything is fine. Let's look at Q-Q plot.
 
 
 ```r
-plot(lm(weight ~ diet , data = lobsters),
-     which = 2)
+# Q-Q plots
+lm_lobsters %>% 
+  resid_panel(plots = "qq")
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-Here, I've used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots, but you can tell R to only plot a specific one. (If you want to  know more about this have a look at the `plot.lm` help documentation using `?plot.lm`). I've asked R to only plot the Q-Q plot with the `which = 2` argument.
+Here, I've used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots. You can tell `resid_panel()` to only plot a specific one, using the `plots =` arguments. If you want to  know more about this have a look at the [help documentation](https://goodekat.github.io/ggResidpanel-tutorial/tutorial.html#overview) or by using `?resid_panel`.
 
 The Q-Q plot looks OK, not perfect, but more than good enough for us to have confidence in the normality of the data.
 
@@ -582,7 +648,9 @@ We'll consider the Bartlett test and we'll look at some diagnostic plots too.
 
 
 ```r
-bartlett.test(weight ~ diet, data = lobsters)
+# perform Bartlett's test
+bartlett.test(weight ~ diet,
+              data = lobsters)
 ```
 
 ```
@@ -594,13 +662,18 @@ bartlett.test(weight ~ diet, data = lobsters)
 ```
 
 ```r
-plot(lm(weight ~ diet, data = lobsters),
-     which = c(1,3))
+# plot the residuals and scale-location plots
+lm_lobsters %>% 
+  resid_panel(plots = c("resid", "ls"),
+              smoother = TRUE)
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672" /><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
-In the above code, I've used the same trick as before with the `which` argument to only plot the two diagnostic plots that relate to equality of variance (residuals vs fitted and scale-location).
+In the above code I've specified which diagnostic plots I wanted. I have also added a loess smoother line (`smoother = TRUE`) to the plots
+
+1. The Residuals Plot. What we're looking for there is that the points are evenly spread on either side of the line. Looks good.
+2. The Location-Scale Plot (this is displayed by default in base R's diagnostic plots). Here we're looking at the red line. If that line is more or less horizontal, then the equality of variance assumption is met.
 
 Here all three methods agree that there isn't any issues with equality of variance:
 
@@ -616,7 +689,8 @@ With our assumptions of normality and equality of variance met we can be confide
 
 
 ```r
-anova(lm(weight ~ diet, data = lobsters))
+anova(lm(weight ~ diet,
+         data = lobsters))
 ```
 
 ```
@@ -637,20 +711,17 @@ anova(lm(weight ~ diet, data = lobsters))
 
 
 ```r
-TukeyHSD(aov(weight ~ diet, data = lobsters))
+lm_lobsters %>% 
+  tukey_hsd()
 ```
 
 ```
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = weight ~ diet, data = lobsters)
-## 
-## $diet
-##                      diff        lwr      upr     p adj
-## Mussels-Flakes  21.895238  -9.661957 53.45243 0.2024851
-## Pellets-Flakes  14.046667 -20.300196 48.39353 0.5508657
-## Pellets-Mussels -7.848571 -41.061560 25.36442 0.8148766
+## # A tibble: 3 × 9
+##   term  group1  group2  null.value estimate conf.low conf.high p.adj p.adj.signif
+## * <chr> <chr>   <chr>        <dbl>    <dbl>    <dbl>     <dbl> <dbl> <chr>       
+## 1 diet  Flakes  Mussels          0    21.9     -9.66      53.5 0.202 ns          
+## 2 diet  Flakes  Pellets          0    14.0    -20.3       48.4 0.551 ns          
+## 3 diet  Mussels Pellets          0    -7.85   -41.1       25.4 0.815 ns
 ```
 
 Here we can see that actually, there is no significant difference between any of the pairs of groups in this dataset.
