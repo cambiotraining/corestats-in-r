@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 16 Correlation coefficients | Core Statistics in R</title>
+<title>Chapter 4 Correlation coefficients | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="16.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta name="description" content="4.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 16 Correlation coefficients | Core Statistics in R">
+<meta property="og:title" content="Chapter 4 Correlation coefficients | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="16.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta property="og:description" content="4.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 Correlation coefficients | Core Statistics in R">
-<meta name="twitter:description" content="16.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
+<meta name="twitter:title" content="Chapter 4 Correlation coefficients | Core Statistics in R">
+<meta name="twitter:description" content="4.1 Objectives  Questions What are correlation coefficients? What kind of correlation coefficients are there and when do I use them? Objectives Be able to calculate correlation coefficients in R...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,8 +22,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
 <body class="campl-theme-2" data-spy="scroll" data-target="#toc">
 
@@ -341,46 +340,12 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
-<li class="book-part">CoreStats 1: Simple hypothesis testing</li>
-<li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
-<li class="book-part">CoreStats 1 (Practicals)</li>
-<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
-<li><a class="" href="cs1-one-sample-t-test.html"><span class="header-section-number">4</span> One-sample t-test</a></li>
-<li><a class="" href="cs1-onesample-wilcoxon-signed-rank.html"><span class="header-section-number">5</span> Wilcoxon signed-rank test</a></li>
-<li><a class="" href="cs1-students-t-test.html"><span class="header-section-number">6</span> Student’s t-test</a></li>
-<li><a class="" href="cs1-mannwhitney-u-test.html"><span class="header-section-number">7</span> Mann-Whitney U test</a></li>
-<li><a class="" href="cs1-paired-two-sample-t-test.html"><span class="header-section-number">8</span> Paired two-sample t-test</a></li>
-<li><a class="" href="cs1-twosample-wilcoxon-signed-rank.html"><span class="header-section-number">9</span> Wilcoxon signed-rank test</a></li>
-<li class="book-part">CoreStats 2: Categorical predictors</li>
-<li><a class="" href="cs2-intro.html"><span class="header-section-number">10</span> Introduction</a></li>
-<li class="book-part">CoreStats 2 (Practicals)</li>
-<li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
-<li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
-<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
-<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
-<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
-<li><a class="active" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
-<li class="book-part">CoreStats 4: Two predictor variables</li>
-<li><a class="" href="cs4-intro.html"><span class="header-section-number">18</span> Introduction</a></li>
-<li class="book-part">CoreStats 4 (Practicals)</li>
-<li><a class="" href="introduction-3.html"><span class="header-section-number">19</span> Introduction</a></li>
-<li><a class="" href="two-way-anova.html"><span class="header-section-number">20</span> Two-way ANOVA</a></li>
-<li><a class="" href="linear-regression-with-grouped-data.html"><span class="header-section-number">21</span> Linear regression with grouped data</a></li>
-<li class="book-part">CoreStats 5: Multiple predictor variables</li>
-<li><a class="" href="cs5-intro.html"><span class="header-section-number">22</span> Introduction</a></li>
-<li class="book-part">CoreStats 5 (Practicals)</li>
-<li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
-<li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
-<li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="active" href="correlation-coefficients.html"><span class="header-section-number">4</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">5</span> Linear regression</a></li>
 </ul>
 
         <div class="book-extra">
@@ -388,13 +353,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="correlation-coefficients" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="correlation-coefficients" class="section level1" number="4">
 <h1>
-<span class="header-section-number">16</span> Correlation coefficients<a class="anchor" aria-label="anchor" href="#correlation-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Correlation coefficients<a class="anchor" aria-label="anchor" href="#correlation-coefficients"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-5" class="section level2" number="16.1">
+<div id="objectives-1" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">16.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="objectives">
 <p><strong>Questions</strong></p>
@@ -410,107 +375,198 @@
 </ul>
 </div>
 </div>
-<div id="purpose-and-aim-4" class="section level2" number="16.2">
+<div id="purpose-and-aim" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">16.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim"><i class="fas fa-link"></i></a>
 </h2>
 <p>Correlation refers to the relationship of two variables (or datasets) to one another. Two datasets are said to be correlated if they are not independent from one another. Correlations can be useful because they can indicate if a predictive relationship may exist. However just because two datasets are correlated does not mean that they are causally related.</p>
 </div>
-<div id="section-commands-8" class="section level2" number="16.3">
+<div id="section-commands" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">16.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands"><i class="fas fa-link"></i></a>
 </h2>
 <p>New commands used in this section:</p>
 <div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
 <th align="left">Description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code></td>
+<td align="left"><code>column_to_rownames()</code></td>
+<td align="left">Converts a column to row name</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code></td>
 <td align="left">Calculates a correlation matrix</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test()</a></code></td>
+<td align="left">Performs correlation test between paired sample, with a tidy output</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code></td>
 <td align="left">Plots a matrix of scatter plots</td>
 </tr>
+<tr class="odd">
+<td align="left"><code>slice()</code></td>
+<td align="left">Selects rows based on their position</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/base/MathFun.html">abs()</a></code></td>
+<td align="left">Computes the absolute value of a number</td>
+</tr>
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-7" class="section level2" number="16.4">
+<div id="data-and-hypotheses" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">16.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will use the <code>USArrests</code> dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. <code>USArrests</code> is an unstacked data frame with 50 observations of four variables: <code>Murder</code>, <code>Assault</code>, <code>UrbanPop</code> and <code>Robbery</code>.</p>
-<p>The data are stored in the file <code>data/raw/CS3-usarrests.csv</code>.</p>
+<p>We will use the <code>USArrests</code> dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. <code>USArrests</code> is a data frame with 50 observations of five variables: <code>state</code>, <code>murder</code>, <code>assault</code>, <code>urban_pop</code> and <code>r</code>obbery`.</p>
+<p>The data are stored in the file <code>data/tidy/CS3-usarrests.csv</code>.</p>
 <p>First we read in the data:</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USArrests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS3-usarrests.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load the data</span>
+<span class="va">USArrests</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS3-usarrests.csv"</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></code></pre></div>
-<pre><code>##            Murder Assault UrbanPop Robbery
-## Alabama      13.2     236       58    21.2
-## Alaska       10.0     263       48    44.5
-## Arizona       8.1     294       80    31.0
-## Arkansas      8.8     190       50    19.5
-## California    9.0     276       91    40.6
-## Colorado      7.9     204       78    38.7</code></pre>
-<p>The syntax for reading in this data frame is a little different. Here we want to use the first column of the <code>.csv</code> file to specify the names of the rows of the dataset rather than to include the information inside the dataset itself. We do this by using the <code>row.names = 1</code> argument which tells R to use the 1st column of the file for the row names. We need to do this because some of the functions will be using require a <em>matrix</em> as input (basically a data frame containing only numbers).</p>
+<span class="va">USArrests</span></code></pre></div>
+<pre><code>## # A tibble: 50 × 5
+##    state       murder assault urban_pop robbery
+##    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Alabama       13.2     236        58    21.2
+##  2 Alaska        10       263        48    44.5
+##  3 Arizona        8.1     294        80    31  
+##  4 Arkansas       8.8     190        50    19.5
+##  5 California     9       276        91    40.6
+##  6 Colorado       7.9     204        78    38.7
+##  7 Connecticut    3.3     110        77    11.1
+##  8 Delaware       5.9     238        72    15.8
+##  9 Florida       15.4     335        80    31.9
+## 10 Georgia       17.4     211        60    25.8
+## # … with 40 more rows</code></pre>
 </div>
-<div id="pearsons-product-moment-correlation-coefficient" class="section level2" number="16.5">
+<div id="pearsons-product-moment-correlation-coefficient" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">16.5</span> Pearson’s product moment correlation coefficient<a class="anchor" aria-label="anchor" href="#pearsons-product-moment-correlation-coefficient"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Pearson’s product moment correlation coefficient<a class="anchor" aria-label="anchor" href="#pearsons-product-moment-correlation-coefficient"><i class="fas fa-link"></i></a>
 </h2>
 <p>Pearson’s r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.</p>
+<p>Before we can look at the correlations we need to reformat our data a little bit. The functions we’re going to use require a <em>matrix</em> as input. This is a slightly different object than a tibble/data frame. Basically it’s a data frame that only contains numbers. Because we want to keep the <code>state</code> information linked to our data, we need to define the <code>state</code> column as the name of the rows. Technically these functions can also take data frames if they only contain numbers, but here we’re interested in keeping the <code>state</code> data linked, so we use a matrix. We convert our data into a matrix as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># convert the state column to row names</span>
+<span class="va">USArrests</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span></code></pre></div>
+<pre><code>##                murder assault urban_pop robbery
+## Alabama          13.2     236        58    21.2
+## Alaska           10.0     263        48    44.5
+## Arizona           8.1     294        80    31.0
+## Arkansas          8.8     190        50    19.5
+## California        9.0     276        91    40.6
+## Colorado          7.9     204        78    38.7
+## Connecticut       3.3     110        77    11.1
+## Delaware          5.9     238        72    15.8
+## Florida          15.4     335        80    31.9
+## Georgia          17.4     211        60    25.8
+## Hawaii            5.3      46        83    20.2
+## Idaho             2.6     120        54    14.2
+## Illinois         10.4     249        83    24.0
+## Indiana           7.2     113        65    21.0
+## Iowa              2.2      56        57    11.3
+## Kansas            6.0     115        66    18.0
+## Kentucky          9.7     109        52    16.3
+## Louisiana        15.4     249        66    22.2
+## Maine             2.1      83        51     7.8
+## Maryland         11.3     300        67    27.8
+## Massachusetts     4.4     149        85    16.3
+## Michigan         12.1     255        74    35.1
+## Minnesota         2.7      72        66    14.9
+## Mississippi      16.1     259        44    17.1
+## Missouri          9.0     178        70    28.2
+## Montana           6.0     109        53    16.4
+## Nebraska          4.3     102        62    16.5
+## Nevada           12.2     252        81    46.0
+## New Hampshire     2.1      57        56     9.5
+## New Jersey        7.4     159        89    18.8
+## New Mexico       11.4     285        70    32.1
+## New York         11.1     254        86    26.1
+## North Carolina   13.0     337        45    16.1
+## North Dakota      0.8      45        44     7.3
+## Ohio              7.3     120        75    21.4
+## Oklahoma          6.6     151        68    20.0
+## Oregon            4.9     159        67    29.3
+## Pennsylvania      6.3     106        72    14.9
+## Rhode Island      3.4     174        87     8.3
+## South Carolina   14.4     279        48    22.5
+## South Dakota      3.8      86        45    12.8
+## Tennessee        13.2     188        59    26.9
+## Texas            12.7     201        80    25.5
+## Utah              3.2     120        80    22.9
+## Vermont           2.2      48        32    11.2
+## Virginia          8.5     156        63    20.7
+## Washington        4.0     145        73    26.2
+## West Virginia     5.7      81        39     9.3
+## Wisconsin         2.6      53        66    10.8
+## Wyoming           6.8     161        60    15.6</code></pre>
+<p>We do not need to update our original <code>USArrests</code> data frame, so we’re just piping this through and displaying the output here so you can see what’s going on.</p>
 </div>
-<div id="summarise-and-visualise-7" class="section level2" number="16.6">
+<div id="summarise-and-visualise" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">16.6</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise"><i class="fas fa-link"></i></a>
 </h2>
-<p>Run this command:</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USArrests</span>, lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>Knowing that the reformatting works, we can first visualise the data:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create correlation plot</span>
+<span class="va">USArrests</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <ul>
-<li>The first argument is a matrix or a data frame</li>
 <li>The argument <code>lower.panel</code> tells R not to add the redundant reflected lower set of plots, below the diagonal</li>
 </ul>
-<p>From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some case (<code>Murder</code> and <code>UrbanPop</code> for example).</p>
+<p>From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some cases (<code>murder</code> and <code>urban_pop</code> for example).</p>
 </div>
-<div id="implement-test-6" class="section level2" number="16.7">
+<div id="implement-test" class="section level2" number="4.7">
 <h2>
-<span class="header-section-number">16.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s test if there are any possible correlations between the variables:</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USArrests</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
+<p>We can calculate Pearson’s correlation coefficients for each pair of the variables (e.g. the coefficient between <code>murder</code> and <code>assault</code>). There are several functions that allow you to do this. There is the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function in base R and <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> from the <code>rstatix</code> package, that spits out the results in a matrix (grid) format. We’ll use <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> here so we can keep using our tibble data sets.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># calculate Pearson's correlation coefficients</span>
+<span class="va">USArrests</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>The first argument is a matrix or a data frame</li>
-<li>The argument <code>method</code> tells R which correlation coefficient to use (<code>pearson</code> (default), <code>kendall</code>, or <code>spearman</code>)</li>
+<li>First we create a matrix, keeping the <code>state</code> data linked as row names</li>
+<li>The <code>method</code> argument tells R which correlation coefficient to use (<code>pearson</code> (default), <code>kendall</code>, or <code>spearman</code>)</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-6" class="section level2" number="16.8">
+<div id="interpret-output-and-report-results" class="section level2" number="4.8">
 <h2>
-<span class="header-section-number">16.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>This should give the following output:</p>
-<pre><code>##              Murder   Assault   UrbanPop   Robbery
-## Murder   1.00000000 0.8018733 0.06957262 0.5635788
-## Assault  0.80187331 1.0000000 0.25887170 0.6652412
-## UrbanPop 0.06957262 0.2588717 1.00000000 0.4113412
-## Robbery  0.56357883 0.6652412 0.41134124 1.0000000</code></pre>
-<p>The matrix gives the correlation coefficient between each pair of variables in the data frame. The matrix is symmetric (<em>why?</em>) and the diagonal values are all 1 (<em>why?</em>). The most correlated variables are <code>Murder</code> and <code>Assault</code> with an <code>r</code> value of 0.801. This appears to agree well with the set of scatter plots that we produced earlier.</p>
+<pre><code>## # A tibble: 4 × 5
+##   rowname   murder assault urban_pop robbery
+## * &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 murder      1       0.8       0.07    0.56
+## 2 assault     0.8     1         0.26    0.67
+## 3 urban_pop   0.07    0.26      1       0.41
+## 4 robbery     0.56    0.67      0.41    1</code></pre>
+<p>The table gives the correlation coefficient between each pair of variables in the data frame. The correlation coefficient is given in the <code>cor</code> column, whereas the variables that are being compared are in the <code>var1</code> and <code>var2</code> columns. The most correlated variables are <code>murder</code> and <code>assault</code> with an <code>r</code> value of 0.80. This appears to agree well with the set of scatter plots that we produced earlier.</p>
 </div>
-<div id="exercise-state-data-pearson" class="section level2" number="16.9">
+<div id="exercise-state-data-pearson" class="section level2" number="4.9">
 <h2>
-<span class="header-section-number">16.9</span> Exercise: State data (Pearson)<a class="anchor" aria-label="anchor" href="#exercise-state-data-pearson"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.9</span> Exercise: State data (Pearson)<a class="anchor" aria-label="anchor" href="#exercise-state-data-pearson"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-10" class="exercise"><strong>Exercise 16.1  </strong></span>Pearson’s correlation for USA state data</p>
-<p>We will use the data from the file <code>data/raw/CS3-statedata.csv</code> dataset for this exercise. This rather more benign dataset contains information on more general properties of each US state, such as population (1975), per capita income (1974), illiteracy proportion (1970), life expectancy (1969), murder rate per 100,000 people (there’s no getting away from it), percentage of the population who are high-school graduates, average number of days where the minimum temperature is below freezing between 1931 and 1960, and the state area in square miles. The dataset contains 50 rows and 8 columns, with column names: <code>Population</code>, <code>Income</code>, <code>Illiteracy</code>, <code>Life.Exp</code>, <code>Murder</code>, <code>HS.Grad</code>, <code>Frost</code> and <code>Area</code>.</p>
-<p>Load in the data (remembering to tell R that the first column of the CSV file should be used to specify the row names of the dataset) and use the pairs command to visually identify 3 different pairs of variables that appear to be</p>
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 4.1  </strong></span>Pearson’s correlation for USA state data</p>
+<p>We will use the data from the file <code>data/tidy/CS3-statedata.csv</code> dataset for this exercise. This rather more benign dataset contains information on more general properties of each US state, such as population (1975), per capita income (1974), illiteracy proportion (1970), life expectancy (1969), murder rate per 100,000 people (there’s no getting away from it), percentage of the population who are high-school graduates, average number of days where the minimum temperature is below freezing between 1931 and 1960, and the state area in square miles. The dataset contains 50 rows and 8 columns, with column names: <code>population</code>, <code>income</code>, <code>illiteracy</code>, <code>life_exp</code>, <code>murder</code>, <code>hs_grad</code>, <code>frost</code> and <code>area</code>.</p>
+<p>Load in the data (remembering to tell R that the first column of the CSV file should be used to specify the row names of the dataset) and use the <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> command to visually identify 3 different pairs of variables that appear to be</p>
 <ol style="list-style-type: decimal">
 <li>the most positively correlated</li>
 <li>the most negatively correlated</li>
@@ -519,153 +575,248 @@
 <p>Calculate Pearson’s r for all variable pairs and see how well you were able to identify correlation visually.</p>
 <details><summary>
 Answer
-</summary><p><strong>1. Read in the data</strong></p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USAstate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/raw/CS3-statedata.csv"</span>,
-                     row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+</summary><div id="read-in-the-data" class="section level3" number="4.9.1">
+<h3>
+<span class="header-section-number">4.9.1</span> Read in the data<a class="anchor" aria-label="anchor" href="#read-in-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">USAstate</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">USAstate</span><span class="op">)</span></code></pre></div>
-<pre><code>##            Population Income Illiteracy LifeExp Murder HSGrad Frost   Area
-## Alabama          3615   3624        2.1   69.05   15.1   41.3    20  50708
-## Alaska            365   6315        1.5   69.31   11.3   66.7   152 566432
-## Arizona          2212   4530        1.8   70.55    7.8   58.1    15 113417
-## Arkansas         2110   3378        1.9   70.66   10.1   39.9    65  51945
-## California      21198   5114        1.1   71.71   10.3   62.6    20 156361
-## Colorado         2541   4884        0.7   72.06    6.8   63.9   166 103766</code></pre>
-<p><strong>2. Look at the pair-wise comparisons</strong></p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USAstate</span>, lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
-<p><strong>3. Create a correlation matrix</strong></p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
-<pre><code>##             Population     Income  Illiteracy     LifeExp     Murder
-## Population  1.00000000  0.2082276  0.10762237 -0.06805195  0.3436428
-## Income      0.20822756  1.0000000 -0.43707519  0.34025534 -0.2300776
-## Illiteracy  0.10762237 -0.4370752  1.00000000 -0.58847793  0.7029752
-## LifeExp    -0.06805195  0.3402553 -0.58847793  1.00000000 -0.7808458
-## Murder      0.34364275 -0.2300776  0.70297520 -0.78084575  1.0000000
-## HSGrad     -0.09848975  0.6199323 -0.65718861  0.58221620 -0.4879710
-## Frost      -0.33215245  0.2262822 -0.67194697  0.26206801 -0.5388834
-## Area        0.02254384  0.3633154  0.07726113 -0.10733194  0.2283902
-##                 HSGrad      Frost        Area
-## Population -0.09848975 -0.3321525  0.02254384
-## Income      0.61993232  0.2262822  0.36331544
-## Illiteracy -0.65718861 -0.6719470  0.07726113
-## LifeExp     0.58221620  0.2620680 -0.10733194
-## Murder     -0.48797102 -0.5388834  0.22839021
-## HSGrad      1.00000000  0.3667797  0.33354187
-## Frost       0.36677970  1.0000000  0.05922910
-## Area        0.33354187  0.0592291  1.00000000</code></pre>
+<span class="va">USAstate</span></code></pre></div>
+<pre><code>## # A tibble: 50 × 9
+##    state       population income illiteracy life_exp murder hs_grad frost   area
+##    &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Alabama           3615   3624        2.1     69.0   15.1    41.3    20  50708
+##  2 Alaska             365   6315        1.5     69.3   11.3    66.7   152 566432
+##  3 Arizona           2212   4530        1.8     70.6    7.8    58.1    15 113417
+##  4 Arkansas          2110   3378        1.9     70.7   10.1    39.9    65  51945
+##  5 California       21198   5114        1.1     71.7   10.3    62.6    20 156361
+##  6 Colorado          2541   4884        0.7     72.1    6.8    63.9   166 103766
+##  7 Connecticut       3100   5348        1.1     72.5    3.1    56     139   4862
+##  8 Delaware           579   4809        0.9     70.1    6.2    54.6   103   1982
+##  9 Florida           8277   4815        1.3     70.7   10.7    52.6    11  54090
+## 10 Georgia           4931   4091        2       68.5   13.9    40.6    60  58073
+## # … with 40 more rows</code></pre>
+</div>
+<div id="pair-wise-comparisons-visual" class="section level3" number="4.9.2">
+<h3>
+<span class="header-section-number">4.9.2</span> Pair-wise comparisons (visual)<a class="anchor" aria-label="anchor" href="#pair-wise-comparisons-visual"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visual comparisons of variables</span>
+<span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+</div>
+<div id="calculate-the-correlation-coefficients" class="section level3" number="4.9.3">
+<h3>
+<span class="header-section-number">4.9.3</span> Calculate the correlation coefficients<a class="anchor" aria-label="anchor" href="#calculate-the-correlation-coefficients"><i class="fas fa-link"></i></a>
+</h3>
+<p>To get the correlation coefficients in a format that allows us to manipulate it, we use the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test()</a></code> function. This does something similar to the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> function - it calculates the pairwise correlation coefficients. However, it outputs the results in a table format, instead of a matrix.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># calculate Pearson's correlation coefficients</span>
+<span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 64 × 8
+##    var1       var2          cor     statistic      p conf.low conf.high method 
+##    &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
+##  1 population population  1           Inf     0        1         1      Pearson
+##  2 population income      0.21          1.47  0.147   -0.0744    0.460  Pearson
+##  3 population illiteracy  0.11          0.750 0.457   -0.176     0.375  Pearson
+##  4 population life_exp   -0.068        -0.473 0.639   -0.340     0.214  Pearson
+##  5 population murder      0.34          2.54  0.0146   0.0722    0.568  Pearson
+##  6 population hs_grad    -0.098        -0.686 0.496   -0.367     0.185  Pearson
+##  7 population frost      -0.33         -2.44  0.0184  -0.559    -0.0593 Pearson
+##  8 population area        0.023         0.156 0.877   -0.257     0.299  Pearson
+##  9 income     population  0.21          1.47  0.147   -0.0744    0.460  Pearson
+## 10 income     income      1     464943848.    0        1         1      Pearson
+## # … with 54 more rows</code></pre>
+<p>To extract the maximum, minimum and least correlated pairs, it would be easy if we filter the correlation table a bit more, because each pair now appears twice (once in each orientation, such as <code>murder</code> &amp; <code>assault</code>, <code>assault</code> &amp; <code>murder</code>).</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># calculate the correlation coefficients</span>
+<span class="co"># select the unique pairs</span>
+<span class="co"># and store in a new object</span>
+<span class="va">USAstate_cor</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># filter out the self-pairs (e.g. murder &amp; murder)</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># arrange the data by correlation coefficient</span>
+  <span class="fu">arrange</span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># each correlation appears twice</span>
+  <span class="co"># because the pairs are duplicated</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># slice the first row of each group</span>
+  <span class="fu">slice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu">n</span><span class="op">(</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># remove the grouping</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Now that we have the unique pairs with their corresponding correlation coefficients, we can extract the information that we need:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># get most positively correlated pair</span>
+<span class="va">USAstate_cor</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># get most negatively correlated pair</span>
+<span class="va">USAstate_cor</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># get least correlated pair</span>
+<span class="va">USAstate_cor</span> <span class="op">%&gt;%</span>
+  <span class="co"># abs() computes the absolute value</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>So taken together:</p>
 <ol style="list-style-type: decimal">
-<li>The most <strong>positively</strong> correlated variables are Murder and Illiteracy</li>
-<li>The most <strong>negatively</strong> correlated variables are Murder and LifeExp</li>
-<li>The most <strong>uncorrelated</strong> variables are Area and Population</li>
-</ol></details>
+<li>The most <strong>positively</strong> correlated variables are illiteracy and murder</li>
+<li>The most <strong>negatively</strong> correlated variables are life_exp and murder</li>
+<li>The most <strong>uncorrelated</strong> variables are population and area</li>
+</ol>
+</div>
+</details>
 </div>
 </div>
-<div id="spearmans-rank-correlation-coefficient" class="section level2" number="16.10">
+<div id="spearmans-rank-correlation-coefficient" class="section level2" number="4.10">
 <h2>
-<span class="header-section-number">16.10</span> Spearman’s rank correlation coefficient<a class="anchor" aria-label="anchor" href="#spearmans-rank-correlation-coefficient"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.10</span> Spearman’s rank correlation coefficient<a class="anchor" aria-label="anchor" href="#spearmans-rank-correlation-coefficient"><i class="fas fa-link"></i></a>
 </h2>
 <p>This test first calculates the rank of the numerical data (i.e. their position from smallest (or most negative) to the largest (or most positive)) in the two variables and then calculates Pearson’s product moment correlation coefficient using the ranks. As a consequence, this test is less sensitive to outliers in the distribution.</p>
 </div>
-<div id="implement-test-7" class="section level2" number="16.11">
+<div id="implement-test-1" class="section level2" number="4.11">
 <h2>
-<span class="header-section-number">16.11</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.11</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>We are using the same <code>USArrests</code> data set as before, so run this command:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USArrests</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">USArrests</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>The first argument is a matrix or a data frame</li>
+<li>Remember that <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> requires a matrix, so we use the <code>state</code> column as row names</li>
 <li>The argument <code>method</code> tells R which correlation coefficient to use</li>
 </ul>
 </div>
-<div id="interpret-output-and-report-results-7" class="section level2" number="16.12">
+<div id="interpret-output-and-report-results-1" class="section level2" number="4.12">
 <h2>
-<span class="header-section-number">16.12</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.12</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This gives the following output:</p>
-<pre><code>##             Murder   Assault  UrbanPop   Robbery
-## Murder   1.0000000 0.8172735 0.1067163 0.6794265
-## Assault  0.8172735 1.0000000 0.2752133 0.7143681
-## UrbanPop 0.1067163 0.2752133 1.0000000 0.4381068
-## Robbery  0.6794265 0.7143681 0.4381068 1.0000000</code></pre>
-<p>The matrix gives the correlation coefficient between each pair of variables in the data frame. Again, the matrix is symmetric, and the diagonal values are all 1 as expected. The values obtained are very similar to the correlation coefficients obtained using the Pearson test.</p>
+<pre><code>## # A tibble: 4 × 5
+##   rowname   murder assault urban_pop robbery
+## * &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 murder      1       0.82      0.11    0.68
+## 2 assault     0.82    1         0.28    0.71
+## 3 urban_pop   0.11    0.28      1       0.44
+## 4 robbery     0.68    0.71      0.44    1</code></pre>
+<p>The table gives the correlation coefficient between each pair of variables in the data frame. Slightly annoyingly, each pair occurs twice but in opposite direction.</p>
 </div>
-<div id="exercise-state-data-spearman" class="section level2" number="16.13">
+<div id="exercise-state-data-spearman" class="section level2" number="4.13">
 <h2>
-<span class="header-section-number">16.13</span> Exercise: State data (Spearman)<a class="anchor" aria-label="anchor" href="#exercise-state-data-spearman"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.13</span> Exercise: State data (Spearman)<a class="anchor" aria-label="anchor" href="#exercise-state-data-spearman"><i class="fas fa-link"></i></a>
 </h2>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 16.2  </strong></span>Spearman’s correlation for USA state data</p>
-<p>Calculate Spearman’s correlation coefficient for the <code>data/raw/CS3-statedata.csv</code> dataset.</p>
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 4.2  </strong></span>Spearman’s correlation for USA state data</p>
+<p>Calculate Spearman’s correlation coefficient for the <code>data/tidy/CS3-statedata.csv</code> dataset.</p>
 <p>Which variable’s correlations are affected most by the use of the Spearman’s rank compared with Pearson’s r?</p>
 <p>With reference to the scatter plot produced earlier, can you explain why this might this be?</p>
 <ul>
-<li>Remember to use the <code>row.names = 1</code> argument to load the data as a matrix</li>
+<li>Remember to use <code>column_to_rownames(var = "state")</code> argument to load the data as a matrix</li>
 </ul>
 <details><summary>
 Hint
 </summary><ol style="list-style-type: decimal">
 <li>Instead of eye-balling differences, think about how you can determine the difference between the two correlation matrices</li>
-<li>The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function can be very useful to visualise matrices</li>
+<li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot()</a></code> function can be very useful to visualise matrices</li>
 </ol></details><details><summary>
 Answer
-</summary><div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
-<pre><code>##            Population      Income Illiteracy    LifeExp     Murder     HSGrad
-## Population  1.0000000  0.12460984  0.3130496 -0.1040171  0.3457401 -0.3833649
-## Income      0.1246098  1.00000000 -0.3145948  0.3241050 -0.2174623  0.5104809
-## Illiteracy  0.3130496 -0.31459482  1.0000000 -0.5553735  0.6723592 -0.6545396
-## LifeExp    -0.1040171  0.32410498 -0.5553735  1.0000000 -0.7802406  0.5239410
-## Murder      0.3457401 -0.21746230  0.6723592 -0.7802406  1.0000000 -0.4367330
-## HSGrad     -0.3833649  0.51048095 -0.6545396  0.5239410 -0.4367330  1.0000000
-## Frost      -0.4588526  0.19686382 -0.6831936  0.2983910 -0.5438432  0.3985351
-## Area       -0.1206723  0.05709484 -0.2503721  0.1275002  0.1064259  0.4389752
-##                 Frost        Area
-## Population -0.4588526 -0.12067227
-## Income      0.1968638  0.05709484
-## Illiteracy -0.6831936 -0.25037208
-## LifeExp     0.2983910  0.12750018
-## Murder     -0.5438432  0.10642590
-## HSGrad      0.3985351  0.43897520
-## Frost       1.0000000  0.11228778
-## Area        0.1122878  1.00000000</code></pre>
-<p>In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we’re using R is that we can be a bit more <strong>programmatic</strong> about these things.</p>
-<p>Let’s calculate the difference between the two correlation matrices:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
-<span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span>
-<span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span></code></pre></div>
-<p>Again, we could now just look at a grid of 64 numbers and see if we can spot the biggest differences, but our eyes aren’t that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data. We can do that using some R plotting functions, <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> to be exact. The <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> function has a lot of features that we don’t need and so I’m not going to go into it in detail here. The main reason I’m using it is that it displays matrices the right way round (other plotting functions display matrices rotated by 90 degrees) and automatically labels the rows and columns.</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html">heatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">corDiff</span><span class="op">)</span>, symm <span class="op">=</span> <span class="cn">TRUE</span>, Rowv <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
-<p>The <code><a href="https://rdrr.io/r/base/MathFun.html">abs()</a></code> function calculates the absolute value (i.e. just the magnitude) of the matrix values. This is just because I only care about situations where the two correlation coefficients are different from each other but I don’t care which is the larger. The <code>symm</code> argument tells the function that we have a symmetric matrix and in conjunction with the <code>Rowv = NA</code> argument stops the plot from reordering the rows and columns. The <code>Rowv = NA</code> argument also stops the function from adding dendrograms to the margins of the plot.</p>
-<p>The plot itself is coloured from yellow, indicating the smallest values (which in this case correspond to no difference in correlation coefficients), through orange to dark red, indicating the biggest values (which in this case correspond to the variables with the biggest difference in correlation coefficients).</p>
-<p>The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light yellow in colour, which means that there isn’t much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the <code>Area</code> row/column suggesting that there’s a big difference in the correlation coefficients there.</p>
+</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 9
+##   rowname    population income illiteracy life_exp murder hs_grad frost   area
+## * &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 population       1     0.12        0.31    -0.1    0.35   -0.38 -0.46 -0.12 
+## 2 income           0.12  1          -0.31     0.32  -0.22    0.51  0.2   0.057
+## 3 illiteracy       0.31 -0.31        1       -0.56   0.67   -0.65 -0.68 -0.25 
+## 4 life_exp        -0.1   0.32       -0.56     1     -0.78    0.52  0.3   0.13 
+## 5 murder           0.35 -0.22        0.67    -0.78   1      -0.44 -0.54  0.11 
+## 6 hs_grad         -0.38  0.51       -0.65     0.52  -0.44    1     0.4   0.44 
+## 7 frost           -0.46  0.2        -0.68     0.3   -0.54    0.4   1     0.11 
+## 8 area            -0.12  0.057      -0.25     0.13   0.11    0.44  0.11  1</code></pre>
+<p>In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we’re using R is that we can be a bit more <strong>programmatic</strong> about these things. Also, our eyes aren’t that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data.</p>
+<p>Let’s calculate the difference between the two correlation matrices. We create a correlation matrix using <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code>. Next we remove the <code>rowname</code>, so we’re left with just a data frame containing numbers. That way we can subtract the values of the two data frames.</p>
+<p>Lastly, we use the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot()</a></code> function to plot a heatmap of the differences.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create a data frame that contains all the Pearson's coefficients</span>
+<span class="va">USAstate_pear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># remove the row names</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span>
+
+<span class="co"># create a data frame that contains all the Pearson's coefficients</span>
+<span class="va">USAstate_spear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># remove the row names</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span>
+
+<span class="co"># calculate the difference between Pearson's and Spearman's</span>
+<span class="va">USAstate_diff</span> <span class="op">&lt;-</span> <span class="va">USAstate_pear</span> <span class="op">-</span> <span class="va">USAstate_spear</span>
+
+<span class="co"># use the column names of the data set as rownames</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span>
+
+<span class="va">USAstate_diff</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+<div class="note">
+<p>This is one of those cases where using tidyverse is actually not necessarily the easiest way. We could do a similar thing using base R syntax:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># read in the data with the base R read.csv function</span>
+<span class="co"># and assign the first column as row names</span>
+<span class="va">USAstate_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+<span class="co"># calculate a correlation matrix using Pearson's</span>
+<span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
+
+<span class="co"># calculate a correlation matrix using Spearman</span>
+<span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span>
+
+<span class="co"># calculate the difference between the two matrices</span>
+<span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span>
+
+<span class="co"># and plot it, like before</span>
+<span class="va">corDiff</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
+</div>
+<p>The plot itself is coloured from blue to red, indicating the biggest positive differences in correlation coefficients in blue. The biggest negative differences are coloured in red, whereas the least difference is indicated in white.</p>
+<p>The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light blue or light red in colour, which means that there isn’t much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the <code>area</code> row/column suggesting that there’s a big difference in the correlation coefficients there.</p>
 <p>We can now revisit the pairwise scatter plot from before to see if this makes sense:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">USAstate</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
-<p>What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the <code>Area</code> vs <code>Income</code> graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># visual comparisons of variables</span>
+<span class="va">USAstate</span> <span class="op">%&gt;%</span> 
+  <span class="fu">column_to_rownames</span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<p>What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the <code>area</code> vs <code>income</code> graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.</p>
 <p>Well done, <a href="https://en.wikipedia.org/wiki/Charles_Spearman">Mr. Spearman</a>.</p>
 </details>
 </div>
 </div>
-<div id="key-points-4" class="section level2" number="16.14">
+<div id="key-points" class="section level2" number="4.14">
 <h2>
-<span class="header-section-number">16.14</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.14</span> Key points<a class="anchor" aria-label="anchor" href="#key-points"><i class="fas fa-link"></i></a>
 </h2>
 <div class="keypoints">
 <ul>
 <li>Correlation is the degree to which two variables are linearly related</li>
 <li>Correlation does not imply causation</li>
-<li>We can visualise correlations using the <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> function</li>
-<li>Using the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function we can calculate correlation matrices</li>
+<li>We can visualise correlations using the <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> and <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot()</a></code> functions</li>
+<li>Using the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> and <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test()</a></code> functions we can calculate correlation matrices</li>
 <li>Two main correlation coefficients are Pearson’s r and Spearman’s rank, with Spearman’s rank being less sensitive to outliers</li>
 </ul>
 </div>
@@ -673,26 +824,32 @@ Answer
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></div>
-<div class="next"><a href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></div>
+<div class="prev"><a href="introduction.html"><span class="header-section-number">3</span> Introduction</a></div>
+<div class="next"><a href="linear-regression.html"><span class="header-section-number">5</span> Linear regression</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#correlation-coefficients"><span class="header-section-number">16</span> Correlation coefficients</a></li>
-<li><a class="nav-link" href="#objectives-5"><span class="header-section-number">16.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-4"><span class="header-section-number">16.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-8"><span class="header-section-number">16.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">16.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#pearsons-product-moment-correlation-coefficient"><span class="header-section-number">16.5</span> Pearson’s product moment correlation coefficient</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">16.6</span> Summarise and visualise</a></li>
-<li><a class="nav-link" href="#implement-test-6"><span class="header-section-number">16.7</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-6"><span class="header-section-number">16.8</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-state-data-pearson"><span class="header-section-number">16.9</span> Exercise: State data (Pearson)</a></li>
-<li><a class="nav-link" href="#spearmans-rank-correlation-coefficient"><span class="header-section-number">16.10</span> Spearman’s rank correlation coefficient</a></li>
-<li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">16.11</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-7"><span class="header-section-number">16.12</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#exercise-state-data-spearman"><span class="header-section-number">16.13</span> Exercise: State data (Spearman)</a></li>
-<li><a class="nav-link" href="#key-points-4"><span class="header-section-number">16.14</span> Key points</a></li>
+<li><a class="nav-link" href="#correlation-coefficients"><span class="header-section-number">4</span> Correlation coefficients</a></li>
+<li><a class="nav-link" href="#objectives-1"><span class="header-section-number">4.1</span> Objectives</a></li>
+<li><a class="nav-link" href="#purpose-and-aim"><span class="header-section-number">4.2</span> Purpose and aim</a></li>
+<li><a class="nav-link" href="#section-commands"><span class="header-section-number">4.3</span> Section commands</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses"><span class="header-section-number">4.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#pearsons-product-moment-correlation-coefficient"><span class="header-section-number">4.5</span> Pearson’s product moment correlation coefficient</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise"><span class="header-section-number">4.6</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#implement-test"><span class="header-section-number">4.7</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results"><span class="header-section-number">4.8</span> Interpret output and report results</a></li>
+<li>
+<a class="nav-link" href="#exercise-state-data-pearson"><span class="header-section-number">4.9</span> Exercise: State data (Pearson)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#read-in-the-data"><span class="header-section-number">4.9.1</span> Read in the data</a></li>
+<li><a class="nav-link" href="#pair-wise-comparisons-visual"><span class="header-section-number">4.9.2</span> Pair-wise comparisons (visual)</a></li>
+<li><a class="nav-link" href="#calculate-the-correlation-coefficients"><span class="header-section-number">4.9.3</span> Calculate the correlation coefficients</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#spearmans-rank-correlation-coefficient"><span class="header-section-number">4.10</span> Spearman’s rank correlation coefficient</a></li>
+<li><a class="nav-link" href="#implement-test-1"><span class="header-section-number">4.11</span> Implement test</a></li>
+<li><a class="nav-link" href="#interpret-output-and-report-results-1"><span class="header-section-number">4.12</span> Interpret output and report results</a></li>
+<li><a class="nav-link" href="#exercise-state-data-spearman"><span class="header-section-number">4.13</span> Exercise: State data (Spearman)</a></li>
+<li><a class="nav-link" href="#key-points"><span class="header-section-number">4.14</span> Key points</a></li>
 </ul>
 
       <div class="book-extra">
