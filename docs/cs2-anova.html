@@ -357,6 +357,12 @@
 <li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
 <li><a class="active" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
 <li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
+<li class="book-part">CoreStats 3: Continuous predictors</li>
+<li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
+<li class="book-part">CoreStats 3 (Practicals)</li>
+<li><a class="" href="introduction-2.html"><span class="header-section-number">15</span> Introduction</a></li>
+<li><a class="" href="correlation-coefficients.html"><span class="header-section-number">16</span> Correlation coefficients</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">17</span> Linear regression</a></li>
 </ul>
 
         <div class="book-extra">
@@ -523,7 +529,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">feeding</span><span class="op">)</span></code></pre></div>
 <p>We can see that all three groups appear to be normally distributed which is good.</p>
-<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from a linear model fitted to the data.</p>
+<p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from a linear model fitted to the data.</p>
 <p>So, we create a linear model, extract the residuals and check their normality:</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>

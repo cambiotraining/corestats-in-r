@@ -24,15 +24,15 @@ New commands used in this section:
 
 | Function| Description|
 |:- |:- |
+|`abs()`| Computes the absolute value of a number |
 |`column_to_rownames()`| Converts a column to row name |
 |`cor_mat()`| Calculates a correlation matrix |
-|`cor_test()`| Performs correlation test between paired sample, with a tidy output |
+|`cor_test()`| Performs correlation test between paired samples, with a tidy output |
 |`pairs()`| Plots a matrix of scatter plots |
 |`slice()`| Selects rows based on their position |
-|`abs()`| Computes the absolute value of a number |
 
 ## Data and hypotheses
-We will use the `USArrests` dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. `USArrests` is a data frame with 50 observations of five variables: `state`, `murder`, `assault`, `urban_pop` and `r`obbery`.
+We will use the `USArrests` dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. `USArrests` is a data frame with 50 observations of five variables: `state`, `murder`, `assault`, `urban_pop` and `robbery`.
 
 The data are stored in the file `data/tidy/CS3-usarrests.csv`.
 
@@ -67,67 +67,13 @@ USArrests
 ## Pearson’s product moment correlation coefficient
 Pearson's r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.
 
-Before we can look at the correlations we need to reformat our data a little bit. The functions we're going to use require a _matrix_ as input. This is a slightly different object than a tibble/data frame. Basically it's a data frame that only contains numbers. Because we want to keep the `state` information linked to our data, we need to define the `state` column as the name of the rows. Technically these functions can also take data frames if they only contain numbers, but here we're interested in keeping the `state` data linked, so we use a matrix. We convert our data into a matrix as follows:
+Before we can look at the correlations we need to reformat our data a little bit. The functions we're going to use require data frames that contain only numbers input. Because we want to keep the `state` information linked to our data, we need to define the `state` column as the name of the rows.
 
 
 ```r
 # convert the state column to row names
 USArrests %>% 
   column_to_rownames(var = "state")
-```
-
-```
-##                murder assault urban_pop robbery
-## Alabama          13.2     236        58    21.2
-## Alaska           10.0     263        48    44.5
-## Arizona           8.1     294        80    31.0
-## Arkansas          8.8     190        50    19.5
-## California        9.0     276        91    40.6
-## Colorado          7.9     204        78    38.7
-## Connecticut       3.3     110        77    11.1
-## Delaware          5.9     238        72    15.8
-## Florida          15.4     335        80    31.9
-## Georgia          17.4     211        60    25.8
-## Hawaii            5.3      46        83    20.2
-## Idaho             2.6     120        54    14.2
-## Illinois         10.4     249        83    24.0
-## Indiana           7.2     113        65    21.0
-## Iowa              2.2      56        57    11.3
-## Kansas            6.0     115        66    18.0
-## Kentucky          9.7     109        52    16.3
-## Louisiana        15.4     249        66    22.2
-## Maine             2.1      83        51     7.8
-## Maryland         11.3     300        67    27.8
-## Massachusetts     4.4     149        85    16.3
-## Michigan         12.1     255        74    35.1
-## Minnesota         2.7      72        66    14.9
-## Mississippi      16.1     259        44    17.1
-## Missouri          9.0     178        70    28.2
-## Montana           6.0     109        53    16.4
-## Nebraska          4.3     102        62    16.5
-## Nevada           12.2     252        81    46.0
-## New Hampshire     2.1      57        56     9.5
-## New Jersey        7.4     159        89    18.8
-## New Mexico       11.4     285        70    32.1
-## New York         11.1     254        86    26.1
-## North Carolina   13.0     337        45    16.1
-## North Dakota      0.8      45        44     7.3
-## Ohio              7.3     120        75    21.4
-## Oklahoma          6.6     151        68    20.0
-## Oregon            4.9     159        67    29.3
-## Pennsylvania      6.3     106        72    14.9
-## Rhode Island      3.4     174        87     8.3
-## South Carolina   14.4     279        48    22.5
-## South Dakota      3.8      86        45    12.8
-## Tennessee        13.2     188        59    26.9
-## Texas            12.7     201        80    25.5
-## Utah              3.2     120        80    22.9
-## Vermont           2.2      48        32    11.2
-## Virginia          8.5     156        63    20.7
-## Washington        4.0     145        73    26.2
-## West Virginia     5.7      81        39     9.3
-## Wisconsin         2.6      53        66    10.8
-## Wyoming           6.8     161        60    15.6
 ```
 
 We do not need to update our original `USArrests` data frame, so we're just piping this through and displaying the output here so you can see what's going on.
@@ -150,7 +96,7 @@ USArrests %>%
 From visual inspection of the scatter plots we can see that there appears to be a slight positive correlation between all pairs of variables, although this may be very weak in some cases (`murder` and `urban_pop` for example).
 
 ## Implement test
-We can calculate Pearson's correlation coefficients for each pair of the variables (e.g. the coefficient between `murder` and `assault`). There are several functions that allow you to do this. There is the `cor()` function in base R and `cor_mat()` from the `rstatix` package, that spits out the results in a matrix (grid) format. We'll use `cor_mat()` here so we can keep using our tibble data sets.
+We can calculate Pearson's correlation coefficients for each pair of the variables (e.g. the coefficient between `murder` and `assault`). There are several functions that allow you to do this. There is the `cor()` function in base R and `cor_mat()` from the `rstatix` package, that spit out the results in a matrix (grid) format. We'll use `cor_mat()` here so we can keep using our tibble data sets.
 
 
 ```r
@@ -177,7 +123,7 @@ This should give the following output:
 ## 4 robbery     0.56    0.67      0.41    1
 ```
 
-The table gives the correlation coefficient between each pair of variables in the data frame. The correlation coefficient is given in the `cor` column, whereas the variables that are being compared are in the `var1` and `var2` columns. The most correlated variables are `murder` and `assault` with an `r` value of 0.80. This appears to agree well with the set of scatter plots that we produced earlier.
+The table gives the correlation coefficient between each pair of variables in the data frame. The most correlated variables are `murder` and `assault` with an `r` value of 0.80. This appears to agree well with the set of scatter plots that we produced earlier.
 
 ## Exercise: State data (Pearson)
 :::exercise
@@ -263,6 +209,8 @@ USAstate %>%
 ## # … with 54 more rows
 ```
 
+The two variables that are compared are given in the `var1` and `var2` columns. The correlation coefficient is given in the `cor` column.
+
 To extract the maximum, minimum and least correlated pairs, it would be easy if we filter the correlation table a bit more, because each pair now appears twice (once in each orientation, such as `murder` & `assault`, `assault` & `murder`).
 
 
@@ -284,6 +232,26 @@ USAstate_cor <- USAstate %>%
   slice(seq(1, n(), by = 2)) %>% 
   # remove the grouping
   ungroup()
+
+# have a look at the ouput
+USAstate_cor
+```
+
+```
+## # A tibble: 28 × 8
+##    var1       var2         cor statistic        p conf.low conf.high method 
+##    <chr>      <chr>      <dbl>     <dbl>    <dbl>    <dbl>     <dbl> <chr>  
+##  1 life_exp   murder     -0.78    -8.66  2.26e-11   -0.870   -0.642  Pearson
+##  2 illiteracy frost      -0.67    -6.29  9.16e- 8   -0.801   -0.484  Pearson
+##  3 illiteracy hs_grad    -0.66    -6.04  2.17e- 7   -0.791   -0.464  Pearson
+##  4 illiteracy life_exp   -0.59    -5.04  6.97e- 6   -0.745   -0.371  Pearson
+##  5 murder     frost      -0.54    -4.43  5.4 e- 5   -0.711   -0.307  Pearson
+##  6 murder     hs_grad    -0.49    -3.87  3.25e- 4   -0.675   -0.243  Pearson
+##  7 income     illiteracy -0.44    -3.37  1.51e- 3   -0.638   -0.181  Pearson
+##  8 population frost      -0.33    -2.44  1.84e- 2   -0.559   -0.0593 Pearson
+##  9 income     murder     -0.23    -1.64  1.08e- 1   -0.478    0.0516 Pearson
+## 10 life_exp   area       -0.11    -0.748 4.58e- 1   -0.374    0.176  Pearson
+## # … with 18 more rows
 ```
 
 Now that we have the unique pairs with their corresponding correlation coefficients, we can extract the information that we need:
@@ -443,8 +411,6 @@ corDiff <- corPear - corSpea
 corDiff %>% 
   cor_plot()
 ```
-
-<img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 :::
 
 The plot itself is coloured from blue to red, indicating the biggest positive differences in correlation coefficients in blue. The biggest negative differences are coloured in red, whereas the least difference is indicated in white.
