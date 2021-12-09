@@ -25,15 +25,15 @@ rmd_files: [
   #"cs3-practical-correlation_coefficients.Rmd",
   #"cs3-practical-linear_regression.Rmd",
 
-  "cs4-intro.Rmd",
-  "cs4-practical-introduction.Rmd",
-  "cs4-practical-two_way_anova.Rmd",
-  "cs4-practical-linear_regression_grouped_data.Rmd",
+  #"cs4-intro.Rmd",
+  #"cs4-practical-introduction.Rmd",
+  #"cs4-practical-two_way_anova.Rmd",
+  #"cs4-practical-linear_regression_grouped_data.Rmd",
 
-  #"cs5-intro.Rmd",
-  #"cs5-practical-introduction.Rmd",
-  #"cs5-practical-linear_models.Rmd",
-  #"cs5-practical-model_comparison.Rmd",
+  "cs5-intro.Rmd",
+  "cs5-practical-introduction.Rmd",
+  "cs5-practical-linear_models.Rmd",
+  "cs5-practical-model_comparison.Rmd",
 
   #"cs6-intro.Rmd",
   #"cs6-practical-introduction.Rmd",
