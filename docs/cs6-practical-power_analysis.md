@@ -1,3 +1,5 @@
+
+
 # Power analysis
 
 ## Objectives
@@ -38,9 +40,9 @@ In an ideal world we would want to be carrying out highly powerful tests using l
 * a significance level (0.05 or 5% is our trusty yet arbitrary steed once again)
 * an effect size that we would like to detect
 
-we can calculate the amount of data that we need to collect in our experiments. (Woohoo! it looks as if statistics will actually give us an answer at last rather than these perpetual shades-of-grey "maybes").
+We can calculate the amount of data that we need to collect in our experiments. (Woohoo! it looks as if statistics will actually give us an answer at last rather than these perpetual shades-of-grey "maybes").
 
-The reality is that most of the easily usable power analysis functions all operate under the assumption that the data that you will collect will meet all of the assumptions of your chosen statistical test perfectly. So, for example, if you want to design an experiment investigating the effectiveness of a single drug compared to a placebo (so a simple t-test) and you want to know how many patients to have in each group in order for the test to work, then the standard power analysis techniques will still assume that all of the data that you end up collecting will meet the assumptions of the t-test that you have to carry out (Sorry to have raised your hopes ever so slightly 😉).
+The reality is that most of the easily usable power analysis functions all operate under the assumption that the data that you will collect will meet all of the assumptions of your chosen statistical test perfectly. So, for example, if you want to design an experiment investigating the effectiveness of a single drug compared to a placebo (so a simple t-test) and you want to know how many patients to have in each group in order for the test to work, then the standard power analysis techniques will still assume that all of the data that you end up collecting will meet the assumptions of the t-test that you have to carry out (sorry to have raised your hopes ever so slightly 😉).
 
 ### Effect size
 As we shall see the commands for carrying out power analyses are very simple to implement apart from the concept of effect size. This is a tricky issue for most people to get to grips with for two reasons:
@@ -48,6 +50,7 @@ As we shall see the commands for carrying out power analyses are very simple to 
 1. Effect size is related to biological significance rather than statistical significance
 2. The way in which we specify effect sizes
 
+:::highlight
 With respect to the first point a common conversation goes a bit like this:
 
 me: "So you’ve been told to carry out a power analysis, eh? Lucky you. What sort of effect size are you looking for?"
@@ -61,6 +64,7 @@ you: "I haven’t carried out my experiment yet, so I have absolutely no idea ho
 me:	<sigh>
 
 (To be honest this would be a relatively well-informed conversation: [this is much closer](https://www.youtube.com/watch?v=Hz1fyhVOjr4) to how things actually go)
+:::
 
 The key point about effect sizes and power analyses is that you need to specify an effect size that you would be interested in observing, or one that would be biologically relevant to see. There may well actually be a 0.1% difference in effectiveness of your drug over a placebo but designing an experiment to detect that would require markedly more individuals than an experiment that was trying to detect a 50% difference in effectiveness. In reality there are three places we can get a sense of effect sizes from:
 
@@ -82,30 +86,27 @@ For reference here are some of Cohen’s suggested values for effect sizes for d
 |:- |:- |:- |:- |
 |t-tests| 0.2 | 0.5 | 0.8 |
 |anova | 0.1 | 0.25 | 0.4 |
-linear models | 0.02 | 0.15 | 0.35 |
-chi-squared | 0.1 | 0.3 | 0.5 |
+|linear models | 0.02 | 0.15 | 0.35 |
+|chi-squared | 0.1 | 0.3 | 0.5 |
 
 We will look at how to carry out power analyses and estimate effect sizes in this section.
 
 ## Packages
-We will be using the `pwr` and `powerAnalysis` packages during this section. Please install those now.
+We will be using the `pwr` package during this section, which contains functions that allow us to perform power calculations. Please install it now.
 
 You can do this by running the following code in your console:
 
 
 ```r
-install.packages(c("pwr", "powerAnalysis"))
+install.packages("pwr")
 ```
 
-Next, load them by running:
+Next, load it by running:
 
 
 ```r
 library(pwr)
-library(powerAnalysis)
 ```
-
-These packages have a lot of overlap but unfortunately neither one of them quite has all the functionality I’d like. `powerAnalysis` has more functions for explicitly calculating effect sizes from previous studies but has a smaller range of power calculation functions. `pwr` has more power functions but fewer effect size functions. However, together they do the job.
 
 ## Section commands
 New commands used in this section:
@@ -115,9 +116,7 @@ New commands used in this section:
 |`pwr.t.test()`| Power analysis for 1-sample, 2-sample and paired t-tests |
 |`pwr.f2.test()`| Power analysis for linear models |
 |`cohen.ES()`| Conventional effect sizes for all tests |
-|`ES.t.one()`| Effect size calculation for t-test |
-|`ES.t.two()`| Effect size calculation for t-test |
-|`ES.t.paired()`| Effect size calculation for t-test |
+|`cohens_d()`| Compute the effect size for t-test |
 
 ## t-tests
 Let’s assume that we want to design an experiment to determine whether there is a difference in the mean price of what male and female students pay at a cafe. How many male and female students would we need to observe in order to detect a "medium" effect size with 80% power and a significance level of 0.05?
@@ -159,7 +158,7 @@ We do this as follows:
 
 ```r
 pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.8,
-           type = "two.sample", alternative="two.sided")
+           type = "two.sample", alternative = "two.sided")
 ```
 
 ```
@@ -219,56 +218,73 @@ This time we want to see what the effect size is so we look at the second line a
 
 In both of the previous two examples we were a little bit context-free in terms of effect size. Let’s look at how we can use a pilot study with real data to calculate effect sizes and perform a power analysis to inform a future study.
 
-Let’s look again at the `fishlength` data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as `data/raw/CS6-fishlength.csv`.
+Let’s look again at the `fishlength` data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as `data/tidy/CS6-fishlength.csv`.
 
 
 ```r
 # read in the data
-fishlength <- read.csv("data/raw/CS6-fishlength.csv")
+fishlength <- read_csv("data/tidy/CS6-fishlength.csv")
 
+# look at the data
+fishlength
+```
+
+```
+## # A tibble: 68 × 3
+##       id river   length
+##    <dbl> <chr>    <dbl>
+##  1     1 Guanapo   19.1
+##  2     2 Guanapo   23.3
+##  3     3 Guanapo   18.2
+##  4     4 Guanapo   16.4
+##  5     5 Guanapo   19.7
+##  6     6 Guanapo   16.6
+##  7     7 Guanapo   17.5
+##  8     8 Guanapo   19.9
+##  9     9 Guanapo   19.1
+## 10    10 Guanapo   18.8
+## # … with 58 more rows
+```
+
+```r
 # summarise the data
-summary(fishlength)
+fishlength %>% 
+  select(-id) %>% 
+  group_by(river) %>% 
+  get_summary_stats(type = "common")
 ```
 
 ```
-##      length         river          
-##  Min.   :11.20   Length:68         
-##  1st Qu.:18.40   Class :character  
-##  Median :19.30   Mode  :character  
-##  Mean   :19.46                     
-##  3rd Qu.:20.93                     
-##  Max.   :26.40
+## # A tibble: 2 × 11
+##   river   variable     n   min   max median   iqr  mean    sd    se    ci
+##   <chr>   <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 Aripo   length      39  17.5  26.4   20.1   2.2  20.3  1.78 0.285 0.577
+## 2 Guanapo length      29  11.2  23.3   18.8   2.2  18.3  2.58 0.48  0.983
 ```
 
 ```r
 # visualise the data
-boxplot(length ~ river,
-        data = fishlength)
+fishlength %>% 
+  ggplot(aes(x = river, y = length)) +
+  geom_boxplot()
 ```
 
-<img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ```r
-# perform a t-test, assuming equal variance
-t.test(length ~ river,
-       data = fishlength, var.equal = TRUE)
+# perform t-test
+fishlength %>% 
+  t_test(length ~ river)
 ```
 
 ```
-## 
-## 	Two Sample t-test
-## 
-## data:  length by river
-## t = 3.8433, df = 66, p-value = 0.0002754
-## alternative hypothesis: true difference in means between group Aripo and group Guanapo is not equal to 0
-## 95 percent confidence interval:
-##  0.9774482 3.0909868
-## sample estimates:
-##   mean in group Aripo mean in group Guanapo 
-##              20.33077              18.29655
+## # A tibble: 1 × 8
+##   .y.    group1 group2     n1    n2 statistic    df       p
+## * <chr>  <chr>  <chr>   <int> <int>     <dbl> <dbl>   <dbl>
+## 1 length Aripo  Guanapo    39    29      3.64  46.9 0.00067
 ```
 
-From the `summary()` command we can see that there are 39 observations for the Aripo river and only 29 observations for the Guanapo river. From the box plot we see that the groups appear to have different means and from the t-test analysis we can see that this difference is significant.
+From the summary statistics we can see that there are 39 observations for the Aripo river and only 29 observations for the Guanapo river. From the box plot we see that the groups appear to have different means and from the t-test analysis we can see that this difference is significant.
 
 Can we use this information to design a more efficient experiment? One that we would be confident was powerful enough to pick up a difference in means as big as was observed in this study but with fewer observations?
 
@@ -276,26 +292,18 @@ Let’s first work out exactly what the effect size of this previous study reall
 
 
 ```r
-ES.t.two(t = 3.8433, n1 = 39, n2 = 29)
+fishlength %>%
+  cohens_d(length ~ river, var.equal = TRUE)
 ```
 
 ```
-## 
-##      effect size (Cohen's d) of independent two-sample t test 
-## 
-##               d = 0.942383
-##     alternative = two.sided
-## 
-## NOTE: The alternative hypothesis is m1 != m2
-## small effect size:  d = 0.2
-## medium effect size: d = 0.5
-## large effect size:  d = 0.8
+## # A tibble: 1 × 7
+##   .y.    group1 group2  effsize    n1    n2 magnitude
+## * <chr>  <chr>  <chr>     <dbl> <int> <int> <ord>    
+## 1 length Aripo  Guanapo   0.942    39    29 large
 ```
 
-This function calculates the effect size using the t-statistic (`t`) and the values of the sample sizes of the two groups (`n1`, `n2`). The function can perform the same calculation is given other information (means of the two groups, standard deviations of the two groups etc.) Have a look at the five examples at the bottom of the help file (`?ES.t.two`) to see other ways in which it can be used.
-
-* The second line has the `d` value that we want.
-* The rest of the output is just padding and reminds us of the conventional values of effect sizes for reference only.
+The `cohens_d()` function calculates the effect size using the formula of the test. The `effsize` column contains the information that we want, in this case 0.94 .
 
 We can know actually answer our question and see how many fish we really need to catch in the future:
 
@@ -326,7 +334,7 @@ This approach can also be used when the pilot study showed a smaller effect size
 :::exercise
 Performing a power analysis on a one-sample data set
 
-Load in `data/raw/CS6-onesample.csv` (this is the same data we looked at in the earlier practical containing information on fish lengths from a single river).
+Load in `data/tidy/CS6-onesample.csv` (this is the same data we looked at in the earlier practical containing information on fish lengths from the Guanapo river).
 
 a. Assume this was a pilot study and analyse the data using a one-sample t-test to see if there is any evidence that the mean length of fish differs from 19 cm.
 b. Use the results of this analysis to estimate the effect size.
@@ -339,58 +347,53 @@ First, read in the data:
 
 
 ```r
-exOne <- read.csv("data/raw/CS6-onesample.csv")
+fish_data <- read_csv("data/tidy/CS6-onesample.csv")
 ```
 
 Let's run the one-sample t-test as we did before:
 
 
 ```r
-t.test(exOne$Guanapo, mu = 19)
+fish_data %>% 
+  t_test(length ~ 1,
+         mu = 20,
+         alternative = "two.sided")
 ```
 
 ```
-## 
-## 	One Sample t-test
-## 
-## data:  exOne$Guanapo
-## t = -1.4657, df = 28, p-value = 0.1539
-## alternative hypothesis: true mean is not equal to 19
-## 95 percent confidence interval:
-##  17.31341 19.27969
-## sample estimates:
-## mean of x 
-##  18.29655
+## # A tibble: 1 × 7
+##   .y.    group1 group2         n statistic    df       p
+## * <chr>  <chr>  <chr>      <int>     <dbl> <dbl>   <dbl>
+## 1 length 1      null model    29     -3.55    28 0.00139
 ```
-OK, there doesn't appear to be a statistically significant result here; the mean length of the fish doesn't appear to be different from 19cm. From the output though we do see that the mean length of our sample of fish is 18.30 (2dp), so the sample is a little bit smaller than 19 cm.
+There does appear to be a statistically significant result here; the mean length of the fish appears to be different from 20 cm.
 
-Let's calculate the effect size using the t-statistic and the degrees of freedom from the t-test output above. This gives us the following value for the effect size in terms of the Cohen's d metric.
+Let's calculate the effect size using these data. This gives us the following output for the effect size in terms of the Cohen's d metric.
 
 
 ```r
-ES.t.one(t = -1.4657, df = 28)
+fish_data %>% 
+  cohens_d(length ~ 1, mu = 20)
 ```
 
 ```
-## 
-##      effect size (Cohen's d) of one-sample t test 
-## 
-##               d = 0.2769913
-##     alternative = two.sided
-## 
-## NOTE: The alternative hypothesis is m != mu
-## small effect size:  d = 0.2
-## medium effect size: d = 0.5
-## large effect size:  d = 0.8
+## # A tibble: 1 × 6
+##   .y.    group1 group2     effsize     n magnitude
+## * <chr>  <chr>  <chr>        <dbl> <int> <ord>    
+## 1 length 1      null model  -0.659    29 moderate
 ```
 
-Our effect size is 0.277 which is somewhere between a small and medium effect size. This means that this would be hard to detect with a small sample size and it's likely that we would need more than just 29 observations to detect an effect this big.
+Our effect size is -0.66 which is a moderate effect size. This is pretty good and it means we might have been able to detect this effect with fewer samples.
 
-Now, let's do the power analysis to actually calculate the sample size required:
+:::Note
+Although the effect size here is negative, it does not matter in terms of the power calculations whether it's negative or positive.
+:::
+
+So, let's do the power analysis to actually calculate the minimum sample size required:
 
 
 ```r
-pwr.t.test(d = 0.2769913, sig.level = 0.05, power = 0.8,
+pwr.t.test(d = -0.6590669, sig.level = 0.05, power = 0.8,
            type = "one.sample")
 ```
 
@@ -398,18 +401,18 @@ pwr.t.test(d = 0.2769913, sig.level = 0.05, power = 0.8,
 ## 
 ##      One-sample t test power calculation 
 ## 
-##               n = 104.2368
-##               d = 0.2769913
+##               n = 20.07483
+##               d = 0.6590669
 ##       sig.level = 0.05
 ##           power = 0.8
 ##     alternative = two.sided
 ```
 
-We would need 105 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let's see what would happen if we wanted to be even more stringent:
+We would need 21 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let's see what would happen if we wanted to be even more stringent:
 
 
 ```r
-pwr.t.test(d = 0.2769913, sig.level = 0.01, power = 0.9,
+pwr.t.test(d = -0.6590669, sig.level = 0.01, power = 0.9,
            type = "one.sample")
 ```
 
@@ -417,14 +420,14 @@ pwr.t.test(d = 0.2769913, sig.level = 0.01, power = 0.9,
 ## 
 ##      One-sample t test power calculation 
 ## 
-##               n = 197.2625
-##               d = 0.2769913
+##               n = 37.62974
+##               d = 0.6590669
 ##       sig.level = 0.01
 ##           power = 0.9
 ##     alternative = two.sided
 ```
 
-198 observations! We would need to do a lot of work if we wanted to work to this level of significance and power. Are such small differences in fish length biologically meaningful?
+Then we'd need 38 observations! We would need to do a bit more work if we wanted to work to this level of significance and power. Are such small differences in fish length biologically meaningful?
 
 </details>
 :::
@@ -433,7 +436,7 @@ pwr.t.test(d = 0.2769913, sig.level = 0.01, power = 0.9,
 :::exercise
 Power analysis on a paired two-sample data set
 
-Load in `data/raw/CS6-twopaired.csv` (again this is the same data that we used in an earlier practical and relates to cortisol levels measured on 20 participants in the morning and evening).
+Load in `data/tidy/CS6-twopaired.csv` (again this is the same data that we used in an earlier practical and relates to cortisol levels measured on 20 participants in the morning and evening).
 
 a. first carry out a power analysis to work out how big of an effect size this experiment should be able to detect at a power of 0.8 and significance level of 0.05. Don’t look at the data just yet!
 b. Now calculate the actual observed effect size from the study.
@@ -445,7 +448,7 @@ First, read in the data:
 
 
 ```r
-exTwo <- read.csv("data/raw/CS6-twopaired.csv")
+cortisol <- read_csv("data/tidy/CS6-twopaired.csv")
 ```
 
 We have a paired dataset with 20 pairs of observations, what sort of effect size could we detect at a significance level of 0.05 and power of 0.8?
@@ -475,47 +478,23 @@ Now let's look at the actual data and work out what the effect size actually is:
 
 
 ```r
-t.test(exTwo$morning, exTwo$evening, paired=TRUE)
+cortisol %>% 
+  cohens_d(cortisol ~ time, paired = TRUE)
 ```
 
 ```
-## 
-## 	Paired t-test
-## 
-## data:  exTwo$morning and exTwo$evening
-## t = 5.1833, df = 19, p-value = 5.288e-05
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##   69.20962 162.96038
-## sample estimates:
-## mean of the differences 
-##                 116.085
+## # A tibble: 1 × 7
+##   .y.      group1  group2  effsize    n1    n2 magnitude
+## * <chr>    <chr>   <chr>     <dbl> <int> <int> <ord>    
+## 1 cortisol evening morning   -1.16    20    20 large
 ```
 
-Use the t-statistic to calculate the effect size:
+
+This value, -1.16, is a massive effect size. It's quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:
 
 
 ```r
-ES.t.paired(t = 5.1833, df = 19)
-```
-
-```
-## 
-##      effect size (Cohen's d) of paired two-sample t test 
-## 
-##               d = 1.189131
-##     alternative = two.sided
-## 
-## NOTE: The alternative hypothesis is md != 0
-## small effect size:  d = 0.2
-## medium effect size: d = 0.5
-## large effect size:  d = 0.8
-```
-This (1.19) is a massive effect size. It's quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:
-
-
-```r
-pwr.t.test(d = 1.189131, sig.level = 0.01, power = 0.8,
+pwr.t.test(d = -1.159019, sig.level = 0.01, power = 0.8,
            type = "paired")
 ```
 
@@ -523,8 +502,8 @@ pwr.t.test(d = 1.189131, sig.level = 0.01, power = 0.8,
 ## 
 ##      Paired t test power calculation 
 ## 
-##               n = 11.67291
-##               d = 1.189131
+##               n = 12.10628
+##               d = 1.159019
 ##       sig.level = 0.01
 ##           power = 0.8
 ##     alternative = two.sided
@@ -532,7 +511,7 @@ pwr.t.test(d = 1.189131, sig.level = 0.01, power = 0.8,
 ## NOTE: n is number of *pairs*
 ```
 
-So we would have only needed 12 pairs of participants in this study given the size of effect we were trying to detect.
+So we would have only needed 13 pairs of participants in this study given the size of effect we were trying to detect.
 
 </details>
 :::
@@ -542,33 +521,40 @@ Thankfully the ideas we’re already covered in the t-test section should see us
 
 For linear models we’ll just use `pwr.f2.test()` to do the power calculation and we won’t need a function for effect sizes (because it’s just based on R<sup>2</sup> and we should just be able to read that off the screen).
 
-Read in `data/raw/CS6-lobsters.csv`. This dataset was used in an earlier practical and describes the effect on lobster weight of three different food sources.
+Read in `data/tidy/CS6-lobsters.csv`. This dataset was used in an earlier practical and describes the effect on lobster weight of three different food sources.
 
 Type this in:
 
 
 ```r
 # read in the data
-lobsters <- read.csv("data/raw/CS6-lobsters.csv")
-
-# summarise the data
-summary(lobsters)
+lobsters <- read_csv("data/tidy/CS6-lobsters.csv")
 
 # visualise the data
-boxplot(weight ~ diet, data = lobsters)
+lobsters %>% 
+  ggplot(aes(x = diet, y = weight)) +
+  geom_boxplot()
 ```
+
+<img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ```r
 # define the linear model
-lm.lob <- lm(weight ~ diet, data = lobsters)
+lm_lobster <- lm(weight ~ diet,
+                 data = lobsters)
 
-# perform an ANOVA on the model
-anova(lm.lob)
+# perform ANOVA on model
+anova(lm_lobster)
 ```
 
-Running through these commands:
-
-* `summary()` shows us that there were only 6, 7 and 5 observations in each group
+```
+## Analysis of Variance Table
+## 
+## Response: weight
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## diet       2 1567.2  783.61  1.6432 0.2263
+## Residuals 15 7153.1  476.87
+```
 * the box plot shows us that there might well be some differences between groups
 * the ANOVA analysis though shows that there isn’t sufficient evidence to support that claim given the insignificant p-value we observe.
 
@@ -582,46 +568,47 @@ First let’s calculate the observed effect size from this study. For linear mod
 f^2 = \frac{R^2}{1-R^2}
 \end{equation}
 
-We find R<sup>2</sup> by looking at the `lm.lob` object:
+We find R<sup>2</sup> from the anova on `lm_lobster` and then we can calculate Cohen's f^2:
 
 
 ```r
-summary(lm.lob)
+# get the effect size for ANOVA
+R2 <- eta_squared(anova(lm_lobster))
+
+R2
 ```
 
-This should give you the following:
-
-
 ```
-## 
-## Call:
-## lm(formula = weight ~ diet, data = lobsters)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -32.129 -16.155  -4.279  15.195  46.720 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  114.433      8.915  12.836 1.71e-09 ***
-## dietMussels   21.895     12.149   1.802   0.0916 .  
-## dietPellets   14.047     13.223   1.062   0.3049    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 21.84 on 15 degrees of freedom
-## Multiple R-squared:  0.1797,	Adjusted R-squared:  0.07035 
-## F-statistic: 1.643 on 2 and 15 DF,  p-value: 0.2263
+##      diet 
+## 0.1797219
 ```
 
-You’ve seen this output before; it summarises the coefficients of the linear model. Here though we’re interested in the Multiple R-squared value on the penultimate line. For our pilot lobster study the R<sup>2</sup> value appears to be 0.1797.
-Using R as a calculator we can work out the Cohen’s f<sup>2</sup> value and we find that the effect size is approximately 0.219.
+```r
+# calculate Cohen's f2
+R2 / (1 - R2)
+```
 
-There’s one more thing that we need for the power calculation for a linear model (and this is where it gets a bit arbitrary); the degrees of freedom. We can read those off the very bottom line of the above output:
+```
+##      diet 
+## 0.2190987
+```
 
-* the first number on the bottom line is the F-statistic for the model (we don’t need that right now)
-* the next number is called the numerator degrees of freedom, which in this case is 2. This is the number that we want. It is simply the number of parameters in the model minus 1. In this model there are three parameters for the three groups (we can see that by noticing the table in the above output has three rows; `intercept`, `dietMussels` and `dietPellets`). 3 - 1 = 2 (see the maths isn’t too bad)
-* the third number is called the denominator degrees of freedom, which in this case is 15. This is actually the number we want the power analysis to calculate as it’s a proxy for the number of observations used in the model, and we’ll see how in a minute.
+So now we've got Cohen's f<sup>2</sup>. There’s one more thing that we need for the power calculation for a linear model (and this is where it gets a bit arbitrary); the degrees of freedom. We can either read those off the very bottom line of the `anova(lm_lobster)` output or we can extract them as follows:
+
+
+```r
+# get degrees of freedom
+lm_lobster %>% 
+  anova() %>% 
+  anova_summary()
+```
+
+```
+##   Effect DFn DFd     F     p p<.05  ges
+## 1   diet   2  15 1.643 0.226       0.18
+```
+
+We have two different degrees of freedom: the **numerator degrees of freedom** (`DFn`) and the **denominator degrees of freedom** (`DFd`).Here the numerator degrees of freedom is 2. This is the number that we want. It is simply the number of parameters in the model minus 1. In this model there are three parameters for the three groups, so 3 - 1 = 2 (see the maths isn’t too bad). The other number is called the denominator degrees of freedom, which in this case is 15. This is actually the number we want the power analysis to calculate as it’s a proxy for the number of observations used in the model, and we’ll see how in a minute.
 
 So, we now want to run a power analysis for this linear model, using the following information:
 
@@ -634,7 +621,6 @@ We can feed this into the `pwr.f2.test()` function, where we use
 
 * `u` to represent the numerator DF value
 * `f2` to represent Cohen’s f<sup>2</sup> effect size value
-
 
 
 ```r

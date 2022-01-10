@@ -51,16 +51,16 @@ fishlengthDF
 ## # A tibble: 29 × 3
 ##       id river   length
 ##    <dbl> <chr>    <dbl>
-##  1     1 guanapo   19.1
-##  2     2 guanapo   23.3
-##  3     3 guanapo   18.2
-##  4     4 guanapo   16.4
-##  5     5 guanapo   19.7
-##  6     6 guanapo   16.6
-##  7     7 guanapo   17.5
-##  8     8 guanapo   19.9
-##  9     9 guanapo   19.1
-## 10    10 guanapo   18.8
+##  1     1 Guanapo   19.1
+##  2     2 Guanapo   23.3
+##  3     3 Guanapo   18.2
+##  4     4 Guanapo   16.4
+##  5     5 Guanapo   19.7
+##  6     6 Guanapo   16.6
+##  7     7 Guanapo   17.5
+##  8     8 Guanapo   19.9
+##  9     9 Guanapo   19.1
+## 10    10 Guanapo   18.8
 ## # … with 19 more rows
 ```
 
