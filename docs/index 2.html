@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 13 Kruskal-Wallis test | Core Statistics in R</title>
+<title>Chapter 1 Overview | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 13 Kruskal-Wallis test | Core Statistics in R">
+<meta name="description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Overview | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
+<meta property="og:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 13 Kruskal-Wallis test | Core Statistics in R">
-<meta name="twitter:description" content="13.1 Objectives  Questions How do I analyse multiple samples of continuous data if the data are not normally distributed? What is a Kruskal-Wallis test? How do I check for differences between...">
+<meta name="twitter:title" content="Chapter 1 Overview | Core Statistics in R">
+<meta name="twitter:description" content="These are the supporting materials for the Core Statistics modules of the PSLS Biostatistics Initiative, Cambridge University.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -340,7 +340,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="active" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li class="book-part">CoreStats 1: Simple hypothesis testing</li>
 <li><a class="" href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">CoreStats 1 (Practicals)</li>
@@ -356,7 +356,7 @@
 <li class="book-part">CoreStats 2 (Practicals)</li>
 <li><a class="" href="introduction-1.html"><span class="header-section-number">11</span> Introduction</a></li>
 <li><a class="" href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></li>
-<li><a class="active" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
+<li><a class="" href="kruskal-wallis-test.html"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
 <li class="book-part">CoreStats 3: Continuous predictors</li>
 <li><a class="" href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></li>
 <li class="book-part">CoreStats 3 (Practicals)</li>
@@ -388,299 +388,84 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="kruskal-wallis-test" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="overview" class="section level1" number="1">
 <h1>
-<span class="header-section-number">13</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objectives-3" class="section level2" number="13.1">
-<h2>
-<span class="header-section-number">13.1</span> Objectives<a class="anchor" aria-label="anchor" href="#objectives-3"><i class="fas fa-link"></i></a>
-</h2>
-<div class="objectives">
-<p><strong>Questions</strong></p>
+<p>These sessions are intended to enable you to perform core data analysis techniques appropriately and confidently using R.</p>
 <ul>
-<li>How do I analyse multiple samples of continuous data if the data are not normally distributed?</li>
-<li>What is a Kruskal-Wallis test?</li>
-<li>How do I check for differences between groups?</li>
+<li><p>6 lecture-practicals</p></li>
+<li><p>Ongoing formative assessment exercises</p></li>
+<li><p>No formal assessment</p></li>
+<li><p>No mathematical derivations</p></li>
+<li><p>No pen and paper calculations</p></li>
 </ul>
-<p><strong>Objectives</strong></p>
-<ul>
-<li>Be able to perform an Kruskal-Wallis test in R</li>
-<li>Understand the output of the test and evaluate the assumptions</li>
-<li>Be able to perform post-hoc testing after a Kruskal-Wallis test</li>
-</ul>
-</div>
-</div>
-<div id="purpose-and-aim-3" class="section level2" number="13.2">
+<p>They are <strong>not</strong> a “how to mindlessly use a stats program” course!</p>
+<div id="core-aims" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">13.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Core aims<a class="anchor" aria-label="anchor" href="#core-aims"><i class="fas fa-link"></i></a>
 </h2>
-<p>The Kruskal-Wallis one-way analysis of variance test is an analogue of ANOVA that can be used when the assumption of normality cannot be met. In this way it is an extension of the Mann-Whitney test for two groups.</p>
-</div>
-<div id="section-commands-7" class="section level2" number="13.3">
-<h2>
-<span class="header-section-number">13.3</span> Section commands<a class="anchor" aria-label="anchor" href="#section-commands-7"><i class="fas fa-link"></i></a>
-</h2>
-<p>New commands used in this section:</p>
-<div class="inline-table"><table class="table table-sm">
-<thead><tr class="header">
-<th align="left">Function</th>
-<th align="left">Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code></td>
-<td align="left">Performs the Kruskal-Wallis test</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code></td>
-<td align="left">Performs Dunn’s test</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<div id="data-and-hypotheses-5" class="section level2" number="13.4">
-<h2>
-<span class="header-section-number">13.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
-</h2>
-<p>For example, suppose a behavioural ecologist records the rate at which <a href="https://en.wikipedia.org/wiki/Spider_monkey">spider monkeys</a> behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as <code>high</code>, <code>low</code> or <code>none.</code> We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:</p>
-<ul>
-<li>
-<span class="math inline">\(H_0\)</span>: The median aggression rates for all types of familiarity are the same</li>
-<li>
-<span class="math inline">\(H_1\)</span>: The median aggression rates are not all equal</li>
-</ul>
-<p>We will use a Kruskal-Wallis test to check this.</p>
-<p>The data are stored in the file <code>data/tidy/CS2-spidermonkey.csv</code>.</p>
-<p>First we read the data in:</p>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-spidermonkey.csv"</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="summarise-and-visualise-6" class="section level2" number="13.5">
-<h2>
-<span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-6"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># look at the data</span>
-<span class="va">spidermonkey</span></code></pre></div>
-<pre><code>## # A tibble: 21 × 3
-##       id aggression familiarity
-##    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      
-##  1     1        0.2 high       
-##  2     2        0.1 high       
-##  3     3        0.4 high       
-##  4     4        0.8 high       
-##  5     5        0.3 high       
-##  6     6        0.5 high       
-##  7     7        0.2 high       
-##  8     8        0.5 low        
-##  9     9        0.4 low        
-## 10    10        0.3 low        
-## # … with 11 more rows</code></pre>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># summarise the data</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">familiarity</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 11
-##   familiarity variable       n   min   max median   iqr  mean    sd    se    ci
-##   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 high        aggression     7   0.1   0.8    0.3  0.25 0.357 0.237 0.09  0.219
-## 2 low         aggression     7   0.3   1.2    0.5  0.3  0.629 0.315 0.119 0.291
-## 3 none        aggression     7   0.9   1.6    1.2  0.25 1.26  0.23  0.087 0.213</code></pre>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create boxplot</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">familiarity</span>, y <span class="op">=</span> <span class="va">aggression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672"></div>
-<p>The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.</p>
-</div>
-<div id="assumptions-13" class="section level2" number="13.6">
-<h2>
-<span class="header-section-number">13.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-13"><i class="fas fa-link"></i></a>
-</h2>
-<p>To use the Kruskal-Wallis test we have to make three assumptions:</p>
+<div class="highlight">
+<p>To know what to do when presented with an arbitrary dataset e.g.</p>
 <ol style="list-style-type: decimal">
-<li>The parent distributions from which the samples are drawn have the same shape (if they’re normal then we should use a one-way ANOVA)</li>
-<li>Each data point in the samples is independent of the others</li>
-<li>The parent distributions should have the same variance</li>
+<li>Know what data analysis techniques are available</li>
+<li>Know which ones are allowable</li>
+<li>Be able to carry these out and understand the results</li>
 </ol>
-<p>Independence we’ll ignore as usual. Similar shape is best assessed from the earlier visualisation of the data. That means that we only need to check equality of variance.</p>
-<div id="equality-of-variance-2" class="section level3" number="13.6.1">
-<h3>
-<span class="header-section-number">13.6.1</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance-2"><i class="fas fa-link"></i></a>
-</h3>
-<p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Levene's test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
-<pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-## factor.</code></pre>
-<pre><code>## # A tibble: 1 × 4
-##     df1   df2 statistic     p
-##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1     2    18     0.114 0.893</code></pre>
-<p>The relevant p-value is given in the <code>p</code> column (0.893). As it is quite large we see that each group do appear to have the same variance.</p>
-<p>There is also a warning about <code>group coerced to factor</code>. There is no need to worry about this - Levene’s test needs to compare different groups and because <code>aggression</code> is encoded as a numeric value, it converts it to a categorical one before running the test.</p>
 </div>
 </div>
-<div id="implement-test-6" class="section level2" number="13.7">
+<div id="core-topics" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">13.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Core topics<a class="anchor" aria-label="anchor" href="#core-topics"><i class="fas fa-link"></i></a>
 </h2>
-<p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
-<ul>
-<li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code> takes the formula in the following format: <code>variable ~ category</code>
-</li>
-</ul>
+<ol style="list-style-type: decimal">
+<li><a href="cs1-intro.html#cs1-intro">Simple hypothesis testing</a></li>
+<li><a href="cs2-intro.html#cs2-intro">Categorical predictor variables</a></li>
+<li><a href="cs3-intro.html#cs3-intro">Continuous predictors</a></li>
+<li><a href="cs4-intro.html#cs4-intro">Two predictor variables</a></li>
+<li><a href="cs5-intro.html#cs5-intro">Multiple predictor variables</a></li>
+<li><a href="cs6-intro.html#cs6-intro">Power analysis</a></li>
+</ol>
 </div>
-<div id="interpret-output-and-report-results-5" class="section level2" number="13.8">
+<div id="practicals" class="section level2" number="1.3">
 <h2>
-<span class="header-section-number">13.8</span> Interpret output and report results<a class="anchor" aria-label="anchor" href="#interpret-output-and-report-results-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> Practicals<a class="anchor" aria-label="anchor" href="#practicals"><i class="fas fa-link"></i></a>
 </h2>
-<p>This is the output that you should now see in the console window:</p>
-<pre><code>## # A tibble: 1 × 6
-##   .y.            n statistic    df       p method        
-## * &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;         
-## 1 aggression    21      13.6     2 0.00112 Kruskal-Wallis</code></pre>
-<pre><code>## 
-##  Kruskal-Wallis rank sum test
-## 
-## data:  aggression by familiarity
-## Kruskal-Wallis chi-squared = 13.597, df = 2, p-value = 0.001115</code></pre>
-<p>The p-value is given in the <code>p</code> column. This shows us the probability of getting samples such as ours if the null hypothesis were actually true.</p>
-<p>Since the p-value is very small (much smaller than the standard significance level of 0.05) we can say “that it is very unlikely that these three samples came from the same parent distribution and as such we can reject our null hypothesis” and state that:</p>
-<blockquote>
-<p>A one-way Kruskal-Wallis rank sum test showed that aggression rates between spidermonkeys depends upon the degree of familiarity between them (KW = 13.597, df = 2, p = 0.0011).</p>
-</blockquote>
-<p><br></p>
-</div>
-<div id="post-hoc-testing-dunns-test" class="section level2" number="13.9">
-<h2>
-<span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)<a class="anchor" aria-label="anchor" href="#post-hoc-testing-dunns-test"><i class="fas fa-link"></i></a>
-</h2>
-<p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.</p>
-<p>Dunn’s test is used to check for significant differences in group medians:</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
-<p>This will give the following output:</p>
-<pre><code>## # A tibble: 3 × 9
-##   .y.        group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
-## * &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
-## 1 aggression high   low        7     7      1.41 0.160    0.160    ns          
-## 2 aggression high   none       7     7      3.66 0.000257 0.000771 ***         
-## 3 aggression low    none       7     7      2.25 0.0245   0.0490   *</code></pre>
-<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function performs a Kruskal-Wallis test on the data, followed by a post-hoc pairwise multiple comparison.</p>
-<p>The comparison between the pairs of groups is reported in the table at the bottom. Each row contains a single comparison. We are interested in the <code>p</code> and <code>p.adj</code> columns, which contain the the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
-<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="cs6-intro.html#cs6-intro">Power analysis</a>.</p>
-</div>
-<div id="exercise-lobster-weight-1" class="section level2" number="13.10">
-<h2>
-<span class="header-section-number">13.10</span> Exercise: Lobster weight<a class="anchor" aria-label="anchor" href="#exercise-lobster-weight-1"><i class="fas fa-link"></i></a>
-</h2>
-<div class="exercise">
-<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 13.1  </strong></span>Kruskal-Wallis and Dunn’s test on lobster data</p>
-<p>Perform a Kruskal-Wallis test and do a post-hoc test on the <code>lobster</code> data set.</p>
-<details><summary>
-Answer
-</summary><div id="hypotheses-6" class="section level3" number="13.10.1">
-<h3>
-<span class="header-section-number">13.10.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-6"><i class="fas fa-link"></i></a>
-</h3>
+<p>Each practical document is divided up into various sections. In each section there will be some explanatory text which should help you to understand what is going on and what you’re trying to achieve.
+There may be a list of commands relevant to that section which will be displayed in boxes like this:</p>
+<div class="note">
+<p><strong>Conditional operators</strong></p>
+<p>To set filtering conditions, use the following <em>relational operators</em>:</p>
 <ul>
 <li>
-<span class="math inline">\(H_0\)</span> : all medians are equal</li>
+<code>&gt;</code> is greater than</li>
 <li>
-<span class="math inline">\(H_1\)</span> : not all medians are equal</li>
+<code>&gt;=</code> is greater than or equal to</li>
+<li>
+<code>&lt;</code> is less than</li>
+<li>
+<code>&lt;=</code> is less than or equal to</li>
+<li>
+<code>==</code> is equal to</li>
+<li>
+<code>!=</code> is different from</li>
+<li>
+<code>%in%</code> is contained in</li>
 </ul>
-</div>
-<div id="import-data-summarise-and-visualise-2" class="section level3" number="13.10.2">
-<h3>
-<span class="header-section-number">13.10.2</span> Import data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise-2"><i class="fas fa-link"></i></a>
-</h3>
-<p>All done previously.</p>
-</div>
-<div id="assumptions-14" class="section level3" number="13.10.3">
-<h3>
-<span class="header-section-number">13.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-14"><i class="fas fa-link"></i></a>
-</h3>
-<p>From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene’s test</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 4
-##     df1   df2 statistic     p
-##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1     2    15   0.00280 0.997</code></pre>
-<p>Given that the p-value is so high, this again agrees with our previous assessment that the equality of variance assumption is well met. Rock on.</p>
-</div>
-<div id="kruskal-wallis-test-1" class="section level3" number="13.10.4">
-<h3>
-<span class="header-section-number">13.10.4</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-1"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
-<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 6
-##   .y.        n statistic    df     p method        
-## * &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
-## 1 weight    18      3.26     2 0.196 Kruskal-Wallis</code></pre>
-<blockquote>
-<p>A Kruskal-Wallis test indicated that the median weight of juvenile lobsters did not differ significantly between diets (KW = 3.26, df = 2, p = 0.20).</p>
-</blockquote>
-<p><br></p>
-</div>
-<div id="post-hoc-dunns-test" class="section level3" number="13.10.5">
-<h3>
-<span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test<a class="anchor" aria-label="anchor" href="#post-hoc-dunns-test"><i class="fas fa-link"></i></a>
-</h3>
-<p>Although rather unnecessary (and likely unwanted, since we don’t want to be p-hacking), because we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
-<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 9
-##   .y.    group1  group2     n1    n2 statistic      p p.adj p.adj.signif
-## * &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
-## 1 weight Flakes  Mussels     6     7     1.79  0.0738 0.221 ns          
-## 2 weight Flakes  Pellets     6     5     0.670 0.503  0.629 ns          
-## 3 weight Mussels Pellets     7     5    -1.01  0.315  0.629 ns</code></pre>
-<p>We can see that none of the comparisons are significant, either based on the uncorrected p-values (<code>p</code>) or the p-values adjusted for multiple comparisons (<code>p.adj</code>). This is consistent with what we found previously.</p>
-
-</div>
-</details>
-</div>
-</div>
-<div id="key-points-3" class="section level2" number="13.11">
-<h2>
-<span class="header-section-number">13.11</span> Key points<a class="anchor" aria-label="anchor" href="#key-points-3"><i class="fas fa-link"></i></a>
-</h2>
-<div class="keypoints">
+<p>To combine conditions, use the following <em>logical operators</em>:</p>
 <ul>
-<li>We use Kruskal-Wallis test to see if there is a difference in medians between multiple continuous variables</li>
-<li>In R we first define a linear model with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, using the format <code>response ~ predictor</code>
-</li>
-<li>Next, we perform a Kruskal-Wallis test on the linear model with <code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code>
-</li>
-<li>We assume parent distributions have the same shape; each data point is independent and the parent distributions have the same variance</li>
-<li>We test for equality of variance using <code><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test()</a></code>
-</li>
-<li>Post-hoc testing to check for significant differences in the group medians is done with <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code>
-</li>
+<li>
+<code>&amp;</code> AND</li>
+<li>
+<code>|</code> OR</li>
 </ul>
 </div>
+</div>
+<div id="index-datasets" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Datasets<a class="anchor" aria-label="anchor" href="#index-datasets"><i class="fas fa-link"></i></a>
+</h2>
+<p>This course uses various data sets. The easiest way of accessing these is by creating an R-project in RStudio. Then download the <code>data</code> folder <a href="data.zip">here</a> by right-clicking on the link and <kbd>Save as…</kbd>. Next unzip the file and copy it into your working directory. Your data should then be accessible via <code>&lt;working-directory-name&gt;/data/tidy</code>.</p>
 
 </div>
 </div>
@@ -688,33 +473,16 @@ Answer
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="cs2-anova.html"><span class="header-section-number">12</span> ANOVA</a></div>
-<div class="next"><a href="cs3-intro.html"><span class="header-section-number">14</span> Introduction</a></div>
+<div class="empty"></div>
+<div class="next"><a href="cs1-intro.html"><span class="header-section-number">2</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#kruskal-wallis-test"><span class="header-section-number">13</span> Kruskal-Wallis test</a></li>
-<li><a class="nav-link" href="#objectives-3"><span class="header-section-number">13.1</span> Objectives</a></li>
-<li><a class="nav-link" href="#purpose-and-aim-3"><span class="header-section-number">13.2</span> Purpose and aim</a></li>
-<li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">13.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-6"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
-<li>
-<a class="nav-link" href="#assumptions-13"><span class="header-section-number">13.6</span> Assumptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#equality-of-variance-2"><span class="header-section-number">13.6.1</span> Equality of variance</a></li></ul>
-</li>
-<li><a class="nav-link" href="#implement-test-6"><span class="header-section-number">13.7</span> Implement test</a></li>
-<li><a class="nav-link" href="#interpret-output-and-report-results-5"><span class="header-section-number">13.8</span> Interpret output and report results</a></li>
-<li><a class="nav-link" href="#post-hoc-testing-dunns-test"><span class="header-section-number">13.9</span> Post-hoc testing (Dunn’s test)</a></li>
-<li>
-<a class="nav-link" href="#exercise-lobster-weight-1"><span class="header-section-number">13.10</span> Exercise: Lobster weight</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#hypotheses-6"><span class="header-section-number">13.10.1</span> Hypotheses</a></li>
-<li><a class="nav-link" href="#import-data-summarise-and-visualise-2"><span class="header-section-number">13.10.2</span> Import data, summarise and visualise</a></li>
-<li><a class="nav-link" href="#assumptions-14"><span class="header-section-number">13.10.3</span> Assumptions</a></li>
-<li><a class="nav-link" href="#kruskal-wallis-test-1"><span class="header-section-number">13.10.4</span> Kruskal-Wallis test</a></li>
-<li><a class="nav-link" href="#post-hoc-dunns-test"><span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#key-points-3"><span class="header-section-number">13.11</span> Key points</a></li>
+<li><a class="nav-link" href="#overview"><span class="header-section-number">1</span> Overview</a></li>
+<li><a class="nav-link" href="#core-aims"><span class="header-section-number">1.1</span> Core aims</a></li>
+<li><a class="nav-link" href="#core-topics"><span class="header-section-number">1.2</span> Core topics</a></li>
+<li><a class="nav-link" href="#practicals"><span class="header-section-number">1.3</span> Practicals</a></li>
+<li><a class="nav-link" href="#index-datasets"><span class="header-section-number">1.4</span> Datasets</a></li>
 </ul>
 
       <div class="book-extra">
