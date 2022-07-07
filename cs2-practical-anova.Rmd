@@ -36,9 +36,6 @@ New functions used in this section are also shown.
 |`library(ggResidpanel)`| | 
 |`anova()`| Carries out an ANOVA on a linear model |
 
-```
-
-
 ## Data and hypotheses
 For example, suppose we measure the feeding rate of oyster catchers (shellfish per hour) at three sites characterised by their degree of shelter from the wind, imaginatively called `exposed` (E), `partially sheltered` (P) and `sheltered` (S). We want to test whether the data support the hypothesis that feeding rates don’t differ between locations. We form the following null and alternative hypotheses:
 
